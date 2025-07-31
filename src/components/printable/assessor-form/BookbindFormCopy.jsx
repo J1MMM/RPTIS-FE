@@ -129,7 +129,9 @@ export const BookbindFormCopy = forwardRef((props, ref) => {
       <div className="header space-between">
         {/* display image  */}
         <img className="logo logo-1" src={logo1} alt="logo1" />
-        <h3>BOOKBIND TAX DECLARATION OF REAL PROPERTY</h3>
+        <h3>
+          BOOKBIND REAL PROPERTY FIELD APPRAISAL & ASSESSMENT SHEET - LAND
+        </h3>
         <img className="logo logo-2" src={logo2} alt="logo1" />
       </div>
       {/* how to access selected data */}

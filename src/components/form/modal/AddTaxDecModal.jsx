@@ -129,7 +129,7 @@ export default function AddTaxDecModal(props) {
   return (
     <>
       <ContainerModal
-        title="TAX DECLARATION OF REAL PROPERTY"
+        title="REAL PROPERTY FIELD APPRAISAL & ASSESSMENT SHEET - LAND"
         open={props?.open}
         onClose={props?.handleClose}
         onSubmit={handleSubmitClick}

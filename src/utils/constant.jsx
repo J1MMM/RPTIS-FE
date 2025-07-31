@@ -1,10 +1,11 @@
-import { Chip, Stack, Typography } from "@mui/material";
+import { Button, Chip, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { io } from "socket.io-client";
 
 export const HEADER_HEIGHT = "80px";
 export const DRAWER_WIDTH_OPEN = 250;
 export const DRAWER_WIDTH_CLOSED = 60;
+export const MAIN_CONTAINER_HEIGHT = `calc(100vh - ${HEADER_HEIGHT} - 60px)`;
 // export const BASE_URL = "http://10.10.10.86:4000";
 export const BASE_URL = "http://localhost:4000";
 export const SOCKET = io(BASE_URL);
@@ -18,11 +19,26 @@ export const ALERT_SEV = {
 
 export const ASSESSMENT_ROLL_COLUMN = [
   {
+    field: "ArpNo",
+    headerName: "ARP NO.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+  {
+    field: "PID",
+    headerName: "PROPERTY INDEX NO.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
     field: "fname",
     headerName: "PROPERTY OWNER",
     editable: false,
     headerClassName: "data-grid-header",
-    width: 200,
+    flex: 1,
     renderCell: (params, i) => {
       const fname = params.row?.fname;
       const mname = params.row?.mname;
@@ -35,40 +51,17 @@ export const ASSESSMENT_ROLL_COLUMN = [
     },
   },
   {
-    field: "PID",
-    headerName: "PROPERTY INDEX NO.",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "ArpNo",
-    headerName: "ARP NO.",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "oldArp",
-    headerName: "OLD ARP",
-    width: 200,
-    editable: false,
-    headerClassName: "data-grid-header",
-  },
-  {
     field: "Address",
-    headerName: "OWNED ADDRESS",
-    width: 200,
+    headerName: "ADDRESS",
+    flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
   },
   {
     field: "kind",
     headerName: "KIND",
-    width: 250,
     editable: false,
-    align: "center",
-    headerAlign: "center",
+    flex: 1,
     headerClassName: "data-grid-header",
     renderCell: (params, i) => {
       return (
@@ -99,34 +92,11 @@ export const ASSESSMENT_ROLL_COLUMN = [
     },
   },
   {
-    field: "classification",
-    headerName: "CLASS",
-    width: 200,
-    editable: false,
-    align: "center",
-    headerAlign: "center",
-    headerClassName: "data-grid-header",
-    renderCell: (params, i) => {
-      const classification = Array.isArray(params.row?.classification)
-        ? params.row?.classification
-        : [];
-
-      return (
-        <Stack flexDirection="row" gap={1} alignItems="center" height="100%">
-          {classification?.map((obj, i) => (
-            <Chip key={i} label={obj?.classification} size="small" />
-          ))}
-        </Stack>
-      );
-    },
-  },
-  {
     field: "LocationOfProperty",
     headerName: "LOCATION OF PROPERTY",
-    width: 200,
+    flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
-
     renderCell: (params, i) => {
       const block = params.row?.BLOCK;
       const brgy = params.row?.Brgy;
@@ -140,7 +110,7 @@ export const ASSESSMENT_ROLL_COLUMN = [
   {
     field: "AssessedValue",
     headerName: "ASSESSED VALUE",
-    width: 200,
+    flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
     renderCell: (params, i) => {
@@ -151,28 +121,13 @@ export const ASSESSMENT_ROLL_COLUMN = [
   {
     field: "TAXABILITY",
     headerName: "TAXABILITY",
-    width: 200,
+    flex: 1,
     editable: false,
-    align: "center",
-    headerAlign: "center",
     headerClassName: "data-grid-header",
 
     renderCell: (params, i) => {
       const TAXABILITY = params.row?.TAXABILITY;
       return <span>{TAXABILITY?.toUpperCase()}</span>;
-    },
-  },
-  {
-    field: "dateOfEffectivity",
-    headerName: "EFFECTIVITY",
-    width: 200,
-    editable: false,
-    align: "center",
-    headerAlign: "center",
-    headerClassName: "data-grid-header",
-    renderCell: (params, i) => {
-      const dateOfEffectivity = dayjs(params.row?.dateOfEffectivity);
-      return <span>{dateOfEffectivity.format("MM/DD/YYYY")}</span>;
     },
   },
 ];
@@ -486,15 +441,15 @@ export const CLASSIFICATION_DEFAULT = {
 export const ASSESSOR_TAB_LINKS = [
   {
     to: "",
-    label: "Assessment Roll",
+    label: "Active Records",
+  },
+  {
+    to: "cancels",
+    label: "Archived Records",
   },
   {
     to: "pending",
     label: "Pending",
-  },
-  {
-    to: "cancels",
-    label: "Canscels",
   },
 ];
 
@@ -776,26 +731,28 @@ export const SUBDIVIDE_INITIAL_DATA = {
 
 export const DATA_GRID_STYLE = {
   "& .MuiDataGrid-row": {
+    fontFamily: "Poppins",
     "&:last-child .MuiDataGrid-cell": {
       borderBottom: "none", // Remove bottom border from last row
     },
   },
   ".MuiDataGrid-columnHeaderTitleContainer": {
-    bgcolor: "primary.main",
+    bgcolor: "mono.main",
   },
 
   ".data-grid-header": {
-    bgcolor: "#1A237E",
-    color: "#FFF",
+    bgcolor: "mono.main",
+    color: "#000",
     ".MuiDataGrid-columnHeaderTitle": {
-      fontWeight: "bold",
+      fontWeight: "600",
+      fontFamily: "Poppins",
     },
     "&.MuiDataGrid-root": {
       border: "none",
-      color: "#FFF",
+      color: "#000",
     },
     ".MuiIconButton-sizeSmall": {
-      color: "#FFF",
+      color: "#000",
     },
   },
   border: "none",
@@ -810,3 +767,64 @@ export const DATA_GRID_INITIAL_STATE = {
     },
   },
 };
+
+export const sampleRows = [
+  {
+    id: 1,
+    fname: "Juan",
+    mname: "S.",
+    lname: "Dela Cruz",
+    PID: "PID-001",
+    ArpNo: "ARP-2024-0001",
+    oldArp: "ARP-2020-0001",
+    Address: "123 Mabini St, San Pablo City",
+    Boundaries: {
+      land: true,
+      building: false,
+      machinery: true,
+      others: false,
+    },
+    classification: [
+      {
+        classification: "Residential",
+        assessedValue: "₱500,000",
+      },
+    ],
+    BLOCK: "Block 12",
+    Brgy: "Barangay 4",
+    LocationOfProperty: "Block 12 Barangay 4", // Optional if not used directly
+    AssessedValue: "₱500,000", // Optional if not used directly
+    TAXABILITY: "taxable",
+    dateOfEffectivity: "2025-01-01",
+  },
+  {
+    id: 2,
+    fname: "Maria",
+    mname: "L.",
+    lname: "Reyes",
+    PID: "PID-002",
+    ArpNo: "ARP-2024-0002",
+    oldArp: "ARP-2019-0002",
+    Address: "456 Bonifacio Ave, San Pablo City",
+    Boundaries: {
+      land: true,
+      building: true,
+      machinery: false,
+      others: false,
+    },
+    classification: [
+      {
+        classification: "Commercial",
+        assessedValue: "₱1,200,000",
+      },
+      {
+        classification: "Industrial",
+        assessedValue: "₱300,000",
+      },
+    ],
+    BLOCK: "Block 9",
+    Brgy: "Barangay 2",
+    TAXABILITY: "exempt",
+    dateOfEffectivity: "2024-06-15",
+  },
+];

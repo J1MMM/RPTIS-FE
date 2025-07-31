@@ -32,7 +32,7 @@ export const TaxdecPrintableFormModal = ({
 
   return (
     <ContainerModal
-      title="TAX DECLARATION OF REAL PROPERTY FORM"
+      title="REAL PROPERTY FIELD APPRAISAL & ASSESSMENT SHEET - LAND"
       open={open}
       onClose={onClose}
       actionButton={

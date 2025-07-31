@@ -127,7 +127,7 @@ const TaxDecModal = (props) => {
   return (
     <>
       <ContainerModal
-        title="TAX DECLARATION OF REAL PROPERTY"
+        title="REAL PROPERTY FIELD APPRAISAL & ASSESSMENT SHEET - LAND"
         open={props?.open}
         actionButton={props?.actionButton}
         onClose={props?.handleClose}

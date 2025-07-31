@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Collapse, Stack } from "@mui/material";
+import { ButtonGroup, Collapse, Stack } from "@mui/material";
 import {
   ALERT_SEV,
   ASSESSMENT_ROLL_COLUMN,
@@ -10,9 +10,10 @@ import {
   DATA_GRID_STYLE,
   INITIAL_FORM_DATA,
   PAGE_SIZE_OPTION,
+  sampleRows,
   SUBDIVIDE_INITIAL_DATA,
 } from "../../utils/constant";
-import { CreateNewFolderOutlined } from "@mui/icons-material";
+import { Add, CreateNewFolderOutlined, Shuffle } from "@mui/icons-material";
 import { useQueryClient } from "react-query";
 import AddTaxDecModal from "../../components/form/modal/AddTaxDecModal";
 import { v4 } from "uuid";
@@ -32,6 +33,7 @@ import { TaxdecPrintableFormModal } from "../../components/form/modal/reactToPri
 import { TableToolbar } from "../../components/form/table/TableToolbar";
 import { ConsolidateModal } from "../../components/form/modal/ConsolidateModal";
 import AssessorTaxdecForms from "../../components/printable/assessor-form/TaxdecFormsPopover";
+import GroupBtnTabs from "../../components/layout/GroupBtnTabs";
 
 function AssessmentRoll() {
   const queryClient = useQueryClient();
@@ -401,39 +403,65 @@ function AssessmentRoll() {
           disabled={Boolean(selectedArpNos.length < 2)}
           variant="outlined"
           onClick={() => setConsolidateActive(true)}
+          startIcon={<Shuffle />}
         >
           consolidate
         </Button>
         <Button
           onClick={() => setTaxdecModalOpen(true)}
           variant="contained"
-          startIcon={<CreateNewFolderOutlined />}
+          startIcon={<Add />}
         >
-          Add Taxdec
+          Add Faas
         </Button>
       </Stack>
     );
   };
 
+  const tableHeader = [
+    ...ASSESSMENT_ROLL_COLUMN,
+    {
+      field: "actions",
+      headerName: "ACTIONS",
+      flex: 1,
+      sortable: false,
+      filterable: false,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "data-grid-header",
+      renderCell: (params) => (
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={() => handleCellDoubleClick(params)}
+        >
+          View
+        </Button>
+      ),
+    },
+  ];
+
   return (
     <>
       <PageContainer>
+        <GroupBtnTabs />
         <DataGrid
           checkboxSelection
-          loading={isAssessorLoading}
-          rows={assessorData}
-          columns={ASSESSMENT_ROLL_COLUMN}
+          // loading={isAssessorLoading}
+          rows={sampleRows}
+          columns={tableHeader}
           initialState={DATA_GRID_INITIAL_STATE}
           pageSizeOptions={PAGE_SIZE_OPTION}
           disableRowSelectionOnClick
-          onCellDoubleClick={handleCellDoubleClick}
+          disableColumnResize
+          // onCellDoubleClick={handleCellDoubleClick}
           onRowSelectionModelChange={handleSelectionChange}
           sx={DATA_GRID_STYLE}
           slots={{
             toolbar: () => (
               <TableToolbar
-                titleText="ASSESSOR OFFICE"
-                subText="Office of the Property Appraiser"
+                titleText="Land FAAS Records"
+                subText="Appraisal and Assessment Data"
                 actionBtn={<PageButton />}
               />
             ),

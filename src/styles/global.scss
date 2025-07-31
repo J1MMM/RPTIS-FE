@@ -42,3 +42,20 @@ body {
     border-bottom: 2px solid #1a237e;
   }
 }
+
+.MuiDataGrid-main {
+  background-color: #fff;
+  border: 1px solid #e7ebf1;
+  border-bottom: none;
+  outline: none;
+  // border-radius: 5px;
+  // border-bottom-right-radius: 0;
+  // border-bottom-left-radius: 0;
+}
+.MuiDataGrid-footerContainer {
+  background-color: #fff;
+  border: 1px solid #e7ebf1;
+  border-top: none;
+  // border-bottom-left-radius: 5px;
+  // border-bottom-right-radius: 5px;
+}

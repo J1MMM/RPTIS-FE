@@ -58,10 +58,10 @@ export const UserMenu = (props) => {
           }}
         />
         <Typography component={"span"} zIndex="2" variant="h6" mt={1}>
-          Yman Mangaring
+          Juan S. Dela Cruz
         </Typography>
         <Typography component={"span"} zIndex="2" variant="caption">
-          ymanmangairng@example.com
+          juandelacruzg@example.com
         </Typography>
 
         <Chip sx={{ mt: 2 }} label="Admin" color="primary" size="small" />

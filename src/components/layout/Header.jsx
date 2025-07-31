@@ -44,7 +44,7 @@ export const Header = (props) => {
             <img src={logo} alt="logo" width={"100%"} />
           </Box>
           <Typography variant="h6" fontWeight={600} color="primary.light">
-            REAL PROPERTY TAX MANAGEMENT SYSTEM
+            REAL PROPERTY TAX INFORMATION SYSTEM
           </Typography>
         </Stack>
 
