@@ -20,7 +20,7 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="Number and Street"
+          label="House No. & Street"
           variant="outlined"
           name="noAndSt"
           value={props?.row?.noAndSt}
@@ -55,9 +55,21 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="Municipality & Province/City"
+          label="City/Municipality"
           variant="outlined"
           value={"San Pablo"}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Province"
+          variant="outlined"
+          value={"Laguna"}
           slotProps={{
             input: {
               readOnly: props?.readOnly,
@@ -80,9 +92,29 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
             },
           }}
         />
+
+        <FormControl margin="dense" fullWidth>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Date"
+              value={props?.row?.DATE == null ? null : dayjs(props?.row?.DATE)}
+              readOnly={props?.readOnly}
+              onChange={(newVal) =>
+                props?.setSelectedRow((prev) => ({
+                  ...prev,
+                  DATE: newVal,
+                }))
+              }
+              slotProps={{ textField: { required: true } }}
+            />
+          </LocalizationProvider>
+        </FormControl>
+      </Stack>
+      <Stack direction="row" gap={1}>
         <TextField
           margin="dense"
           fullWidth
+          multiline
           label="Survey No."
           variant="outlined"
           name="Survey"
@@ -94,8 +126,6 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
             },
           }}
         />
-      </Stack>
-      <Stack direction="row" gap={1}>
         <TextField
           margin="dense"
           fullWidth
@@ -126,22 +156,6 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         />
       </Stack>
       <Stack direction="row" gap={1}>
-        <FormControl margin="dense" fullWidth>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Date"
-              value={props?.row?.DATE == null ? null : dayjs(props?.row?.DATE)}
-              readOnly={props?.readOnly}
-              onChange={(newVal) =>
-                props?.setSelectedRow((prev) => ({
-                  ...prev,
-                  DATE: newVal,
-                }))
-              }
-              slotProps={{ textField: { required: true } }}
-            />
-          </LocalizationProvider>
-        </FormControl>
         <TextField
           margin="dense"
           fullWidth

@@ -9,10 +9,11 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="First Name"
+          label="Full Name"
           variant="outlined"
-          name="fname"
-          value={props?.row?.fname}
+          name="ownerFullname"
+          value={props?.row?.ownerFullname}
+          multiline
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -23,26 +24,10 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          id="outlined-basic"
-          label="last Name"
+          label="TIN No."
           variant="outlined"
-          name="lname"
-          value={props?.row?.lname}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
-          id="outlined-basic"
-          label="Middle Name"
-          variant="outlined"
-          name="mname"
-          value={props?.row?.mname}
+          name="TIN"
+          value={props?.row?.TIN}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -55,11 +40,10 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          id="outlined-basic"
-          label="Address"
+          label="House No. & Street"
           variant="outlined"
-          name="Address"
-          value={props?.row?.Address}
+          name="Street"
+          value={props?.row?.Street}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -70,11 +54,10 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          id="outlined-basic"
-          label="TIN No."
+          label="Barangay/District"
           variant="outlined"
-          name="TIN"
-          value={props?.row?.TIN}
+          name="Barangay"
+          value={props?.row?.Barangay}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -85,11 +68,24 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
+          label="City/Municipality"
           variant="outlined"
-          id="outlined-basic"
-          label="Telephone No."
-          name="Telephone"
-          value={props?.row?.Telephone}
+          name="city"
+          value={props?.row?.City}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Province"
+          variant="outlined"
+          name="city"
+          value={props?.row?.City}
           onChange={handleFormChange}
           slotProps={{
             input: {

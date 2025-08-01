@@ -4,59 +4,16 @@ import { Stack, TextField } from "@mui/material";
 
 export const BenificialFields = ({ props, handleFormChange }) => {
   return (
-    <Fieldset title="Administrator / Beneficial User">
+    <Fieldset title="Administrator Information">
       <Stack direction="row" gap={1}>
         <TextField
           margin="dense"
           fullWidth
-          label="First Name"
+          label="Full Name"
           variant="outlined"
-          name="AdminFname"
-          value={props?.row?.AdminFname}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
-          label="last Name"
-          variant="outlined"
-          name="AdminLname"
-          value={props?.row?.AdminLname}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
-          label="Middle Name"
-          variant="outlined"
-          name="AdminMname"
-          value={props?.row?.AdminMname}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextField
-          margin="dense"
-          fullWidth
-          label="Address"
-          variant="outlined"
-          name="AdminAddress"
-          value={props?.row?.AdminAddress}
+          name="administratorFullname"
+          value={props?.row?.administratorFullname}
+          multiline
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -69,8 +26,24 @@ export const BenificialFields = ({ props, handleFormChange }) => {
           fullWidth
           label="TIN No."
           variant="outlined"
-          name="AdminTIN"
-          value={props?.row?.AdminTIN}
+          name="administratorTIN"
+          value={props?.row?.administratorTIN}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          label="House No. & Street"
+          variant="outlined"
+          name="administratorStreet"
+          value={props?.row?.administratorStreet}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -81,7 +54,54 @@ export const BenificialFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="Telephone No."
+          id="outlined-basic"
+          label="Barangay/District"
+          variant="outlined"
+          name="administratorBrgy"
+          value={props?.row?.administratorBrgy}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+        <TextField
+          margin="dense"
+          fullWidth
+          id="outlined-basic"
+          label="City/Municipality"
+          variant="outlined"
+          name="administratorCity"
+          value={props?.row?.administratorCity}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+        <TextField
+          margin="dense"
+          fullWidth
+          id="outlined-basic"
+          label="Province"
+          variant="outlined"
+          name="administratorProvince"
+          value={props?.row?.administratorProvince}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Tell. No."
           variant="outlined"
           name="AdminTel"
           value={props?.row?.AdminTel}

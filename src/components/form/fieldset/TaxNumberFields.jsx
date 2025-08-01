@@ -1,14 +1,42 @@
-import { Stack, TextField } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
 import React from "react";
+
+const transactionCode = [
+  "SD",
+  "CS",
+  "DC",
+  "PC",
+  "DP",
+  "DT",
+  "TR",
+  "RC",
+  "GR",
+  "SP",
+];
 
 export const TaxNumberFields = ({ props, handleFormChange }) => {
   return (
-    <Stack flexDirection="row" justifyContent="space-between">
+    <Stack flexDirection="row" justifyContent="space-between" gap={1}>
+      <FormControl fullWidth required>
+        <InputLabel>Transaction Code</InputLabel>
+        <Select label="Transaction Code">
+          {transactionCode.map((c) => (
+            <MenuItem value={c}>{c}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <TextField
+        fullWidth
         required
-        label="T.D. No."
+        label="ARP No."
         variant="outlined"
-        sx={{ width: "45%" }}
         name="ArpNo"
         value={props?.row?.ArpNo}
         onChange={handleFormChange}
@@ -20,12 +48,12 @@ export const TaxNumberFields = ({ props, handleFormChange }) => {
       />
 
       <TextField
+        fullWidth
         required
-        label="Property Identification No."
+        label="PIN"
         variant="outlined"
-        sx={{ width: "45%" }}
-        name="PID"
-        value={props?.row?.PID}
+        name="PIN"
+        value={props?.row?.PIN}
         onChange={handleFormChange}
         slotProps={{
           input: {
