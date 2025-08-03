@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 
-import { CLASSIFICATION_DEFAULT } from "../../../utils/constant";
 import { useState } from "react";
 import { v4 } from "uuid";
 import { ContainerModal } from "../../shared/ContainerModal";
@@ -13,6 +12,7 @@ import { TaxabilityFields } from "../fieldset/TaxabilityFields";
 import { EOAFields } from "../fieldset/EOAFields";
 import { ClassificationFields } from "../fieldset/ClassificationFields";
 import { CancelsFields } from "../fieldset/CancelsFields";
+import { CLASSIFICATION_DEFAULT } from "../../../pages/Assessor/assessorConstant";
 
 export default function AddTaxDecModal(props) {
   const [openClassificationModal, setOpenClassificationModal] = useState(false);
@@ -162,9 +162,6 @@ export default function AddTaxDecModal(props) {
           handleOthersChange={handleOthersChange}
         />
 
-        <TaxabilityFields {...props} />
-        <EOAFields props={props} handleFormChange={handleFormChange} />
-
         <ClassificationFields
           props={props}
           open={openClassificationModal}
@@ -174,6 +171,8 @@ export default function AddTaxDecModal(props) {
           handleAddClassification={handleAddClassification}
           handleClassificationChange={handleClassificationChange}
         />
+        <EOAFields props={props} handleFormChange={handleFormChange} />
+        <TaxabilityFields {...props} />
 
         <CancelsFields props={props} handleFormChange={handleFormChange} />
       </ContainerModal>

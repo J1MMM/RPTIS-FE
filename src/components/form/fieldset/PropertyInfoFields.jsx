@@ -18,6 +18,37 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
     <Fieldset title="Property Information">
       <Stack direction="row" gap={1}>
         <TextField
+          fullWidth
+          required
+          label="ARP No."
+          variant="outlined"
+          name="ArpNo"
+          value={props?.row?.ArpNo}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly || props?.pendingPage,
+            },
+          }}
+        />
+
+        <TextField
+          fullWidth
+          required
+          label="PIN"
+          variant="outlined"
+          name="PIN"
+          value={props?.row?.PIN}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
           margin="dense"
           fullWidth
           label="House No. & Street"
@@ -81,7 +112,7 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="OCT/TCT/CLOA No.."
+          label="OCT/TCT/No."
           variant="outlined"
           name="oct"
           value={props?.row?.oct}
@@ -114,39 +145,25 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          multiline
-          label="Survey No."
-          variant="outlined"
-          name="Survey"
-          value={props?.row?.Survey}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
-          label="CCT"
-          variant="outlined"
-          name="cct"
-          value={props?.row?.cct}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
           label="Lot No"
           variant="outlined"
           name="LOT"
           value={props?.row?.LOT}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Block No."
+          variant="outlined"
+          name="BLOCK"
+          value={props?.row?.BLOCK}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -159,10 +176,11 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
         <TextField
           margin="dense"
           fullWidth
-          label="Block No."
+          multiline
+          label="Survey No."
           variant="outlined"
-          name="BLOCK"
-          value={props?.row?.BLOCK}
+          name="Survey"
+          value={props?.row?.Survey}
           onChange={handleFormChange}
           slotProps={{
             input: {

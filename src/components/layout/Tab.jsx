@@ -5,9 +5,11 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Margin } from "@mui/icons-material";
 import { Paper, Stack, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+const Tab = ({ links }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-const Tab = (props) => {
   return (
     <Paper
       component={Stack}
@@ -18,13 +20,34 @@ const Tab = (props) => {
         borderRadius: 0,
         borderBottom: "1px solid #e2e2e2",
         bgcolor: "mono.main",
+        userSelect: "none",
       }}
     >
-      {props?.links.map((obj, index) => {
+      {links.map((obj, index) => {
+        const isActive = location.pathname.startsWith(`/assessor/${obj.to}`);
+
         return (
-          <NavLink key={index} to={obj.to} className="tab-link" end>
-            <Typography> {obj.label}</Typography>
-          </NavLink>
+          <Typography
+            key={index}
+            sx={{
+              px: 3,
+              py: 1.5,
+              fontFamily: "Poppins",
+              fontWeight: 500,
+              color: isActive ? "primary.main" : "#000",
+              borderBottom: isActive
+                ? "2px solid #1A237E"
+                : "2px solid transparent",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              if (!isActive) {
+                navigate(obj.to);
+              }
+            }}
+          >
+            {obj.label}
+          </Typography>
         );
       })}
     </Paper>

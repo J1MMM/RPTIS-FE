@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CLASSIFICATION_DEFAULT } from "../../../utils/constant";
 import { v4 } from "uuid";
 import { ContainerModal } from "../../shared/ContainerModal";
 import { OwnerInfoFields } from "../fieldset/OwnerInfoFields";
@@ -11,6 +10,7 @@ import { ClassificationFields } from "../fieldset/ClassificationFields";
 import { TaxNumberFields } from "../fieldset/TaxNumberFields";
 import { CancelsFields } from "../fieldset/CancelsFields";
 import { BoundariesFields } from "../fieldset/BoundariesFields";
+import { CLASSIFICATION_DEFAULT } from "../../../pages/Assessor/assessorConstant";
 
 const TaxDecModal = (props) => {
   const [openClassificationModal, setOpenClassificationModal] = useState(false);

@@ -9,10 +9,11 @@ const ClassificationCustomFooter = (props) => {
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.04)",
-        borderTop: "1px solid rgba(224, 224, 224, 1)",
+        border: "1px solid rgba(224, 224, 224, 1)",
         minHeight: 52,
         boxSizing: "border-box",
-        bgcolor: "#EEF2F6",
+        // bgcolor: "#EEF2F6",
+        bgcolor: "#FFFF",
       }}
     >
       {/* Columns with borders */}
@@ -55,15 +56,6 @@ const ClassificationCustomFooter = (props) => {
       >
         {props?.marketValueTotal || 0}
       </Typography>
-
-      <Typography
-        sx={{
-          flex: 1,
-          borderRight: "1px solid rgba(224, 224, 224, 1)", // Right border
-          padding: "8px",
-        }}
-        variant="body2"
-      ></Typography>
 
       <Typography
         sx={{

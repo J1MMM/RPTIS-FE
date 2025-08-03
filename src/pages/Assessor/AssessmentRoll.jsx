@@ -443,36 +443,33 @@ function AssessmentRoll() {
 
   return (
     <>
-      <PageContainer>
-        <GroupBtnTabs />
-        <DataGrid
-          checkboxSelection
-          // loading={isAssessorLoading}
-          rows={sampleRows}
-          columns={tableHeader}
-          initialState={DATA_GRID_INITIAL_STATE}
-          pageSizeOptions={PAGE_SIZE_OPTION}
-          disableRowSelectionOnClick
-          disableColumnResize
-          // onCellDoubleClick={handleCellDoubleClick}
-          onRowSelectionModelChange={handleSelectionChange}
-          sx={DATA_GRID_STYLE}
-          slots={{
-            toolbar: () => (
-              <TableToolbar
-                titleText="Land FAAS Records"
-                subText="Appraisal and Assessment Data"
-                actionBtn={<PageButton />}
-              />
-            ),
-          }}
-          slotProps={{
-            panel: {
-              placement: "bottom-end",
-            },
-          }}
-        />
-      </PageContainer>
+      <DataGrid
+        checkboxSelection
+        // loading={isAssessorLoading}
+        rows={sampleRows}
+        columns={tableHeader}
+        initialState={DATA_GRID_INITIAL_STATE}
+        pageSizeOptions={PAGE_SIZE_OPTION}
+        disableRowSelectionOnClick
+        disableColumnResize
+        // onCellDoubleClick={handleCellDoubleClick}
+        onRowSelectionModelChange={handleSelectionChange}
+        sx={DATA_GRID_STYLE}
+        slots={{
+          toolbar: () => (
+            <TableToolbar
+              titleText="Land FAAS Records"
+              subText="Appraisal and Assessment Data"
+              actionBtn={<PageButton />}
+            />
+          ),
+        }}
+        slotProps={{
+          panel: {
+            placement: "bottom-end",
+          },
+        }}
+      />
 
       <TaxDecModal
         open={openRPTview}

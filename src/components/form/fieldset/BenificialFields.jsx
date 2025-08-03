@@ -1,6 +1,14 @@
 import React from "react";
 import Fieldset from "../../shared/Fieldset";
-import { Stack, TextField } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
+import { BRGY_LIST } from "../../../utils/constant";
 
 export const BenificialFields = ({ props, handleFormChange }) => {
   return (
@@ -14,20 +22,6 @@ export const BenificialFields = ({ props, handleFormChange }) => {
           name="administratorFullname"
           value={props?.row?.administratorFullname}
           multiline
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
-        <TextField
-          margin="dense"
-          fullWidth
-          label="TIN No."
-          variant="outlined"
-          name="administratorTIN"
-          value={props?.row?.administratorTIN}
           onChange={handleFormChange}
           slotProps={{
             input: {
@@ -51,21 +45,26 @@ export const BenificialFields = ({ props, handleFormChange }) => {
             },
           }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
-          id="outlined-basic"
-          label="Barangay/District"
-          variant="outlined"
-          name="administratorBrgy"
-          value={props?.row?.administratorBrgy}
-          onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
-        />
+
+        <FormControl fullWidth margin="dense">
+          <InputLabel id="Barangay/District">Barangay/District</InputLabel>
+          <Select
+            labelId="Barangay/District"
+            id="demo-simple-select"
+            value={props?.row?.administratorBrgy || ""}
+            required
+            name="administratorBrgy"
+            label="Barangay/District"
+            onChange={handleFormChange}
+            readOnly={props?.readOnly || props?.pendingPage}
+          >
+            {BRGY_LIST.map((val, index) => (
+              <MenuItem key={index} value={val}>
+                {val}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField
           margin="dense"
           fullWidth
@@ -105,6 +104,21 @@ export const BenificialFields = ({ props, handleFormChange }) => {
           variant="outlined"
           name="AdminTel"
           value={props?.row?.AdminTel}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+
+        <TextField
+          margin="dense"
+          fullWidth
+          label="TIN No."
+          variant="outlined"
+          name="administratorTIN"
+          value={props?.row?.administratorTIN}
           onChange={handleFormChange}
           slotProps={{
             input: {

@@ -13,6 +13,14 @@ import { AssessorLayout } from "./components/layout/AssessorLayout.jsx";
 import { Missing } from "./pages/404.jsx";
 import { LandTaxLayout } from "./components/layout/LandTaxLayout.jsx";
 import { CashLayout } from "./components/layout/CashLayout.jsx";
+import ArchivedRecordsLayout from "./pages/Assessor/ArchivedRecordsLayout.jsx";
+import {
+  AssessorPageLayout,
+  ActiveRecordsLayout,
+  LandFaasPage,
+  BuildingFaasPage,
+  MachineryFaasPage,
+} from "./features/Assessor";
 
 function App() {
   return (
@@ -25,11 +33,21 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Navigate to="/assessor" />} />
           <Route>
-            <Route path="" element={<AssessmentRoll />} />
-            <Route path="assessor" element={<AssessorLayout />}>
-              <Route index element={<AssessmentRoll />} />
+            <Route path="assessor" element={<AssessorPageLayout />}>
+              <Route index element={<Navigate to="active" replace />} />
+              <Route path="active" element={<ActiveRecordsLayout />}>
+                <Route index element={<Navigate to="land" replace />} />
+                <Route path="land" element={<LandFaasPage />} />
+                <Route path="building" element={<BuildingFaasPage />} />
+                <Route path="machinery" element={<MachineryFaasPage />} />
+              </Route>
+              <Route path="archived" element={<ArchivedRecordsLayout />}>
+                <Route index element={<Navigate to="land" replace />} />
+                <Route path="land" element={<Cancels />} />
+                <Route path="building" element={<AssessmentRoll />} />
+                <Route path="machinery" element={<AssessmentRoll />} />
+              </Route>
               <Route path="pending" element={<Pending />} />
-              <Route path="cancels" element={<Cancels />} />
             </Route>
 
             <Route path="landtax-division" element={<LandTaxLayout />}>

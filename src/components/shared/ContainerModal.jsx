@@ -29,9 +29,10 @@ export const ContainerModal = ({
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          alignItems: "center",
           backgroundColor: "primary.main",
           color: "#ffffff",
-          fontWeight: 600, // Correct weight for semi-bold
+          padding: "8px 24px",
         }}
       >
         {title}

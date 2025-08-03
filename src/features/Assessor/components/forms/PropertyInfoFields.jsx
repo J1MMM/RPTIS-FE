@@ -1,0 +1,193 @@
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from "@mui/material";
+import { BRGY_LIST } from "../../../../utils/constant";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
+import StyledFieldset from "../modals/StyledFieldset";
+
+export const PropertyInfoFields = ({ props, handleFormChange }) => {
+  return (
+    <StyledFieldset title="Property Information">
+      <Stack direction="row" gap={1}>
+        <TextField
+          fullWidth
+          required
+          label="ARP No."
+          variant="outlined"
+          name="ArpNo"
+          value={props?.row?.ArpNo}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly || props?.pendingPage,
+            },
+          }}
+        />
+
+        <TextField
+          fullWidth
+          required
+          label="PIN"
+          variant="outlined"
+          name="PIN"
+          value={props?.row?.PIN}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          label="House No. & Street"
+          variant="outlined"
+          name="noAndSt"
+          value={props?.row?.noAndSt}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+
+        <FormControl fullWidth margin="dense">
+          <InputLabel id="Barangay/District">Barangay/District</InputLabel>
+          <Select
+            labelId="Barangay/District"
+            id="demo-simple-select"
+            value={props?.row?.Brgy || ""}
+            required
+            name="Brgy"
+            label="Barangay/District"
+            onChange={handleFormChange}
+            readOnly={props?.readOnly || props?.pendingPage}
+          >
+            {BRGY_LIST.map((val, index) => (
+              <MenuItem key={index} value={val}>
+                {val}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <TextField
+          margin="dense"
+          fullWidth
+          label="City/Municipality"
+          variant="outlined"
+          value={"San Pablo"}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Province"
+          variant="outlined"
+          value={"Laguna"}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          label="OCT/TCT/No."
+          variant="outlined"
+          name="oct"
+          value={props?.row?.oct}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+
+        <FormControl margin="dense" fullWidth>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Date"
+              value={props?.row?.DATE == null ? null : dayjs(props?.row?.DATE)}
+              readOnly={props?.readOnly}
+              onChange={(newVal) =>
+                props?.setSelectedRow((prev) => ({
+                  ...prev,
+                  DATE: newVal,
+                }))
+              }
+              slotProps={{ textField: { required: true } }}
+            />
+          </LocalizationProvider>
+        </FormControl>
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Lot No"
+          variant="outlined"
+          name="LOT"
+          value={props?.row?.LOT}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+
+        <TextField
+          margin="dense"
+          fullWidth
+          label="Block No."
+          variant="outlined"
+          name="BLOCK"
+          value={props?.row?.BLOCK}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextField
+          margin="dense"
+          fullWidth
+          multiline
+          label="Survey No."
+          variant="outlined"
+          name="Survey"
+          value={props?.row?.Survey}
+          onChange={handleFormChange}
+          slotProps={{
+            input: {
+              readOnly: props?.readOnly,
+            },
+          }}
+        />
+      </Stack>
+    </StyledFieldset>
+  );
+};

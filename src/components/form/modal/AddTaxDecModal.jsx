@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 
-import { CLASSIFICATION_DEFAULT } from "../../../utils/constant";
 import { useState } from "react";
 import { v4 } from "uuid";
 import { ContainerModal } from "../../shared/ContainerModal";
@@ -13,17 +12,47 @@ import { TaxabilityFields } from "../fieldset/TaxabilityFields";
 import { EOAFields } from "../fieldset/EOAFields";
 import { ClassificationFields } from "../fieldset/ClassificationFields";
 import { CancelsFields } from "../fieldset/CancelsFields";
+import { Lan } from "@mui/icons-material";
+import LandBounderiesFields from "../fieldset/LandBounderiesFields";
+import {
+  ACTUALUSE_EQUI_LEVEL,
+  CLASSIFICATION_DEFAULT,
+  UNIT_VALUE_TABLE,
+} from "../../../pages/Assessor/assessorConstant";
+import { LandMarketValueFields } from "../fieldset/LandMarketValueFields";
+import { LandPropertyAssessmentFields } from "../fieldset/LandPropertyAssessmentFields";
 
 export default function AddTaxDecModal(props) {
   const [openClassificationModal, setOpenClassificationModal] = useState(false);
-  const [classificationData, setClassificationData] = useState(
-    CLASSIFICATION_DEFAULT
-  );
+  const [landAppraisal, setLandAppraisal] = useState(CLASSIFICATION_DEFAULT);
 
-  const handleClassificationChange = (e) => {
-    setClassificationData({
-      ...classificationData,
-      [e.target.name]: e.target.value,
+  const handleLandAppraisalChange = (e) => {
+    const { name, value } = e.target;
+
+    setLandAppraisal((prev) => {
+      const updated = {
+        ...prev,
+        [name]: value,
+      };
+
+      // Reset subclass if classification changes
+      if (name === "classification") {
+        updated.subClass = "";
+      }
+
+      const classification = updated.classification?.toLowerCase();
+      const subClass = updated.subClass?.toLowerCase();
+      const area = parseFloat(updated.area) || 0;
+      const actualUse = updated.actualUse?.toLowerCase();
+
+      updated.unitValue = UNIT_VALUE_TABLE[classification]?.[subClass] || 0;
+      updated.assessmentLevel = ACTUALUSE_EQUI_LEVEL[actualUse] || 0;
+
+      updated.baseMarketValue = parseFloat(
+        (area * updated.unitValue).toFixed(2)
+      );
+
+      return updated;
     });
   };
 
@@ -41,48 +70,6 @@ export default function AddTaxDecModal(props) {
       };
     });
   };
-  const handleBuildingChange = (e) => {
-    props?.setSelectedRow((prev) => {
-      return {
-        ...prev,
-        Boundaries: {
-          ...prev.Boundaries,
-          buildingDetails: {
-            ...prev?.Boundaries.buildingDetails,
-            [e.target.name]: e.target.value,
-          },
-        },
-      };
-    });
-  };
-  const handleMachineChange = (e) => {
-    props?.setSelectedRow((prev) => {
-      return {
-        ...prev,
-        Boundaries: {
-          ...prev.Boundaries,
-          machineryDetails: {
-            ...prev?.Boundaries.machineryDetails,
-            [e.target.name]: e.target.value,
-          },
-        },
-      };
-    });
-  };
-  const handleOthersChange = (e) => {
-    props?.setSelectedRow((prev) => {
-      return {
-        ...prev,
-        Boundaries: {
-          ...prev.Boundaries,
-          othersDetails: {
-            ...prev?.Boundaries.othersDetails,
-            [e.target.name]: e.target.value,
-          },
-        },
-      };
-    });
-  };
 
   const handleFormChange = (e) => {
     props?.setSelectedRow({
@@ -91,19 +78,8 @@ export default function AddTaxDecModal(props) {
     });
   };
 
-  const handleCheckboxChange = (e) =>
-    props?.setSelectedRow((prev) => {
-      return {
-        ...prev,
-        Boundaries: {
-          ...prev.Boundaries,
-          [e.target.name]: e.target.checked,
-        },
-      };
-    });
-
   const handleAddClassification = () => {
-    if (classificationData.classification != "") {
+    if (landAppraisal.classification != "") {
       const id = v4();
 
       props?.setSelectedRow((prev) => {
@@ -111,12 +87,12 @@ export default function AddTaxDecModal(props) {
           ...prev,
           classification: [
             ...prev.classification,
-            { ...classificationData, id: id },
+            { ...landAppraisal, id: id },
           ],
         };
       });
 
-      setClassificationData(CLASSIFICATION_DEFAULT);
+      setLandAppraisal(CLASSIFICATION_DEFAULT);
       setOpenClassificationModal(false);
     }
   };
@@ -149,33 +125,40 @@ export default function AddTaxDecModal(props) {
         }
       >
         <TaxNumberFields props={props} handleFormChange={handleFormChange} />
+        <PropertyInfoFields props={props} handleFormChange={handleFormChange} />
         <OwnerInfoFields props={props} handleFormChange={handleFormChange} />
         <BenificialFields props={props} handleFormChange={handleFormChange} />
-        <PropertyInfoFields props={props} handleFormChange={handleFormChange} />
 
-        <BoundariesFields
+        <LandBounderiesFields
           props={props}
-          handleCheckboxChange={handleCheckboxChange}
           handleLandChange={handleLandChange}
-          handleBuildingChange={handleBuildingChange}
-          handleMachineChange={handleMachineChange}
-          handleOthersChange={handleOthersChange}
         />
-
-        <TaxabilityFields {...props} />
-        <EOAFields props={props} handleFormChange={handleFormChange} />
 
         <ClassificationFields
           props={props}
           open={openClassificationModal}
           onClose={() => setOpenClassificationModal(false)}
           addClassOnlick={() => setOpenClassificationModal(true)}
-          classificationData={classificationData}
+          classificationData={landAppraisal}
           handleAddClassification={handleAddClassification}
-          handleClassificationChange={handleClassificationChange}
+          handleClassificationChange={handleLandAppraisalChange}
+        />
+        <LandMarketValueFields
+          props={props}
+          open={openClassificationModal}
+          onClose={() => setOpenClassificationModal(false)}
+          addClassOnlick={() => setOpenClassificationModal(true)}
+          classificationData={landAppraisal}
+          handleAddClassification={handleAddClassification}
+          handleClassificationChange={handleLandAppraisalChange}
+        />
+        <LandPropertyAssessmentFields
+          props={props}
+          handleFormChange={handleFormChange}
         />
 
-        <CancelsFields props={props} handleFormChange={handleFormChange} />
+        <TaxabilityFields {...props} />
+        <EOAFields props={props} handleFormChange={handleFormChange} />
       </ContainerModal>
     </>
   );

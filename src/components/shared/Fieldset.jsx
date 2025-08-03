@@ -7,8 +7,9 @@ function Fieldset({ title, children }) {
       component={"fieldset"}
       sx={{
         border: "1px solid #1A237E",
-        borderRadius: 2,
+        borderRadius: 1,
         boxSizing: "border-box",
+        position: "relative",
       }}
     >
       <legend style={{ color: "#1A237E" }}>{title}</legend>

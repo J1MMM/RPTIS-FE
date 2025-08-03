@@ -1,6 +1,6 @@
 import { Button, Chip, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 
 export const HEADER_HEIGHT = "80px";
 export const DRAWER_WIDTH_OPEN = 250;
@@ -8,7 +8,7 @@ export const DRAWER_WIDTH_CLOSED = 60;
 export const MAIN_CONTAINER_HEIGHT = `calc(100vh - ${HEADER_HEIGHT} - 60px)`;
 // export const BASE_URL = "http://10.10.10.86:4000";
 export const BASE_URL = "http://localhost:4000";
-export const SOCKET = io(BASE_URL);
+// export const SOCKET = io(BASE_URL);
 
 export const ALERT_SEV = {
   error: "error",
@@ -384,67 +384,13 @@ export const PAYMENT_ORDER_TABLE_COLUMN = [
   },
 ];
 
-export const CLASSIFICATION_COLUMN = [
-  {
-    field: "classification",
-    headerName: "Classification",
-    flex: 1,
-    editable: true,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "area",
-    headerName: "Area",
-    flex: 1,
-    editable: true,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "marketValue",
-    headerName: "Market Value",
-    flex: 1,
-    editable: true,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "actualUse",
-    headerName: "Actual Use",
-    flex: 1,
-    editable: true,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "level",
-    headerName: "Level",
-    flex: 1,
-    editable: true,
-    headerClassName: "data-grid-header",
-  },
-  {
-    field: "assessedValue",
-    headerName: "Assessed Value",
-    editable: true,
-    headerClassName: "data-grid-header",
-    flex: 1,
-  },
-];
-
-export const CLASSIFICATION_DEFAULT = {
-  classification: "",
-  area: "",
-  marketValue: "",
-  actualUse: "",
-  level: "",
-  assessedValue: "",
-};
-
 export const ASSESSOR_TAB_LINKS = [
   {
-    to: "",
+    to: "active",
     label: "Active Records",
   },
   {
-    to: "cancels",
+    to: "archived",
     label: "Archived Records",
   },
   {
