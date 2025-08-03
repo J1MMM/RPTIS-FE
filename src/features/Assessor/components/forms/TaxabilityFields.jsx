@@ -1,5 +1,5 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 
 export const TaxabilityFields = (props) => {
   return (

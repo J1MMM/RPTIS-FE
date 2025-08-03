@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { BRGY_LIST } from "../../../../utils/constant";
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 
 export const OwnerInfoFields = ({ props, handleFormChange }) => {
   return (

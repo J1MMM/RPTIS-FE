@@ -14,7 +14,6 @@ import {
   SUBDIVIDE_INITIAL_DATA,
 } from "../../../../utils/constant";
 import { Add, Shuffle } from "@mui/icons-material";
-import { useQueryClient } from "react-query";
 import { v4 } from "uuid";
 import axios from "../../../../api/axios";
 import dayjs from "dayjs";
@@ -25,9 +24,9 @@ import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/modals/AddLandFaasModal";
 
 function LandFaasPage() {
-  const queryClient = useQueryClient();
-
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  console.log("landFaasRecords");
+  console.log(landFaasRecords);
 
   const [modalActive, setModalActive] = useState(false);
   const [openRPTview, setOpenRPTview] = useState(false);
@@ -155,8 +154,6 @@ function LandFaasPage() {
       const response = await axios.post("/api/assessor/cancel", formatedArr);
       console.log(response);
 
-      await queryClient.invalidateQueries("cancelsData");
-
       setAlertShown(true);
       setAlertSeverity(ALERT_SEV.success);
       setFormMsg("ARP found and values have been moved to tax cancels");
@@ -205,8 +202,6 @@ function LandFaasPage() {
         newFormData
       );
       console.log(response.data);
-
-      await queryClient.invalidateQueries("cancelsData");
 
       setSelectedArpNos([]);
       setAlertShown(true);
@@ -266,8 +261,6 @@ function LandFaasPage() {
       }
       setFormMsg(response.data?.message);
 
-      await queryClient.invalidateQueries("pendingData");
-      await queryClient.invalidateQueries("cancelsData");
       setOpenRPTview(false);
     } catch (error) {
       console.log(error);
@@ -338,7 +331,7 @@ function LandFaasPage() {
       <DataGrid
         checkboxSelection
         // loading={isAssessorLoading}
-        rows={sampleRows}
+        rows={landFaasRecords}
         columns={TABLE_HEADER}
         initialState={DATA_GRID_INITIAL_STATE}
         pageSizeOptions={PAGE_SIZE_OPTION}

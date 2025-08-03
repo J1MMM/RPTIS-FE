@@ -134,11 +134,7 @@ export default function AddLandFaasModal(props) {
 
         <LandAppraisalFields
           props={props}
-          open={openClassificationModal}
-          onClose={() => setOpenClassificationModal(false)}
-          addClassOnlick={() => setOpenClassificationModal(true)}
           classificationData={landAppraisal}
-          handleAddClassification={handleAddClassification}
           handleClassificationChange={handleLandAppraisalChange}
         />
         <LandMarketValueFields

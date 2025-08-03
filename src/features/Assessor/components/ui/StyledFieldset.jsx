@@ -12,7 +12,7 @@ function StyledFieldset({ title, children }) {
         position: "relative",
       }}
     >
-      <legend style={{ color: "primary.main" }}>{title}</legend>
+      <legend style={{ color: "#1A237E" }}>{title}</legend>
       {children}
     </Box>
   );

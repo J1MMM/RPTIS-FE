@@ -2,7 +2,7 @@ import { FormControl, Stack, TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 
 export const EOAFields = ({ props, handleFormChange }) => {
   return (

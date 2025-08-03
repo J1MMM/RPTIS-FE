@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import { NumericFormat } from "react-number-format";
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 import { CLASSIFICATION_DD } from "../../constants/dropdownOptions";
 
 export const LandPropertyAssessmentFields = ({ props, handleFormChange }) => {

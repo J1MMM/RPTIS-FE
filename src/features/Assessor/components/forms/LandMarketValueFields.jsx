@@ -1,8 +1,9 @@
 import { Button, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 import { LandMarketValueTable } from "../tables/LandMarketValueTable";
+import { AddLandMarketValModal } from "../modals/AddLandMarketValModal";
 
 export const LandMarketValueFields = ({
   props,
@@ -37,14 +38,14 @@ export const LandMarketValueFields = ({
         />
       </StyledFieldset>
 
-      {/* <AddLandMarketValModal
+      <AddLandMarketValModal
         props={props}
         open={open}
         onClose={onClose}
         handleAddClassification={handleAddClassification}
         handleClassificationChange={handleClassificationChange}
         classificationData={classificationData}
-      /> */}
+      />
     </>
   );
 };

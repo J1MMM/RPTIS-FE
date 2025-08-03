@@ -1,5 +1,5 @@
 import { Stack, TextField } from "@mui/material";
-import StyledFieldset from "../modals/StyledFieldset";
+import StyledFieldset from "../ui/StyledFieldset";
 
 function LandBounderiesFields({ props, handleLandChange }) {
   return (

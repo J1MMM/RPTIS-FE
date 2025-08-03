@@ -1,51 +1,3 @@
-export const CLASSIFICATION_COLUMN = [
-  {
-    field: "classification",
-    headerName: "Classification",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "subClass",
-    headerName: "Sub-Classification",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "area",
-    headerName: "Area",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "unitValue",
-    headerName: "Unit Value",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "baseMarketValue",
-    headerName: "Base Market Value",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-];
-
 export const MARKET_VALUE_TABLE_COLUMN = [
   {
     field: "baseMarketValue",
@@ -87,45 +39,6 @@ export const MARKET_VALUE_TABLE_COLUMN = [
   {
     field: "marketValue",
     headerName: "Market Value",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-];
-export const PROPERTY_ASS_TABLE_COLUMN = [
-  {
-    field: "actualUse",
-    headerName: "Actual Use",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "marketValue",
-    headerName: "Market Value",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-
-  {
-    field: "assessmentLevel",
-    headerName: "Assessment Level",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: "assessedValue",
-    headerName: "Assessed Value",
     flex: 1,
     headerClassName: "data-grid-header",
     sortable: false,
