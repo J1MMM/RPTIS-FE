@@ -6,6 +6,7 @@ const AssessorContext = createContext({});
 
 export const AssessorProvider = ({ children }) => {
   const [landFaasRecords, setLandFaasRecords] = useState([]);
+  const [loading, setLoading] = useState([]);
 
   useEffect(() => {
     console.log("AssessorContext mounted");
