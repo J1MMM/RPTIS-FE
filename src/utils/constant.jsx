@@ -67,7 +67,6 @@ export const ASSESSMENT_ROLL_COLUMN = [
       return (
         <Stack flexDirection="row" gap={1}>
           <span>
-            {" "}
             {params?.row?.Boundaries?.land == true && (
               <Chip size="small" label="LAND" />
             )}
@@ -700,6 +699,12 @@ export const DATA_GRID_STYLE = {
     ".MuiIconButton-sizeSmall": {
       color: "#000",
     },
+  },
+  "& .MuiDataGrid-cell:focus": {
+    outline: "none",
+  },
+  "& .MuiDataGrid-cell:focus-within": {
+    outline: "none",
   },
   border: "none",
 };

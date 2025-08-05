@@ -37,6 +37,7 @@ export const FIELD_NAMES = {
   SE_BOUNDARY: "SEBoundary",
   NW_BOUNDARY: "NWBoundary",
   // Land Appraisal
+  LAND_APPRAISAL: "landAppraisal",
   LAND_CLASSIFICATION: "classification",
   LAND_SUB_CLASS: "subClass",
   LAND_AREA: "area",
@@ -59,4 +60,6 @@ export const FIELD_NAMES = {
   EFFECTIVITY_QTR: "qtr",
   EFFECTIVITY_YEAR: "year",
   EFFECTIVITY_DATE_OF_EFFECTIVITY: "dateOfEffectivity",
+
+  TOTAL_MARKET_VALUE: "totalMarketValue",
 };

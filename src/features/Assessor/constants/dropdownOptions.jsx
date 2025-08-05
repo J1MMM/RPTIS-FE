@@ -1,28 +1,44 @@
-export const CLASSIFICATION_DD = [
+export const CLASSIFICATION_OPTIONS = [
   { value: "Residential", label: "Residential" },
   { value: "Commercial", label: "Commercial" },
   { value: "Industrial", label: "Industrial" },
   { value: "Agricultural", label: "Agricultural" },
 ];
 
-export const SUBCLASS_DD = {
-  Residential: ["R1", "R2", "R3", "R4", "R5", "R6"],
-  Commercial: ["C1", "C2", "C3", "C4"],
-  Industrial: ["I1", "I2", "I3"],
+export const SUBCLASS_OPTIONS = {
+  Residential: [
+    { value: "R1", label: "R1" },
+    { value: "R2", label: "R2" },
+    { value: "R3", label: "R3" },
+    { value: "R4", label: "R4" },
+    { value: "R5", label: "R5" },
+    { value: "R6", label: "R6" },
+  ],
+  Commercial: [
+    { value: "C1", label: "C1" },
+    { value: "C2", label: "C2" },
+    { value: "C3", label: "C3" },
+    { value: "C4", label: "C4" },
+  ],
+  Industrial: [
+    { value: "I1", label: "I1" },
+    { value: "I2", label: "I2" },
+    { value: "I3", label: "I3" },
+  ],
   Agricultural: [
-    "A1",
-    "A2",
-    "A3",
-    "A4",
-    "B1",
-    "B2",
-    "B3",
-    "C1",
-    "C2",
-    "C3",
-    "D1",
-    "D2",
-    "D3",
+    { value: "A1", label: "A1" },
+    { value: "A2", label: "A2" },
+    { value: "A3", label: "A3" },
+    { value: "A4", label: "A4" },
+    { value: "B1", label: "B1" },
+    { value: "B2", label: "B2" },
+    { value: "B3", label: "B3" },
+    { value: "C1", label: "C1" },
+    { value: "C2", label: "C2" },
+    { value: "C3", label: "C3" },
+    { value: "D1", label: "D1" },
+    { value: "D2", label: "D2" },
+    { value: "D3", label: "D3" },
   ],
 };
 

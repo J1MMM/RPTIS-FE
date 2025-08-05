@@ -121,15 +121,7 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELD_NAMES.NW_BOUNDARY]: "",
 
   // land appraisal
-  landAppraisal: [
-    // {
-    //   [FIELD_NAMES.LAND_CLASSIFICATION]: "",
-    //   [FIELD_NAMES.LAND_SUB_CLASS]: "",
-    //   [FIELD_NAMES.LAND_AREA]: "",
-    //   [FIELD_NAMES.LAND_UNIT_VALUE]: "",
-    //   [FIELD_NAMES.LAND_BASE_MARKET_VALUE]: "",
-    // },
-  ],
+  [FIELD_NAMES.LAND_APPRAISAL]: [],
 
   // market adjustment
   [FIELD_NAMES.MARKET_ADJUSTMENT_CLASSIFICATION]: "",
@@ -140,7 +132,7 @@ export const DEFAULT_FIELD_VALUES = {
 
   // property assessment
   [FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
-  [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: "",
+  [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: 0,
   [FIELD_NAMES.PROPERTY_MARKET_VALUE]: "",
   [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]: "",
 
@@ -151,4 +143,13 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELD_NAMES.EFFECTIVITY_QTR]: "",
   [FIELD_NAMES.EFFECTIVITY_YEAR]: null,
   [FIELD_NAMES.EFFECTIVITY_DATE_OF_EFFECTIVITY]: null,
+
+  [FIELD_NAMES.TOTAL_MARKET_VALUE]: 0,
+};
+
+export const ACTUAL_USE_EQUIVALENTS = {
+  residential: 0.15,
+  agricultural: 0.4,
+  commercial: 0.4,
+  industrial: 0.4,
 };

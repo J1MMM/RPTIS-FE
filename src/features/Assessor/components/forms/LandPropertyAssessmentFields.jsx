@@ -10,50 +10,36 @@ import {
 
 import { NumericFormat } from "react-number-format";
 import StyledFieldset from "../ui/StyledFieldset";
-import { CLASSIFICATION_DD } from "../../constants/dropdownOptions";
+import { CLASSIFICATION_OPTIONS } from "../../constants/dropdownOptions";
+import BaseSelect from "../../../../components/inputs/BaseSelect";
+import { FIELD_NAMES } from "../../constants/fieldNames";
+import BaseTextField from "../../../../components/inputs/BaseTextField";
+import { ACTUAL_USE_EQUIVALENTS } from "../../constants/defaultValues";
+import { formatPercent } from "../../../../utils/formatters";
 
-export const LandPropertyAssessmentFields = ({ props, handleFormChange }) => {
+export const LandPropertyAssessmentFields = (props) => {
+  const { formData, handleFormChange } = props;
+
   return (
     <StyledFieldset title="Property Assessment">
       <Stack>
         <Stack direction="row" gap={1}>
-          <FormControl fullWidth margin="dense" required>
-            <InputLabel>Actual Use</InputLabel>
-            <Select
-              required
-              label="Actual Use"
-              value={props?.row?.actualUse || ""}
-              name="actualUse"
-              onChange={handleFormChange}
-              readOnly={props?.readOnly || props?.pendingPage}
-            >
-              {CLASSIFICATION_DD.map((val, index) => (
-                <MenuItem key={index} value={val.value}>
-                  {val.label}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <TextField
-            required
-            type="number"
-            margin="dense"
-            fullWidth
-            label="Assessment Level"
-            variant="outlined"
-            name="assessmentLevel"
-            value={props?.row?.assessmentLevel}
+          <BaseSelect
+            label="Actual Use"
             onChange={handleFormChange}
-            slotProps={{
-              input: {
-                readOnly: true,
-                endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                inputProps: {
-                  min: 0,
-                },
-              },
-            }}
+            name={FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE}
+            readOnly={props?.readOnly || props?.pendingPage}
+            value={formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE] || ""}
+            options={CLASSIFICATION_OPTIONS}
+          />
+
+          <BaseTextField
+            label="Assessment Level"
+            name={FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL}
+            value={formatPercent(
+              formData[FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]
+            )}
+            readOnly
           />
         </Stack>
 
@@ -65,7 +51,7 @@ export const LandPropertyAssessmentFields = ({ props, handleFormChange }) => {
             label="Market Value"
             variant="outlined"
             name="baseMarketValue"
-            value={props?.row?.baseMarketValue}
+            value={formData?.[FIELD_NAMES.TOTAL_MARKET_VALUE]}
             thousandSeparator=","
             allowNegative={false}
             slotProps={{
@@ -84,7 +70,7 @@ export const LandPropertyAssessmentFields = ({ props, handleFormChange }) => {
             label="Assessed Value"
             variant="outlined"
             name="assessedValue"
-            value={props?.row?.assessedValue}
+            value={formData[FIELD_NAMES.PROPERTY_ASSESSED_VALUE]}
             thousandSeparator=","
             allowNegative={false}
             slotProps={{

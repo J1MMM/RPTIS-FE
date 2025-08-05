@@ -1,8 +1,7 @@
 import { InputAdornment, TextField } from "@mui/material";
-import React from "react";
 import { NumericFormat } from "react-number-format";
 
-function NumericFormatTextField({ name, value, label }) {
+function NumericFormatTextField({ name, value, label, adornment }) {
   return (
     <NumericFormat
       customInput={TextField}
@@ -16,10 +15,8 @@ function NumericFormatTextField({ name, value, label }) {
       allowNegative={false}
       slotProps={{
         input: {
+          ...adornment,
           readOnly: true,
-          startAdornment: (
-            <InputAdornment position="start">&#8369;</InputAdornment>
-          ),
         },
       }}
     />

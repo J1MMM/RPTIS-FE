@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { Collapse, Stack } from "@mui/material";
@@ -21,29 +21,41 @@ import { formatFullname, sumFieldInArray } from "../../../../utils/helper";
 import { TableToolbar } from "../../../../components/form/table/TableToolbar";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/modals/AddLandFaasModal";
-import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
+import {
+  ACTUAL_USE_EQUIVALENTS,
+  DEFAULT_FIELD_VALUES,
+} from "../../constants/defaultValues";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
 function LandFaasPage() {
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const [formData, setFormData] = useState(DEFAULT_FIELD_VALUES);
 
   const [addModalActive, setAddModalActive] = useState(false);
-  const [previewModalActive, setPreviewModalActive] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
   const [selectedArpNos, setSelectedArpNos] = useState([]);
-  const [selectedRowID, setSelectedRowID] = useState(null);
-  const [prevSelected, setPrevSelected] = useState(null);
   const [readOnly, setReadOnly] = useState(true);
 
-  const handleCellDoubleClick = (params) => {
-    setSelectedRowID(params?.row?.id);
-
-    const formattedRow = useRowFormatter(params);
-
-    setSelectedRow(formattedRow);
-    setPrevSelected(formattedRow);
-    setPreviewModalActive(true);
+  const handleViewClick = (params) => {
+    const id = params?.row?.id;
   };
+
+  useEffect(() => {
+    const actualUseRaw = formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE];
+    const actualUse = actualUseRaw?.toLowerCase();
+    const assessmentLevel = ACTUAL_USE_EQUIVALENTS[actualUse] ?? 0;
+    const totalMarketValue = formData[FIELD_NAMES.TOTAL_MARKET_VALUE] ?? 0;
+
+    const assessedValue = assessmentLevel * totalMarketValue;
+
+    setFormData((prev) => ({
+      ...prev,
+      [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: assessmentLevel,
+      [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]: assessedValue,
+    }));
+  }, [
+    formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE],
+    formData[FIELD_NAMES.TOTAL_MARKET_VALUE],
+  ]);
 
   const PageButton = () => {
     return (
@@ -82,7 +94,7 @@ function LandFaasPage() {
         <Button
           variant="outlined"
           size="small"
-          onClick={() => handleCellDoubleClick(params)}
+          onClick={() => handleViewClick(params)}
         >
           View
         </Button>
@@ -101,7 +113,6 @@ function LandFaasPage() {
         pageSizeOptions={PAGE_SIZE_OPTION}
         disableRowSelectionOnClick
         disableColumnResize
-        // onCellDoubleClick={handleCellDoubleClick}
         sx={DATA_GRID_STYLE}
         slots={{
           toolbar: () => (
@@ -122,7 +133,7 @@ function LandFaasPage() {
       <AddLandFaasModal
         modalControl={{
           open: addModalActive,
-          handleClose: () => setAddModalActive(false),
+          onClose: () => setAddModalActive(false),
         }}
         formState={{ formData, setFormData, setReadOnly }}
         // actionButton={<TaxdecModalButtons />}

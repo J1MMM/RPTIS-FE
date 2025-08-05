@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 
 function BaseTextField({
   label,
@@ -7,10 +7,14 @@ function BaseTextField({
   onChange,
   readOnly,
   pendingPage,
+  disabled,
+  adornment,
   required = true,
 }) {
   return (
     <TextField
+      disabled={disabled}
+      margin="dense"
       fullWidth
       required={required}
       variant="outlined"
@@ -20,6 +24,7 @@ function BaseTextField({
       onChange={onChange}
       slotProps={{
         input: {
+          ...adornment,
           readOnly: readOnly || pendingPage,
         },
       }}

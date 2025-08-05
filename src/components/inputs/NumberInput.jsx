@@ -1,6 +1,6 @@
 import { InputAdornment, TextField } from "@mui/material";
 
-function NumberInputTextField({ value, name, label, onChange, readOnly }) {
+function NumberInput({ value, name, label, onChange, readOnly, adornment }) {
   return (
     <TextField
       required
@@ -27,8 +27,8 @@ function NumberInputTextField({ value, name, label, onChange, readOnly }) {
       }}
       slotProps={{
         input: {
+          ...adornment,
           readOnly,
-          endAdornment: <InputAdornment position="end">m²</InputAdornment>,
           inputProps: {
             min: 0,
           },
@@ -38,4 +38,4 @@ function NumberInputTextField({ value, name, label, onChange, readOnly }) {
   );
 }
 
-export default NumberInputTextField;
+export default NumberInput;

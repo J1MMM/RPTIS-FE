@@ -3,28 +3,53 @@ import { APPRAISAL_COLUMN } from "../../constants/tableColumns";
 import { DATA_GRID_INITIAL_STATE } from "../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../constants/styles";
 import { DATA_GRID_STYLE } from "../../../../utils/constant";
+import LandAppraisalTableFooter from "../ui/LandAppraisalTableFooter";
+import { IconButton } from "@mui/material";
+import { Close, Delete } from "@mui/icons-material";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
 export const LandAppraisalTable = (props) => {
-  const { formData } = props;
+  const { formData, handleDelete } = props;
+
+  const landAppraisalData = formData?.landAppraisal;
+  const totalMarketValue = formData?.totalMarketValue;
 
   return (
     <DataGrid
-      rows={formData.landAppraisal}
-      columns={APPRAISAL_COLUMN}
+      rows={landAppraisalData}
+      columns={[
+        {
+          field: "actions",
+          headerName: "Actions",
+          width: 80,
+          headerClassName: "data-grid-header",
+          sortable: false,
+          filterable: false,
+          disableColumnMenu: true,
+          headerAlign: "center",
+          align: "center",
+          renderCell: (params) => (
+            <IconButton
+              color="mono.main"
+              onClick={() => handleDelete(params.row.id)}
+            >
+              <Close />
+            </IconButton>
+          ),
+        },
+        ...APPRAISAL_COLUMN,
+      ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
       sx={{ ...DATA_GRID_STYLE, width: LAND_INNER_TABLE_WIDTH }}
       hideFooterPagination
       disableColumnResize
-      // slots={{
-      //   footer: () => (
-      //     <ClassificationCustomFooter
-      //       marketValueTotal={marketValueTotal}
-      //       assessedValueTotal={assessedValueTotal}
-      //       areaValueTotal={areaValueTotal}
-      //     />
-      //   ),
-      // }}
+      showCellVerticalBorder
+      slots={{
+        footer: () => (
+          <LandAppraisalTableFooter totalMarketValue={totalMarketValue} />
+        ),
+      }}
     />
   );
 };

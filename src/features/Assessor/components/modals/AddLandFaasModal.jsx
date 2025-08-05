@@ -1,32 +1,18 @@
-import { useState } from "react";
 import { Button } from "@mui/material";
 import { TaxNumberFields } from "../forms/TaxNumberFields";
 import { OwnerInfoFields } from "../forms/OwnerInfoFields";
 import { PropertyInfoFields } from "../forms/PropertyInfoFields";
-import { TaxabilityFields } from "../forms/TaxabilityFields";
-import { EOAFields } from "../forms/EOAFields";
 import LandBounderiesFields from "../forms/LandBounderiesFields";
 import { LandMarketValueFields } from "../forms/LandMarketValueFields";
 import { LandPropertyAssessmentFields } from "../forms/LandPropertyAssessmentFields";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
-import {
-  ACTUALUSE_EQUI_LEVEL,
-  UNIT_VALUE_TABLE,
-} from "../../constants/unitValues";
-import { LAND_APPRAISAL_DEFAULT_DATA } from "../../constants/defaultValues";
 import { AdministratorInfoFields } from "../forms/AdministratorInfoFields";
 import { LandAppraisalFields } from "../forms/LandAppraisalFields";
+import { TaxabilityFields } from "../forms/TaxabilityFields";
 
 export default function AddLandFaasModal({ modalControl, formState }) {
   const { open, onClose } = modalControl;
   const { formData, setFormData, setReadOnly } = formState;
-
-  const [openMarketValAdjustmentModal, setOpenMarketValAdjustmentModal] =
-    useState(false);
-
-  const [landAppraisal, setLandAppraisal] = useState(
-    LAND_APPRAISAL_DEFAULT_DATA
-  );
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -84,28 +70,22 @@ export default function AddLandFaasModal({ modalControl, formState }) {
           handleFormChange={handleFormChange}
         />
 
-        <LandAppraisalFields
-          formData={formData}
-          setFormData={setFormData}
-          handleFormChange={handleFormChange}
-        />
+        <LandAppraisalFields formData={formData} setFormData={setFormData} />
 
-        <LandMarketValueFields
-          formData={formData}
-          handleFormChange={handleFormChange}
-        />
+        <LandMarketValueFields formData={formData} />
 
-        {/*     <LandPropertyAssessmentFields
+        <LandPropertyAssessmentFields
           formData={formData}
           handleFormChange={handleFormChange}
         />
 
         <TaxabilityFields
           formData={formData}
+          setFormData={setFormData}
           handleFormChange={handleFormChange}
         />
 
-        <EOAFields formData={formData} handleFormChange={handleFormChange} /> */}
+        {/* <EOAFields formData={formData} handleFormChange={handleFormChange} /> */}
       </ContainerModal>
     </>
   );

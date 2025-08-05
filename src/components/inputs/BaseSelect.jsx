@@ -5,14 +5,20 @@ function BaseSelect({
   name,
   value,
   onChange,
-  options = [],
   readOnly,
+  disabled,
   required = true,
+  options = [{ value: "", label: "" }],
 }) {
   const labelId = `${label.replace(/\s+/g, "-").toLowerCase()}-label`;
 
   return (
-    <FormControl fullWidth margin="dense" required={required}>
+    <FormControl
+      fullWidth
+      margin="dense"
+      required={required}
+      disabled={disabled}
+    >
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         labelId={labelId}
@@ -23,9 +29,9 @@ function BaseSelect({
         onChange={onChange}
         readOnly={readOnly}
       >
-        {options.map((val, index) => (
-          <MenuItem key={index} value={val}>
-            {val}
+        {options.map((obj, index) => (
+          <MenuItem key={index} value={obj.value}>
+            {obj.label}
           </MenuItem>
         ))}
       </Select>
