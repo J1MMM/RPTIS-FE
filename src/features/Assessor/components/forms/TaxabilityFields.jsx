@@ -9,11 +9,14 @@ import StyledFieldset from "../ui/StyledFieldset";
 import { FIELD_NAMES } from "../../constants/fieldNames";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import BaseTextField from "../../../../components/inputs/BaseTextField";
+import BaseSelect from "../../../../components/inputs/BaseSelect";
+import { QUATER_OPTIONS } from "../../constants/dropdownOptions";
 
 export const TaxabilityFields = (props) => {
   const { formData, handleFormChange, setFormData } = props;
   return (
-    <StyledFieldset title="TAXABILITY">
+    <StyledFieldset title="Taxability & Effectivity">
       <Stack direction="row" gap={1}>
         <FormControlLabel
           control={<Checkbox />}
@@ -40,21 +43,14 @@ export const TaxabilityFields = (props) => {
           disabled={props?.readOnly}
         />
 
-        <TextField
-          margin="dense"
-          fullWidth
-          label="QTR"
-          variant="outlined"
-          name="qtr"
-          value={props?.row?.qtr}
+        <BaseSelect
+          label="Quarter"
+          name={FIELD_NAMES.EFFECTIVITY_QTR}
+          value={formData[FIELD_NAMES.EFFECTIVITY_QTR] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          readOnly={props?.readOnly}
+          options={QUATER_OPTIONS}
         />
-
         <FormControl margin="dense" fullWidth>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker

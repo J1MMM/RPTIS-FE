@@ -4,7 +4,7 @@ import { OwnerInfoFields } from "../forms/OwnerInfoFields";
 import { PropertyInfoFields } from "../forms/PropertyInfoFields";
 import LandBounderiesFields from "../forms/LandBounderiesFields";
 import { LandMarketValueFields } from "../forms/LandMarketValueFields";
-import { LandPropertyAssessmentFields } from "../forms/LandPropertyAssessmentFields";
+import { AssessmentFields } from "../forms/AssessmentFields";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
 import { AdministratorInfoFields } from "../forms/AdministratorInfoFields";
 import { LandAppraisalFields } from "../forms/LandAppraisalFields";
@@ -74,8 +74,9 @@ export default function AddLandFaasModal({ modalControl, formState }) {
 
         <LandMarketValueFields formData={formData} />
 
-        <LandPropertyAssessmentFields
+        <AssessmentFields
           formData={formData}
+          setFormData={setFormData}
           handleFormChange={handleFormChange}
         />
 
@@ -84,8 +85,6 @@ export default function AddLandFaasModal({ modalControl, formState }) {
           setFormData={setFormData}
           handleFormChange={handleFormChange}
         />
-
-        {/* <EOAFields formData={formData} handleFormChange={handleFormChange} /> */}
       </ContainerModal>
     </>
   );

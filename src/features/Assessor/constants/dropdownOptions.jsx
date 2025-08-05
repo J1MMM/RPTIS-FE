@@ -54,3 +54,10 @@ export const TRANSACTION_CODE = [
   "GR",
   "SP",
 ];
+
+export const QUATER_OPTIONS = [
+  { value: "1st Quarter", label: "1st Quarter" },
+  { value: "2nd Quarter", label: "2nd Quarter" },
+  { value: "3rd Quarter", label: "3rd Quarter" },
+  { value: "4th Quarter", label: "4th Quarter" },
+];
