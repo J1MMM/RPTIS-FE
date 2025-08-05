@@ -6,21 +6,19 @@ import {
   Stack,
 } from "@mui/material";
 import { TRANSACTION_CODE } from "../../constants/dropdownOptions";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
-export const TaxNumberFields = ({ props, handleFormChange }) => {
+export const TaxNumberFields = (props) => {
+  const { formData, handleFormChange } = props;
+
   return (
-    <Stack
-      width={200}
-      flexDirection="row"
-      justifyContent="space-between"
-      gap={1}
-    >
+    <Stack width={200} direction="row" justifyContent="space-between">
       <FormControl fullWidth required>
         <InputLabel>Transaction Code</InputLabel>
         <Select
           label="Transaction Code"
-          value={props?.row?.transactionCode || ""}
-          name="transactionCode"
+          value={formData[FIELD_NAMES.TRANSACTION_CODE] || ""}
+          name={FIELD_NAMES.TRANSACTION_CODE}
           onChange={handleFormChange}
         >
           {TRANSACTION_CODE.map((code, index) => (

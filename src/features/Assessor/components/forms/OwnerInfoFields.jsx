@@ -8,8 +8,11 @@ import {
 } from "@mui/material";
 import { BRGY_LIST } from "../../../../utils/constant";
 import StyledFieldset from "../ui/StyledFieldset";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
-export const OwnerInfoFields = ({ props, handleFormChange }) => {
+export const OwnerInfoFields = (props) => {
+  const { formData, handleFormChange, readOnly, pendingPage } = props;
+
   return (
     <StyledFieldset title="Owner's Information">
       <Stack direction="row" gap={1}>
@@ -18,13 +21,13 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Full Name"
           variant="outlined"
-          name="ownerFullname"
-          value={props?.row?.ownerFullname}
+          name={FIELD_NAMES.OWNER_FULLNAME}
+          value={formData[FIELD_NAMES.OWNER_FULLNAME]}
           multiline
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -33,12 +36,12 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="TIN No."
           variant="outlined"
-          name="TIN"
-          value={props?.row?.TIN}
+          name={FIELD_NAMES.OWNER_TIN}
+          value={formData[FIELD_NAMES.OWNER_TIN]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -49,12 +52,12 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="House No. & Street"
           variant="outlined"
-          name="Street"
-          value={props?.row?.Street}
+          name={FIELD_NAMES.OWNER_STREET}
+          value={formData[FIELD_NAMES.OWNER_STREET]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -64,12 +67,11 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
           <Select
             required
             labelId="Barangay/District"
-            id="demo-simple-select"
-            value={props?.row?.ownerBrgy || ""}
-            name="ownerBrgy"
+            value={formData[FIELD_NAMES.OWNER_BARANGAY] || ""}
+            name={FIELD_NAMES.OWNER_BARANGAY}
             label="Barangay/District"
             onChange={handleFormChange}
-            readOnly={props?.readOnly || props?.pendingPage}
+            readOnly={readOnly || pendingPage}
           >
             {BRGY_LIST.map((val, index) => (
               <MenuItem key={index} value={val}>
@@ -78,17 +80,18 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
             ))}
           </Select>
         </FormControl>
+
         <TextField
           margin="dense"
           fullWidth
           label="City/Municipality"
           variant="outlined"
-          name="city"
-          value={props?.row?.City}
+          name={FIELD_NAMES.OWNER_CITY}
+          value={formData[FIELD_NAMES.OWNER_CITY]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -97,12 +100,12 @@ export const OwnerInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Province"
           variant="outlined"
-          name="city"
-          value={props?.row?.City}
+          name={FIELD_NAMES.OWNER_PROVINCE}
+          value={formData[FIELD_NAMES.OWNER_PROVINCE]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />

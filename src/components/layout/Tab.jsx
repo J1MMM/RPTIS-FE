@@ -1,11 +1,5 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { Margin } from "@mui/icons-material";
 import { Paper, Stack, Typography } from "@mui/material";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const Tab = ({ links }) => {
   const location = useLocation();
   const navigate = useNavigate();

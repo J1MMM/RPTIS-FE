@@ -1,139 +1,61 @@
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-} from "@mui/material";
-
-import { NumericFormat } from "react-number-format";
+import { Button, Stack } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { v4 } from "uuid";
 import StyledFieldset from "../ui/StyledFieldset";
-import {
-  CLASSIFICATION_DD,
-  SUBCLASS_DD,
-} from "../../constants/dropdownOptions";
+import { LandMarketValueTable } from "../tables/LandMarketValueTable";
+import { useState } from "react";
+import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
+import { LandAppraisalTable } from "../tables/LandAppraisalTable";
 
-export const LandAppraisalFields = ({
-  props,
-  handleClassificationChange,
-  classificationData,
-}) => {
+export const LandAppraisalFields = (props) => {
+  const { setFormData, formData } = props;
+  const [modalActive, setModalActive] = useState(false);
+  const [landAppraisal, setLandAppraisal] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      const id = v4();
+
+      setFormData((prev) => ({
+        ...prev,
+        landAppraisal: [...prev?.landAppraisal, { ...landAppraisal, id }],
+      }));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setModalActive(false);
+    }
+  };
+
   return (
     <>
       <StyledFieldset title="Land Appraisal">
-        <Stack>
-          <Stack direction="row" gap={1}>
-            <FormControl fullWidth margin="dense">
-              <InputLabel>Classification</InputLabel>
-              <Select
-                required
-                label="Classification"
-                value={classificationData.classification || ""}
-                name="classification"
-                onChange={handleClassificationChange}
-                readOnly={props?.readOnly || props?.pendingPage}
-              >
-                {CLASSIFICATION_DD.map((val, index) => (
-                  <MenuItem key={index} value={val.value}>
-                    {val.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <FormControl
-              fullWidth
-              margin="dense"
-              disabled={!classificationData.classification}
-            >
-              <InputLabel>Sub-Class</InputLabel>
-              <Select
-                required
-                label="Sub-Class"
-                value={classificationData.subClass || ""}
-                name="subClass"
-                onChange={handleClassificationChange}
-                readOnly={props?.readOnly || props?.pendingPage}
-              >
-                {SUBCLASS_DD[classificationData?.classification]?.map(
-                  (val, index) => (
-                    <MenuItem key={index} value={val}>
-                      {val}
-                    </MenuItem>
-                  )
-                )}
-              </Select>
-            </FormControl>
-
-            <TextField
-              required
-              type="number"
-              margin="dense"
-              fullWidth
-              label="Area"
-              variant="outlined"
-              name="area"
-              value={classificationData?.area}
-              onChange={handleClassificationChange}
-              slotProps={{
-                input: {
-                  readOnly: props?.readOnly,
-                  endAdornment: (
-                    <InputAdornment position="end">m²</InputAdornment>
-                  ),
-                  inputProps: {
-                    min: 0,
-                  },
-                },
-              }}
-            />
-          </Stack>
-
-          <Stack direction="row" gap={1}>
-            <NumericFormat
-              customInput={TextField}
-              margin="dense"
-              fullWidth
-              label="Unit Value"
-              variant="outlined"
-              name="unitValue"
-              value={classificationData?.unitValue}
-              thousandSeparator=","
-              allowNegative={false}
-              slotProps={{
-                input: {
-                  readOnly: true,
-                  startAdornment: (
-                    <InputAdornment position="start">&#8369;</InputAdornment>
-                  ),
-                },
-              }}
-            />
-
-            <NumericFormat
-              customInput={TextField}
-              margin="dense"
-              fullWidth
-              label="Base Market Value"
-              variant="outlined"
-              name="baseMarketValue"
-              value={classificationData?.baseMarketValue}
-              thousandSeparator=","
-              allowNegative={false}
-              slotProps={{
-                input: {
-                  readOnly: true,
-                  startAdornment: (
-                    <InputAdornment position="start">&#8369;</InputAdornment>
-                  ),
-                },
-              }}
-            />
-          </Stack>
+        <Stack mb={2}>
+          <Button
+            sx={{
+              alignSelf: "flex-start",
+            }}
+            variant="contained"
+            disabled={props?.readOnly}
+            startIcon={<Add />}
+            onClick={() => setModalActive(true)}
+          >
+            Appraisal
+          </Button>
         </Stack>
+
+        <LandAppraisalTable formData={formData} />
       </StyledFieldset>
+
+      <AddLandAppraisalModal
+        open={modalActive}
+        onClose={() => setModalActive(false)}
+        handleSubmit={handleSubmit}
+        landAppraisal={landAppraisal}
+        setLandAppraisal={setLandAppraisal}
+      />
     </>
   );
 };

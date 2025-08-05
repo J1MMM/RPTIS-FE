@@ -4,16 +4,11 @@ import { Add } from "@mui/icons-material";
 import StyledFieldset from "../ui/StyledFieldset";
 import { LandMarketValueTable } from "../tables/LandMarketValueTable";
 import { AddLandMarketValModal } from "../modals/AddLandMarketValModal";
+import { useState } from "react";
 
-export const LandMarketValueFields = ({
-  props,
-  addClassOnlick,
-  open,
-  onClose,
-  handleAddClassification,
-  handleClassificationChange,
-  classificationData,
-}) => {
+export const LandMarketValueFields = (props) => {
+  const [modalActive, setModalActive] = useState(false);
+
   return (
     <>
       <StyledFieldset title="Market Value Adjustment">
@@ -22,8 +17,8 @@ export const LandMarketValueFields = ({
             sx={{
               alignSelf: "flex-start",
             }}
+            onClick={() => setModalActive(true)}
             variant="contained"
-            onClick={addClassOnlick}
             disabled={props?.readOnly}
             startIcon={<Add />}
           >
@@ -31,20 +26,12 @@ export const LandMarketValueFields = ({
           </Button>
         </Stack>
 
-        <LandMarketValueTable
-          props={props}
-          classification={props?.row?.classification}
-          setFormData={props?.setSelectedRow}
-        />
+        <LandMarketValueTable props={props} />
       </StyledFieldset>
 
       <AddLandMarketValModal
-        props={props}
-        open={open}
-        onClose={onClose}
-        handleAddClassification={handleAddClassification}
-        handleClassificationChange={handleClassificationChange}
-        classificationData={classificationData}
+        open={modalActive}
+        onClose={() => setModalActive(false)}
       />
     </>
   );

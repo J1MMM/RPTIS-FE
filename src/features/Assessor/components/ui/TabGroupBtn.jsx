@@ -1,16 +1,5 @@
-import { Button, ButtonGroup } from "@mui/material";
-import { NavLink } from "react-router-dom";
-
-const btnStyles = {
-  padding: "8px 24px",
-  fontFamily: "Poppins",
-  borderColor: "#e3e3e3",
-  color: "#000",
-  "&.active": {
-    bgcolor: "mono.main",
-    color: "primary.main",
-  },
-};
+import { ButtonGroup } from "@mui/material";
+import { NavTabButton } from "./NavTabButton";
 
 const LINKS = [
   { to: "./land", label: "Land" },
@@ -21,16 +10,10 @@ const LINKS = [
 function TabGroupBtn() {
   return (
     <ButtonGroup sx={{ backgroundColor: "#FFF", mb: 2 }} variant="outlined">
-      {LINKS.map((link, index) => (
-        <Button
-          component={NavLink}
-          disableRipple
-          key={index}
-          to={link.to}
-          sx={btnStyles}
-        >
+      {LINKS.map((link) => (
+        <NavTabButton key={link.to} to={link.to}>
           {link.label}
-        </Button>
+        </NavTabButton>
       ))}
     </ButtonGroup>
   );

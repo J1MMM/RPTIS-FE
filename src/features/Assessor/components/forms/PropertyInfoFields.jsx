@@ -11,8 +11,12 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import StyledFieldset from "../ui/StyledFieldset";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
-export const PropertyInfoFields = ({ props, handleFormChange }) => {
+export const PropertyInfoFields = (props) => {
+  const { formData, setFormData, handleFormChange, readOnly, pendingPage } =
+    props;
+
   return (
     <StyledFieldset title="Property Information">
       <Stack direction="row" gap={1}>
@@ -21,12 +25,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           required
           label="ARP No."
           variant="outlined"
-          name="ArpNo"
-          value={props?.row?.ArpNo}
+          name={FIELD_NAMES.ARP_NO}
+          value={formData[FIELD_NAMES.ARP_NO]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly || props?.pendingPage,
+              readOnly: readOnly || pendingPage,
             },
           }}
         />
@@ -36,12 +40,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           required
           label="PIN"
           variant="outlined"
-          name="PIN"
-          value={props?.row?.PIN}
+          name={FIELD_NAMES.PIN}
+          value={formData[FIELD_NAMES.PIN]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -52,12 +56,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="House No. & Street"
           variant="outlined"
-          name="noAndSt"
-          value={props?.row?.noAndSt}
+          name={FIELD_NAMES.NO_AND_STREET}
+          value={formData[FIELD_NAMES.NO_AND_STREET]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -67,12 +71,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           <Select
             labelId="Barangay/District"
             id="demo-simple-select"
-            value={props?.row?.Brgy || ""}
+            name={FIELD_NAMES.BARANGAY}
+            value={formData[FIELD_NAMES.BARANGAY] || ""}
             required
-            name="Brgy"
             label="Barangay/District"
             onChange={handleFormChange}
-            readOnly={props?.readOnly || props?.pendingPage}
+            readOnly={readOnly || pendingPage}
           >
             {BRGY_LIST.map((val, index) => (
               <MenuItem key={index} value={val}>
@@ -87,10 +91,11 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="City/Municipality"
           variant="outlined"
-          value={"San Pablo"}
+          name={FIELD_NAMES.CITY}
+          value={formData[FIELD_NAMES.CITY]}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: true,
             },
           }}
         />
@@ -99,10 +104,11 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Province"
           variant="outlined"
-          value={"Laguna"}
+          name={FIELD_NAMES.PROVINCE}
+          value={formData[FIELD_NAMES.PROVINCE]}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: true,
             },
           }}
         />
@@ -113,12 +119,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="OCT/TCT/No."
           variant="outlined"
-          name="oct"
-          value={props?.row?.oct}
+          name={FIELD_NAMES.OCT_TCT_NO}
+          value={formData[FIELD_NAMES.OCT_TCT_NO]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -127,12 +133,16 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Date"
-              value={props?.row?.DATE == null ? null : dayjs(props?.row?.DATE)}
-              readOnly={props?.readOnly}
+              value={
+                formData[FIELD_NAMES.DATE] == null
+                  ? null
+                  : dayjs(formData[FIELD_NAMES.DATE])
+              }
+              readOnly={readOnly}
               onChange={(newVal) =>
-                props?.setSelectedRow((prev) => ({
+                setFormData((prev) => ({
                   ...prev,
-                  DATE: newVal,
+                  [FIELD_NAMES.DATE]: newVal,
                 }))
               }
               slotProps={{ textField: { required: true } }}
@@ -146,12 +156,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Lot No"
           variant="outlined"
-          name="LOT"
-          value={props?.row?.LOT}
+          name={FIELD_NAMES.LOT_NO}
+          value={formData[FIELD_NAMES.LOT_NO]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -161,12 +171,12 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Block No."
           variant="outlined"
-          name="BLOCK"
-          value={props?.row?.BLOCK}
+          name={FIELD_NAMES.BLOCK_NO}
+          value={formData[FIELD_NAMES.BLOCK_NO]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />
@@ -179,11 +189,11 @@ export const PropertyInfoFields = ({ props, handleFormChange }) => {
           label="Survey No."
           variant="outlined"
           name="Survey"
-          value={props?.row?.Survey}
+          value={formData[FIELD_NAMES.SURVEY_NO]}
           onChange={handleFormChange}
           slotProps={{
             input: {
-              readOnly: props?.readOnly,
+              readOnly: readOnly,
             },
           }}
         />

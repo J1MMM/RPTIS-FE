@@ -8,8 +8,10 @@ import {
 } from "@mui/material";
 import { BRGY_LIST } from "../../../../utils/constant";
 import StyledFieldset from "../ui/StyledFieldset";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
-export const BenificialFields = ({ props, handleFormChange }) => {
+export const AdministratorInfoFields = (props) => {
+  const { formData, handleFormChange, readOnly } = props;
   return (
     <StyledFieldset title="Administrator Information">
       <Stack direction="row" gap={1}>
@@ -18,44 +20,38 @@ export const BenificialFields = ({ props, handleFormChange }) => {
           fullWidth
           label="Full Name"
           variant="outlined"
-          name="administratorFullname"
-          value={props?.row?.administratorFullname}
+          name={FIELD_NAMES.ADMINISTRATOR_FULLNAME}
+          value={formData[FIELD_NAMES.ADMINISTRATOR_FULLNAME] || ""}
           multiline
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
       </Stack>
+
       <Stack direction="row" gap={1}>
         <TextField
           margin="dense"
           fullWidth
           label="House No. & Street"
           variant="outlined"
-          name="administratorStreet"
-          value={props?.row?.administratorStreet}
+          name={FIELD_NAMES.ADMINISTRATOR_STREET}
+          value={formData[FIELD_NAMES.ADMINISTRATOR_STREET] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
 
         <FormControl fullWidth margin="dense">
-          <InputLabel id="Barangay/District">Barangay/District</InputLabel>
+          <InputLabel id="administratorBrgy-label">
+            Barangay/District
+          </InputLabel>
           <Select
-            labelId="Barangay/District"
-            id="demo-simple-select"
-            value={props?.row?.administratorBrgy || ""}
+            labelId="administratorBrgy-label"
+            value={formData[FIELD_NAMES.ADMINISTRATOR_BRGY] || ""}
             required
-            name="administratorBrgy"
+            name={FIELD_NAMES.ADMINISTRATOR_BRGY}
             label="Barangay/District"
             onChange={handleFormChange}
-            readOnly={props?.readOnly || props?.pendingPage}
+            readOnly={readOnly}
           >
             {BRGY_LIST.map((val, index) => (
               <MenuItem key={index} value={val}>
@@ -64,51 +60,40 @@ export const BenificialFields = ({ props, handleFormChange }) => {
             ))}
           </Select>
         </FormControl>
+
         <TextField
           margin="dense"
           fullWidth
-          id="outlined-basic"
           label="City/Municipality"
           variant="outlined"
-          name="administratorCity"
-          value={props?.row?.administratorCity}
+          name={FIELD_NAMES.ADMINISTRATOR_CITY}
+          value={formData[FIELD_NAMES.ADMINISTRATOR_CITY] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
+
         <TextField
           margin="dense"
           fullWidth
-          id="outlined-basic"
           label="Province"
           variant="outlined"
-          name="administratorProvince"
-          value={props?.row?.administratorProvince}
+          name={FIELD_NAMES.ADMINISTRATOR_PROVINCE}
+          value={formData[FIELD_NAMES.ADMINISTRATOR_PROVINCE] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
       </Stack>
+
       <Stack direction="row" gap={1}>
         <TextField
           margin="dense"
           fullWidth
-          label="Tell. No."
+          label="Tel. No."
           variant="outlined"
-          name="AdminTel"
-          value={props?.row?.AdminTel}
+          name={FIELD_NAMES.ADMIN_TEL}
+          value={formData[FIELD_NAMES.ADMIN_TEL] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
 
         <TextField
@@ -116,14 +101,10 @@ export const BenificialFields = ({ props, handleFormChange }) => {
           fullWidth
           label="TIN No."
           variant="outlined"
-          name="administratorTIN"
-          value={props?.row?.administratorTIN}
+          name={FIELD_NAMES.ADMINISTRATOR_TIN}
+          value={formData[FIELD_NAMES.ADMINISTRATOR_TIN] || ""}
           onChange={handleFormChange}
-          slotProps={{
-            input: {
-              readOnly: props?.readOnly,
-            },
-          }}
+          slotProps={{ input: { readOnly } }}
         />
       </Stack>
     </StyledFieldset>

@@ -1,7 +1,7 @@
 import {
-  ArchiveOutlined,
-  AssessmentOutlined,
-  ListAltRounded,
+  AccountBalance,
+  FactCheckOutlined,
+  PaymentsOutlined,
 } from "@mui/icons-material";
 import { Drawer, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -31,7 +31,7 @@ export default function NavDrawer(props) {
       <Stack>
         <NavLink to="/assessor" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
-            <ListAltRounded sx={{ fontSize: 32 }} />
+            <AccountBalance sx={{ fontSize: 32 }} />
             <Typography display={props.open ? "inline" : "none"} minWidth={300}>
               Assessor Office
             </Typography>
@@ -39,7 +39,7 @@ export default function NavDrawer(props) {
         </NavLink>
         <NavLink to="/landtax-division" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
-            <AssessmentOutlined sx={{ fontSize: 32 }} />
+            <FactCheckOutlined sx={{ fontSize: 32 }} />
             <Typography display={props.open ? "inline" : "none"} minWidth={300}>
               Landtax Division
             </Typography>
@@ -47,7 +47,7 @@ export default function NavDrawer(props) {
         </NavLink>
         <NavLink to="/cash-division" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={2}>
-            <ArchiveOutlined sx={{ fontSize: 32 }} />
+            <PaymentsOutlined sx={{ fontSize: 32 }} />
             <Typography display={props.open ? "inline" : "none"} minWidth={300}>
               Cash Division
             </Typography>

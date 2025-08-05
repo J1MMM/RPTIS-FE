@@ -1,3 +1,53 @@
+import { FIELD_NAMES } from "./fieldNames";
+
+export const APPRAISAL_COLUMN = [
+  {
+    field: "classification",
+    headerName: FIELD_NAMES.LAND_CLASSIFICATION,
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: "subClass",
+    headerName: "Sub-Classification",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: "area",
+    headerName: "Area",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: "unitValue",
+    headerName: "Unit Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: "baseMarketValue",
+    headerName: "Base Market Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+];
+
 export const MARKET_VALUE_TABLE_COLUMN = [
   {
     field: "baseMarketValue",
