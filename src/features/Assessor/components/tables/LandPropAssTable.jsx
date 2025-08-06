@@ -10,16 +10,16 @@ import LandAppraisalTableFooter from "../ui/LandAppraisalTableFooter";
 import { IconButton } from "@mui/material";
 import { Close, Delete } from "@mui/icons-material";
 import { FIELD_NAMES } from "../../constants/fieldNames";
+import PropAssessmentTableFooter from "../ui/PropAssessmentTableFooter";
 
 export const LandPropAssTable = (props) => {
   const { formData, handleDelete } = props;
 
-  const propertyAssData = formData[FIELD_NAMES.PROPERTY_ASSESSMENT];
   const totalAssessedValue = formData[FIELD_NAMES.TOTAL_ASSESSED_VALUE] || 0;
 
   return (
     <DataGrid
-      rows={propertyAssData}
+      rows={formData[FIELD_NAMES.PROPERTY_ASSESSMENT]}
       columns={[
         {
           field: "actions",
@@ -49,9 +49,7 @@ export const LandPropAssTable = (props) => {
       disableColumnResize
       showCellVerticalBorder
       slots={{
-        footer: () => (
-          <LandAppraisalTableFooter totalMarketValue={totalAssessedValue} />
-        ),
+        footer: () => <PropAssessmentTableFooter total={totalAssessedValue} />,
       }}
     />
   );

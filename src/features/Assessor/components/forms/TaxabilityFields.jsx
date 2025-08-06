@@ -12,6 +12,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import BaseTextField from "../../../../components/inputs/BaseTextField";
 import BaseSelect from "../../../../components/inputs/BaseSelect";
 import { QUATER_OPTIONS } from "../../constants/dropdownOptions";
+import dayjs from "dayjs";
 
 export const TaxabilityFields = (props) => {
   const { formData, handleFormChange, setFormData } = props;
@@ -55,14 +56,18 @@ export const TaxabilityFields = (props) => {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Year"
-              value={props?.row?.year == null ? null : dayjs(props?.row?.year)}
+              value={
+                formData[FIELD_NAMES.EFFECTIVITY_YEAR] == null
+                  ? null
+                  : dayjs(formData[FIELD_NAMES.EFFECTIVITY_YEAR])
+              }
               format="YYYY"
               openTo="year"
               readOnly={props?.readOnly}
               onChange={(newVal) =>
-                props?.setSelectedRow((prev) => ({
+                setFormData((prev) => ({
                   ...prev,
-                  year: newVal,
+                  [FIELD_NAMES.EFFECTIVITY_YEAR]: newVal,
                 }))
               }
               slotProps={{ textField: { required: true } }}

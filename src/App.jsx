@@ -18,6 +18,8 @@ import {
   AssessorPageLayout,
   ActiveRecordsLayout,
   LandFaasPage,
+  BuildingFaasPage,
+  MachineryFaasPage,
 } from "./features/Assessor";
 
 function App() {
@@ -36,8 +38,8 @@ function App() {
               <Route path="active" element={<ActiveRecordsLayout />}>
                 <Route index element={<Navigate to="land" replace />} />
                 <Route path="land" element={<LandFaasPage />} />
-                <Route path="building" element={<LandFaasPage />} />
-                <Route path="machinery" element={<LandFaasPage />} />
+                <Route path="building" element={<BuildingFaasPage />} />
+                <Route path="machinery" element={<MachineryFaasPage />} />
               </Route>
               <Route path="archived" element={<ArchivedRecordsLayout />}>
                 <Route index element={<Navigate to="land" replace />} />

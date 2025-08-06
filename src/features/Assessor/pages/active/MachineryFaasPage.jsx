@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { Collapse, Stack } from "@mui/material";
@@ -8,13 +8,11 @@ import {
   BOUNDARIES_INITIAL_STATE,
   DATA_GRID_INITIAL_STATE,
   DATA_GRID_STYLE,
-  INITIAL_FORM_DATA,
   PAGE_SIZE_OPTION,
   sampleRows,
   SUBDIVIDE_INITIAL_DATA,
 } from "../../../../utils/constant";
 import { Add, Shuffle } from "@mui/icons-material";
-import { useQueryClient } from "react-query";
 import { v4 } from "uuid";
 import axios from "../../../../api/axios";
 import dayjs from "dayjs";
@@ -23,270 +21,41 @@ import { formatFullname, sumFieldInArray } from "../../../../utils/helper";
 import { TableToolbar } from "../../../../components/form/table/TableToolbar";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/modals/AddLandFaasModal";
+import {
+  ACTUAL_USE_EQUIVALENTS,
+  DEFAULT_FIELD_VALUES,
+} from "../../constants/defaultValues";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
 function MachineryFaasPage() {
-  const queryClient = useQueryClient();
-
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  const [formData, setFormData] = useState(DEFAULT_FIELD_VALUES);
 
-  const [modalActive, setModalActive] = useState(false);
-  const [openRPTview, setOpenRPTview] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [addModalActive, setAddModalActive] = useState(false);
   const [selectedArpNos, setSelectedArpNos] = useState([]);
-  const [selectedRowID, setSelectedRowID] = useState(null);
-  const [prevSelected, setPrevSelected] = useState(null);
   const [readOnly, setReadOnly] = useState(true);
 
-  const [isDisable, setIsDisable] = useState(false);
-  const [alertShown, setAlertShown] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState(ALERT_SEV.info);
-  const [formMsg, setFormMsg] = useState("");
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
-  const [addTaxConfirmation, setAddTaxConfirmation] = useState(false);
-  const [consolidateConfirmation, setConsolidateConfirmation] = useState(false);
-
-  const [subdivideForm, setSubdivideForm] = useState(SUBDIVIDE_INITIAL_DATA);
-  const [subdivideModalOpen, setSubdivideModalOpen] = useState(false);
-
-  const [formDataNew, setFormDataNew] = useState(INITIAL_FORM_DATA);
-  const [consolidateFormData, setconsolidateFormData] =
-    useState(INITIAL_FORM_DATA);
-  const [printableFormOpen, setPrintableFormOpen] = useState(false);
-  const [currentFormType, setCurrentFormType] = useState("ClientForm");
-
-  const [consolidateActive, setConsolidateActive] = useState(false);
-
-  const openPrintableForm = (formType) => {
-    setCurrentFormType(formType);
-    setPrintableFormOpen(true);
+  const handleViewClick = (params) => {
+    const id = params?.row?.id;
   };
 
-  const handleCellDoubleClick = (params) => {
-    setSelectedRowID(params?.row?.id);
+  useEffect(() => {
+    const actualUseRaw = formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE];
+    const actualUse = actualUseRaw?.toLowerCase();
+    const assessmentLevel = ACTUAL_USE_EQUIVALENTS[actualUse] ?? 0;
+    const totalMarketValue = formData[FIELD_NAMES.TOTAL_MARKET_VALUE] ?? 0;
 
-    const formattedRow = useRowFormatter(params);
+    const assessedValue = assessmentLevel * totalMarketValue;
 
-    setSelectedRow(formattedRow);
-    setPrevSelected(formattedRow);
-    setOpenRPTview(true);
-  };
-
-  const handleTransferClick = (e) => {
-    const Boundaries = BOUNDARIES_INITIAL_STATE;
-
-    const assessedValueTotal = sumFieldInArray(
-      selectedRow?.classification || [],
-      "assessedValue"
-    );
-
-    const new_data = {
-      ...INITIAL_FORM_DATA,
-      oldArp: selectedRow?.ArpNo,
-      previousOwner: formatFullname(selectedRow),
-      previousAV: assessedValueTotal || 0,
-      previousPid: selectedRow?.PID,
-      Boundaries,
-    };
-
-    setSelectedRow(new_data);
-    setReadOnly(false);
-  };
-
-  const handleCancelTransferClick = () => {
-    setReadOnly(true);
-    setSelectedRow(prevSelected);
-  };
-
-  const handleAddTaxSubmit = async (e) => {
-    setIsDisable(true);
-
-    try {
-      const id = v4();
-      console.log("submit add");
-      console.log(formDataNew);
-
-      const newFormData = {
-        ...formDataNew,
-        id: id,
-
-        DATE: dayjs(formDataNew.DATE).toISOString(),
-        year: dayjs(formDataNew.year).toISOString(),
-        dateOfEffectivity: dayjs(formDataNew.dateOfEffectivity).toISOString(),
-      };
-
-      const response = await axios.post("/api/assessor/createTax", newFormData);
-      console.log(response.data);
-
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.success);
-      setFormMsg("Tax Created Successfully");
-      setModalActive(false);
-
-      setFormDataNew(INITIAL_FORM_DATA);
-    } catch (error) {
-      console.log(error);
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.error);
-      setFormMsg(error?.message);
-
-      if (error.status == 409) {
-        setFormMsg("ARP Already Exist");
-      }
-    }
-
-    setAddTaxConfirmation(false);
-    setIsDisable(false);
-  };
-
-  const handleTransferSubmit = async () => {
-    setIsDisable(true);
-    const id = v4();
-
-    try {
-      const formatedArr = {
-        ...selectedRow,
-        NewArp: selectedRow?.ArpNo,
-        ArpNo: selectedRow?.oldArp,
-        DATE: dayjs(selectedRow?.DATE).toISOString(),
-        dateOfEffectivity: dayjs(selectedRow?.dateOfEffectivity).toISOString(),
-        year: dayjs(selectedRow?.year).toISOString(),
-      };
-
-      const response = await axios.post("/api/assessor/cancel", formatedArr);
-      console.log(response);
-
-      await queryClient.invalidateQueries("cancelsData");
-
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.success);
-      setFormMsg("ARP found and values have been moved to tax cancels");
-      setOpenRPTview(false);
-      setSelectedRow(INITIAL_FORM_DATA);
-
-      setReadOnly(true);
-    } catch (error) {
-      console.log(error);
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.error);
-      setFormMsg(error?.message);
-
-      if (error.status == 409) {
-        setFormMsg("ARP Already Exist");
-      }
-    }
-    setIsDisable(false);
-    setConfirmationOpen(false);
-  };
-
-  const handleConsolidateSubmit = async () => {
-    setIsDisable(true);
-
-    try {
-      const id = v4();
-      console.log("submit conso");
-      // console.log(consolidateFormData);
-
-      const newFormData = {
-        ...consolidateFormData,
-        id: id,
-        ArpNo: selectedArpNos,
-        NewArp: consolidateFormData.ArpNo,
-        DATE: dayjs(consolidateFormData.DATE).toISOString(),
-        year: dayjs(consolidateFormData.year).toISOString(),
-        dateOfEffectivity: dayjs(
-          consolidateFormData.dateOfEffectivity
-        ).toISOString(),
-      };
-
-      console.log(newFormData);
-
-      const response = await axios.post(
-        "/api/assessor/consolidate",
-        newFormData
-      );
-      console.log(response.data);
-
-      await queryClient.invalidateQueries("cancelsData");
-
-      setSelectedArpNos([]);
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.success);
-      setFormMsg("Tax Created Successfully");
-      setConsolidateActive(false);
-
-      setconsolidateFormData(INITIAL_FORM_DATA);
-    } catch (error) {
-      console.log(error);
-      setAlertShown(true);
-      setAlertSeverity(ALERT_SEV.error);
-      setFormMsg(error?.message);
-
-      if (error.status == 409) {
-        setFormMsg("ARP Already Exist");
-      }
-    }
-
-    setConsolidateConfirmation(false);
-    setIsDisable(false);
-  };
-
-  const handleSubdivideClick = () => {
-    setSubdivideModalOpen(true);
-    setSubdivideForm((prev) => ({ ...prev, ArpNo: selectedRow?.ArpNo }));
-  };
-
-  const handleTaxModalClose = () => {
-    setReadOnly(true);
-    setOpenRPTview(false);
-    setConsolidateActive(false);
-  };
-  const handleSubdivideSubmit = async () => {
-    setIsDisable(true);
-    try {
-      const formatedData = {
-        ...subdivideForm,
-        count: parseInt(subdivideForm?.count),
-        startArpNo: parseInt(subdivideForm?.startArpNo),
-      };
-
-      const response = await axios.post(
-        "/api/assessor/subdivide",
-        formatedData
-      );
-      console.log("response");
-      console.log(response);
-
-      setAlertSeverity(ALERT_SEV.success);
-      if (response.data?.message == "auto rollback of transaction") {
-        setFormMsg(response.data?.error);
-        setAlertSeverity(ALERT_SEV.error);
-        setAlertShown(true);
-        setIsDisable(false);
-        return;
-      }
-      setFormMsg(response.data?.message);
-
-      await queryClient.invalidateQueries("pendingData");
-      await queryClient.invalidateQueries("cancelsData");
-      setOpenRPTview(false);
-    } catch (error) {
-      console.log(error);
-      setAlertSeverity(ALERT_SEV.error);
-      setFormMsg(error?.message);
-    }
-    setAlertShown(true);
-    setIsDisable(false);
-    setSubdivideModalOpen(false);
-  };
-
-  const handleSelectionChange = (newSelection) => {
-    // Get only the ArpNo field for the selected IDs
-    const selectedArpNosData = newSelection?.map((id) => {
-      const selectedRow = landFaasRecords?.find((row) => row.id === id);
-      return selectedRow ? selectedRow?.ArpNo : null; // Return only the ArpNo
-    });
-    setSelectedArpNos(selectedArpNosData);
-  };
+    setFormData((prev) => ({
+      ...prev,
+      [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: assessmentLevel,
+      [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]: assessedValue,
+    }));
+  }, [
+    formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE],
+    formData[FIELD_NAMES.TOTAL_MARKET_VALUE],
+  ]);
 
   const PageButton = () => {
     return (
@@ -300,7 +69,7 @@ function MachineryFaasPage() {
           consolidate
         </Button>
         <Button
-          onClick={() => setModalActive(true)}
+          onClick={() => setAddModalActive(true)}
           variant="contained"
           startIcon={<Add />}
         >
@@ -325,7 +94,7 @@ function MachineryFaasPage() {
         <Button
           variant="outlined"
           size="small"
-          onClick={() => handleCellDoubleClick(params)}
+          onClick={() => handleViewClick(params)}
         >
           View
         </Button>
@@ -338,14 +107,12 @@ function MachineryFaasPage() {
       <DataGrid
         checkboxSelection
         // loading={isAssessorLoading}
-        rows={sampleRows}
+        rows={landFaasRecords}
         columns={TABLE_HEADER}
         initialState={DATA_GRID_INITIAL_STATE}
         pageSizeOptions={PAGE_SIZE_OPTION}
         disableRowSelectionOnClick
         disableColumnResize
-        // onCellDoubleClick={handleCellDoubleClick}
-        onRowSelectionModelChange={handleSelectionChange}
         sx={DATA_GRID_STYLE}
         slots={{
           toolbar: () => (
@@ -364,12 +131,11 @@ function MachineryFaasPage() {
       />
 
       <AddLandFaasModal
-        open={modalActive}
-        handleClose={() => setModalActive(false)}
-        row={formDataNew}
-        setSelectedRow={setFormDataNew}
-        setConfirmationOpen={setAddTaxConfirmation}
-        setReadOnly={setReadOnly}
+        modalControl={{
+          open: addModalActive,
+          onClose: () => setAddModalActive(false),
+        }}
+        formState={{ formData, setFormData, setReadOnly }}
         // actionButton={<TaxdecModalButtons />}
       />
 

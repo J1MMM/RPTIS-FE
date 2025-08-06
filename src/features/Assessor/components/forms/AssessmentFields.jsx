@@ -18,15 +18,8 @@ import { LandPropAssTable } from "../tables/LandPropAssTable";
 export const AssessmentFields = (props) => {
   const { setFormData, formData, handleFormChange } = props;
   const [modalActive, setModalActive] = useState(false);
-  const [propAssForm, setPropAssForm] = useState({});
 
-  const handlePropAssChange = (event) => {
-    const { name, value } = event.target;
-    setPropAssForm({
-      ...propAssForm,
-      [name]: value,
-    });
-  };
+  const appraisalEmpty = formData[FIELD_NAMES.LAND_APPRAISAL]?.length === 0;
 
   const handlePropAssSubmit = (e) => {
     e.preventDefault();
@@ -42,20 +35,31 @@ export const AssessmentFields = (props) => {
           formData[FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL],
         [FIELD_NAMES.TOTAL_MARKET_VALUE]:
           formData[FIELD_NAMES.TOTAL_MARKET_VALUE],
-        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]:
-          formData[FIELD_NAMES.TOTAL_ASSESSED_VALUE],
+        [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]:
+          formData[FIELD_NAMES.PROPERTY_ASSESSED_VALUE],
       };
 
-      // const totalMarketValue = updatedPropsAss.reduce(
-      //   (sum, obj) => sum + (obj[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0),
-      //   0
-      // );
+      setFormData((prev) => {
+        const updated = {
+          ...prev,
+          [FIELD_NAMES.PROPERTY_ASSESSMENT]: [
+            ...prev[FIELD_NAMES.PROPERTY_ASSESSMENT],
+            newPropAssessment,
+          ],
+          [FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
+        };
 
-      setFormData((prev) => ({
-        ...prev,
-        [FIELD_NAMES.PROPERTY_ASSESSMENT]: newPropAssessment,
-        // [FIELD_NAMES.TOTAL_MARKET_VALUE]: totalMarketValue,
-      }));
+        const totalAssessedValue = updated[
+          FIELD_NAMES.PROPERTY_ASSESSMENT
+        ].reduce(
+          (sum, obj) => sum + (obj[FIELD_NAMES.PROPERTY_ASSESSED_VALUE] || 0),
+          0
+        );
+
+        updated[FIELD_NAMES.TOTAL_ASSESSED_VALUE] = totalAssessedValue;
+
+        return updated;
+      });
     } catch (error) {
       console.error(error);
     } finally {
@@ -69,23 +73,28 @@ export const AssessmentFields = (props) => {
         FIELD_NAMES.PROPERTY_ASSESSMENT
       ]?.filter((item) => item.id !== id);
 
+      const totalAssessedValue = updatedLandAppraisal.reduce(
+        (sum, obj) => sum + (obj[FIELD_NAMES.PROPERTY_ASSESSED_VALUE] || 0),
+        0
+      );
       return {
         ...prev,
         [FIELD_NAMES.PROPERTY_ASSESSMENT]: updatedLandAppraisal,
+        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
       };
     });
   };
 
   return (
     <>
-      <StyledFieldset title="Land Appraisal">
+      <StyledFieldset title="Property Assessment">
         <Stack mb={2}>
           <Button
             sx={{
               alignSelf: "flex-start",
             }}
             variant="contained"
-            disabled={props?.readOnly}
+            disabled={appraisalEmpty}
             startIcon={<Add />}
             onClick={() => setModalActive(true)}
           >
@@ -101,7 +110,6 @@ export const AssessmentFields = (props) => {
         onClose={() => setModalActive(false)}
         formData={formData}
         handleFormChange={handleFormChange}
-        propAssForm={propAssForm}
         handlePropAssSubmit={handlePropAssSubmit}
       />
     </>

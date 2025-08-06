@@ -5,10 +5,15 @@ import StyledFieldset from "../ui/StyledFieldset";
 import { LandMarketValueTable } from "../tables/LandMarketValueTable";
 import { AddLandMarketValModal } from "../modals/AddLandMarketValModal";
 import { useState } from "react";
+import { FIELD_NAMES } from "../../constants/fieldNames";
 
 export const LandMarketValueFields = (props) => {
+  const { formData } = props;
   const [modalActive, setModalActive] = useState(false);
+  const [inputFields, setInputFields] = useState({});
 
+  const appraisalEmpty = formData[FIELD_NAMES.LAND_APPRAISAL]?.length === 0;
+  const handleFieldsChange = () => {};
   return (
     <>
       <StyledFieldset title="Market Value Adjustment">
@@ -19,7 +24,7 @@ export const LandMarketValueFields = (props) => {
             }}
             onClick={() => setModalActive(true)}
             variant="contained"
-            disabled={props?.readOnly}
+            disabled={appraisalEmpty}
             startIcon={<Add />}
           >
             Adjustment
@@ -32,6 +37,9 @@ export const LandMarketValueFields = (props) => {
       <AddLandMarketValModal
         open={modalActive}
         onClose={() => setModalActive(false)}
+        inputFields={inputFields}
+        handleFieldsChange={handleFieldsChange}
+        formData={formData}
       />
     </>
   );

@@ -85,6 +85,8 @@ export const LandAppraisalFields = (props) => {
         ...prev,
         [FIELD_NAMES.LAND_APPRAISAL]: updatedAppraisals,
         [FIELD_NAMES.TOTAL_MARKET_VALUE]: totalMarketValue,
+        [FIELD_NAMES.PROPERTY_ASSESSMENT]: [],
+        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: 0,
       }));
       setLandAppraisalForm(LAND_APPRAISAL_DEFAULT_DATA);
     } catch (error) {
@@ -109,6 +111,8 @@ export const LandAppraisalFields = (props) => {
         ...prev,
         landAppraisal: updatedLandAppraisal,
         totalMarketValue,
+        [FIELD_NAMES.PROPERTY_ASSESSMENT]: [],
+        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: 0,
       };
     });
   };

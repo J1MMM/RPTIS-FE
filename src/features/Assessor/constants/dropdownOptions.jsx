@@ -61,3 +61,10 @@ export const QUATER_OPTIONS = [
   { value: "3rd Quarter", label: "3rd Quarter" },
   { value: "4th Quarter", label: "4th Quarter" },
 ];
+
+export const ADJUSTMENT_FACTOR_OPTIONS = [
+  { value: "Stripping", label: "Stripping" },
+  { value: "Corner Influence", label: "Corner Influence" },
+  { value: "Right of Way", label: "Right of Way" },
+  { value: "Open Spaces", label: "Open Spaces" },
+];

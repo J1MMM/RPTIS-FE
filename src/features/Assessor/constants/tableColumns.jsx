@@ -1,4 +1,4 @@
-import { formatPeso } from "../../../utils/formatters";
+import { formatPercent, formatPeso } from "../../../utils/formatters";
 import { FIELD_NAMES } from "./fieldNames";
 
 export const APPRAISAL_COLUMN = [
@@ -112,7 +112,7 @@ export const MARKET_VALUE_TABLE_COLUMN = [
 
 export const PROPERTY_ASS_TABLE_COLUMN = [
   {
-    field: "actualUse",
+    field: FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE,
     headerName: "Actual Use",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -121,13 +121,17 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
   },
   {
-    field: "marketValue",
+    field: FIELD_NAMES.TOTAL_MARKET_VALUE,
     headerName: "Market Value",
     flex: 1,
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
   },
 
   {
@@ -138,6 +142,10 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPercent(value);
+    },
   },
   {
     field: "assessedValue",
@@ -147,5 +155,9 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
   },
 ];
