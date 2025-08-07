@@ -88,7 +88,7 @@ export const AssessmentFields = (props) => {
   return (
     <>
       <StyledFieldset title="Property Assessment">
-        <Stack mb={2}>
+        {/* <Stack mb={2}>
           <Button
             sx={{
               alignSelf: "flex-start",
@@ -100,7 +100,7 @@ export const AssessmentFields = (props) => {
           >
             Assessment
           </Button>
-        </Stack>
+        </Stack> */}
 
         <LandPropAssTable formData={formData} handleDelete={handleDelete} />
       </StyledFieldset>

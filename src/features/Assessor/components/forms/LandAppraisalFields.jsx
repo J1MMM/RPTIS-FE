@@ -12,6 +12,7 @@ import {
   ACTUALUSE_EQUI_LEVEL,
   UNIT_VALUE_TABLE,
 } from "../../constants/unitValues";
+import { useNavigate } from "react-router-dom";
 
 export const LandAppraisalFields = (props) => {
   const { setFormData, formData } = props;
@@ -19,6 +20,7 @@ export const LandAppraisalFields = (props) => {
   const [landAppraisalForm, setLandAppraisalForm] = useState(
     LAND_APPRAISAL_DEFAULT_DATA
   );
+  const navigate = useNavigate();
 
   const subClass = landAppraisalForm[FIELD_NAMES.LAND_SUB_CLASS];
   const landArea = landAppraisalForm[FIELD_NAMES.LAND_AREA];
@@ -89,6 +91,7 @@ export const LandAppraisalFields = (props) => {
         [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: 0,
       }));
       setLandAppraisalForm(LAND_APPRAISAL_DEFAULT_DATA);
+      scrollTo("yest-section");
     } catch (error) {
       console.error(error);
     } finally {

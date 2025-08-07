@@ -64,8 +64,18 @@ export const AddLandMarketValModal = (props) => {
         </Stack>
 
         <Stack direction="row" gap={1}>
+          <BaseTextField
+            label="Adjustment"
+            name={FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS}
+            value={inputFields[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] || ""}
+            onChange={handleFieldsChange}
+            readOnly={true}
+            adornment={{
+              endAdornment: <InputAdornment position="start">%</InputAdornment>,
+            }}
+          />
           <NumericFormatTextField
-            label="Unit Value"
+            label="Value Adjustment"
             name={FIELD_NAMES.LAND_UNIT_VALUE}
             value={inputFields?.[FIELD_NAMES.LAND_UNIT_VALUE]}
             adornment={{
@@ -75,7 +85,7 @@ export const AddLandMarketValModal = (props) => {
             }}
           />
           <NumericFormatTextField
-            label="Base Market Value"
+            label="Market Value"
             name={FIELD_NAMES.LAND_BASE_MARKET_VALUE}
             value={inputFields?.[FIELD_NAMES.LAND_BASE_MARKET_VALUE]}
             adornment={{

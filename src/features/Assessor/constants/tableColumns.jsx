@@ -111,17 +111,17 @@ export const MARKET_VALUE_TABLE_COLUMN = [
 ];
 
 export const PROPERTY_ASS_TABLE_COLUMN = [
+  // {
+  //   field: FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE,
+  //   headerName: "Actual Use",
+  //   flex: 1,
+  //   headerClassName: "data-grid-header",
+  //   sortable: false,
+  //   filterable: false,
+  //   disableColumnMenu: true,
+  // },
   {
-    field: FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE,
-    headerName: "Actual Use",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: FIELD_NAMES.TOTAL_MARKET_VALUE,
+    field: FIELD_NAMES.LAND_BASE_MARKET_VALUE,
     headerName: "Market Value",
     flex: 1,
     headerClassName: "data-grid-header",

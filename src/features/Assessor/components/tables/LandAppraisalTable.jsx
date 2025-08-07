@@ -4,8 +4,8 @@ import { DATA_GRID_INITIAL_STATE } from "../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../constants/styles";
 import { DATA_GRID_STYLE } from "../../../../utils/constant";
 import LandAppraisalTableFooter from "../ui/LandAppraisalTableFooter";
-import { IconButton } from "@mui/material";
-import { Close, Delete } from "@mui/icons-material";
+import { Button, IconButton } from "@mui/material";
+import { Add, Close, Delete } from "@mui/icons-material";
 import { FIELD_NAMES } from "../../constants/fieldNames";
 
 export const LandAppraisalTable = (props) => {
@@ -38,6 +38,26 @@ export const LandAppraisalTable = (props) => {
           ),
         },
         ...APPRAISAL_COLUMN,
+        // {
+        //   field: "adjustment",
+        //   headerName: "Adjustment",
+        //   flex: 1,
+        //   headerClassName: "data-grid-header",
+        //   align: "center",
+        //   sortable: false,
+        //   filterable: false,
+        //   disableColumnMenu: true,
+        //   renderCell: (params) => (
+        //     <Button
+        //       // startIcon={<Add />}
+        //       size="small"
+        //       variant="contained"
+        //       color="primary"
+        //     >
+        //       Adjustment
+        //     </Button>
+        //   ),
+        // },
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
