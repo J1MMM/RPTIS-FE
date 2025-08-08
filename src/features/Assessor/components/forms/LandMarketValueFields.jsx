@@ -38,7 +38,6 @@ export const LandMarketValueFields = (props) => {
         open={modalActive}
         onClose={() => setModalActive(false)}
         inputFields={inputFields}
-        handleFieldsChange={handleFieldsChange}
         formData={formData}
       />
     </>

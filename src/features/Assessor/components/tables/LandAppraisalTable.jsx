@@ -61,7 +61,12 @@ export const LandAppraisalTable = (props) => {
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
-      sx={{ ...DATA_GRID_STYLE, width: LAND_INNER_TABLE_WIDTH }}
+      sx={{
+        ...DATA_GRID_STYLE,
+        width: LAND_INNER_TABLE_WIDTH,
+        // minHeight: 215,
+        // maxHeight: 215,
+      }}
       hideFooterPagination
       disableColumnResize
       showCellVerticalBorder

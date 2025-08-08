@@ -1,6 +1,14 @@
 import { InputAdornment, TextField } from "@mui/material";
 
-function NumberInput({ value, name, label, onChange, readOnly, adornment }) {
+function NumberInput({
+  value,
+  name,
+  label,
+  onChange,
+  readOnly,
+  adornment,
+  disabled,
+}) {
   return (
     <TextField
       required
@@ -15,6 +23,7 @@ function NumberInput({ value, name, label, onChange, readOnly, adornment }) {
       onWheel={(e) => {
         e.target.blur();
       }}
+      disabled={disabled}
       sx={{
         "& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button":
           {

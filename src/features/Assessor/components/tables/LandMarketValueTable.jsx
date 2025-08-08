@@ -16,7 +16,13 @@ export const LandMarketValueTable = (props) => {
       columns={MARKET_VALUE_TABLE_COLUMN}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
-      sx={{ ...DATA_GRID_STYLE, width: LAND_INNER_TABLE_WIDTH, minHeight: 250 }}
+      sx={{
+        ...DATA_GRID_STYLE,
+        width: LAND_INNER_TABLE_WIDTH,
+        minHeight: LAND_INNER_TABLE_WIDTH,
+        // minHeight: 215,
+        // maxHeight: 215,
+      }}
       hideFooterPagination
       disableColumnResize
       // slots={{

@@ -70,3 +70,15 @@ export const ADJUSTMENT_FACTOR_OPTIONS = [
   { value: "Right of Way", label: "Right of Way" },
   { value: "Open Spaces", label: "Open Spaces" },
 ];
+
+export const ACTUAL_USE_OPTIONS = [
+  { value: "Residential", label: "Residential" },
+  { value: "Commercial", label: "Commercial" },
+  { value: "Industrial", label: "Industrial" },
+  { value: "Agricultural", label: "Agricultural" },
+  // { value: "Special(Educational)", label: "Special(Educational)" },
+  // { value: "Special(Religious)", label: "Special(Religious)" },
+  // { value: "Special(Government)", label: "Special(Government)" },
+  // { value: "Special(Charitable)", label: "Special(Charitable)" },
+  // { value: "Special(OTHERS)", label: "Special(OTHERS)" },
+];

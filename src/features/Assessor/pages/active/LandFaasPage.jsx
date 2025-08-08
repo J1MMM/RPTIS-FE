@@ -47,9 +47,6 @@ function LandFaasPage() {
           variant="outlined"
           onClick={() => setConsolidateActive(true)}
           startIcon={<Shuffle />}
-          sx={{
-            whiteSpace: "nowrap", // prevents the text from wrapping
-          }}
         >
           consolidate
         </Button>
@@ -57,9 +54,6 @@ function LandFaasPage() {
           onClick={() => setAddModalActive(true)}
           variant="contained"
           startIcon={<Add />}
-          sx={{
-            whiteSpace: "nowrap",
-          }}
         >
           Add Faas
         </Button>

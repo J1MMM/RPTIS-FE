@@ -49,11 +49,12 @@ export const FIELD_NAMES = {
   LAND_ASSESSED_VALUE: "assessedValue",
 
   // market adjustment
-  // MARKET_ADJUSTMENT: "marketAdjustment",
-  // MARKET_ADJUSTMENT_FACTORS: "marketAdjustmentFactors",
-  // MARKET_ADJUSTMENT_PERCENT: "marketAdjustmentPercent",
-  // MARKET_VALUE_ADJUSTMENT: "marketValueAdjustment",
-  // ADJUSTED_MARKETVALUE: "adjustedMarketValue",
+  MARKET_ADJUSTMENT: "marketAdjustment",
+  MARKET_ADJUSTMENT_FACTORS: "marketAdjustmentFactors",
+  MARKET_ADJUSTMENT_PERCENT: "marketAdjustmentPercent",
+  MARKET_VALUE_ADJUSTMENT_AREA: "marketValueAdjustmentArea",
+  MARKET_VALUE_ADJUSTMENT: "marketValueAdjustment",
+  ADJUSTED_MARKETVALUE: "adjustedMarketValue",
 
   // TAXABILITY
   TAXABILITY: "TAXABILITY",
