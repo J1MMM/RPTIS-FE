@@ -2,17 +2,12 @@ import { Button, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "../ui/StyledFieldset";
-import { LandMarketValueTable } from "../tables/LandMarketValueTable";
 import { useEffect, useState } from "react";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { LandAppraisalTable } from "../tables/LandAppraisalTable";
 import { LAND_APPRAISAL_DEFAULT_DATA } from "../../constants/defaultValues";
 import { FIELD_NAMES } from "../../constants/fieldNames";
-import {
-  ACTUALUSE_EQUI_LEVEL,
-  UNIT_VALUE_TABLE,
-} from "../../constants/unitValues";
-import { useNavigate } from "react-router-dom";
+import { UNIT_VALUE_TABLE } from "../../constants/unitValues";
 
 export const LandAppraisalFields = (props) => {
   const { setFormData, formData } = props;
@@ -20,7 +15,6 @@ export const LandAppraisalFields = (props) => {
   const [landAppraisalForm, setLandAppraisalForm] = useState(
     LAND_APPRAISAL_DEFAULT_DATA
   );
-  const navigate = useNavigate();
 
   const subClass = landAppraisalForm[FIELD_NAMES.LAND_SUB_CLASS];
   const landArea = landAppraisalForm[FIELD_NAMES.LAND_AREA];
@@ -91,7 +85,6 @@ export const LandAppraisalFields = (props) => {
         [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: 0,
       }));
       setLandAppraisalForm(LAND_APPRAISAL_DEFAULT_DATA);
-      scrollTo("yest-section");
     } catch (error) {
       console.error(error);
     } finally {
@@ -110,12 +103,17 @@ export const LandAppraisalFields = (props) => {
         0
       );
 
+      const totalAssessedValue = updatedLandAppraisal.reduce(
+        (sum, obj) => sum + (obj[FIELD_NAMES.LAND_ASSESSED_VALUE] || 0),
+        0
+      );
+
       return {
         ...prev,
-        landAppraisal: updatedLandAppraisal,
         totalMarketValue,
+        landAppraisal: updatedLandAppraisal,
+        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
         [FIELD_NAMES.PROPERTY_ASSESSMENT]: [],
-        [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: 0,
       };
     });
   };

@@ -39,24 +39,6 @@ function LandFaasPage() {
     const id = params?.row?.id;
   };
 
-  useEffect(() => {
-    const actualUseRaw = formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE];
-    const actualUse = actualUseRaw?.toLowerCase();
-    const assessmentLevel = ACTUAL_USE_EQUIVALENTS[actualUse] ?? 0;
-    const totalMarketValue = formData[FIELD_NAMES.TOTAL_MARKET_VALUE] ?? 0;
-
-    const assessedValue = assessmentLevel * totalMarketValue;
-
-    setFormData((prev) => ({
-      ...prev,
-      [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: assessmentLevel,
-      [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]: assessedValue,
-    }));
-  }, [
-    formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE],
-    formData[FIELD_NAMES.TOTAL_MARKET_VALUE],
-  ]);
-
   const PageButton = () => {
     return (
       <Stack direction="row" gap={1}>
@@ -65,6 +47,9 @@ function LandFaasPage() {
           variant="outlined"
           onClick={() => setConsolidateActive(true)}
           startIcon={<Shuffle />}
+          sx={{
+            whiteSpace: "nowrap", // prevents the text from wrapping
+          }}
         >
           consolidate
         </Button>
@@ -72,6 +57,9 @@ function LandFaasPage() {
           onClick={() => setAddModalActive(true)}
           variant="contained"
           startIcon={<Add />}
+          sx={{
+            whiteSpace: "nowrap",
+          }}
         >
           Add Faas
         </Button>

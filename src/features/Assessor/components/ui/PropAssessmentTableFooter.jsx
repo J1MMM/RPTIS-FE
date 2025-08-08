@@ -11,7 +11,6 @@ const styledText = {
 const PropAssessmentTableFooter = ({ total }) => {
   return (
     <Stack direction="row" border="1px solid rgba(224, 224, 224, 1)" p={1}>
-      <Typography sx={{ ...styledText, maxWidth: 55 }} variant="body2" />
       <Typography sx={styledText} variant="body2"></Typography>
 
       <Typography sx={styledText} variant="body2"></Typography>

@@ -14,7 +14,7 @@ import PropAssessmentTableFooter from "../ui/PropAssessmentTableFooter";
 import { CLASSIFICATION_OPTIONS } from "../../constants/dropdownOptions";
 
 export const LandPropAssTable = (props) => {
-  const { formData, handleDelete } = props;
+  const { formData, handleChange } = props;
 
   const totalAssessedValue = formData[FIELD_NAMES.TOTAL_ASSESSED_VALUE] || 0;
 
@@ -22,27 +22,8 @@ export const LandPropAssTable = (props) => {
     <DataGrid
       rows={formData[FIELD_NAMES.LAND_APPRAISAL]}
       columns={[
-        // {
-        //   field: "actions",
-        //   headerName: "Actions",
-        //   width: 80,
-        //   headerClassName: "data-grid-header",
-        //   sortable: false,
-        //   filterable: false,
-        //   disableColumnMenu: true,
-        //   headerAlign: "center",
-        //   align: "center",
-        //   renderCell: (params) => (
-        //     <IconButton
-        //       color="mono.main"
-        //       onClick={() => handleDelete(params.row.id)}
-        //     >
-        //       <Close />
-        //     </IconButton>
-        //   ),
-        // },
         {
-          field: FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE,
+          field: FIELD_NAMES.LAND_ACTUAL_USE,
           headerName: "Actual Use",
           flex: 1,
           headerClassName: "data-grid-header",
@@ -52,14 +33,11 @@ export const LandPropAssTable = (props) => {
           renderCell: (params) => {
             return (
               <Select
-                value={params.row.adjustment}
+                value={params.row.actualUse}
                 onChange={(e) => handleChange(params.row.id, e.target.value)}
                 fullWidth
                 variant="standard"
               >
-                <MenuItem value="" disabled>
-                  Select adjustment...
-                </MenuItem>
                 {CLASSIFICATION_OPTIONS.map((option, index) => (
                   <MenuItem key={index} value={option.value}>
                     {option.label}
