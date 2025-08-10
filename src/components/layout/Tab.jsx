@@ -30,7 +30,7 @@ const Tab = ({ links }) => {
               fontWeight: 500,
               color: isActive ? "primary.main" : "#000",
               borderBottom: isActive
-                ? "2px solid #1A237E"
+                ? "2px solid #1E3A8A"
                 : "2px solid transparent",
               cursor: "pointer",
             }}

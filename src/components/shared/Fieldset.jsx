@@ -6,13 +6,13 @@ function Fieldset({ title, children }) {
     <Box
       component={"fieldset"}
       sx={{
-        border: "1px solid #1A237E",
+        border: "1px solid #1E3A8A",
         borderRadius: 1,
         boxSizing: "border-box",
         position: "relative",
       }}
     >
-      <legend style={{ color: "#1A237E" }}>{title}</legend>
+      <legend style={{ color: "#1E3A8A" }}>{title}</legend>
       {children}
     </Box>
   );

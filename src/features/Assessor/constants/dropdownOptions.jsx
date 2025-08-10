@@ -63,9 +63,7 @@ export const QUATER_OPTIONS = [
 ];
 
 export const ADJUSTMENT_FACTOR_OPTIONS = [
-  { value: "1st Stripping", label: "1st Stripping" },
-  { value: "2nd Stripping", label: "2nd Stripping" },
-  { value: "3rd Stripping", label: "3rd Stripping" },
+  { value: "Stripping", label: "Stripping" },
   { value: "Corner Influence", label: "Corner Influence" },
   { value: "Right of Way", label: "Right of Way" },
   { value: "Open Spaces", label: "Open Spaces" },

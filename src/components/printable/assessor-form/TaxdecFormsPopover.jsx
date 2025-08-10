@@ -21,7 +21,7 @@ export default function TaxdecFprmPopover(props) {
   return (
     <div>
       <Button aria-describedby={id} variant="outlined" onClick={handleClick}>
-        <ArticleOutlinedIcon fontSize="medium" color="#1A237E" />
+        <ArticleOutlinedIcon fontSize="medium" color="#1E3A8A" />
         GENERATE FORM
       </Button>
       <Popover
