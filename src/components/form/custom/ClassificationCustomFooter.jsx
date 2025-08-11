@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { SYMBOLS } from "../../../constant/symbols";
 
 const ClassificationCustomFooter = (props) => {
   return (
@@ -42,7 +43,7 @@ const ClassificationCustomFooter = (props) => {
         <span>{props?.areaValueTotal || 0}</span>{" "}
         {/* Replace with your actual value */}
         <Box component="span" sx={{ marginLeft: "8px" }}>
-          m²
+          {SYMBOLS.SQUARE_METER}
         </Box>
       </Typography>
 

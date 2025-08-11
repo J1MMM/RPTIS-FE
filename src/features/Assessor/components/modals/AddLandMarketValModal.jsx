@@ -2,7 +2,11 @@ import {
   Box,
   Button,
   Checkbox,
+  Collapse,
+  Divider,
+  FormControl,
   FormControlLabel,
+  FormLabel,
   Grid2,
   InputAdornment,
   Stack,
@@ -31,19 +35,46 @@ import { LAND_INNER_TABLE_WIDTH } from "../../constants/styles";
 import { DATA_GRID_INITIAL_STATE } from "../../constants/defaultValues";
 import { DataGrid } from "@mui/x-data-grid";
 import { APPRAISAL_COLUMN } from "../../constants/tableColumns";
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Fieldset from "../../../../components/shared/Fieldset";
+import { SYMBOLS } from "../../../../constant/symbols";
 
-const STRIPPINGS = [
-  { name: "stripping1st", label: "1st Stripping" },
-  { name: "stripping2nd", label: "2nd Stripping" },
-  { name: "stripping3rd", label: "3rd Stripping" },
+const STRIPPING_DEFAULT = [
+  {
+    name: "1stStripping",
+    label: "1st Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
+  {
+    name: "2ndStripping",
+    label: "2nd Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
+  {
+    name: "3rdStripping",
+    label: "3rd Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
 ];
 
 export const AddLandMarketValModal = (props) => {
   const { open, onClose, inputFields, formData } = props;
   const [selectedRow, setSelectedRow] = useState({});
+  const [visibleStripping, setVisibleStripping] = useState(1);
+  const [strippingFields, setStrippingFields] = useState(STRIPPING_DEFAULT);
   const isSelectedRowEmpty = Object.keys(selectedRow).length !== 0;
+  const inputArea =
+    selectedRow?.[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA];
+
   const [disableSelection, setDisableSelection] = useState(true);
   const handleFieldsChange = (e) => {
     const { name, value } = e.target;
@@ -61,9 +92,112 @@ export const AddLandMarketValModal = (props) => {
     }
     setSelectedRow(row);
   };
+  console.log("strippingFields");
+  console.log(strippingFields);
+
+  useEffect(() => {
+    let baseUnitVal = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE];
+    if (inputArea) {
+      if (inputArea > 60) {
+        setVisibleStripping(3);
+
+        setStrippingFields((prev) => {
+          return prev?.map((obj) => {
+            if (obj.name == "3rdStripping") {
+              const unitVal = baseUnitVal * 0.5;
+              const area = inputArea - 60;
+
+              return {
+                ...obj,
+                area: area,
+                percentOfAdj: 50,
+                unitVal: unitVal,
+                valueAdjustment: unitVal * area,
+              };
+            }
+            if (obj.name == "2ndStripping") {
+              const unitVal = baseUnitVal * 0.75;
+              return {
+                ...obj,
+                area: 30,
+                percentOfAdj: 75,
+                unitVal: unitVal,
+                valueAdjustment: unitVal * 30,
+              };
+            }
+            if (obj.name == "1stStripping") {
+              return {
+                ...obj,
+                area: 30,
+                percentOfAdj: 100,
+                unitVal: baseUnitVal,
+                valueAdjustment: baseUnitVal * 30,
+              };
+            }
+          });
+        });
+      } else if (inputArea > 30) {
+        setVisibleStripping(2);
+        setStrippingFields((prev) => {
+          return prev?.map((obj) => {
+            if (obj.name == "2ndStripping") {
+              const unitVal = baseUnitVal * 0.75;
+              const area = inputArea - 30;
+              return {
+                ...obj,
+                area: area,
+                percentOfAdj: 75,
+                unitVal: unitVal,
+                valueAdjustment: unitVal * 30,
+              };
+            }
+            if (obj.name == "1stStripping") {
+              return {
+                ...obj,
+                area: 30,
+                percentOfAdj: 100,
+                unitVal: baseUnitVal,
+                valueAdjustment: baseUnitVal * 30,
+              };
+            }
+            return obj;
+          });
+        });
+      } else {
+        setVisibleStripping(1);
+        setStrippingFields((prev) => {
+          return prev?.map((obj) => {
+            if (obj.name == "1stStripping") {
+              return {
+                ...obj,
+                area: inputArea,
+                percentOfAdj: 100,
+                unitVal: baseUnitVal,
+                valueAdjustment: baseUnitVal * inputArea,
+              };
+            }
+            return obj;
+          });
+        });
+      }
+    }
+
+    const totalValAdj =
+      strippingFields.reduce((total, row) => row.valueAdjustment + total, 0) ||
+      0;
+
+    console.log("🚀🚀🚀🚀🚀🚀🚀🚀");
+    console.log("totalValAdj");
+    console.log(totalValAdj);
+    setSelectedRow((prev) => ({
+      ...prev,
+      totalValueAdjustment: totalValAdj,
+    }));
+  }, [inputArea]);
 
   console.log("selectedRow");
   console.log(selectedRow);
+  console.log(visibleStripping);
   return (
     <ContainerModal
       maxWidth="md"
@@ -196,76 +330,146 @@ export const AddLandMarketValModal = (props) => {
             options={ADJUSTMENT_FACTOR_OPTIONS}
           />
         </Stack>
-        {selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] == "Stripping" && (
-          <Fieldset title="Stripping">
-            <Grid2
-              container
-              border={"1px solid red"}
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr", // 2 equal columns
-                gap: 2, // theme spacing
-              }}
-            >
-              <Grid2 border={"1px solid"}>
-                <table border={"1px solid"}>
-                  <tbody>
-                    {STRIPPINGS.map((item, index) => (
-                      <tr key={index}>
-                        <td>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                              //  checked={false}
-                              />
-                            }
-                            label={item.label}
-                            sx={{ whiteSpace: "nowrap" }}
-                          />
-                        </td>
-                        <td>
-                          <TextField
-                            size="small"
-                            variant="outlined"
-                            placeholder="Area"
-                            slotProps={{
-                              input: {
-                                endAdornment: (
-                                  <InputAdornment position="start">
-                                    m²
-                                  </InputAdornment>
-                                ),
-                              },
-                            }}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </Grid2>
-              <Grid2>
-                <BaseTextField
-                  disabled={!isSelectedRowEmpty}
-                  label="Percent of Adjustment"
-                  name={FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT}
-                  value={
-                    selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT] || ""
-                  }
-                  onChange={handleFieldsChange}
-                  readOnly={true}
-                  adornment={{
-                    endAdornment: (
-                      <InputAdornment position="start">%</InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid2>
-            </Grid2>
-          </Fieldset>
-        )}
 
-        <Stack direction="row" gap={1}>
+        <Collapse
+          in={selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] == "Stripping"}
+          title="Stripping"
+          unmountOnExit
+        >
+          <Typography
+            variant="h6"
+            fontSize={16}
+            color="primary"
+            sx={{ borderBottom: "2px solid", mt: 2 }}
+          >
+            Stripping Computation
+          </Typography>
+          <Grid2
+            container
+            // border={"1px solid red"}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "auto 1fr  1fr 1fr 1fr", // 2 equal columns
+              columnGap: 1,
+              alignItems: "center",
+              alignContent: "start",
+              mt: 3,
+            }}
+          >
+            {strippingFields.slice(0, visibleStripping).map((item, index) => (
+              <Fragment key={index}>
+                <Grid2 alignSelf={"center"}>
+                  <FormLabel>{item.label}:</FormLabel>
+                </Grid2>
+                <Grid2>
+                  <NumericFormatTextField
+                    label="Unit Values"
+                    disabled={!isSelectedRowEmpty}
+                    value={item.unitVal}
+                    size={"small"}
+                    readOnly={true}
+                    adornment={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          {SYMBOLS.PESO}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid2>
+                <Grid2>
+                  <NumberInput
+                    label="Percent"
+                    size="small"
+                    value={item.percentOfAdj}
+                    readOnly={true}
+                    adornment={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {SYMBOLS.PERCENT}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid2>
+                <Grid2>
+                  <NumberInput
+                    label="Area"
+                    size="small"
+                    value={item.area}
+                    readOnly={true}
+                    adornment={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {SYMBOLS.SQUARE_METER}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid2>
+                <Grid2>
+                  <NumberInput
+                    label="Value Adjustment"
+                    size="small"
+                    value={item.valueAdjustment}
+                    readOnly={true}
+                    adornment={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          {SYMBOLS.PESO}
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid2>
+              </Fragment>
+            ))}
+          </Grid2>
+
+          <Stack direction="row" spacing={1} mt={1}>
+            <NumberInput
+              disabled={!isSelectedRowEmpty}
+              label="Area"
+              name={FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
+              value={
+                selectedRow[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA] ||
+                ""
+              }
+              onChange={handleFieldsChange}
+              adornment={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.SQUARE_METER}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <NumericFormatTextField
+              disabled={!isSelectedRowEmpty}
+              label="Total Value Adjustment"
+              name={FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT}
+              value={selectedRow?.totalValueAdjustment || ""}
+              onChange={handleFieldsChange}
+              readOnly={true}
+              adornment={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.PESO}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Stack>
+          <Divider
+            sx={{
+              borderColor: "primary.main", // change line color
+              borderWidth: "1px",
+              my: 2, // add vertical margin
+            }}
+          />
+        </Collapse>
+
+        <Stack direction="row" gap={1} mt={1}>
           <BaseTextField
             disabled={!isSelectedRowEmpty}
             label="Percent of Adjustment"
@@ -277,17 +481,7 @@ export const AddLandMarketValModal = (props) => {
               endAdornment: <InputAdornment position="start">%</InputAdornment>,
             }}
           />
-          <NumericFormatTextField
-            disabled={!isSelectedRowEmpty}
-            label="Unit Value"
-            name={FIELD_NAMES.LAND_UNIT_VALUE}
-            value={selectedRow[FIELD_NAMES.LAND_UNIT_VALUE]}
-            adornment={{
-              startAdornment: (
-                <InputAdornment position="start">&#8369;</InputAdornment>
-              ),
-            }}
-          />
+
           {/* <NumericFormatTextField
             disabled={!isSelectedRowEmpty}
             label="Area"

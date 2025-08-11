@@ -7,3 +7,13 @@ const adjustmentComputations = {
   rightOfWay: ({ unitValue, area }) => unitValue * 0.1 * area,
   openSpaces: ({ unitValue, area }) => unitValue * 0.3 * area,
 };
+const totalValAdj =
+  strippingFields.reduce((total, row) => row.valueAdjustment + total, 0) || 0;
+
+console.log("🚀🚀🚀🚀🚀🚀🚀🚀");
+console.log("totalValAdj");
+console.log(totalValAdj);
+setSelectedRow((prev) => ({
+  ...prev,
+  totalValueAdjustment: totalValAdj,
+}));

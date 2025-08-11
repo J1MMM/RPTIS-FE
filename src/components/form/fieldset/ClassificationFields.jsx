@@ -18,6 +18,7 @@ import {
   SUBCLASS_DD,
 } from "../../../pages/Assessor/assessorConstant";
 import { NumericFormat } from "react-number-format";
+import { SYMBOLS } from "../../../constant/symbols";
 
 export const ClassificationFields = ({
   props,
@@ -109,7 +110,9 @@ export const ClassificationFields = ({
                 input: {
                   readOnly: props?.readOnly,
                   endAdornment: (
-                    <InputAdornment position="end">m²</InputAdornment>
+                    <InputAdornment position="end">
+                      {SYMBOLS.SQUARE_METER}
+                    </InputAdornment>
                   ),
                   inputProps: {
                     min: 0,

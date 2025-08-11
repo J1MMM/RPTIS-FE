@@ -12,6 +12,7 @@ import {
   CLASSIFICATION_OPTIONS,
   SUBCLASS_OPTIONS,
 } from "../../constants/dropdownOptions";
+import { SYMBOLS } from "../../../../constant/symbols";
 
 export const AddLandAppraisalModal = (props) => {
   const {
@@ -76,7 +77,9 @@ export const AddLandAppraisalModal = (props) => {
             readOnly={props?.readOnly}
             adornment={{
               endAdornment: (
-                <InputAdornment position="start">m²</InputAdornment>
+                <InputAdornment position="start">
+                  {SYMBOLS.SQUARE_METER}
+                </InputAdornment>
               ),
             }}
           />

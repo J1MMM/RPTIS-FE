@@ -16,6 +16,7 @@ import {
   SUBCLASS_DD,
   UNIT_VALUE_TABLE,
 } from "../../../pages/Assessor/assessorConstant";
+import { SYMBOLS } from "../../../constant/symbols";
 
 export const AddClassificationModal = ({
   props,
@@ -110,7 +111,9 @@ export const AddClassificationModal = ({
               input: {
                 readOnly: props?.readOnly,
                 endAdornment: (
-                  <InputAdornment position="end">m²</InputAdornment>
+                  <InputAdornment position="end">
+                    {SYMBOLS.SQUARE_METER}
+                  </InputAdornment>
                 ),
                 inputProps: {
                   min: 0,

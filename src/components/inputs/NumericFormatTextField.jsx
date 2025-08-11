@@ -1,15 +1,25 @@
 import { InputAdornment, TextField } from "@mui/material";
 import { NumericFormat } from "react-number-format";
 
-function NumericFormatTextField({ name, value, label, adornment, disabled }) {
+function NumericFormatTextField({
+  name,
+  value,
+  label,
+  adornment,
+  disabled,
+  size,
+  margin = "dense",
+  readOnly = true,
+}) {
   return (
     <NumericFormat
+      size={size}
       disabled={disabled}
       customInput={TextField}
-      margin="dense"
       fullWidth
       variant="outlined"
       label={label}
+      margin={margin}
       name={name}
       value={value}
       thousandSeparator=","
@@ -17,7 +27,7 @@ function NumericFormatTextField({ name, value, label, adornment, disabled }) {
       slotProps={{
         input: {
           ...adornment,
-          readOnly: true,
+          readOnly: readOnly,
         },
       }}
     />

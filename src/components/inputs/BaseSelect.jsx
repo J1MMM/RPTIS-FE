@@ -7,6 +7,7 @@ function BaseSelect({
   onChange,
   readOnly,
   disabled,
+  margin = "dense",
   required = true,
   options = [{ value: "", label: "" }],
 }) {
@@ -15,7 +16,7 @@ function BaseSelect({
   return (
     <FormControl
       fullWidth
-      margin="dense"
+      margin={margin}
       required={required}
       disabled={disabled}
     >

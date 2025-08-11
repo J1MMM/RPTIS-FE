@@ -8,12 +8,15 @@ function NumberInput({
   readOnly,
   adornment,
   disabled,
+  margin = "dense",
+  size = "medium",
 }) {
   return (
     <TextField
       required
+      size={size}
       type="number"
-      margin="dense"
+      margin={margin}
       fullWidth
       variant="outlined"
       label={label}
