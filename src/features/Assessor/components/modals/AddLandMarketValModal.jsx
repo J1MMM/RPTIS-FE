@@ -38,6 +38,7 @@ import { APPRAISAL_COLUMN } from "../../constants/tableColumns";
 import { Fragment, useEffect, useState } from "react";
 import Fieldset from "../../../../components/shared/Fieldset";
 import { SYMBOLS } from "../../../../constant/symbols";
+import { toFixedTwo } from "../../../../utils/formatters";
 
 const STRIPPING_DEFAULT = [
   {
@@ -96,104 +97,101 @@ export const AddLandMarketValModal = (props) => {
   console.log(strippingFields);
 
   useEffect(() => {
-    let baseUnitVal = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE];
-    if (inputArea) {
-      if (inputArea > 60) {
-        setVisibleStripping(3);
+    // if no inputArea or no selected row / unit value, do nothing
+    if (!inputArea) return;
 
-        setStrippingFields((prev) => {
-          return prev?.map((obj) => {
-            if (obj.name == "3rdStripping") {
-              const unitVal = baseUnitVal * 0.5;
-              const area = inputArea - 60;
+    // read only the primitive we need (avoid depending on whole object)
+    const baseUnitVal = Number(selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0);
 
-              return {
-                ...obj,
-                area: area,
-                percentOfAdj: 50,
-                unitVal: unitVal,
-                valueAdjustment: unitVal * area,
-              };
-            }
-            if (obj.name == "2ndStripping") {
-              const unitVal = baseUnitVal * 0.75;
-              return {
-                ...obj,
-                area: 30,
-                percentOfAdj: 75,
-                unitVal: unitVal,
-                valueAdjustment: unitVal * 30,
-              };
-            }
-            if (obj.name == "1stStripping") {
-              return {
-                ...obj,
-                area: 30,
-                percentOfAdj: 100,
-                unitVal: baseUnitVal,
-                valueAdjustment: baseUnitVal * 30,
-              };
-            }
-          });
-        });
-      } else if (inputArea > 30) {
-        setVisibleStripping(2);
-        setStrippingFields((prev) => {
-          return prev?.map((obj) => {
-            if (obj.name == "2ndStripping") {
-              const unitVal = baseUnitVal * 0.75;
-              const area = inputArea - 30;
-              return {
-                ...obj,
-                area: area,
-                percentOfAdj: 75,
-                unitVal: unitVal,
-                valueAdjustment: unitVal * 30,
-              };
-            }
-            if (obj.name == "1stStripping") {
-              return {
-                ...obj,
-                area: 30,
-                percentOfAdj: 100,
-                unitVal: baseUnitVal,
-                valueAdjustment: baseUnitVal * 30,
-              };
-            }
-            return obj;
-          });
-        });
-      } else {
-        setVisibleStripping(1);
-        setStrippingFields((prev) => {
-          return prev?.map((obj) => {
-            if (obj.name == "1stStripping") {
-              return {
-                ...obj,
-                area: inputArea,
-                percentOfAdj: 100,
-                unitVal: baseUnitVal,
-                valueAdjustment: baseUnitVal * inputArea,
-              };
-            }
-            return obj;
-          });
-        });
-      }
+    // compute visible count + updatedFields in memory
+    let visibleCount = 1;
+    let updatedFields = [];
+
+    if (inputArea > 60) {
+      visibleCount = 3;
+      updatedFields = [
+        {
+          name: "1stStripping",
+          area: 30,
+          percentOfAdj: 100,
+          unitVal: baseUnitVal,
+          valueAdjustment: baseUnitVal * 30,
+        },
+        {
+          name: "2ndStripping",
+          area: 30,
+          percentOfAdj: 75,
+          unitVal: baseUnitVal * 0.75,
+          valueAdjustment: baseUnitVal * 0.75 * 30,
+        },
+        {
+          name: "3rdStripping",
+          area: inputArea - 60,
+          percentOfAdj: 50,
+          unitVal: baseUnitVal * 0.5,
+          valueAdjustment: baseUnitVal * 0.5 * (inputArea - 60),
+        },
+      ];
+    } else if (inputArea > 30) {
+      visibleCount = 2;
+      updatedFields = [
+        {
+          name: "1stStripping",
+          area: 30,
+          percentOfAdj: 100,
+          unitVal: baseUnitVal,
+          valueAdjustment: baseUnitVal * 30,
+        },
+        {
+          name: "2ndStripping",
+          area: inputArea - 30,
+          percentOfAdj: 75,
+          unitVal: baseUnitVal * 0.75,
+          valueAdjustment: baseUnitVal * 0.75 * (inputArea - 30),
+        },
+      ];
+    } else {
+      visibleCount = 1;
+      updatedFields = [
+        {
+          name: "1stStripping",
+          area: inputArea,
+          percentOfAdj: 100,
+          unitVal: baseUnitVal,
+          valueAdjustment: baseUnitVal * inputArea,
+        },
+      ];
     }
 
-    const totalValAdj =
-      strippingFields.reduce((total, row) => row.valueAdjustment + total, 0) ||
-      0;
+    // sum total
+    const totalValAdj = updatedFields.reduce(
+      (total, row) => total + (Number(row.valueAdjustment) || 0),
+      0
+    );
 
-    console.log("🚀🚀🚀🚀🚀🚀🚀🚀");
-    console.log("totalValAdj");
-    console.log(totalValAdj);
-    setSelectedRow((prev) => ({
-      ...prev,
-      totalValueAdjustment: totalValAdj,
-    }));
-  }, [inputArea]);
+    // update visibleStripping and strippingFields
+    setVisibleStripping((prev) =>
+      prev === visibleCount ? prev : visibleCount
+    );
+
+    setStrippingFields((prev) =>
+      prev.map((obj) => {
+        const found = updatedFields.find((u) => u.name === obj.name);
+        return found ? { ...obj, ...found } : obj;
+      })
+    );
+
+    // Only update selectedRow if totalValueAdjustment actually changed
+    setSelectedRow((prev) => {
+      if (!prev) return prev;
+      const prevTotal = Number(prev.totalValueAdjustment) || 0;
+      if (toFixedTwo(prevTotal) === toFixedTwo(totalValAdj)) {
+        return prev; // no change -> avoid state update
+      }
+      return { ...prev, totalValueAdjustment: toFixedTwo(totalValAdj) };
+    });
+    // only depend on the primitives that should trigger recalculation:
+  }, [inputArea, selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE]]);
 
   console.log("selectedRow");
   console.log(selectedRow);
@@ -313,7 +311,7 @@ export const AddLandMarketValModal = (props) => {
             disabled={!isSelectedRowEmpty}
             label="Base Market Value"
             name={FIELD_NAMES.LAND_BASE_MARKET_VALUE}
-            value={selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || ""}
+            value={toFixedTwo(selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE])}
             readOnly={true}
             adornment={{
               startAdornment: (
@@ -332,7 +330,10 @@ export const AddLandMarketValModal = (props) => {
         </Stack>
 
         <Collapse
-          in={selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] == "Stripping"}
+          in={
+            selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] &&
+            selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] == "Stripping"
+          }
           title="Stripping"
           unmountOnExit
         >
@@ -408,7 +409,7 @@ export const AddLandMarketValModal = (props) => {
                   />
                 </Grid2>
                 <Grid2>
-                  <NumberInput
+                  <NumericFormatTextField
                     label="Value Adjustment"
                     size="small"
                     value={item.valueAdjustment}
@@ -447,8 +448,25 @@ export const AddLandMarketValModal = (props) => {
             <NumericFormatTextField
               disabled={!isSelectedRowEmpty}
               label="Total Value Adjustment"
-              name={FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT}
-              value={selectedRow?.totalValueAdjustment || ""}
+              name={FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT}
+              value={
+                selectedRow[FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""
+              }
+              onChange={handleFieldsChange}
+              readOnly={true}
+              adornment={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.PESO}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <NumericFormatTextField
+              disabled={!isSelectedRowEmpty}
+              label="Market Value"
+              name={FIELD_NAMES.ADJUSTED_MARKETVALUE}
+              value={selectedRow[FIELD_NAMES.ADJUSTED_MARKETVALUE] || ""}
               onChange={handleFieldsChange}
               readOnly={true}
               adornment={{
@@ -460,66 +478,74 @@ export const AddLandMarketValModal = (props) => {
               }}
             />
           </Stack>
-          <Divider
+          {/* <Divider
             sx={{
               borderColor: "primary.main", // change line color
               borderWidth: "1px",
               my: 2, // add vertical margin
             }}
-          />
-        </Collapse>
-
-        <Stack direction="row" gap={1} mt={1}>
-          <BaseTextField
-            disabled={!isSelectedRowEmpty}
-            label="Percent of Adjustment"
-            name={FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT}
-            value={selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT] || ""}
-            onChange={handleFieldsChange}
-            readOnly={true}
-            adornment={{
-              endAdornment: <InputAdornment position="start">%</InputAdornment>,
-            }}
-          />
-
-          {/* <NumericFormatTextField
-            disabled={!isSelectedRowEmpty}
-            label="Area"
-            name={FIELD_NAMES.LAND_AREA}
-            value={selectedRow[FIELD_NAMES.LAND_AREA] || ""}
-            onChange={handleFieldsChange}
-            readOnly={true}
-            adornment={{
-              endAdornment: (
-                <InputAdornment position="start">m²</InputAdornment>
-              ),
-            }}
           /> */}
-        </Stack>
-        <Stack direction="row" gap={1}>
-          <NumericFormatTextField
-            disabled={!isSelectedRowEmpty}
-            label="Value Adjustment"
-            name={FIELD_NAMES.MARKET_VALUE_ADJUSTMENT}
-            value={selectedRow[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT]}
-            adornment={{
-              startAdornment: (
-                <InputAdornment position="start">&#8369;</InputAdornment>
-              ),
-            }}
-          />
-          <NumericFormatTextField
-            disabled={!isSelectedRowEmpty}
-            label="Market Value"
-            name={FIELD_NAMES.ADJUSTED_MARKETVALUE}
-            value={selectedRow[FIELD_NAMES.ADJUSTED_MARKETVALUE]}
-            adornment={{
-              startAdornment: (
-                <InputAdornment position="start">&#8369;</InputAdornment>
-              ),
-            }}
-          />
-        </Stack>
+        </Collapse>
+        <Collapse
+          in={
+            selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] &&
+            selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] !== "Stripping"
+          }
+          title="Stripping"
+          unmountOnExit
+        >
+          <Stack direction="row" spacing={1} mt={1}>
+            <NumberInput
+              disabled={!isSelectedRowEmpty}
+              label="Area"
+              name={FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
+              value={
+                selectedRow[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA] ||
+                ""
+              }
+              onChange={handleFieldsChange}
+              adornment={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.SQUARE_METER}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <NumericFormatTextField
+              disabled={!isSelectedRowEmpty}
+              label="Total Value Adjustment"
+              name={FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT}
+              value={
+                selectedRow[FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""
+              }
+              onChange={handleFieldsChange}
+              readOnly={true}
+              adornment={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.PESO}
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <NumericFormatTextField
+              disabled={!isSelectedRowEmpty}
+              label="Market Value"
+              name={FIELD_NAMES.ADJUSTED_MARKETVALUE}
+              value={selectedRow[FIELD_NAMES.ADJUSTED_MARKETVALUE] || ""}
+              onChange={handleFieldsChange}
+              readOnly={true}
+              adornment={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    {SYMBOLS.PESO}
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Stack>
+        </Collapse>
       </Stack>
     </ContainerModal>
   );
