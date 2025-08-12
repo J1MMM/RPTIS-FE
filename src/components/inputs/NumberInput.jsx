@@ -8,6 +8,7 @@ function NumberInput({
   readOnly,
   adornment,
   disabled,
+  width,
   margin = "dense",
   size = "medium",
 }) {
@@ -36,6 +37,7 @@ function NumberInput({
         "& input[type=number]": {
           MozAppearance: "textfield", // For Firefox
         },
+        width: width,
       }}
       slotProps={{
         input: {

@@ -72,7 +72,7 @@ export default function AddLandFaasModal({ modalControl, formState }) {
 
         <LandAppraisalFields formData={formData} setFormData={setFormData} />
 
-        <LandMarketValueFields formData={formData} />
+        <LandMarketValueFields formData={formData} setFormData={setFormData} />
 
         <AssessmentFields
           formData={formData}

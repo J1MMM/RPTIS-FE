@@ -126,6 +126,7 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELD_NAMES.LAND_APPRAISAL]: [],
 
   // market adjustment
+  [FIELD_NAMES.MARKET_ADJUSTMENT]: [],
   [FIELD_NAMES.MARKET_ADJUSTMENT_CLASSIFICATION]: "",
   [FIELD_NAMES.MARKET_ADJUSTMENT_SUB_CLASS]: "",
   [FIELD_NAMES.MARKET_ADJUSTMENT_UNIT_VALUE]: "",
@@ -136,7 +137,6 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
   [FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]: 0,
   [FIELD_NAMES.PROPERTY_MARKET_VALUE]: "",
-  [FIELD_NAMES.PROPERTY_ASSESSED_VALUE]: "",
 
   // taxability
   [FIELD_NAMES.TAXABILITY]: "",
@@ -155,3 +155,33 @@ export const ACTUAL_USE_EQUIVALENTS = {
   commercial: 0.4,
   industrial: 0.4,
 };
+
+export const STRIPPING_FIELDS_DEFAULT = [
+  {
+    id: "",
+    name: "1stStripping",
+    label: "1st Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
+  {
+    id: "",
+    name: "2ndStripping",
+    label: "2nd Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
+  {
+    id: "",
+    name: "3rdStripping",
+    label: "3rd Stripping",
+    unitVal: 0,
+    percentOfAdj: 0,
+    area: 0,
+    valueAdjustment: 0,
+  },
+];

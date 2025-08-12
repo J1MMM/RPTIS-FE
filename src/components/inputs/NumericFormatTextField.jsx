@@ -8,6 +8,7 @@ function NumericFormatTextField({
   adornment,
   disabled,
   size,
+  color,
   margin = "dense",
   readOnly = true,
 }) {

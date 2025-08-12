@@ -72,7 +72,7 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     disableColumnMenu: true,
   },
   {
-    field: "adjustmentFactors",
+    field: [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS],
     headerName: "Adjustment Factors",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -82,7 +82,7 @@ export const MARKET_VALUE_TABLE_COLUMN = [
   },
 
   {
-    field: "adjustmentPercentage",
+    field: [FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT],
     headerName: "% Adjustment ",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -91,7 +91,7 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     disableColumnMenu: true,
   },
   {
-    field: "valueAdjustment",
+    field: [FIELD_NAMES.ADJUSTED_MARKETVALUE],
     headerName: "Value Adjustment",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -99,15 +99,15 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     filterable: false,
     disableColumnMenu: true,
   },
-  {
-    field: "marketValue",
-    headerName: "Market Value",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
+  // {
+  //   field: [FIELD_NAMES.TOTAL_MARKET_VALUE],
+  //   headerName: "Market Value",
+  //   flex: 1,
+  //   headerClassName: "data-grid-header",
+  //   sortable: false,
+  //   filterable: false,
+  //   disableColumnMenu: true,
+  // },
 ];
 
 export const PROPERTY_ASS_TABLE_COLUMN = [
