@@ -114,6 +114,7 @@ export const LandAppraisalFields = (props) => {
         landAppraisal: updatedLandAppraisal,
         [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
         [FIELD_NAMES.PROPERTY_ASSESSMENT]: [],
+        [FIELD_NAMES.MARKET_ADJUSTMENT]: [],
       };
     });
   };

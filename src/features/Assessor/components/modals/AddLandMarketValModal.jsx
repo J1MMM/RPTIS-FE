@@ -44,6 +44,9 @@ export const AddLandMarketValModal = (props) => {
     strippingFields,
     setStrippingFields,
   } = props;
+  const filteredLandAppraisal = formData[FIELD_NAMES.LAND_APPRAISAL]?.filter(
+    (row) => row?.adjusted == false
+  );
   const [selectedFactor, setSelectedFactor] = useState("");
   const [visibleStripping, setVisibleStripping] = useState(1);
 
@@ -86,15 +89,15 @@ export const AddLandMarketValModal = (props) => {
       baseUnitVal
     );
 
-    setVisibleStripping((prev) =>
-      prev === visibleCount ? prev : visibleCount
+    // wag update pag same
+    setStrippingFields((prev) =>
+      JSON.stringify(prev) === JSON.stringify(updatedFields)
+        ? prev
+        : updatedFields
     );
 
-    setStrippingFields((prev) =>
-      prev.map((obj) => {
-        const found = updatedFields.find((u) => u.name === obj.name);
-        return found ? { ...obj, ...found } : obj;
-      })
+    setVisibleStripping((prev) =>
+      prev === visibleCount ? prev : visibleCount
     );
 
     setSelectedRow((prev) => {
@@ -136,7 +139,7 @@ export const AddLandMarketValModal = (props) => {
       <Stack>
         <DividerHeading mt={0}> Land Appraisal</DividerHeading>
         <DataGrid
-          rows={formData[FIELD_NAMES.LAND_APPRAISAL]}
+          rows={filteredLandAppraisal}
           columns={[
             ...APPRAISAL_COLUMN,
             {

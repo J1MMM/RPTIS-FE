@@ -166,22 +166,4 @@ export const STRIPPING_FIELDS_DEFAULT = [
     area: 0,
     valueAdjustment: 0,
   },
-  {
-    id: "",
-    name: "2ndStripping",
-    label: "2nd Stripping",
-    unitVal: 0,
-    percentOfAdj: 0,
-    area: 0,
-    valueAdjustment: 0,
-  },
-  {
-    id: "",
-    name: "3rdStripping",
-    label: "3rd Stripping",
-    unitVal: 0,
-    percentOfAdj: 0,
-    area: 0,
-    valueAdjustment: 0,
-  },
 ];

@@ -19,6 +19,7 @@ export const LandMarketValueFields = (props) => {
   const appraisalEmpty = formData[FIELD_NAMES.LAND_APPRAISAL]?.length === 0;
   console.log("formData");
   console.log(formData);
+
   const handleAdjustmentSubmit = () => {
     try {
       if (
@@ -35,14 +36,30 @@ export const LandMarketValueFields = (props) => {
           [FIELD_NAMES.ADJUSTED_MARKETVALUE]: row.valueAdjustment,
         }));
 
-        setFormData((prev) => ({
-          ...prev,
-          [FIELD_NAMES.MARKET_ADJUSTMENT]: [
-            ...(prev[FIELD_NAMES.MARKET_ADJUSTMENT] || []),
-            ...AdjustmentArr,
-          ],
-        }));
+        setFormData((prev) => {
+          const updatedAppraisal = prev[FIELD_NAMES.LAND_APPRAISAL]?.map(
+            (row) => {
+              if (row.id == selectedRow.id) {
+                return {
+                  ...row,
+                  adjusted: true,
+                };
+              }
+              return row;
+            }
+          );
 
+          return {
+            ...prev,
+            [FIELD_NAMES.MARKET_ADJUSTMENT]: [
+              ...(prev[FIELD_NAMES.MARKET_ADJUSTMENT] || []),
+              ...AdjustmentArr,
+            ],
+            [FIELD_NAMES.LAND_APPRAISAL]: updatedAppraisal,
+          };
+        });
+        setStrippingFields(STRIPPING_FIELDS_DEFAULT);
+        setSelectedRow({});
         setModalActive(false);
       }
       console.log("submit");

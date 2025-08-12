@@ -59,7 +59,6 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
     updatedFields = [
       {
         id: v4(),
-
         name: "1stStripping",
         area: inputArea,
         percentOfAdj: 100,
