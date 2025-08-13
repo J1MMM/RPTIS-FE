@@ -1,4 +1,5 @@
 import { formatPercent, formatPeso } from "../../../utils/formatters";
+import { roundToNearestTen } from "../../../utils/math";
 import { FIELD_NAMES } from "./fieldNames";
 
 export const APPRAISAL_COLUMN = [
@@ -106,12 +107,16 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
   },
 ];
 
 export const PROPERTY_ASS_TABLE_COLUMN = [
   {
-    field: FIELD_NAMES.LAND_BASE_MARKET_VALUE,
+    field: FIELD_NAMES.LAND_MARKET_VALUE,
     headerName: "Market Value",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -147,7 +152,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
+      return isNaN(value) ? "" : formatPeso(roundToNearestTen(value));
     },
   },
 ];

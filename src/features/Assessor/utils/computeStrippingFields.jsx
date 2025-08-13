@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { sumByField } from "../../../utils/math";
 
 export const computeStrippingFields = (inputArea, baseUnitVal) => {
   let visibleCount = 1;
@@ -10,6 +11,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       {
         id: v4(),
         name: "1stStripping",
+        label: "1st Stripping",
         area: 30,
         percentOfAdj: 1,
         unitVal: baseUnitVal,
@@ -18,6 +20,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       {
         id: v4(),
         name: "2ndStripping",
+        label: "2nd Stripping",
         area: 30,
         percentOfAdj: 0.75,
         unitVal: baseUnitVal * 0.75,
@@ -26,6 +29,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       {
         id: v4(),
         name: "3rdStripping",
+        label: "3rd Stripping",
         area: inputArea - 60,
         percentOfAdj: 0.5,
         unitVal: baseUnitVal * 0.5,
@@ -38,6 +42,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       {
         id: v4(),
         name: "1stStripping",
+        label: "1st Stripping",
         area: 30,
         percentOfAdj: 1,
         unitVal: baseUnitVal,
@@ -45,8 +50,8 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
       {
         id: v4(),
-
         name: "2ndStripping",
+        label: "2nd Stripping",
         area: inputArea - 30,
         percentOfAdj: 0.75,
         unitVal: baseUnitVal * 0.75,
@@ -59,6 +64,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       {
         id: v4(),
         name: "1stStripping",
+        label: "1st Stripping",
         area: inputArea,
         percentOfAdj: 1,
         unitVal: baseUnitVal,
@@ -68,10 +74,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
   }
 
   // sum total
-  const totalValAdj = updatedFields.reduce(
-    (total, row) => total + (Number(row.valueAdjustment) || 0),
-    0
-  );
+  const totalValAdj = sumByField(updatedFields, "valueAdjustment");
 
   return { totalValAdj, updatedFields, visibleCount };
 };

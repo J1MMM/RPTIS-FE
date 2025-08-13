@@ -9,11 +9,13 @@ function BaseTextField({
   pendingPage,
   disabled,
   adornment,
+  size,
   margin = "dense",
   required = true,
 }) {
   return (
     <TextField
+      size={size}
       disabled={disabled}
       margin={margin}
       fullWidth

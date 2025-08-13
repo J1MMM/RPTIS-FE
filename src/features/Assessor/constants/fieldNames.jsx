@@ -43,6 +43,7 @@ export const FIELD_NAMES = {
   LAND_AREA: "area",
   LAND_UNIT_VALUE: "unitValue",
   LAND_BASE_MARKET_VALUE: "baseMarketValue",
+  LAND_MARKET_VALUE: "marketValue",
   // Property Assessment
   LAND_ACTUAL_USE: "actualUse",
   LAND_ASSESSMENT_LEVEL: "assessmentLevel",

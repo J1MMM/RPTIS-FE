@@ -6,12 +6,14 @@ import { DATA_GRID_STYLE } from "../../../../utils/constant";
 import LandAppraisalTableFooter from "../ui/LandAppraisalTableFooter";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
+import { FIELD_NAMES } from "../../constants/fieldNames";
+import { sumByField } from "../../../../utils/math";
 
 export const LandAppraisalTable = (props) => {
   const { formData, handleDelete } = props;
 
-  const landAppraisalData = formData?.landAppraisal;
-  const totalMarketValue = formData?.totalMarketValue;
+  const landAppraisalData = formData?.[FIELD_NAMES.LAND_APPRAISAL];
+  const totalBaseMarketVal = sumByField(landAppraisalData, "baseMarketValue");
 
   return (
     <DataGrid
@@ -51,7 +53,7 @@ export const LandAppraisalTable = (props) => {
       showCellVerticalBorder
       slots={{
         footer: () => (
-          <LandAppraisalTableFooter totalMarketValue={totalMarketValue} />
+          <LandAppraisalTableFooter totalBaseMarketVal={totalBaseMarketVal} />
         ),
       }}
     />

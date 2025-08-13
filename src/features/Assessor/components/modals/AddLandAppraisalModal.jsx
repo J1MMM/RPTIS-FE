@@ -13,6 +13,7 @@ import {
   SUBCLASS_OPTIONS,
 } from "../../constants/dropdownOptions";
 import { SYMBOLS } from "../../../../constant/symbols";
+import { toFixedTwo } from "../../../../utils/formatters";
 
 export const AddLandAppraisalModal = (props) => {
   const {
@@ -99,7 +100,9 @@ export const AddLandAppraisalModal = (props) => {
           <NumericFormatTextField
             label="Base Market Value"
             name={FIELD_NAMES.LAND_BASE_MARKET_VALUE}
-            value={landAppraisal?.[FIELD_NAMES.LAND_BASE_MARKET_VALUE]}
+            value={toFixedTwo(
+              landAppraisal?.[FIELD_NAMES.LAND_BASE_MARKET_VALUE]
+            )}
             adornment={{
               startAdornment: (
                 <InputAdornment position="start">&#8369;</InputAdornment>

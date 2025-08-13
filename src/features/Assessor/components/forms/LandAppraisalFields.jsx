@@ -8,6 +8,7 @@ import { LandAppraisalTable } from "../tables/LandAppraisalTable";
 import { LAND_APPRAISAL_DEFAULT_DATA } from "../../constants/defaultValues";
 import { FIELD_NAMES } from "../../constants/fieldNames";
 import { UNIT_VALUE_TABLE } from "../../constants/unitValues";
+import { sumByField } from "../../../../utils/math";
 
 export const LandAppraisalFields = (props) => {
   const { setFormData, formData } = props;
@@ -63,19 +64,21 @@ export const LandAppraisalFields = (props) => {
   };
 
   const handleAppraisalSubmit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
     try {
       const id = v4();
 
-      const newAppraisal = { ...landAppraisalForm, id };
+      const newAppraisal = {
+        ...landAppraisalForm,
+        id,
+        [FIELD_NAMES.LAND_MARKET_VALUE]:
+          landAppraisalForm?.[FIELD_NAMES.LAND_BASE_MARKET_VALUE],
+      };
 
       const updatedAppraisals = [...formData?.landAppraisal, newAppraisal];
 
-      const totalMarketValue = updatedAppraisals.reduce(
-        (sum, obj) => sum + (obj[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0),
-        0
-      );
+      const totalMarketValue = sumByField(updatedAppraisals, [
+        FIELD_NAMES.LAND_MARKET_VALUE,
+      ]);
 
       setFormData((prev) => ({
         ...prev,
@@ -101,15 +104,13 @@ export const LandAppraisalFields = (props) => {
         FIELD_NAMES.MARKET_ADJUSTMENT
       ].filter((item) => item?.appraisalID !== id);
 
-      const totalMarketValue = updatedLandAppraisal.reduce(
-        (sum, obj) => sum + (obj[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0),
-        0
-      );
+      const totalMarketValue = sumByField(updatedLandAppraisal, [
+        FIELD_NAMES.LAND_MARKET_VALUE,
+      ]);
 
-      const totalAssessedValue = updatedLandAppraisal.reduce(
-        (sum, obj) => sum + (obj[FIELD_NAMES.LAND_ASSESSED_VALUE] || 0),
-        0
-      );
+      const totalAssessedValue = sumByField(updatedLandAppraisal, [
+        FIELD_NAMES.LAND_ASSESSED_VALUE,
+      ]);
 
       return {
         ...prev,
@@ -122,6 +123,9 @@ export const LandAppraisalFields = (props) => {
     });
   };
 
+  const onCloseModal = () => {
+    setModalActive(false);
+  };
   return (
     <>
       <StyledFieldset title="Land Appraisal">
@@ -144,7 +148,7 @@ export const LandAppraisalFields = (props) => {
 
       <AddLandAppraisalModal
         open={modalActive}
-        onClose={() => setModalActive(false)}
+        onClose={() => onCloseModal}
         handleAppraisalSubmit={handleAppraisalSubmit}
         landAppraisal={landAppraisalForm}
         handleFieldsChange={handleFieldsChange}

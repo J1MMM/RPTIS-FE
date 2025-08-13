@@ -2,6 +2,8 @@ import StyledFieldset from "../ui/StyledFieldset";
 import { ACTUAL_USE_EQUIVALENTS } from "../../constants/defaultValues";
 import { FIELD_NAMES } from "../../constants/fieldNames";
 import { LandPropAssTable } from "../tables/LandPropAssTable";
+import { sumByField } from "../../../../utils/math";
+import { useEffect } from "react";
 
 export const AssessmentFields = (props) => {
   const { setFormData, formData } = props;
@@ -14,10 +16,9 @@ export const AssessmentFields = (props) => {
             const actualUseRaw = actualUseVal;
             const actualUse = actualUseRaw?.toLowerCase();
             const assessmentLevel = ACTUAL_USE_EQUIVALENTS[actualUse] ?? 0;
-            const totalMarketValue =
-              row[FIELD_NAMES.LAND_BASE_MARKET_VALUE] ?? 0;
+            const landMarketValue = row[FIELD_NAMES.LAND_MARKET_VALUE] ?? 0;
 
-            const assessedValue = assessmentLevel * totalMarketValue;
+            const assessedValue = assessmentLevel * landMarketValue;
             return {
               ...row,
               [FIELD_NAMES.LAND_ACTUAL_USE]: actualUseVal,
@@ -29,9 +30,9 @@ export const AssessmentFields = (props) => {
         }
       );
 
-      const totalAssessedValue = updatedLandAppraisal.reduce(
-        (sum, obj) => sum + (obj[FIELD_NAMES.LAND_ASSESSED_VALUE] || 0),
-        0
+      const totalAssessedValue = sumByField(
+        updatedLandAppraisal,
+        FIELD_NAMES.LAND_ASSESSED_VALUE
       );
 
       const updatedFormData = {

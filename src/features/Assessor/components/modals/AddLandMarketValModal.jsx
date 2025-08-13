@@ -27,11 +27,12 @@ import { DataGrid } from "@mui/x-data-grid";
 import { APPRAISAL_COLUMN } from "../../constants/tableColumns";
 import { Fragment, useEffect, useState } from "react";
 import { SYMBOLS } from "../../../../constant/symbols";
-import { toFixedTwo } from "../../../../utils/formatters";
 import { computeStrippingFields } from "../../utils/computeStrippingFields";
 import { Close } from "@mui/icons-material";
 import { NumberFormatBase } from "react-number-format";
 import DividerHeading from "../../../../components/ui/DividerHeading";
+import BaseTextField from "../../../../components/inputs/BaseTextField";
+import { toFixedTwo } from "../../../../utils/formatters";
 
 export const AddLandMarketValModal = (props) => {
   const {
@@ -43,16 +44,21 @@ export const AddLandMarketValModal = (props) => {
     setSelectedRow,
     strippingFields,
     setStrippingFields,
+    selectedFactor,
+    setSelectedFactor,
   } = props;
-  const filteredLandAppraisal = formData[FIELD_NAMES.LAND_APPRAISAL]?.filter(
+
+  const [visibleStripping, setVisibleStripping] = useState(1);
+  const selectedRowEmpty = Object.keys(selectedRow).length === 0;
+  // variablesssssssssss
+  const FILTERED_LAND_APPRAISAL = formData[FIELD_NAMES.LAND_APPRAISAL]?.filter(
     (row) => row?.adjusted == false
   );
-  const [selectedFactor, setSelectedFactor] = useState("");
-  const [visibleStripping, setVisibleStripping] = useState(1);
-
-  const selectedRowEmpty = Object.keys(selectedRow).length === 0;
-  const inputArea =
+  const USER_INPUT_AREA =
     selectedRow?.[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA];
+  const BASE_UNIT_VALUE = Number(
+    selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0
+  );
 
   const handleFieldsChange = (e) => {
     const { name, value } = e.target;
@@ -81,12 +87,11 @@ export const AddLandMarketValModal = (props) => {
   console.log(strippingFields);
 
   useEffect(() => {
-    if (!inputArea) return;
-    const baseUnitVal = Number(selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0);
+    if (!USER_INPUT_AREA) return;
 
     const { totalValAdj, updatedFields, visibleCount } = computeStrippingFields(
-      inputArea,
-      baseUnitVal
+      USER_INPUT_AREA,
+      BASE_UNIT_VALUE
     );
 
     // wag update pag same
@@ -108,7 +113,7 @@ export const AddLandMarketValModal = (props) => {
       }
       return { ...prev, totalValueAdjustment: toFixedTwo(totalValAdj) };
     });
-  }, [inputArea, selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE]]);
+  }, [USER_INPUT_AREA, selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE]]);
 
   console.log("selectedRow");
   console.log(selectedRow);
@@ -139,7 +144,7 @@ export const AddLandMarketValModal = (props) => {
       <Stack>
         <DividerHeading mt={0}> Land Appraisal</DividerHeading>
         <DataGrid
-          rows={filteredLandAppraisal}
+          rows={FILTERED_LAND_APPRAISAL}
           columns={[
             ...APPRAISAL_COLUMN,
             {
@@ -305,7 +310,11 @@ export const AddLandMarketValModal = (props) => {
           >
             {strippingFields.slice(0, visibleStripping).map((item, index) => (
               <Fragment key={index}>
-                <Grid2 alignSelf={"center"}>
+                <Grid2
+                  display={"flex"}
+                  alignSelf={"center"}
+                  justifyContent={"end"}
+                >
                   <FormLabel>{item.label}:</FormLabel>
                 </Grid2>
                 <Grid2>
@@ -328,7 +337,7 @@ export const AddLandMarketValModal = (props) => {
                   <NumberInput
                     label="Percent"
                     size="small"
-                    value={item.percentOfAdj}
+                    value={item.percentOfAdj * 100}
                     readOnly={true}
                     adornment={{
                       endAdornment: (
@@ -343,7 +352,7 @@ export const AddLandMarketValModal = (props) => {
                   <NumberInput
                     label="Area"
                     size="small"
-                    value={item.area}
+                    value={toFixedTwo(item.area)}
                     readOnly={true}
                     adornment={{
                       endAdornment: (
@@ -358,7 +367,7 @@ export const AddLandMarketValModal = (props) => {
                   <NumericFormatTextField
                     label="Value Adjustment"
                     size="small"
-                    value={item.valueAdjustment}
+                    value={toFixedTwo(item.valueAdjustment)}
                     readOnly={true}
                     adornment={{
                       startAdornment: (

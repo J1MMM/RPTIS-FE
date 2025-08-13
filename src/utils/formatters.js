@@ -18,9 +18,3 @@ export const toFixedTwo = (num) => {
   if (isNaN(parsed)) return 0;
   return Number(parsed.toFixed(2));
 };
-
-export const roundOff = (num) => {
-  const parsed = Number(num);
-  if (isNaN(parsed)) return 0;
-  return Math.round(parsed);
-};

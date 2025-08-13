@@ -1,14 +1,13 @@
 import { Stack, Typography } from "@mui/material";
 import { formatPeso } from "../../../../utils/formatters";
 
-const LandAppraisalTableFooter = ({ totalBaseMarketVal }) => {
+const MarketAdjustmentTableFooter = ({ total }) => {
   return (
     <Stack direction="row" border="1px solid #E0E0E0" p={1}>
       <Typography sx={{ ...styledText, maxWidth: 55 }} />
       <Typography sx={styledText} />
       <Typography sx={styledText} />
 
-      <Typography sx={styledText} variant="body2"></Typography>
       <Typography sx={{ ...styledText, fontWeight: "600" }} variant="body2">
         Total:
       </Typography>
@@ -16,16 +15,16 @@ const LandAppraisalTableFooter = ({ totalBaseMarketVal }) => {
         sx={{ ...styledText, borderRight: "none", fontWeight: "600" }}
         variant="body2"
       >
-        {formatPeso(totalBaseMarketVal)}
+        {formatPeso(total)}
       </Typography>
     </Stack>
   );
 };
 
-export default LandAppraisalTableFooter;
+export default MarketAdjustmentTableFooter;
 
 const styledText = {
   flex: 1,
-  borderRight: "1px solid #E0E0E0",
+  borderRight: "1px solid rgba(224, 224, 224, 1)",
   padding: "8px",
 };
