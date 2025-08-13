@@ -135,7 +135,12 @@ export const AddLandMarketValModal = (props) => {
           >
             Cancel
           </Button>
-          <Button variant="contained" size="small" type="submit">
+          <Button
+            variant="contained"
+            size="small"
+            type="submit"
+            disabled={selectedFactor == ""}
+          >
             Submit
           </Button>
         </>

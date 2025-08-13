@@ -24,14 +24,12 @@ export const LandMarketValueFields = (props) => {
   console.log(formData);
 
   const handleAdjustmentSubmit = () => {
-    try {
-      if (
-        (
-          selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] || ""
-        ).toLowerCase() === "stripping"
-      ) {
-        // new market value adjustment obj
+    const adjustmentFactorRaw = [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
+    const adjustmentFactor = (adjustmentFactorRaw || "").toLowerCase();
 
+    try {
+      if (adjustmentFactor === "stripping") {
+        // new market value adjustment obj
         const updatedMarketAdjustment = strippingFields.map((row) => ({
           id: v4(),
           appraisalID: selectedRow.id,
@@ -80,6 +78,7 @@ export const LandMarketValueFields = (props) => {
           };
         });
         setStrippingFields(STRIPPING_FIELDS_DEFAULT);
+        setSelectedFactor("");
         setSelectedRow({});
         setModalActive(false);
       }
@@ -125,6 +124,12 @@ export const LandMarketValueFields = (props) => {
     });
   };
 
+  const onModalClose = () => {
+    setSelectedFactor("");
+    setSelectedRow({});
+    setModalActive(false);
+  };
+
   return (
     <>
       <StyledFieldset title="Market Value Adjustment">
@@ -146,7 +151,7 @@ export const LandMarketValueFields = (props) => {
 
       <AddLandMarketValModal
         open={modalActive}
-        onClose={() => setModalActive(false)}
+        onClose={onModalClose}
         handleSubmit={handleAdjustmentSubmit}
         selectedRow={selectedRow}
         setSelectedRow={setSelectedRow}
