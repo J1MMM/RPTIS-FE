@@ -24,8 +24,9 @@ export const LandMarketValueFields = (props) => {
   console.log(formData);
 
   const handleAdjustmentSubmit = () => {
-    const adjustmentFactorRaw = [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
-    const adjustmentFactor = (adjustmentFactorRaw || "").toLowerCase();
+    const adjustmentFactor = (
+      selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] || ""
+    ).toLowerCase();
     const landBaseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE];
 
     try {
