@@ -2,6 +2,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { MARKET_VALUE_TABLE_COLUMN } from "../../constants/tableColumns";
 import { DATA_GRID_INITIAL_STATE } from "../../constants/defaultValues";
 import { DATA_GRID_STYLE } from "../../../../utils/constant";
+import { LAND_INNER_TABLE_WIDTH } from "../../constants/styles";
 
 export const LandMarketValueTable = (props) => {
   const { formData } = props;
@@ -14,6 +15,7 @@ export const LandMarketValueTable = (props) => {
       initialState={DATA_GRID_INITIAL_STATE}
       sx={{
         ...DATA_GRID_STYLE,
+        width: LAND_INNER_TABLE_WIDTH,
         maxHeight: 260,
       }}
       hideFooterPagination

@@ -94,9 +94,12 @@ export const LandAppraisalFields = (props) => {
 
   const handleDelete = (id) => {
     setFormData((prev) => {
-      const updatedLandAppraisal = prev.landAppraisal.filter(
+      const updatedLandAppraisal = prev[FIELD_NAMES.LAND_APPRAISAL].filter(
         (item) => item.id !== id
       );
+      const updatedMarketAjustments = prev[
+        FIELD_NAMES.MARKET_ADJUSTMENT
+      ].filter((item) => item?.appraisalID !== id);
 
       const totalMarketValue = updatedLandAppraisal.reduce(
         (sum, obj) => sum + (obj[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0),
@@ -113,8 +116,8 @@ export const LandAppraisalFields = (props) => {
         totalMarketValue,
         landAppraisal: updatedLandAppraisal,
         [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
+        [FIELD_NAMES.MARKET_ADJUSTMENT]: updatedMarketAjustments,
         [FIELD_NAMES.PROPERTY_ASSESSMENT]: [],
-        [FIELD_NAMES.MARKET_ADJUSTMENT]: [],
       };
     });
   };

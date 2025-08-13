@@ -70,6 +70,10 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
   },
   {
     field: FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS,
@@ -89,6 +93,10 @@ export const MARKET_VALUE_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPercent(value);
+    },
   },
   {
     field: FIELD_NAMES.ADJUSTED_MARKETVALUE,
