@@ -26,6 +26,7 @@ export const LandMarketValueFields = (props) => {
   const handleAdjustmentSubmit = () => {
     const adjustmentFactorRaw = [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
     const adjustmentFactor = (adjustmentFactorRaw || "").toLowerCase();
+    const landBaseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE];
 
     try {
       if (adjustmentFactor === "stripping") {
@@ -33,8 +34,7 @@ export const LandMarketValueFields = (props) => {
         const updatedMarketAdjustment = strippingFields.map((row) => ({
           id: v4(),
           appraisalID: selectedRow.id,
-          [FIELD_NAMES.LAND_BASE_MARKET_VALUE]:
-            selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE],
+          [FIELD_NAMES.LAND_BASE_MARKET_VALUE]: landBaseMarketVal,
           [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: row.name,
           [FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT]: row.percentOfAdj,
           [FIELD_NAMES.ADJUSTED_MARKETVALUE]: row.valueAdjustment,
