@@ -6,7 +6,10 @@ import { ContainerModal } from "../../../../components/shared/ContainerModal";
 import { toFixedTwo } from "@utils/formatters";
 // Feature-specific constants & utils
 import { FIELD_NAMES } from "../../constants/fieldNames";
-import { STRIPPING_FIELDS_DEFAULT } from "../../constants/defaultValues";
+import {
+  FACTOR_TYPES,
+  STRIPPING_FIELDS_DEFAULT,
+} from "../../constants/defaultValues";
 import { computeStrippingFields } from "../../utils/computeStrippingFields";
 // Feature-specific constants & utils
 import SelectAppraisalTable from "../tables/SelectAppraisalTable";
@@ -31,9 +34,9 @@ export const AddLandMarketValModal = ({
   const FILTERED_LAND_APPRAISAL = landAppraisal?.filter(
     (row) => row?.adjusted == false
   );
-  const INPUT_AREA =
+  const inputArea =
     selectedRow?.[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA];
-  const BASE_UNIT_VAL = Number(selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0);
+  const unitValue = Number(selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0);
 
   const handleFieldsChange = (e) => {
     const { name, value } = e.target;
@@ -45,24 +48,28 @@ export const AddLandMarketValModal = ({
 
   const handleAdjustmentFactorChange = (row, value) => {
     setSelectedFactor(value);
-    setSelectedRow({ ...row, [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: value });
     setStrippingFields(STRIPPING_FIELDS_DEFAULT);
     setVisibleStripping(1);
+    setSelectedRow({
+      ...row,
+      [FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT]: 0,
+      [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: value,
+    });
   };
 
   const handleClearAdjustmentFactor = () => {
     setSelectedRow({});
-    setSelectedFactor("");
     setStrippingFields(STRIPPING_FIELDS_DEFAULT);
     setVisibleStripping(1);
+    setSelectedFactor("");
   };
-
+  /* ==================================STRIPPING COMPUTATION==================================*/
   useEffect(() => {
-    if (!INPUT_AREA) return;
+    if (!inputArea || selectedFactor !== "Stripping") return;
 
     const { totalValAdj, updatedFields, visibleCount } = computeStrippingFields(
-      INPUT_AREA,
-      BASE_UNIT_VAL
+      inputArea,
+      unitValue
     );
 
     // Avoid unnecessary update
@@ -82,9 +89,39 @@ export const AddLandMarketValModal = ({
       if (toFixedTwo(prevTotal) === toFixedTwo(totalValAdj)) {
         return prev;
       }
-      return { ...prev, totalValueAdjustment: toFixedTwo(totalValAdj) };
+      return { ...prev, totalValueAdjustment: totalValAdj };
     });
-  }, [INPUT_AREA]);
+  }, [inputArea]);
+  /* ==================================OTHER ADJUSTMENT FACTOR COMPUTATION==================================*/
+  useEffect(() => {
+    if (selectedRowEmpty || selectedFactor == "Stripping") return;
+    const baseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0;
+    const area = selectedRow[FIELD_NAMES.LAND_AREA] || 0;
+    const unitValue = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE] || 0;
+    let percent = 0;
+    let totalValueAdjustment = 0;
+
+    switch (selectedFactor) {
+      case FACTOR_TYPES.CORNER_INFLUENCE:
+        percent = 0.3;
+        totalValueAdjustment = unitValue * percent * area + baseMarketVal;
+        break;
+      case FACTOR_TYPES.RIGHT_OF_WAY:
+        percent = 0.1;
+        totalValueAdjustment = unitValue * percent * area;
+        break;
+      case FACTOR_TYPES.OPEN_SPACES:
+        percent = 0.3;
+        totalValueAdjustment = unitValue * percent * area;
+        break;
+    }
+
+    setSelectedRow((prev) => ({
+      ...prev,
+      totalValueAdjustment,
+      percent,
+    }));
+  }, [selectedFactor]);
 
   return (
     <ContainerModal
@@ -123,6 +160,7 @@ export const AddLandMarketValModal = ({
           handleAdjustmentFactorChange={handleAdjustmentFactorChange}
           onClear={handleClearAdjustmentFactor}
         />
+
         <StrippingComputationPanel
           open={!selectedRowEmpty && selectedFactor == "Stripping"}
           selectedRow={selectedRow}
@@ -133,10 +171,11 @@ export const AddLandMarketValModal = ({
         />
 
         <CornerInfluencePanel
+          open={!selectedRowEmpty && selectedFactor !== "Stripping"}
           handleFieldsChange={handleFieldsChange}
-          open={!selectedRowEmpty && selectedFactor === "Corner Influence"}
           selectedRow={selectedRow}
           selectedRowEmpty={selectedRowEmpty}
+          selectedFactor={selectedFactor}
         />
       </Stack>
     </ContainerModal>

@@ -28,6 +28,12 @@ function NumberInput({
         e.target.blur();
       }}
       disabled={disabled}
+      onKeyDown={(e) => {
+        // Prevent "e", "E", "+", and "-" from being typed
+        if (["e", "E", "+", "-"].includes(e.key)) {
+          e.preventDefault();
+        }
+      }}
       sx={{
         "& input[type=number]::-webkit-outer-spin-button, & input[type=number]::-webkit-inner-spin-button":
           {

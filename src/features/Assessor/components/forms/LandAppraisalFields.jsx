@@ -123,9 +123,6 @@ export const LandAppraisalFields = (props) => {
     });
   };
 
-  const onCloseModal = () => {
-    setModalActive(false);
-  };
   return (
     <>
       <StyledFieldset title="Land Appraisal">
@@ -148,7 +145,7 @@ export const LandAppraisalFields = (props) => {
 
       <AddLandAppraisalModal
         open={modalActive}
-        onClose={() => onCloseModal}
+        onClose={() => setModalActive(false)}
         handleAppraisalSubmit={handleAppraisalSubmit}
         landAppraisal={landAppraisalForm}
         handleFieldsChange={handleFieldsChange}

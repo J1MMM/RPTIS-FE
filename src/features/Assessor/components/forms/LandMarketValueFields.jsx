@@ -1,12 +1,14 @@
 import { Button, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
-
 import StyledFieldset from "../ui/StyledFieldset";
 import { LandMarketValueTable } from "../tables/LandMarketValueTable";
 import { AddLandMarketValModal } from "../modals/AddLandMarketValModal";
 import { useState } from "react";
 import { FIELD_NAMES } from "../../constants/fieldNames";
-import { STRIPPING_FIELDS_DEFAULT } from "../../constants/defaultValues";
+import {
+  FACTOR_TYPES,
+  STRIPPING_FIELDS_DEFAULT,
+} from "../../constants/defaultValues";
 import { v4 } from "uuid";
 import { sumByField } from "../../../../utils/math";
 
@@ -22,15 +24,17 @@ export const LandMarketValueFields = (props) => {
   const appraisalEmpty = formData[FIELD_NAMES.LAND_APPRAISAL]?.length === 0;
   console.log("formData");
   console.log(formData);
+  console.log("selectedRow");
+  console.log(selectedRow);
 
   const handleAdjustmentSubmit = () => {
-    const adjustmentFactor = (
-      selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS] || ""
-    ).toLowerCase();
+    console.log("submit");
+
+    const adjustmentFactor = selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
     const landBaseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE];
 
     try {
-      if (adjustmentFactor === "stripping") {
+      if (adjustmentFactor === FACTOR_TYPES.STRIPPING) {
         // new market value adjustment obj
         const updatedMarketAdjustment = strippingFields.map((row) => ({
           id: v4(),
@@ -78,13 +82,57 @@ export const LandMarketValueFields = (props) => {
             [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
           };
         });
-        setStrippingFields(STRIPPING_FIELDS_DEFAULT);
-        setSelectedFactor("");
-        setSelectedRow({});
-        setModalActive(false);
       }
+      if (adjustmentFactor !== FACTOR_TYPES.STRIPPING) {
+        const updatedMarketAdjustment = {
+          id: v4(),
+          appraisalID: selectedRow.id,
+          [FIELD_NAMES.LAND_BASE_MARKET_VALUE]: landBaseMarketVal,
+          [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: adjustmentFactor,
+          [FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT]: selectedRow?.percent,
+          [FIELD_NAMES.ADJUSTED_MARKETVALUE]: selectedRow?.totalValueAdjustment,
+        };
+        setFormData((prev) => {
+          // updated the udjusted value of appraisal
+          const updatedLandAppraisal = prev[FIELD_NAMES.LAND_APPRAISAL]?.map(
+            (row) => {
+              if (row.id == selectedRow.id) {
+                return {
+                  ...row,
+                  [FIELD_NAMES.LAND_MARKET_VALUE]:
+                    selectedRow?.totalValueAdjustment,
+                  [FIELD_NAMES.LAND_ACTUAL_USE]: "",
+                  [FIELD_NAMES.LAND_ASSESSMENT_LEVEL]: 0,
+                  [FIELD_NAMES.LAND_ASSESSED_VALUE]: 0,
+                  adjusted: true,
+                };
+              }
+              return row;
+            }
+          );
+
+          const totalAssessedValue = sumByField(
+            updatedLandAppraisal,
+            FIELD_NAMES.LAND_ASSESSED_VALUE
+          );
+
+          return {
+            ...prev,
+            [FIELD_NAMES.MARKET_ADJUSTMENT]: [
+              ...(prev[FIELD_NAMES.MARKET_ADJUSTMENT] || []),
+              updatedMarketAdjustment,
+            ],
+            [FIELD_NAMES.LAND_APPRAISAL]: updatedLandAppraisal,
+            [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
+          };
+        });
+      }
+      setStrippingFields(STRIPPING_FIELDS_DEFAULT);
+      setSelectedFactor("");
+      setSelectedRow({});
+      setModalActive(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

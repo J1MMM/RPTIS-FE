@@ -170,3 +170,10 @@ export const STRIPPING_FIELDS_DEFAULT = [
     valueAdjustment: 0,
   },
 ];
+
+export const FACTOR_TYPES = {
+  STRIPPING: "Stripping",
+  CORNER_INFLUENCE: "Corner Influence",
+  RIGHT_OF_WAY: "Right of Way",
+  OPEN_SPACES: "Open Spaces",
+};

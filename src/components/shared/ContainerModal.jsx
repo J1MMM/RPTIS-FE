@@ -19,10 +19,10 @@ export const ContainerModal = ({
 }) => {
   return (
     <Dialog
+      fullWidth
+      open={open}
       component={"form"}
       maxWidth={maxWidth || "md"}
-      open={open}
-      fullWidth
       onSubmit={onSubmit}
     >
       <DialogTitle
