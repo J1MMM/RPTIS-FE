@@ -11,6 +11,11 @@ import {
 } from "../../constants/defaultValues";
 import { v4 } from "uuid";
 import { sumByField } from "../../../../utils/math";
+import {
+  processNonStrippingAdjustment,
+  processStrippingAdjustment,
+  updateLandAppraisal,
+} from "../../utils/submitAdjustmentComputations";
 
 export const LandMarketValueFields = (props) => {
   const { formData, setFormData } = props;
@@ -28,49 +33,16 @@ export const LandMarketValueFields = (props) => {
   console.log(selectedRow);
 
   const handleAdjustmentSubmit = () => {
-    console.log("submit");
-
-    const adjustmentFactor = selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
-    const landBaseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE];
-
     try {
+      const adjustmentFactor =
+        selectedRow[FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS];
+
       if (adjustmentFactor === FACTOR_TYPES.STRIPPING) {
-        // new market value adjustment obj
-        const updatedMarketAdjustment = strippingFields.map((row) => ({
-          id: v4(),
-          appraisalID: selectedRow.id,
-          [FIELD_NAMES.LAND_BASE_MARKET_VALUE]: landBaseMarketVal,
-          [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: row.name,
-          [FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT]: row.percentOfAdj,
-          [FIELD_NAMES.ADJUSTED_MARKETVALUE]: row.valueAdjustment,
-        }));
-
-        const totalMarketVal = sumByField(updatedMarketAdjustment, [
-          FIELD_NAMES.ADJUSTED_MARKETVALUE,
-        ]);
-
+        const { updatedMarketAdjustment, totalMarketVal } =
+          processStrippingAdjustment(selectedRow, strippingFields);
         setFormData((prev) => {
-          // updated the udjusted value of appraisal
-          const updatedLandAppraisal = prev[FIELD_NAMES.LAND_APPRAISAL]?.map(
-            (row) => {
-              if (row.id == selectedRow.id) {
-                return {
-                  ...row,
-                  [FIELD_NAMES.LAND_MARKET_VALUE]: totalMarketVal,
-                  [FIELD_NAMES.LAND_ACTUAL_USE]: "",
-                  [FIELD_NAMES.LAND_ASSESSMENT_LEVEL]: 0,
-                  [FIELD_NAMES.LAND_ASSESSED_VALUE]: 0,
-                  adjusted: true,
-                };
-              }
-              return row;
-            }
-          );
-
-          const totalAssessedValue = sumByField(
-            updatedLandAppraisal,
-            FIELD_NAMES.LAND_ASSESSED_VALUE
-          );
+          const { updatedLandAppraisal, totalAssessedValue } =
+            updateLandAppraisal(prev, totalMarketVal, selectedRow);
 
           return {
             ...prev,
@@ -82,40 +54,16 @@ export const LandMarketValueFields = (props) => {
             [FIELD_NAMES.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
           };
         });
-      }
-      if (adjustmentFactor !== FACTOR_TYPES.STRIPPING) {
-        const updatedMarketAdjustment = {
-          id: v4(),
-          appraisalID: selectedRow.id,
-          [FIELD_NAMES.LAND_BASE_MARKET_VALUE]: landBaseMarketVal,
-          [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: adjustmentFactor,
-          [FIELD_NAMES.MARKET_ADJUSTMENT_PERCENT]: selectedRow?.percent,
-          [FIELD_NAMES.ADJUSTED_MARKETVALUE]: selectedRow?.totalValueAdjustment,
-        };
+      } else {
+        const updatedMarketAdjustment =
+          processNonStrippingAdjustment(selectedRow);
         setFormData((prev) => {
-          // updated the udjusted value of appraisal
-          const updatedLandAppraisal = prev[FIELD_NAMES.LAND_APPRAISAL]?.map(
-            (row) => {
-              if (row.id == selectedRow.id) {
-                return {
-                  ...row,
-                  [FIELD_NAMES.LAND_MARKET_VALUE]:
-                    selectedRow?.totalValueAdjustment,
-                  [FIELD_NAMES.LAND_ACTUAL_USE]: "",
-                  [FIELD_NAMES.LAND_ASSESSMENT_LEVEL]: 0,
-                  [FIELD_NAMES.LAND_ASSESSED_VALUE]: 0,
-                  adjusted: true,
-                };
-              }
-              return row;
-            }
-          );
-
-          const totalAssessedValue = sumByField(
-            updatedLandAppraisal,
-            FIELD_NAMES.LAND_ASSESSED_VALUE
-          );
-
+          const { updatedLandAppraisal, totalAssessedValue } =
+            updateLandAppraisal(
+              prev,
+              selectedRow?.totalValueAdjustment,
+              selectedRow
+            );
           return {
             ...prev,
             [FIELD_NAMES.MARKET_ADJUSTMENT]: [
@@ -127,6 +75,8 @@ export const LandMarketValueFields = (props) => {
           };
         });
       }
+
+      // Reset state
       setStrippingFields(STRIPPING_FIELDS_DEFAULT);
       setSelectedFactor("");
       setSelectedRow({});

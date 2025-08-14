@@ -63,7 +63,7 @@ function SelectAppraisalTable({
                   }}
                 >
                   <MenuItem disabled value="">
-                    <em>Adjustment Factors</em>
+                    <em>Select Factor</em>
                   </MenuItem>
                   {ADJUSTMENT_FACTOR_OPTIONS.map((item) => (
                     <MenuItem key={item.value} value={item.value}>

@@ -97,22 +97,25 @@ export const AddLandMarketValModal = ({
     if (selectedRowEmpty || selectedFactor == "Stripping") return;
     const baseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0;
     const area = selectedRow[FIELD_NAMES.LAND_AREA] || 0;
-    const unitValue = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE] || 0;
+    let unitValue = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE] || 0;
     let percent = 0;
     let totalValueAdjustment = 0;
 
     switch (selectedFactor) {
       case FACTOR_TYPES.CORNER_INFLUENCE:
         percent = 0.3;
-        totalValueAdjustment = unitValue * percent * area + baseMarketVal;
+        unitValue *= percent;
+        totalValueAdjustment = unitValue * area + baseMarketVal;
         break;
       case FACTOR_TYPES.RIGHT_OF_WAY:
         percent = 0.1;
-        totalValueAdjustment = unitValue * percent * area;
+        unitValue *= percent;
+        totalValueAdjustment = unitValue * area;
         break;
       case FACTOR_TYPES.OPEN_SPACES:
         percent = 0.3;
-        totalValueAdjustment = unitValue * percent * area;
+        unitValue *= percent;
+        totalValueAdjustment = unitValue * area;
         break;
     }
 
@@ -120,6 +123,7 @@ export const AddLandMarketValModal = ({
       ...prev,
       totalValueAdjustment,
       percent,
+      unitValue,
     }));
   }, [selectedFactor]);
 
