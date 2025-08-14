@@ -1,12 +1,9 @@
-import { Box, Collapse, InputAdornment, Stack } from "@mui/material";
+import { Collapse, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import NumberInput from "@components/inputs/NumberInput";
 import NumericFormatTextField from "@components/inputs/NumericFormatTextField";
-import { SYMBOLS } from "@constants/symbols";
 import { FIELD_NAMES } from "../../../../constants/fieldNames";
-import { useEffect } from "react";
-import { ADORNMENTS } from "../../../../../../constants/adornments";
-import { formatPercent } from "../../../../../../utils/formatters";
+import { ADORNMENTS } from "@constants/adornments";
+import { formatPercent } from "@utils/formatters";
 
 function CornerInfluencePanel({ open, selectedRow, selectedFactor }) {
   return (
