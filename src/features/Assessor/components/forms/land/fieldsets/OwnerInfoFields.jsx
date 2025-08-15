@@ -12,7 +12,6 @@ import { FIELDS } from "../../../../constants/fieldNames";
 
 export const OwnerInfoFields = (props) => {
   const { formData, handleFormChange, readOnly, pendingPage } = props;
-
   return (
     <StyledFieldset title="Owner's Information">
       <Stack direction="row" gap={1}>
