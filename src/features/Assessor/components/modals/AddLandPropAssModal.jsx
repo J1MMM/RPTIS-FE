@@ -1,9 +1,9 @@
 import { Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
-import { FIELD_NAMES } from "../../constants/fieldNames";
+import { FIELDS } from "../../constants/fieldNames";
 import NumberInput from "../../../../components/inputs/NumberInput";
-import NumericFormatTextField from "../../../../components/inputs/NumericFormatTextField";
-import BaseSelect from "../../../../components/inputs/BaseSelect";
+import NumericField from "../../../../components/inputs/NumericField";
+import SelectField from "../../../../components/inputs/SelectField";
 import {
   ACTUALUSE_EQUI_LEVEL,
   UNIT_VALUE_TABLE,
@@ -12,7 +12,7 @@ import {
   CLASSIFICATION_OPTIONS,
   SUBCLASS_OPTIONS,
 } from "../../constants/dropdownOptions";
-import BaseTextField from "../../../../components/inputs/BaseTextField";
+import TextInput from "../../../../components/inputs/TextInput";
 import { NumericFormat } from "react-number-format";
 import { formatPercent } from "../../../../utils/formatters";
 
@@ -45,21 +45,19 @@ export const AddLandPropAssModal = (props) => {
     >
       <Stack>
         <Stack direction="row" gap={1}>
-          <BaseSelect
+          <SelectField
             label="Actual Use"
             onChange={handleFormChange}
-            name={FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE}
+            name={FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE}
             readOnly={props?.readOnly || props?.pendingPage}
-            value={formData[FIELD_NAMES.PROPERTY_ASSESSMENT_ACTUAL_USE] || ""}
+            value={formData[FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE] || ""}
             options={CLASSIFICATION_OPTIONS}
           />
 
-          <BaseTextField
+          <TextInput
             label="Assessment Level"
-            name={FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL}
-            value={formatPercent(
-              formData[FIELD_NAMES.PROPERTY_ASSESSMENT_LEVEL]
-            )}
+            name={FIELDS.PROPERTY_ASSESSMENT_LEVEL}
+            value={formatPercent(formData[FIELDS.PROPERTY_ASSESSMENT_LEVEL])}
             readOnly
           />
         </Stack>
@@ -72,7 +70,7 @@ export const AddLandPropAssModal = (props) => {
             label="Market Value"
             variant="outlined"
             name="baseMarketValue"
-            value={formData?.[FIELD_NAMES.TOTAL_MARKET_VALUE]}
+            value={formData?.[FIELDS.TOTAL_MARKET_VALUE]}
             thousandSeparator=","
             allowNegative={false}
             slotProps={{
@@ -91,7 +89,7 @@ export const AddLandPropAssModal = (props) => {
             label="Assessed Value"
             variant="outlined"
             name="assessedValue"
-            value={formData[FIELD_NAMES.PROPERTY_ASSESSED_VALUE]}
+            value={formData[FIELDS.PROPERTY_ASSESSED_VALUE]}
             thousandSeparator=","
             allowNegative={false}
             slotProps={{

@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import {
-  Box,
-  CircularProgress,
-  LinearProgress,
-  Typography,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import UseRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
 

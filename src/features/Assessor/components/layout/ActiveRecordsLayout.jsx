@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { PageContainer } from "../../../../components/layout/PageContainer";
-import TabGroupBtn from "../ui/TabGroupBtn";
+import SegmentedTabs from "../../../../components/navigation/SegmentedTabs";
 
 function ActiveRecordsLayout() {
   return (
     <PageContainer>
-      <TabGroupBtn />
+      <SegmentedTabs />
       <Outlet />
     </PageContainer>
   );

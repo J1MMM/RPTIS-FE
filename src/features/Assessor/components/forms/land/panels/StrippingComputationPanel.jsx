@@ -1,10 +1,10 @@
 import { Box, Collapse, Divider, Grid2, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import { FIELD_NAMES } from "../../../../constants/fieldNames";
-import StrippingAdjustmentList from "../fields/StrippingAdjustmentList";
+import { FIELDS } from "../../../../constants/fieldNames";
+import StrippingAdjustmentList from "../fieldsets/StrippingAdjustmentList";
 import { ADORNMENTS } from "@constants/adornments";
-import NumberInput from "@components/inputs/NumberInput";
-import NumericFormatTextField from "@components/inputs/NumericFormatTextField";
+import NumberInput from "@components/ui/NumberInput";
+import NumericField from "@components/ui/NumericField";
 
 function StrippingComputationPanel({
   open,
@@ -22,19 +22,17 @@ function StrippingComputationPanel({
         <NumberInput
           disabled={selectedRowEmpty}
           label="Area"
-          name={FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
-          value={
-            selectedRow[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA] || ""
-          }
+          name={FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
+          value={selectedRow[FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA] || ""}
           onChange={handleFieldsChange}
           adornment={ADORNMENTS.SQM}
         />
 
-        <NumericFormatTextField
+        <NumericField
           disabled={selectedRowEmpty}
           label="Total Value Adjustment"
-          name={FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT}
-          value={selectedRow[FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
+          name={FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT}
+          value={selectedRow[FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
           onChange={handleFieldsChange}
           readOnly={true}
           adornment={ADORNMENTS.PESO}

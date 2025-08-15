@@ -1,10 +1,9 @@
 import { MenuRounded } from "@mui/icons-material";
 import { AppBar, Box, IconButton, Stack, Typography } from "@mui/material";
-import React from "react";
 import logo from "../../assets/images/favicon.svg";
 import backgroundImage from "../../assets/images/header-bg.jpg";
 import UserAvatar from "../shared/UserAvatar";
-import { HEADER_HEIGHT } from "../../utils/constant";
+import { HEADER_HEIGHT } from "../../constants/layout";
 
 const headerContainerStyle = {
   display: "flex",

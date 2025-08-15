@@ -1,7 +1,7 @@
 import { Collapse, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import NumericFormatTextField from "@components/inputs/NumericFormatTextField";
-import { FIELD_NAMES } from "../../../../constants/fieldNames";
+import NumericField from "@components/ui/NumericField";
+import { FIELDS } from "../../../../constants/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
 import { formatPercent } from "@utils/formatters";
 
@@ -12,20 +12,20 @@ function CornerInfluencePanel({ open, selectedRow, selectedFactor }) {
 
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
-          <NumericFormatTextField
+          <NumericField
             label="Base Market Value"
-            value={selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || ""}
+            value={selectedRow[FIELDS.LAND_BASE_MARKET_VALUE] || ""}
             readOnly={true}
             adornment={ADORNMENTS.PESO}
           />
 
-          <NumericFormatTextField
+          <NumericField
             label="Area"
-            value={selectedRow[FIELD_NAMES.LAND_AREA] || ""}
+            value={selectedRow[FIELDS.LAND_AREA] || ""}
             readOnly={true}
             adornment={ADORNMENTS.SQM}
           />
-          <NumericFormatTextField
+          <NumericField
             label="Percent of Adjustment"
             value={formatPercent(selectedRow?.percent) || ""}
             readOnly={true}
@@ -33,15 +33,15 @@ function CornerInfluencePanel({ open, selectedRow, selectedFactor }) {
           />
         </Stack>
         <Stack direction="row" spacing={1}>
-          <NumericFormatTextField
+          <NumericField
             label="Unit Value"
-            value={selectedRow[FIELD_NAMES.LAND_UNIT_VALUE] || ""}
+            value={selectedRow[FIELDS.LAND_UNIT_VALUE] || ""}
             readOnly={true}
             adornment={ADORNMENTS.PESO}
           />
-          <NumericFormatTextField
+          <NumericField
             label="Total Value Adjustment"
-            value={selectedRow[FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
+            value={selectedRow[FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
             readOnly={true}
             adornment={ADORNMENTS.PESO}
           />

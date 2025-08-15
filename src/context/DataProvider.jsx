@@ -1,27 +1,26 @@
-import React, { createContext } from "react";
-import { fetchInitialData, fetchPendingData } from "../api/assessorAPI";
+import { createContext } from "react";
 import { useQuery } from "react-query";
-import { fetchCancelsData } from "../api/cancelsAPI";
 
 const DataContext = createContext({});
+const sample = () => {};
 
 export const DataProvider = ({ children }) => {
   const {
     data: assessorData,
     isLoading: isAssessorLoading,
     isError: isAssessorError,
-  } = useQuery("assessorData", fetchInitialData);
+  } = useQuery("assessorData", sample);
 
   const {
     data: cancelsData,
     isLoading: isCancelsLoading,
     isError: isCancelsError,
-  } = useQuery("cancelsData", fetchCancelsData);
+  } = useQuery("cancelsData", sample);
   const {
     data: pendingData,
     isLoading: isPendingLoading,
     isError: isPendingError,
-  } = useQuery("pendingData", fetchPendingData);
+  } = useQuery("pendingData", sample);
 
   return (
     <DataContext.Provider

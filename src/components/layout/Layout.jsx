@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Box from "@mui/material/Box";
-import NavDrawer from "./NavDrawer";
+import NavDrawer from "../navigation/NavDrawer";
 import { Header } from "./Header";
 import { Stack } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
 import {
   DRAWER_WIDTH_CLOSED,
   DRAWER_WIDTH_OPEN,
   HEADER_HEIGHT,
-  MAIN_CONTAINER_HEIGHT,
-} from "../../utils/constant";
-import useAuth from "../../hooks/useAuth";
-import { useQuery, useQueryClient } from "react-query";
-import { fetchInitialData } from "../../api/assessorAPI";
+} from "../../constants/layout";
 
 const styleLayout = {
   position: "relative",

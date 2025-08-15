@@ -1,19 +1,15 @@
-import { Button, InputAdornment, Stack } from "@mui/material";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
-import { FIELD_NAMES } from "../../constants/fieldNames";
-import NumberInput from "../../../../components/inputs/NumberInput";
-import NumericFormatTextField from "../../../../components/inputs/NumericFormatTextField";
-import BaseSelect from "../../../../components/inputs/BaseSelect";
-import {
-  ACTUALUSE_EQUI_LEVEL,
-  UNIT_VALUE_TABLE,
-} from "../../constants/unitValues";
+import { Button, Stack } from "@mui/material";
 import {
   CLASSIFICATION_OPTIONS,
   SUBCLASS_OPTIONS,
 } from "../../constants/dropdownOptions";
-import { SYMBOLS } from "../../../../constant/symbols";
+import NumberInput from "../../../../components/ui/NumberInput";
+import SelectField from "../../../../components/ui/SelectField";
+import NumericField from "../../../../components/ui/NumericField";
+import { FIELDS } from "../../constants/fieldNames";
 import { toFixedTwo } from "../../../../utils/formatters";
+import { ADORNMENTS } from "../../../../constants/adornments";
 
 export const AddLandAppraisalModal = (props) => {
   const {
@@ -49,65 +45,49 @@ export const AddLandAppraisalModal = (props) => {
     >
       <Stack>
         <Stack direction="row" gap={1}>
-          <BaseSelect
+          <SelectField
             label="Classification"
-            name={FIELD_NAMES.LAND_CLASSIFICATION}
-            value={landAppraisal[FIELD_NAMES.LAND_CLASSIFICATION] || ""}
+            name={FIELDS.LAND_CLASSIFICATION}
+            value={landAppraisal[FIELDS.LAND_CLASSIFICATION] || ""}
             onChange={handleFieldsChange}
             readOnly={props?.readOnly || props?.pendingPage}
             options={CLASSIFICATION_OPTIONS}
           />
 
-          <BaseSelect
+          <SelectField
             label="Sub-Class"
-            name={FIELD_NAMES.LAND_SUB_CLASS}
-            value={landAppraisal[FIELD_NAMES.LAND_SUB_CLASS] || ""}
+            name={FIELDS.LAND_SUB_CLASS}
+            value={landAppraisal[FIELDS.LAND_SUB_CLASS] || ""}
             onChange={handleFieldsChange}
             readOnly={props?.readOnly || props?.pendingPage}
-            disabled={!landAppraisal[FIELD_NAMES.LAND_CLASSIFICATION]}
+            disabled={!landAppraisal[FIELDS.LAND_CLASSIFICATION]}
             options={
-              SUBCLASS_OPTIONS[landAppraisal?.[FIELD_NAMES.LAND_CLASSIFICATION]]
+              SUBCLASS_OPTIONS[landAppraisal?.[FIELDS.LAND_CLASSIFICATION]]
             }
           />
 
           <NumberInput
             label="Area"
-            name={FIELD_NAMES.LAND_AREA}
-            value={landAppraisal?.[FIELD_NAMES.LAND_AREA]}
+            name={FIELDS.LAND_AREA}
+            value={landAppraisal?.[FIELDS.LAND_AREA]}
             onChange={handleFieldsChange}
             readOnly={props?.readOnly}
-            adornment={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  {SYMBOLS.SQUARE_METER}
-                </InputAdornment>
-              ),
-            }}
+            adornment={ADORNMENTS.SQM}
           />
         </Stack>
 
         <Stack direction="row" gap={1}>
-          <NumericFormatTextField
+          <NumericField
             label="Unit Value"
-            name={FIELD_NAMES.LAND_UNIT_VALUE}
-            value={landAppraisal?.[FIELD_NAMES.LAND_UNIT_VALUE]}
-            adornment={{
-              startAdornment: (
-                <InputAdornment position="start">&#8369;</InputAdornment>
-              ),
-            }}
+            name={FIELDS.LAND_UNIT_VALUE}
+            value={landAppraisal?.[FIELDS.LAND_UNIT_VALUE]}
+            adornment={ADORNMENTS.PESO}
           />
-          <NumericFormatTextField
+          <NumericField
             label="Base Market Value"
-            name={FIELD_NAMES.LAND_BASE_MARKET_VALUE}
-            value={toFixedTwo(
-              landAppraisal?.[FIELD_NAMES.LAND_BASE_MARKET_VALUE]
-            )}
-            adornment={{
-              startAdornment: (
-                <InputAdornment position="start">&#8369;</InputAdornment>
-              ),
-            }}
+            name={FIELDS.LAND_BASE_MARKET_VALUE}
+            value={toFixedTwo(landAppraisal?.[FIELDS.LAND_BASE_MARKET_VALUE])}
+            adornment={ADORNMENTS.PESO}
           />
         </Stack>
       </Stack>

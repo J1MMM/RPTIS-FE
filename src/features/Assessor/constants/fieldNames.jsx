@@ -1,4 +1,4 @@
-export const FIELD_NAMES = {
+export const FIELDS = {
   // property info
   TRANSACTION_CODE: "transactionCode",
   ARP_NO: "ArpNo",

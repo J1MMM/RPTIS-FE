@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Tab from "../../../../components/layout/Tab";
-import { ASSESSOR_TAB_LINKS } from "../../../../utils/constant";
+import NavigationTabs from "../../../../components/navigation/NavigationTabs";
 import { AssessorProvider } from "../../context/AssessorContext";
+import { ASSESSOR_TAB_LINKS } from "../../constants/tabs";
 
 const AssessorPageLayout = () => {
   return (
     <AssessorProvider>
-      <Tab links={ASSESSOR_TAB_LINKS} />
+      <NavigationTabs links={ASSESSOR_TAB_LINKS} />
       <Outlet />
     </AssessorProvider>
   );

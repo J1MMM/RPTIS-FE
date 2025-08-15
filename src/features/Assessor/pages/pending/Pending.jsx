@@ -6,7 +6,6 @@ import {
 } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import {
-  ALERT_SEV,
   CENCELS_TABLE_COLUMN,
   DATA_GRID_INITIAL_STATE,
   DATA_GRID_STYLE,
@@ -23,7 +22,7 @@ import { v4 } from "uuid";
 import dayjs from "dayjs";
 import axios from "../../api/axios";
 import SnackBar from "../../components/shared/SnackBar";
-import { TableToolbar } from "../../components/form/table/TableToolbar";
+import { TableToolbar } from "../../../../components/shared/TableToolbar";
 
 function Pending() {
   const queryClient = useQueryClient();
@@ -37,7 +36,7 @@ function Pending() {
   const [confirmationOpen, setConfirmationOpen] = useState(false);
 
   const [alertShown, setAlertShown] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState(ALERT_SEV.info);
+  const [alertSeverity, setAlertSeverity] = useState("");
   const [formMsg, setFormMsg] = useState("");
 
   const handleCellDoubleClick = (params) => {
@@ -84,11 +83,11 @@ function Pending() {
         oldData.filter((item) => item.id != selectedRowID)
       );
       setFormMsg(response?.data?.message);
-      setAlertSeverity(ALERT_SEV.success);
+      setAlertSeverity("");
       setTaxdecModalOpen(false);
     } catch (error) {
       console.log(error);
-      setAlertSeverity(ALERT_SEV.error);
+      setAlertSeverity("");
       setFormMsg(error?.message);
     }
 

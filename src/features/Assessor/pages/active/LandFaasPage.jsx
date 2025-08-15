@@ -1,31 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { Collapse, Stack } from "@mui/material";
 import {
-  ALERT_SEV,
-  ASSESSMENT_ROLL_COLUMN,
-  BOUNDARIES_INITIAL_STATE,
   DATA_GRID_INITIAL_STATE,
   DATA_GRID_STYLE,
   PAGE_SIZE_OPTION,
-  sampleRows,
-  SUBDIVIDE_INITIAL_DATA,
-} from "../../../../utils/constant";
+} from "@constants/tableStyles";
 import { Add, Shuffle } from "@mui/icons-material";
-import { v4 } from "uuid";
-import axios from "../../../../api/axios";
-import dayjs from "dayjs";
-import { useRowFormatter } from "../../../../hooks/useRowFormatter";
-import { formatFullname, sumFieldInArray } from "../../../../utils/helper";
-import { TableToolbar } from "../../../../components/form/table/TableToolbar";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/modals/AddLandFaasModal";
-import {
-  ACTUAL_USE_EQUIVALENTS,
-  DEFAULT_FIELD_VALUES,
-} from "../../constants/defaultValues";
-import { FIELD_NAMES } from "../../constants/fieldNames";
+import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
+import { FIELDS } from "../../constants/fieldNames";
+import { TableToolbar } from "../../../../components/shared/TableToolbar";
+import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
 
 function LandFaasPage() {
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
@@ -62,7 +50,7 @@ function LandFaasPage() {
   };
 
   const TABLE_HEADER = [
-    ...ASSESSMENT_ROLL_COLUMN,
+    ...LAND_TABLE_COLUMN,
     {
       field: "actions",
       headerName: "ACTIONS",

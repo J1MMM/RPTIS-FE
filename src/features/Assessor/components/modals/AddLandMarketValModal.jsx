@@ -5,14 +5,14 @@ import { Button, Stack } from "@mui/material";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
 import { toFixedTwo } from "@utils/formatters";
 // Feature-specific constants & utils
-import { FIELD_NAMES } from "../../constants/fieldNames";
+import { FIELDS } from "../../constants/fieldNames";
 import {
   FACTOR_TYPES,
   STRIPPING_FIELDS_DEFAULT,
 } from "../../constants/defaultValues";
 import { computeStrippingFields } from "../../utils/computeStrippingFields";
 // Feature-specific constants & utils
-import SelectAppraisalTable from "../tables/SelectAppraisalTable";
+import SelectAppraisalTable from "../tables/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../forms/land/panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../forms/land/panels/CornerInfluencePanel";
 
@@ -30,13 +30,12 @@ export const AddLandMarketValModal = ({
 }) => {
   const [visibleStripping, setVisibleStripping] = useState(1);
   const selectedRowEmpty = Object.keys(selectedRow).length === 0;
-  const landAppraisal = formData[FIELD_NAMES.LAND_APPRAISAL];
+  const landAppraisal = formData[FIELDS.LAND_APPRAISAL];
   const FILTERED_LAND_APPRAISAL = landAppraisal?.filter(
     (row) => row?.adjusted == false
   );
-  const inputArea =
-    selectedRow?.[FIELD_NAMES.MARKET_VALUE_ADJUSTMENT_INPUT_AREA];
-  const unitValue = Number(selectedRow?.[FIELD_NAMES.LAND_UNIT_VALUE] ?? 0);
+  const inputArea = selectedRow?.[FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA];
+  const unitValue = Number(selectedRow?.[FIELDS.LAND_UNIT_VALUE] ?? 0);
 
   const handleFieldsChange = (e) => {
     const { name, value } = e.target;
@@ -52,8 +51,8 @@ export const AddLandMarketValModal = ({
     setVisibleStripping(1);
     setSelectedRow({
       ...row,
-      [FIELD_NAMES.TOTAL_MARKET_VALUE_ADJUSTMENT]: 0,
-      [FIELD_NAMES.MARKET_ADJUSTMENT_FACTORS]: value,
+      [FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT]: 0,
+      [FIELDS.MARKET_ADJUSTMENT_FACTORS]: value,
     });
   };
 
@@ -95,9 +94,9 @@ export const AddLandMarketValModal = ({
   /* ==================================OTHER ADJUSTMENT FACTOR COMPUTATION==================================*/
   useEffect(() => {
     if (selectedRowEmpty || selectedFactor == "Stripping") return;
-    const baseMarketVal = selectedRow[FIELD_NAMES.LAND_BASE_MARKET_VALUE] || 0;
-    const area = selectedRow[FIELD_NAMES.LAND_AREA] || 0;
-    let unitValue = selectedRow[FIELD_NAMES.LAND_UNIT_VALUE] || 0;
+    const baseMarketVal = selectedRow[FIELDS.LAND_BASE_MARKET_VALUE] || 0;
+    const area = selectedRow[FIELDS.LAND_AREA] || 0;
+    let unitValue = selectedRow[FIELDS.LAND_UNIT_VALUE] || 0;
     let percent = 0;
     let totalValueAdjustment = 0;
 
