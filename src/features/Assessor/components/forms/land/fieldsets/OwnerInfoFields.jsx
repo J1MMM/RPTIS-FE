@@ -6,7 +6,7 @@ import useAssessorForm from "../../../../hooks/useFormContext";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import SelectField from "../../../../../../components/ui/SelectField";
 
-export const OwnerInfoFields = () => {
+function OwnerInfoFields() {
   const { landFaasControl } = useAssessorForm();
   return (
     <StyledFieldset title="Owner's Information">
@@ -50,3 +50,5 @@ export const OwnerInfoFields = () => {
     </StyledFieldset>
   );
 };
+
+export default OwnerInfoFields

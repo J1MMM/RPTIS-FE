@@ -9,13 +9,12 @@ import { sumByField } from "../../../../../utils/math";
 import MarketAdjustmentTableFooter from "./MarketAdjustmentTableFooter";
 
 export const LandMarketValueTable = (props) => {
-  const { formData, handleDelete } = props;
-  const marketValArr = formData?.marketAdjustment;
-  const totalMarketVal = sumByField(marketValArr, "adjustedMarketValue");
+  const { handleDelete, marketAdjustment } = props;
+  const totalMarketVal = sumByField(marketAdjustment, "adjustedMarketValue");
 
   return (
     <DataGrid
-      rows={marketValArr}
+      rows={marketAdjustment}
       columns={[
         {
           field: "actions",
@@ -42,7 +41,7 @@ export const LandMarketValueTable = (props) => {
       sx={{
         ...DATA_GRID_STYLE,
         width: LAND_INNER_TABLE_WIDTH,
-        maxHeight: 260,
+        maxHeight: 280,
       }}
       hideFooterPagination
       disableColumnResize

@@ -8,22 +8,25 @@ import {
 } from "@mui/material";
 import React from "react";
 
-export const ContainerModal = ({
+function ContainerModal({
   children,
   actionButton,
   title,
   open,
   onClose,
   onSubmit,
-  maxWidth,
-}) => {
+  maxWidth = "md",
+  disabled
+}) {
   return (
     <Dialog
+
       fullWidth
       open={open}
       component={"form"}
-      maxWidth={maxWidth || "md"}
+      maxWidth={maxWidth}
       onSubmit={onSubmit}
+
     >
       <DialogTitle
         sx={{
@@ -36,7 +39,7 @@ export const ContainerModal = ({
         }}
       >
         {title}
-        <IconButton sx={{ color: "#FFF" }} onClick={onClose}>
+        <IconButton disabled={disabled} sx={{ color: "#FFF" }} onClick={onClose}>
           <CloseRounded />
         </IconButton>
       </DialogTitle>
@@ -52,3 +55,5 @@ export const ContainerModal = ({
     </Dialog>
   );
 };
+
+export default ContainerModal

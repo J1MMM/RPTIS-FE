@@ -6,7 +6,7 @@ import useAssessorForm from "../../../../hooks/useFormContext";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import SelectField from "../../../../../../components/ui/SelectField";
 
-export const AdministratorInfoFields = () => {
+function AdministratorInfoFields() {
   const { landFaasControl } = useAssessorForm();
   return (
     <StyledFieldset title="Administrator Information">
@@ -62,3 +62,5 @@ export const AdministratorInfoFields = () => {
     </StyledFieldset>
   );
 };
+
+export default AdministratorInfoFields

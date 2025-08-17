@@ -54,10 +54,10 @@ export const FIELDS = {
   MARKET_ADJUSTMENT_FACTORS: "marketAdjustmentFactors",
   MARKET_ADJUSTMENT_PERCENT: "marketAdjustmentPercent",
   MARKET_VALUE_ADJUSTMENT_AREA: "marketValueAdjustmentArea",
-  MARKET_VALUE_ADJUSTMENT_INPUT_AREA: "marketValueAdjustmentInputArea",
   _VALUE_ADJUSTMENT: "marketValueAdjustment",
   TOTAL_MARKET_VALUE_ADJUSTMENT: "totalValueAdjustment",
   ADJUSTED_MARKETVALUE: "adjustedMarketValue",
+  INPUT_AREA: "marketValueAdjustmentInputArea",
 
   // TAXABILITY
   TAXABILITY: "TAXABILITY",

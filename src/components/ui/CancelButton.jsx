@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import React from "react";
 
-function CancelButton({ onClose }) {
+function CancelButton({ onClick, disabled }) {
   return (
-    <Button variant="outlined" size="small" color="primary" onClick={onClose}>
+    <Button disabled={disabled} variant="outlined" size="small" color="primary" onClick={onClick}>
       Cancel
     </Button>
   );

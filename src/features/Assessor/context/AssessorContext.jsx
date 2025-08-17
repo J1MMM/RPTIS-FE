@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { getLandFaasRecords } from "../services/landFaasService";
 import { SAMPLE_DATA } from "../constants/defaultValues";
 
 const AssessorContext = createContext({});

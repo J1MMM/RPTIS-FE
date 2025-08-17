@@ -1,16 +1,21 @@
 import { FIELDS } from "./fieldNames";
 
 export const APPRAISAL_FORM_DEFAULT = {
+  id: "",
+  appraisalID: "",
+  adjusted: false,
   [FIELDS.LAND_CLASSIFICATION]: "",
   [FIELDS.SUBCLASS]: "",
   [FIELDS.LAND_AREA]: "",
-  [FIELDS.LAND_UNIT_VALUE]: 0,
-  [FIELDS.LAND_BASE_MARKET_VALUE]: 0,
-  [FIELDS.LAND_MARKET_VALUE]: 0,
+  [FIELDS.LAND_UNIT_VALUE]: "",
+  [FIELDS.LAND_BASE_MARKET_VALUE]: "",
+  [FIELDS.LAND_MARKET_VALUE]: "",
   [FIELDS.LAND_ACTUAL_USE]: "",
-  [FIELDS.LAND_ASSESSMENT_LEVEL]: 0,
-  [FIELDS.LAND_ASSESSED_VALUE]: 0,
-  adjusted: false,
+  [FIELDS.LAND_ASSESSMENT_LEVEL]: "",
+  [FIELDS.LAND_ASSESSED_VALUE]: "",
+  totalValueAdjustment: "",
+  marketAdjustmentFactors: "",
+  marketValueAdjustmentInputArea: "",
 };
 
 export const DATA_GRID_INITIAL_STATE = {
@@ -177,3 +182,4 @@ export const FACTOR_TYPES = {
   RIGHT_OF_WAY: "Right of Way",
   OPEN_SPACES: "Open Spaces",
 };
+

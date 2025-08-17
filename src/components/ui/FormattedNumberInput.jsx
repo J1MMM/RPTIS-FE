@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { NumericFormat } from "react-number-format";
 
-function NumericFieldOld({
+function FormattedNumberInput({
   name,
   value,
   label,
@@ -34,4 +34,4 @@ function NumericFieldOld({
   );
 }
 
-export default NumericFieldOld;
+export default FormattedNumberInput;

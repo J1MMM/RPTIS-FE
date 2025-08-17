@@ -9,7 +9,6 @@ import {
 } from "@constants/tableStyles";
 import { Add, Shuffle } from "@mui/icons-material";
 import useFaasData from "../../hooks/useFaasData";
-import AddLandFaasModal from "../../components/modals/AddLandFaasModal";
 import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import { FIELDS } from "../../constants/fieldNames";
 import { TableToolbar } from "../../../../components/shared/TableToolbar";
@@ -18,20 +17,19 @@ import { useForm } from "react-hook-form";
 import { TRANSACTION_CODE } from "../../constants/dropdownOptions";
 import SelectField from "../../../../components/ui/SelectField";
 import useAssessorForm from "../../hooks/useFormContext";
+import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
+import { toast, ToastContainer } from "react-toastify";
 
 function LandFaasPage() {
   const { handleSubmit } = useAssessorForm();
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
-  const [formData, setFormData] = useState(DEFAULT_FIELD_VALUES);
-
   const [addModalActive, setAddModalActive] = useState(false);
   const [selectedArpNos, setSelectedArpNos] = useState([]);
-  const [readOnly, setReadOnly] = useState(true);
 
   const onSubmit = (data) => {
     console.log("Submit from react-hook-form");
     console.log(data);
-    console.log(data[FIELDS.TRANSACTION_CODE]);
+    toast.success("Form submitted successfully!")
   };
   const handleViewClick = (params) => {
     const id = params?.row?.id;
@@ -115,10 +113,11 @@ function LandFaasPage() {
           open: addModalActive,
           onClose: () => setAddModalActive(false),
         }}
-        formState={{ formData, setFormData, setReadOnly }}
-        onSubmit={onSubmit}
-        // actionButton={<TaxdecModalButtons />}
+        handleSubmit={handleSubmit(onSubmit)}
+      // actionButton={<TaxdecModalButtons />}
       />
+
+      <ToastContainer position="top-right" autoClose={3000} />
 
       {/* <TaxDecModal
         open={openRPTview}

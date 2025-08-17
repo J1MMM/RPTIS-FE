@@ -3,78 +3,43 @@ import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { useEffect, useState } from "react";
-import { AddLandAppraisalModal } from "../../../modals/AddLandAppraisalModal";
 import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
 import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { GET_UNITVAL } from "../../../../constants/unitValues";
+import { UNITVAL_TABLE } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
 import { useForm, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
+import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 
-export const LandAppraisalFields = (props) => {
-  const { setFormData, formData } = props;
-  const { setValue: setFormValue } = useAssessorForm();
+function LandAppraisalFields() {
+  const { control: landFaasFormControl, setValue: setLandFaasFormVal } = useAssessorForm();
+  const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
-  const [landAppraisalForm, setLandAppraisalForm] = useState(
-    APPRAISAL_FORM_DEFAULT
-  );
-  const { control, watch, setValue, getValues, handleSubmit, reset } = useForm({
-    defaultValues: APPRAISAL_FORM_DEFAULT,
-  });
 
-  const [classification, subClass, landArea] = useWatch({
-    control,
-    name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA],
-  });
-  console.log(watch());
+  const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
+  const [landAppraisal, marketAdjustment] = useWatch({ control: landFaasFormControl, name: [FIELDS.LAND_APPRAISAL, FIELDS.MARKET_ADJUSTMENT] }) || []; //array
 
   useEffect(() => {
-    const unitValue =
-      GET_UNITVAL[classification?.toLowerCase()]?.[subClass?.toLowerCase()] ||
-      0;
-
+    const unitValue = UNITVAL_TABLE[classification?.toLowerCase()]?.[subClass?.toLowerCase()] || 0;
     const baseMarketValue = unitValue * (parseFloat(landArea) || 0);
-    setValue(FIELDS.LAND_UNIT_VALUE, unitValue, {});
-    setValue(FIELDS.LAND_MARKET_VALUE, baseMarketValue, {});
-    setValue(FIELDS.LAND_BASE_MARKET_VALUE, baseMarketValue, {});
+
+    setValue(FIELDS.LAND_UNIT_VALUE, unitValue);
+    setValue(FIELDS.LAND_MARKET_VALUE, baseMarketValue);
+    setValue(FIELDS.LAND_BASE_MARKET_VALUE, baseMarketValue);
+
   }, [subClass, landArea]);
 
-  const handleFieldsChange = (e) => {
-    const { name, value } = e.target;
-
-    setLandAppraisalForm((prev) => {
-      const updated = {
-        ...prev,
-        [name]: value,
-      };
-
-      if (name === FIELDS.LAND_CLASSIFICATION) {
-        updated[FIELDS.SUBCLASS] = "";
-      }
-
-      return updated;
-    });
-  };
-
-  const onAppraisalSubmit = (data) => {
+  const onAppraisalSubmit = async (data) => {
     try {
-      const id = v4();
-      const newAppraisal = { ...data, id }; //object
-      const currentAppraisals = getValues(FIELDS.LAND_APPRAISAL) || []; //array
-      const updatedAppraisals = [...currentAppraisals, newAppraisal]; //array
-
-      const totalMarketValue = sumByField(updatedAppraisals, [
-        FIELDS.LAND_MARKET_VALUE,
-      ]);
-      setFormValue(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      const updatedAppraisals = [...landAppraisal, { ...data, id: v4() }];
+      const totalMarketValue = sumByField(updatedAppraisals, [FIELDS.LAND_MARKET_VALUE]);
       // Update RHF state
-      setValue(FIELDS.LAND_APPRAISAL, updatedAppraisals);
-      setValue(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
-      setValue(FIELDS.PROPERTY_ASSESSMENT, []);
-      setValue(FIELDS.TOTAL_ASSESSED_VALUE, 0);
-
-      reset(APPRAISAL_FORM_DEFAULT); // clear form
+      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
+      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
+      // clear form
+      resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
     } catch (error) {
       console.error("Error in onAppraisalSubmit:", error);
     } finally {
@@ -83,31 +48,20 @@ export const LandAppraisalFields = (props) => {
   };
 
   const handleDelete = (id) => {
-    setFormData((prev) => {
-      const updatedLandAppraisal = prev[FIELDS.LAND_APPRAISAL].filter(
-        (item) => item.id !== id
-      );
-      const updatedMarketAjustments = prev[FIELDS.MARKET_ADJUSTMENT].filter(
-        (item) => item?.appraisalID !== id
-      );
+    try {
+      const updatedLandAppraisal = landAppraisal.filter(item => item?.id !== id)
+      const updatedMarketAdj = marketAdjustment.filter(item => item?.appraisalID !== id);
+      const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
+      const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
+      // Update RHF state
+      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedLandAppraisal)
+      setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAdj)
+      setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
+      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+    } catch (error) {
+      console.error(error);
 
-      const totalMarketValue = sumByField(updatedLandAppraisal, [
-        FIELDS.LAND_MARKET_VALUE,
-      ]);
-
-      const totalAssessedValue = sumByField(updatedLandAppraisal, [
-        FIELDS.LAND_ASSESSED_VALUE,
-      ]);
-
-      return {
-        ...prev,
-        totalMarketValue,
-        landAppraisal: updatedLandAppraisal,
-        [FIELDS.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
-        [FIELDS.MARKET_ADJUSTMENT]: updatedMarketAjustments,
-        [FIELDS.PROPERTY_ASSESSMENT]: [],
-      };
-    });
+    }
   };
 
   return (
@@ -115,30 +69,33 @@ export const LandAppraisalFields = (props) => {
       <StyledFieldset title="Land Appraisal">
         <Stack mb={2}>
           <Button
+            disableFocusRipple
+            variant="contained"
+            startIcon={<Add />}
+            onClick={() => setModalActive(true)}
             sx={{
               alignSelf: "flex-start",
             }}
-            variant="contained"
-            disabled={props?.readOnly}
-            startIcon={<Add />}
-            onClick={() => setModalActive(true)}
           >
             Appraisal
           </Button>
         </Stack>
-
-        <LandAppraisalTable formData={formData} handleDelete={handleDelete} />
+        <LandAppraisalTable
+          currentAppraisals={landAppraisal}
+          handleDelete={handleDelete} />
       </StyledFieldset>
 
       <AddLandAppraisalModal
-        watch={watch}
-        setValue={setValue}
-        control={control}
+        disabled={isSubmitting}
         open={modalActive}
         onClose={() => setModalActive(false)}
         handleSubmit={handleSubmit(onAppraisalSubmit)}
-        landAppraisal={landAppraisalForm}
+        control={addAppraisalControl}
+        watch={watch}
+        setValue={setValue}
       />
     </>
   );
 };
+
+export default LandAppraisalFields

@@ -9,31 +9,29 @@ import { FIELDS } from "../../../constants/fieldNames";
 import { sumByField } from "../../../../../utils/math";
 import LandAppraisalTableFooter from "./LandAppraisalTableFooter";
 
-export const LandAppraisalTable = (props) => {
-  const { formData, handleDelete } = props;
+const columnProps = {
+  field: "actions",
+  headerName: "Actions",
+  width: 80,
+  headerClassName: "data-grid-header",
+  sortable: false,
+  filterable: false,
+  disableColumnMenu: true,
+  headerAlign: "center",
+  align: "center",
+}
 
-  const landAppraisalData = formData?.[FIELDS.LAND_APPRAISAL];
-  const totalBaseMarketVal = sumByField(landAppraisalData, "baseMarketValue");
+export const LandAppraisalTable = ({ currentAppraisals, handleDelete }) => {
+  const totalBaseMarketVal = sumByField(currentAppraisals, FIELDS.LAND_BASE_MARKET_VALUE);
 
   return (
     <DataGrid
-      rows={landAppraisalData}
+      rows={currentAppraisals}
       columns={[
         {
-          field: "actions",
-          headerName: "Actions",
-          width: 80,
-          headerClassName: "data-grid-header",
-          sortable: false,
-          filterable: false,
-          disableColumnMenu: true,
-          headerAlign: "center",
-          align: "center",
+          ...columnProps,
           renderCell: (params) => (
-            <IconButton
-              color="mono.main"
-              onClick={() => handleDelete(params.row.id)}
-            >
+            <IconButton color="mono.main" onClick={() => handleDelete(params.row.id)}>
               <Close />
             </IconButton>
           ),

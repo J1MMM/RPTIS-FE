@@ -7,7 +7,7 @@ import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import DateInput from "../../../../../../components/ui/DateInput";
 import useAssessorForm from "../../../../hooks/useFormContext";
 
-export const PropertyInfoFields = () => {
+function PropertyInfoFields() {
   const { landFaasControl } = useAssessorForm();
 
   return (
@@ -78,3 +78,5 @@ export const PropertyInfoFields = () => {
     </StyledFieldset>
   );
 };
+
+export default PropertyInfoFields

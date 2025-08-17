@@ -1,23 +1,21 @@
-import { ContainerModal } from "../../../../components/shared/ContainerModal";
 import { Stack } from "@mui/material";
-import {
-  CLASSIFICATION_OPTIONS,
-  SUBCLASS_OPTIONS,
-} from "../../constants/dropdownOptions";
-import { FIELDS } from "../../constants/fieldNames";
-import { ADORNMENTS } from "../../../../constants/adornments";
-import SelectField from "../../../../components/ui/SelectField";
-import SubmitButton from "../../../../components/ui/SubmitButton";
-import CancelButton from "../../../../components/ui/CancelButton";
-import NumberInput from "../../../../components/ui/NumberInput";
-import NumericField from "../../../../components/ui/NumericField";
+import ContainerModal from "@components/shared/ContainerModal";
+import SelectField from "@components/ui/SelectField";
+import SubmitButton from "@components/ui/SubmitButton";
+import CancelButton from "@components/ui/CancelButton";
+import NumberInput from "@components/ui/NumberInput";
+import NumericField from "@components/ui/NumericField";
+import { ADORNMENTS } from "@constants/adornments";
+import { CLASSIFICATION_OPTIONS, SUBCLASS_OPTIONS } from "../../../../constants/dropdownOptions";
+import { FIELDS } from "../../../../constants/fieldNames";
+import TextInput from "../../../../../../components/ui/TextInput";
 
-export const AddLandAppraisalModal = (props) => {
-  const { watch, setValue, control, handleSubmit, open, onClose } = props;
+export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled }) => {
   const classificationValue = watch(FIELDS.LAND_CLASSIFICATION);
 
   return (
     <ContainerModal
+      disabled={disabled}
       maxWidth="sm"
       title="Land Appraisal"
       open={open}
@@ -25,8 +23,8 @@ export const AddLandAppraisalModal = (props) => {
       onSubmit={handleSubmit}
       actionButton={
         <>
-          <CancelButton />
-          <SubmitButton />
+          <CancelButton disabled={disabled} onClick={onClose} />
+          <SubmitButton disabled={disabled} />
         </>
       }
     >
@@ -60,17 +58,21 @@ export const AddLandAppraisalModal = (props) => {
         </Stack>
 
         <Stack direction="row" gap={1}>
-          <NumericField
+          <TextInput
             control={control}
+            isNumeric
             label="Unit Value"
             name={FIELDS.LAND_UNIT_VALUE}
             adornment={ADORNMENTS.PESO}
+            readOnly={true}
           />
-          <NumericField
+          <TextInput
             control={control}
+            isNumeric
             label="Base Market Value"
             name={FIELDS.LAND_BASE_MARKET_VALUE}
             adornment={ADORNMENTS.PESO}
+            readOnly={true}
           />
         </Stack>
       </Stack>

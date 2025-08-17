@@ -2,11 +2,9 @@ import { v4 } from "uuid";
 import { sumByField } from "../../../utils/math";
 
 export const computeStrippingFields = (inputArea, baseUnitVal) => {
-  let visibleCount = 1;
   let updatedFields = [];
 
   if (inputArea > 60) {
-    visibleCount = 3;
     updatedFields = [
       {
         id: v4(),
@@ -37,7 +35,6 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
     ];
   } else if (inputArea > 30) {
-    visibleCount = 2;
     updatedFields = [
       {
         id: v4(),
@@ -59,7 +56,6 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
     ];
   } else {
-    visibleCount = 1;
     updatedFields = [
       {
         id: v4(),
@@ -76,5 +72,5 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
   // sum total
   const totalValAdj = sumByField(updatedFields, "valueAdjustment");
 
-  return { totalValAdj, updatedFields, visibleCount };
+  return { totalValAdj, updatedFields };
 };

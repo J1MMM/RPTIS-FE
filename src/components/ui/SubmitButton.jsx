@@ -1,10 +1,15 @@
-import { Button } from "@mui/material";
-import React from "react";
+import { Button, CircularProgress } from "@mui/material";
 
-function SubmitButton() {
+function SubmitButton({ disabled, label = "Submit" }) {
   return (
-    <Button variant="contained" size="small" type="submit">
-      Add
+    <Button
+      disabled={disabled}
+      startIcon={disabled && <CircularProgress size={16} color="inherit" />}
+      variant="contained"
+      size="small"
+      type="submit"
+    >
+      {label}
     </Button>
   );
 }

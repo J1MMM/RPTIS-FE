@@ -4,7 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import StyledFieldset from "@components/ui/StyledFieldset";
 
-export const EOAFields = ({ props, handleFormChange }) => {
+function EOAFields() {
   return (
     <StyledFieldset title="Effectively of Assessment/Reassessment">
       <Stack direction="row" gap={1}>
@@ -66,3 +66,5 @@ export const EOAFields = ({ props, handleFormChange }) => {
     </StyledFieldset>
   );
 };
+
+export default EOAFields

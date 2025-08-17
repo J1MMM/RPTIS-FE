@@ -1,50 +1,37 @@
-import { Box, Collapse, Divider, Grid2, Stack } from "@mui/material";
+import { Collapse, Divider, Grid2, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import { FIELDS } from "../../../../constants/fieldNames";
+import TextInput from "@components/ui/TextInput";
+import NumberInput from "@components/ui/NumberInput";
 import StrippingAdjustmentList from "../fieldsets/StrippingAdjustmentList";
+import { FIELDS } from "../../../../constants/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
-import NumericFieldOld from "@components/ui/NumericFieldOld";
-import NumberInputOld from "../../../../../../components/ui/NumberInputOld";
 
-function StrippingComputationPanel({
-  open,
-  selectedRow,
-  selectedRowEmpty,
-  visibleStripping,
-  strippingFields,
-  handleFieldsChange,
-}) {
+function StrippingComputationPanel({ open, selectedRowEmpty, strippingFields, selControl }) {
+
   return (
     <Collapse in={open} timeout={0} easing="ease-in-out" unmountOnExit>
       <DividerHeading mt={2}>Stripping Computation</DividerHeading>
-
       <Stack direction="row" gap={1}>
-        <NumberInputOld
+        <NumberInput
+          control={selControl}
           disabled={selectedRowEmpty}
           label="Area"
-          name={FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
-          value={selectedRow[FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA] || ""}
-          onChange={handleFieldsChange}
+          name={FIELDS.INPUT_AREA}
           adornment={ADORNMENTS.SQM}
         />
 
-        <NumericFieldOld
+        <TextInput
+          isNumeric
+          control={selControl}
           disabled={selectedRowEmpty}
           label="Total Value Adjustment"
           name={FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT}
-          value={selectedRow[FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
-          onChange={handleFieldsChange}
           readOnly={true}
           adornment={ADORNMENTS.PESO}
         />
       </Stack>
 
-      <Divider
-        sx={{
-          my: 2,
-          borderColor: "primary.main",
-        }}
-      />
+      <Divider sx={{ my: 2, borderColor: "primary.main" }} />
 
       <Grid2
         container
@@ -56,7 +43,7 @@ function StrippingComputationPanel({
           alignContent: "start",
         }}
       >
-        {strippingFields?.slice(0, visibleStripping).map((item, index) => (
+        {strippingFields?.slice(0, strippingFields?.lenght).map((item, index) => (
           <StrippingAdjustmentList key={index} item={item} />
         ))}
       </Grid2>

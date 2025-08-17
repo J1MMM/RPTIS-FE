@@ -3,54 +3,43 @@ import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { LandPropAssTable } from "../../../tables/property-assessment/LandPropAssTable";
 import { sumByField } from "../../../../../../utils/math";
-import { useEffect } from "react";
+import useAssessorForm from "../../../../hooks/useFormContext";
+import { useWatch } from "react-hook-form";
 
-export const AssessmentFields = (props) => {
-  const { setFormData, formData } = props;
+function AssessmentFields() {
+  const { control: landFaasFormControl, setValue: setLandFaasFormVal } = useAssessorForm()
+  const formData = useWatch({ control: landFaasFormControl })
 
-  const handleAcutalUseChange = (id, actualUseVal) => {
-    setFormData((prev) => {
-      const updatedLandAppraisal = prev[FIELDS.LAND_APPRAISAL].map((row) => {
-        if (row.id === id) {
-          const actualUseRaw = actualUseVal;
-          const actualUse = actualUseRaw?.toLowerCase();
-          const assessmentLevel = ACTUAL_USE_EQUIVALENTS[actualUse] ?? 0;
-          const landMarketValue = row[FIELDS.LAND_MARKET_VALUE] ?? 0;
-
-          const assessedValue = assessmentLevel * landMarketValue;
-          return {
-            ...row,
-            [FIELDS.LAND_ACTUAL_USE]: actualUseVal,
-            [FIELDS.LAND_ASSESSMENT_LEVEL]: assessmentLevel,
-            [FIELDS.LAND_ASSESSED_VALUE]: assessedValue,
-          };
+  const handleActualUseChange = (id, actualUseVal) => {
+    const updatedAppraisals = formData[FIELDS.LAND_APPRAISAL].map((row) =>
+      row.id === id
+        ? {
+          ...row,
+          [FIELDS.LAND_ACTUAL_USE]: actualUseVal,
+          [FIELDS.LAND_ASSESSMENT_LEVEL]:
+            ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0,
+          [FIELDS.LAND_ASSESSED_VALUE]:
+            (ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0) *
+            (row[FIELDS.LAND_MARKET_VALUE] ?? 0),
         }
-        return row;
-      });
+        : row
+    );
 
-      const totalAssessedValue = sumByField(
-        updatedLandAppraisal,
-        FIELDS.LAND_ASSESSED_VALUE
-      );
-
-      const updatedFormData = {
-        ...prev,
-        [FIELDS.LAND_APPRAISAL]: updatedLandAppraisal,
-        [FIELDS.TOTAL_ASSESSED_VALUE]: totalAssessedValue,
-      };
-
-      return updatedFormData;
-    });
+    setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+    setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, sumByField(updatedAppraisals, FIELDS.LAND_ASSESSED_VALUE));
   };
+
 
   return (
     <>
       <StyledFieldset title="Property Assessment">
         <LandPropAssTable
           formData={formData}
-          handleChange={handleAcutalUseChange}
+          handleChange={handleActualUseChange}
         />
       </StyledFieldset>
     </>
   );
 };
+
+export default AssessmentFields

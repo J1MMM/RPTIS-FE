@@ -1,4 +1,4 @@
-export const GET_UNITVAL = {
+export const UNITVAL_TABLE = {
   residential: {
     r1: 2860,
     r2: 1260,

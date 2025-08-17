@@ -1,5 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
+import { formatPercent } from "../../utils/formatters";
+const numberFormatter = new Intl.NumberFormat("en-US");
 
 function TextInput({
   control,
@@ -13,7 +15,9 @@ function TextInput({
   multiline = false,
   margin = "dense",
   required = true,
-  rules = {}, // validation rules
+  isNumeric = false,
+  isPercent = false,
+  rules = {},
 }) {
   return (
     <Controller
@@ -31,6 +35,15 @@ function TextInput({
           variant="outlined"
           multiline={multiline}
           label={label}
+          value={
+            isPercent
+              ? formatPercent(field.value)
+              : isNumeric
+                ? field.value === "" || field.value == null
+                  ? ""
+                  : numberFormatter.format(field.value)
+                : field.value ?? ""
+          }
           error={!!error}
           helperText={error ? error.message : ""}
           slotProps={{

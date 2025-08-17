@@ -1,20 +1,17 @@
-import { DataGrid } from "@mui/x-data-grid";
-import { APPRAISAL_COLUMN } from "../../../constants/tableColumns";
 import { IconButton, InputAdornment, MenuItem, TextField } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { Close } from "@mui/icons-material";
-import { ADJUSTMENT_FACTOR_OPTIONS } from "../../../constants/dropdownOptions";
-import {
-  DATA_GRID_INITIAL_STATE,
-  DATA_GRID_STYLE,
-} from "@constants/tableStyles";
 import DividerHeading from "@components/ui/DividerHeading";
+import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE } from "@constants/tableStyles";
+import { APPRAISAL_COLUMN } from "../../../constants/tableColumns";
+import { ADJUSTMENT_FACTOR_OPTIONS } from "../../../constants/dropdownOptions";
 
 function SelectAppraisalTable({
   rows,
   selectedRow,
   selectedRowEmpty,
   selectedFactor,
-  handleAdjustmentFactorChange,
+  handleSelectRow,
   onClear,
 }) {
   return (
@@ -47,7 +44,7 @@ function SelectAppraisalTable({
                   fullWidth
                   value={isSelected ? selectedFactor : ""}
                   onChange={(e) =>
-                    handleAdjustmentFactorChange(params.row, e.target.value)
+                    handleSelectRow(params.row, e.target.value)
                   }
                   slotProps={{
                     input: {
