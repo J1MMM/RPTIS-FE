@@ -10,7 +10,7 @@ import { FIELDS } from "../../../../constants/fieldNames";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextInput from "../../../../../../components/ui/TextInput";
-import SelectField from "../../../../../../components/ui/SelectField";
+import SelectFieldOld from "../../../../../../components/ui/SelectFieldOld";
 import { QUATER_OPTIONS } from "../../../../constants/dropdownOptions";
 import dayjs from "dayjs";
 
@@ -44,7 +44,7 @@ export const TaxabilityFields = (props) => {
           disabled={props?.readOnly}
         />
 
-        <SelectField
+        <SelectFieldOld
           label="Quarter"
           name={FIELDS.EFFECTIVITY_QTR}
           value={formData[FIELDS.EFFECTIVITY_QTR] || ""}

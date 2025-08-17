@@ -43,16 +43,16 @@ export const SUBCLASS_OPTIONS = {
 };
 
 export const TRANSACTION_CODE = [
-  "SD",
-  "CS",
-  "DC",
-  "PC",
-  "DP",
-  "DT",
-  "TR",
-  "RC",
-  "GR",
-  "SP",
+  { value: "SD", label: "SD" },
+  { value: "CS", label: "CS" },
+  { value: "DC", label: "DC" },
+  { value: "PC", label: "PC" },
+  { value: "DP", label: "DP" },
+  { value: "DT", label: "DT" },
+  { value: "TR", label: "TR" },
+  { value: "RC", label: "RC" },
+  { value: "GR", label: "GR" },
+  { value: "SP", label: "SP" },
 ];
 
 export const QUATER_OPTIONS = [

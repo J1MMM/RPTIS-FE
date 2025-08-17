@@ -1,12 +1,13 @@
+import { Controller } from "react-hook-form";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 function SelectField({
-  label,
+  control,
   name,
-  value,
-  onChange,
+  label,
   readOnly,
   disabled,
+  onChange,
   margin = "dense",
   required = true,
   options = [{ value: "", label: "" }],
@@ -16,26 +17,36 @@ function SelectField({
   return (
     <FormControl
       fullWidth
-      margin={margin}
+      margin={margin} // This will apply dense spacing
       required={required}
       disabled={disabled}
     >
       <InputLabel id={labelId}>{label}</InputLabel>
-      <Select
-        labelId={labelId}
-        id={`${labelId}-select`}
-        value={value || ""}
+      <Controller
         name={name}
-        label={label}
-        onChange={onChange}
-        readOnly={readOnly}
-      >
-        {options.map((obj, index) => (
-          <MenuItem key={index} value={obj.value}>
-            {obj.label}
-          </MenuItem>
-        ))}
-      </Select>
+        defaultValue=""
+        control={control}
+        rules={{ required: required && "This field is required" }}
+        render={({ field }) => (
+          <Select
+            {...field}
+            labelId={labelId}
+            label={label}
+            id={`${labelId}-select`}
+            readOnly={readOnly}
+            onChange={(e) => {
+              field.onChange(e); // use form hook function
+              if (onChange) onChange(e); // use custom onChange function
+            }}
+          >
+            {options.map((obj, index) => (
+              <MenuItem key={index} value={obj.value}>
+                {obj.label}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
+      />
     </FormControl>
   );
 }

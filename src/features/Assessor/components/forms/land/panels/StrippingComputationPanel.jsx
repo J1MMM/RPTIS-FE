@@ -3,8 +3,8 @@ import DividerHeading from "@components/ui/DividerHeading";
 import { FIELDS } from "../../../../constants/fieldNames";
 import StrippingAdjustmentList from "../fieldsets/StrippingAdjustmentList";
 import { ADORNMENTS } from "@constants/adornments";
-import NumberInput from "@components/ui/NumberInput";
-import NumericField from "@components/ui/NumericField";
+import NumericFieldOld from "@components/ui/NumericFieldOld";
+import NumberInputOld from "../../../../../../components/ui/NumberInputOld";
 
 function StrippingComputationPanel({
   open,
@@ -19,7 +19,7 @@ function StrippingComputationPanel({
       <DividerHeading mt={2}>Stripping Computation</DividerHeading>
 
       <Stack direction="row" gap={1}>
-        <NumberInput
+        <NumberInputOld
           disabled={selectedRowEmpty}
           label="Area"
           name={FIELDS.MARKET_VALUE_ADJUSTMENT_INPUT_AREA}
@@ -28,7 +28,7 @@ function StrippingComputationPanel({
           adornment={ADORNMENTS.SQM}
         />
 
-        <NumericField
+        <NumericFieldOld
           disabled={selectedRowEmpty}
           label="Total Value Adjustment"
           name={FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT}

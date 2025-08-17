@@ -2,13 +2,13 @@ import { Fragment } from "react";
 import { FormLabel } from "@mui/material";
 import { ADORNMENTS } from "@constants/adornments";
 import { toFixedTwo } from "@utils/formatters";
-import NumericField from "@components/ui/NumericField";
+import NumericFieldOld from "@components/ui/NumericFieldOld";
 
 function StrippingAdjustmentList({ item }) {
   return (
     <Fragment>
       <FormLabel sx={{ textAlign: "end" }}>{item.label}:</FormLabel>
-      <NumericField
+      <NumericFieldOld
         label="Unit Values"
         value={item.unitVal}
         size={"small"}
@@ -16,7 +16,7 @@ function StrippingAdjustmentList({ item }) {
         adornment={ADORNMENTS.PESO}
       />
 
-      <NumericField
+      <NumericFieldOld
         label="Percent of Adjustment"
         size="small"
         value={item.percentOfAdj * 100}
@@ -24,7 +24,7 @@ function StrippingAdjustmentList({ item }) {
         adornment={ADORNMENTS.PERCENT}
       />
 
-      <NumericField
+      <NumericFieldOld
         label="Area"
         size="small"
         value={toFixedTwo(item.area)}
@@ -32,7 +32,7 @@ function StrippingAdjustmentList({ item }) {
         adornment={ADORNMENTS.SQM}
       />
 
-      <NumericField
+      <NumericFieldOld
         label="Value Adjustment"
         size="small"
         value={toFixedTwo(item.valueAdjustment)}

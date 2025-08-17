@@ -1,6 +1,6 @@
 import { Collapse, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import NumericField from "@components/ui/NumericField";
+import NumericFieldOld from "@components/ui/NumericFieldOld";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
 import { formatPercent } from "@utils/formatters";
@@ -12,20 +12,20 @@ function CornerInfluencePanel({ open, selectedRow, selectedFactor }) {
 
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>
-          <NumericField
+          <NumericFieldOld
             label="Base Market Value"
             value={selectedRow[FIELDS.LAND_BASE_MARKET_VALUE] || ""}
             readOnly={true}
             adornment={ADORNMENTS.PESO}
           />
 
-          <NumericField
+          <NumericFieldOld
             label="Area"
             value={selectedRow[FIELDS.LAND_AREA] || ""}
             readOnly={true}
             adornment={ADORNMENTS.SQM}
           />
-          <NumericField
+          <NumericFieldOld
             label="Percent of Adjustment"
             value={formatPercent(selectedRow?.percent) || ""}
             readOnly={true}
@@ -33,13 +33,13 @@ function CornerInfluencePanel({ open, selectedRow, selectedFactor }) {
           />
         </Stack>
         <Stack direction="row" spacing={1}>
-          <NumericField
+          <NumericFieldOld
             label="Unit Value"
             value={selectedRow[FIELDS.LAND_UNIT_VALUE] || ""}
             readOnly={true}
             adornment={ADORNMENTS.PESO}
           />
-          <NumericField
+          <NumericFieldOld
             label="Total Value Adjustment"
             value={selectedRow[FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT] || ""}
             readOnly={true}

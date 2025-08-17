@@ -5,45 +5,39 @@ import StyledFieldset from "@components/ui/StyledFieldset";
 import { useEffect, useState } from "react";
 import { AddLandAppraisalModal } from "../../../modals/AddLandAppraisalModal";
 import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
-import { LAND_APPRAISAL_DEFAULT_DATA } from "../../../../constants/defaultValues";
+import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { UNIT_VALUE_TABLE } from "../../../../constants/unitValues";
+import { GET_UNITVAL } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
+import { useForm, useWatch } from "react-hook-form";
+import useAssessorForm from "../../../../hooks/useFormContext";
 
 export const LandAppraisalFields = (props) => {
   const { setFormData, formData } = props;
+  const { setValue: setFormValue } = useAssessorForm();
   const [modalActive, setModalActive] = useState(false);
   const [landAppraisalForm, setLandAppraisalForm] = useState(
-    LAND_APPRAISAL_DEFAULT_DATA
+    APPRAISAL_FORM_DEFAULT
   );
+  const { control, watch, setValue, getValues, handleSubmit, reset } = useForm({
+    defaultValues: APPRAISAL_FORM_DEFAULT,
+  });
 
-  const subClass = landAppraisalForm[FIELDS.LAND_SUB_CLASS];
-  const landArea = landAppraisalForm[FIELDS.LAND_AREA];
+  const [classification, subClass, landArea] = useWatch({
+    control,
+    name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA],
+  });
+  console.log(watch());
 
   useEffect(() => {
-    setLandAppraisalForm((prev) => {
-      const classificationRaw = prev[FIELDS.LAND_CLASSIFICATION];
-      const subClassRaw = prev[FIELDS.LAND_SUB_CLASS];
+    const unitValue =
+      GET_UNITVAL[classification?.toLowerCase()]?.[subClass?.toLowerCase()] ||
+      0;
 
-      const classification = classificationRaw?.toLowerCase();
-      const subClass = subClassRaw?.toLowerCase();
-      const unitValue = UNIT_VALUE_TABLE[classification]?.[subClass] || 0;
-      const landArea = parseFloat(prev[FIELDS.LAND_AREA]) || 0;
-      const baseMarketValue = unitValue * landArea;
-
-      const currentUnitValue = prev[FIELDS.LAND_UNIT_VALUE];
-      const currentBMV = prev[FIELDS.LAND_BASE_MARKET_VALUE];
-
-      // Prevent unnecessary state updates
-      if (currentUnitValue === unitValue && currentBMV === baseMarketValue)
-        return prev;
-
-      return {
-        ...prev,
-        [FIELDS.LAND_UNIT_VALUE]: unitValue,
-        [FIELDS.LAND_BASE_MARKET_VALUE]: baseMarketValue,
-      };
-    });
+    const baseMarketValue = unitValue * (parseFloat(landArea) || 0);
+    setValue(FIELDS.LAND_UNIT_VALUE, unitValue, {});
+    setValue(FIELDS.LAND_MARKET_VALUE, baseMarketValue, {});
+    setValue(FIELDS.LAND_BASE_MARKET_VALUE, baseMarketValue, {});
   }, [subClass, landArea]);
 
   const handleFieldsChange = (e) => {
@@ -56,40 +50,33 @@ export const LandAppraisalFields = (props) => {
       };
 
       if (name === FIELDS.LAND_CLASSIFICATION) {
-        updated[FIELDS.LAND_SUB_CLASS] = "";
+        updated[FIELDS.SUBCLASS] = "";
       }
 
       return updated;
     });
   };
 
-  const handleAppraisalSubmit = (e) => {
+  const onAppraisalSubmit = (data) => {
     try {
       const id = v4();
-
-      const newAppraisal = {
-        ...landAppraisalForm,
-        id,
-        [FIELDS.LAND_MARKET_VALUE]:
-          landAppraisalForm?.[FIELDS.LAND_BASE_MARKET_VALUE],
-      };
-
-      const updatedAppraisals = [...formData?.landAppraisal, newAppraisal];
+      const newAppraisal = { ...data, id }; //object
+      const currentAppraisals = getValues(FIELDS.LAND_APPRAISAL) || []; //array
+      const updatedAppraisals = [...currentAppraisals, newAppraisal]; //array
 
       const totalMarketValue = sumByField(updatedAppraisals, [
         FIELDS.LAND_MARKET_VALUE,
       ]);
+      setFormValue(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      // Update RHF state
+      setValue(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      setValue(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
+      setValue(FIELDS.PROPERTY_ASSESSMENT, []);
+      setValue(FIELDS.TOTAL_ASSESSED_VALUE, 0);
 
-      setFormData((prev) => ({
-        ...prev,
-        [FIELDS.LAND_APPRAISAL]: updatedAppraisals,
-        [FIELDS.TOTAL_MARKET_VALUE]: totalMarketValue,
-        [FIELDS.PROPERTY_ASSESSMENT]: [],
-        [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
-      }));
-      setLandAppraisalForm(LAND_APPRAISAL_DEFAULT_DATA);
+      reset(APPRAISAL_FORM_DEFAULT); // clear form
     } catch (error) {
-      console.error(error);
+      console.error("Error in onAppraisalSubmit:", error);
     } finally {
       setModalActive(false);
     }
@@ -144,11 +131,13 @@ export const LandAppraisalFields = (props) => {
       </StyledFieldset>
 
       <AddLandAppraisalModal
+        watch={watch}
+        setValue={setValue}
+        control={control}
         open={modalActive}
         onClose={() => setModalActive(false)}
-        handleAppraisalSubmit={handleAppraisalSubmit}
+        handleSubmit={handleSubmit(onAppraisalSubmit)}
         landAppraisal={landAppraisalForm}
-        handleFieldsChange={handleFieldsChange}
       />
     </>
   );

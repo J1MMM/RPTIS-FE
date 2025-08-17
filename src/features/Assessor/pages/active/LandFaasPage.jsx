@@ -14,8 +14,13 @@ import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import { FIELDS } from "../../constants/fieldNames";
 import { TableToolbar } from "../../../../components/shared/TableToolbar";
 import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
+import { useForm } from "react-hook-form";
+import { TRANSACTION_CODE } from "../../constants/dropdownOptions";
+import SelectField from "../../../../components/ui/SelectField";
+import useAssessorForm from "../../hooks/useFormContext";
 
 function LandFaasPage() {
+  const { handleSubmit } = useAssessorForm();
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const [formData, setFormData] = useState(DEFAULT_FIELD_VALUES);
 
@@ -23,6 +28,11 @@ function LandFaasPage() {
   const [selectedArpNos, setSelectedArpNos] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
 
+  const onSubmit = (data) => {
+    console.log("Submit from react-hook-form");
+    console.log(data);
+    console.log(data[FIELDS.TRANSACTION_CODE]);
+  };
   const handleViewClick = (params) => {
     const id = params?.row?.id;
   };
@@ -106,6 +116,7 @@ function LandFaasPage() {
           onClose: () => setAddModalActive(false),
         }}
         formState={{ formData, setFormData, setReadOnly }}
+        onSubmit={onSubmit}
         // actionButton={<TaxdecModalButtons />}
       />
 

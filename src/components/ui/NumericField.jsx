@@ -1,36 +1,49 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { Controller } from "react-hook-form";
+import { TextField } from "@mui/material";
 import { NumericFormat } from "react-number-format";
 
 function NumericField({
+  control,
   name,
-  value,
   label,
   adornment,
   disabled,
-  size,
-  color,
+  size = "medium",
   margin = "dense",
   readOnly = true,
+  rules, // RHF validation rules
 }) {
   return (
-    <NumericFormat
-      size={size}
-      disabled={disabled}
-      customInput={TextField}
-      fullWidth
-      variant="outlined"
-      label={label}
-      margin={margin}
+    <Controller
       name={name}
-      value={value}
-      thousandSeparator=","
-      allowNegative={false}
-      slotProps={{
-        input: {
-          ...adornment,
-          readOnly: readOnly,
-        },
-      }}
+      control={control}
+      rules={rules}
+      render={({ field, fieldState: { error } }) => (
+        <NumericFormat
+          {...field}
+          customInput={TextField}
+          fullWidth
+          variant="outlined"
+          label={label}
+          size={size}
+          margin={margin}
+          disabled={disabled}
+          thousandSeparator=","
+          allowNegative={false}
+          value={field.value ?? ""}
+          onValueChange={(values) => {
+            field.onChange(values.value); // raw number without formatting
+          }}
+          slotProps={{
+            input: {
+              ...adornment,
+              readOnly,
+            },
+          }}
+          error={!!error}
+          helperText={error?.message}
+        />
+      )}
     />
   );
 }

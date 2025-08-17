@@ -11,11 +11,12 @@ import {
 import { NumericFormat } from "react-number-format";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { CLASSIFICATION_OPTIONS } from "../../../../constants/dropdownOptions";
-import SelectField from "../../../../components/inputs/SelectField";
+
 import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../components/inputs/TextInput";
 import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
 import { formatPercent } from "../../../../../../utils/formatters";
+import SelectFieldOld from "../../../../../../components/ui/SelectFieldOld";
 
 export const LandPropertyAssessmentFields = (props) => {
   const { formData, handleFormChange } = props;
@@ -24,7 +25,7 @@ export const LandPropertyAssessmentFields = (props) => {
     <StyledFieldset title="Property Assessment">
       <Stack>
         <Stack direction="row" gap={1}>
-          <SelectField
+          <SelectFieldOld
             label="Actual Use"
             onChange={handleFormChange}
             name={FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE}

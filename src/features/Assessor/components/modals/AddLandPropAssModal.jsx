@@ -1,20 +1,12 @@
 import { Button, InputAdornment, Stack, TextField } from "@mui/material";
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
 import { FIELDS } from "../../constants/fieldNames";
-import NumberInput from "../../../../components/inputs/NumberInput";
-import NumericField from "../../../../components/inputs/NumericField";
-import SelectField from "../../../../components/inputs/SelectField";
-import {
-  ACTUALUSE_EQUI_LEVEL,
-  UNIT_VALUE_TABLE,
-} from "../../constants/unitValues";
-import {
-  CLASSIFICATION_OPTIONS,
-  SUBCLASS_OPTIONS,
-} from "../../constants/dropdownOptions";
+
+import { CLASSIFICATION_OPTIONS } from "../../constants/dropdownOptions";
 import TextInput from "../../../../components/inputs/TextInput";
 import { NumericFormat } from "react-number-format";
 import { formatPercent } from "../../../../utils/formatters";
+import SelectFieldOld from "../../../../components/ui/SelectFieldOld";
 
 export const AddLandPropAssModal = (props) => {
   const { formData, handleFormChange, handlePropAssSubmit, open, onClose } =
@@ -45,7 +37,7 @@ export const AddLandPropAssModal = (props) => {
     >
       <Stack>
         <Stack direction="row" gap={1}>
-          <SelectField
+          <SelectFieldOld
             label="Actual Use"
             onChange={handleFormChange}
             name={FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE}

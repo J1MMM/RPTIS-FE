@@ -128,7 +128,7 @@ export const APPRAISAL_COLUMN = [
     disableColumnMenu: true,
   },
   {
-    field: FIELDS.LAND_SUB_CLASS,
+    field: FIELDS.SUBCLASS,
     headerName: "Sub-Classification",
     flex: 1,
     headerClassName: "data-grid-header",

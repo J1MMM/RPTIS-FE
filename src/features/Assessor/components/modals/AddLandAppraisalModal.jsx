@@ -1,24 +1,20 @@
 import { ContainerModal } from "../../../../components/shared/ContainerModal";
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import {
   CLASSIFICATION_OPTIONS,
   SUBCLASS_OPTIONS,
 } from "../../constants/dropdownOptions";
-import NumberInput from "../../../../components/ui/NumberInput";
-import SelectField from "../../../../components/ui/SelectField";
-import NumericField from "../../../../components/ui/NumericField";
 import { FIELDS } from "../../constants/fieldNames";
-import { toFixedTwo } from "../../../../utils/formatters";
 import { ADORNMENTS } from "../../../../constants/adornments";
+import SelectField from "../../../../components/ui/SelectField";
+import SubmitButton from "../../../../components/ui/SubmitButton";
+import CancelButton from "../../../../components/ui/CancelButton";
+import NumberInput from "../../../../components/ui/NumberInput";
+import NumericField from "../../../../components/ui/NumericField";
 
 export const AddLandAppraisalModal = (props) => {
-  const {
-    landAppraisal,
-    handleFieldsChange,
-    handleAppraisalSubmit,
-    open,
-    onClose,
-  } = props;
+  const { watch, setValue, control, handleSubmit, open, onClose } = props;
+  const classificationValue = watch(FIELDS.LAND_CLASSIFICATION);
 
   return (
     <ContainerModal
@@ -26,67 +22,54 @@ export const AddLandAppraisalModal = (props) => {
       title="Land Appraisal"
       open={open}
       onClose={onClose}
-      onSubmit={handleAppraisalSubmit}
+      onSubmit={handleSubmit}
       actionButton={
         <>
-          <Button
-            variant="outlined"
-            size="small"
-            color="primary"
-            onClick={onClose}
-          >
-            Cancel
-          </Button>
-          <Button variant="contained" size="small" type="submit">
-            Add
-          </Button>
+          <CancelButton />
+          <SubmitButton />
         </>
       }
     >
       <Stack>
         <Stack direction="row" gap={1}>
           <SelectField
+            control={control}
             label="Classification"
             name={FIELDS.LAND_CLASSIFICATION}
-            value={landAppraisal[FIELDS.LAND_CLASSIFICATION] || ""}
-            onChange={handleFieldsChange}
-            readOnly={props?.readOnly || props?.pendingPage}
             options={CLASSIFICATION_OPTIONS}
+            onChange={(e) => {
+              setValue(FIELDS.SUBCLASS, "");
+              setValue(FIELDS.LAND_CLASSIFICATION, e.target.value);
+            }}
           />
 
           <SelectField
+            control={control}
             label="Sub-Class"
-            name={FIELDS.LAND_SUB_CLASS}
-            value={landAppraisal[FIELDS.LAND_SUB_CLASS] || ""}
-            onChange={handleFieldsChange}
-            readOnly={props?.readOnly || props?.pendingPage}
-            disabled={!landAppraisal[FIELDS.LAND_CLASSIFICATION]}
-            options={
-              SUBCLASS_OPTIONS[landAppraisal?.[FIELDS.LAND_CLASSIFICATION]]
-            }
+            name={FIELDS.SUBCLASS}
+            disabled={!classificationValue}
+            options={SUBCLASS_OPTIONS[classificationValue] || []}
           />
 
           <NumberInput
+            control={control}
             label="Area"
             name={FIELDS.LAND_AREA}
-            value={landAppraisal?.[FIELDS.LAND_AREA]}
-            onChange={handleFieldsChange}
-            readOnly={props?.readOnly}
             adornment={ADORNMENTS.SQM}
           />
         </Stack>
 
         <Stack direction="row" gap={1}>
           <NumericField
+            control={control}
             label="Unit Value"
             name={FIELDS.LAND_UNIT_VALUE}
-            value={landAppraisal?.[FIELDS.LAND_UNIT_VALUE]}
             adornment={ADORNMENTS.PESO}
           />
           <NumericField
+            control={control}
             label="Base Market Value"
             name={FIELDS.LAND_BASE_MARKET_VALUE}
-            value={toFixedTwo(landAppraisal?.[FIELDS.LAND_BASE_MARKET_VALUE])}
             adornment={ADORNMENTS.PESO}
           />
         </Stack>

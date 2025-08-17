@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import { TextField } from "@mui/material";
 
-function NumberInput({
+function NumberInputOld({
   control,
   name,
   label,
@@ -61,4 +61,4 @@ function NumberInput({
   );
 }
 
-export default NumberInput;
+export default NumberInputOld;

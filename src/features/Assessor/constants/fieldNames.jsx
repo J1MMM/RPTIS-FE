@@ -39,7 +39,7 @@ export const FIELDS = {
   // Land Appraisal
   LAND_APPRAISAL: "landAppraisal",
   LAND_CLASSIFICATION: "classification",
-  LAND_SUB_CLASS: "subClass",
+  SUBCLASS: "subClass",
   LAND_AREA: "area",
   LAND_UNIT_VALUE: "unitValue",
   LAND_BASE_MARKET_VALUE: "baseMarketValue",

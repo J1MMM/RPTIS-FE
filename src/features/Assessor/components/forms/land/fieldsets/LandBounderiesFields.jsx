@@ -1,94 +1,56 @@
-import { Stack, TextField } from "@mui/material";
+import { Stack } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { FIELDS } from "../../../../constants/fieldNames";
+import TextInput from "../../../../../../components/ui/TextInput";
+import useAssessorForm from "../../../../hooks/useFormContext";
 
-function LandBounderiesFields(props) {
-  const { formData, handleFormChange } = props;
+function LandBounderiesFields() {
+  const { landFaasControl } = useAssessorForm();
   return (
     <StyledFieldset title="Boundaries">
       <Stack direction="row" gap={1}>
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="North"
-          variant="outlined"
           name={FIELDS.NORTH_BOUNDARY}
-          value={formData[FIELDS.NORTH_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="South"
-          variant="outlined"
           name={FIELDS.SOUTH_BOUNDARY}
-          value={formData[FIELDS.SOUTH_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="East"
-          variant="outlined"
           name={FIELDS.EAST_BOUNDARY}
-          value={formData[FIELDS.EAST_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="West"
-          variant="outlined"
           name={FIELDS.WEST_BOUNDARY}
-          value={formData[FIELDS.WEST_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
       </Stack>
 
       <Stack direction="row" gap={1}>
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="NE"
-          variant="outlined"
           name={FIELDS.NE_BOUNDARY}
-          value={formData[FIELDS.NE_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="SW"
-          variant="outlined"
           name={FIELDS.SW_BOUNDARY}
-          value={formData[FIELDS.SW_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="SE"
-          variant="outlined"
           name={FIELDS.SE_BOUNDARY}
-          value={formData[FIELDS.SE_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
-        <TextField
-          margin="dense"
-          fullWidth
+        <TextInput
+          control={landFaasControl}
           label="NW"
-          variant="outlined"
           name={FIELDS.NW_BOUNDARY}
-          value={formData[FIELDS.NW_BOUNDARY] || ""}
-          onChange={handleFormChange}
-          slotProps={{ input: { readOnly: props?.readOnly } }}
         />
       </Stack>
     </StyledFieldset>
