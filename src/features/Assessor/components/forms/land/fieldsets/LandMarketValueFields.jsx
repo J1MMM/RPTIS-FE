@@ -10,6 +10,8 @@ import { processNonStrippingAdjustment, processStrippingAdjustment, updateLandAp
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
 import { useForm, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
+import { toastConfig } from "@constants/toastConfig";
+import { toast } from "react-toastify";
 
 function LandMarketValueFields() {
   const [modalActive, setModalActive] = useState(false);
@@ -23,10 +25,6 @@ function LandMarketValueFields() {
   const marketAdjustment = useWatch({ control: landFaasFormControl, name: FIELDS.MARKET_ADJUSTMENT }) || []
   const selectedRowData = useWatch({ control: selControl })
   const appraisalEmpty = landAppraisals?.length === 0;
-  console.log("==SELECTED ROW==");
-  console.log(getSelValues());
-  console.log("==FAAS FORM==");
-  console.log(faasFormData);
 
   const handleAdjustmentSubmit = () => {
     const adjustmentFactor = selectedRowData[FIELDS.MARKET_ADJUSTMENT_FACTORS];
@@ -55,33 +53,42 @@ function LandMarketValueFields() {
       setSelectedFactor("");
       resetSelForm(APPRAISAL_FORM_DEFAULT)
       setModalActive(false);
+      toast.success("Adjustment added successfully!", toastConfig);
+
     } catch (error) {
+      toast.error("Failed to Add Adjustment. Please try again.", toastConfig);
       console.error(error);
     }
   };
 
   const handleDelete = (id) => {
-    const updatedAppraisal = landAppraisals.map((item) => {
-      const initialMarketVal = item[FIELDS.LAND_BASE_MARKET_VALUE];
-      if (item?.id == id) {
-        return {
-          ...item,
-          [FIELDS.LAND_MARKET_VALUE]: initialMarketVal,
-          [FIELDS.LAND_ACTUAL_USE]: "",
-          [FIELDS.LAND_ASSESSMENT_LEVEL]: 0,
-          [FIELDS.LAND_ASSESSED_VALUE]: 0,
-          adjusted: false,
-        };
-      }
-      return item;
-    });
+    try {
+      const updatedAppraisal = landAppraisals.map((item) => {
+        const initialMarketVal = item[FIELDS.LAND_BASE_MARKET_VALUE];
+        if (item?.id == id) {
+          return {
+            ...item,
+            [FIELDS.LAND_MARKET_VALUE]: initialMarketVal,
+            [FIELDS.LAND_ACTUAL_USE]: "",
+            [FIELDS.LAND_ASSESSMENT_LEVEL]: 0,
+            [FIELDS.LAND_ASSESSED_VALUE]: 0,
+            adjusted: false,
+          };
+        }
+        return item;
+      });
 
-    const updatedMarketAjustments = marketAdjustment.filter((item) => item?.appraisalID !== id);
-    const totalAssessedValue = sumByField(updatedAppraisal, FIELDS.LAND_ASSESSED_VALUE);
+      const updatedMarketAjustments = marketAdjustment.filter((item) => item?.appraisalID !== id);
+      const totalAssessedValue = sumByField(updatedAppraisal, FIELDS.LAND_ASSESSED_VALUE);
 
-    setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
-    setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAjustments)
-    setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+      setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAjustments)
+      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      toast.success("Adjustment deleted successfully!", toastConfig);
+    } catch (error) {
+      toast.error("Failed to Delete Adjustment. Please try again.", toastConfig);
+    }
+
   };
 
   const onModalClose = () => {

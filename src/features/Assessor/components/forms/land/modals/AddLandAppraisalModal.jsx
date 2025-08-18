@@ -11,7 +11,9 @@ import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
 
 export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled }) => {
-  const classificationValue = watch(FIELDS.LAND_CLASSIFICATION);
+  const classification = watch(FIELDS.LAND_CLASSIFICATION);
+  const subclass = watch(FIELDS.SUBCLASS);
+  const area = watch(FIELDS.LAND_AREA);
 
   return (
     <ContainerModal
@@ -20,11 +22,10 @@ export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, wa
       title="Land Appraisal"
       open={open}
       onClose={onClose}
-      onSubmit={handleSubmit}
       actionButton={
         <>
           <CancelButton disabled={disabled} onClick={onClose} />
-          <SubmitButton disabled={disabled} />
+          <SubmitButton onClick={handleSubmit} disabled={disabled || !classification || !subclass || !area} />
         </>
       }
     >
@@ -45,8 +46,8 @@ export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, wa
             control={control}
             label="Sub-Class"
             name={FIELDS.SUBCLASS}
-            disabled={!classificationValue}
-            options={SUBCLASS_OPTIONS[classificationValue] || []}
+            disabled={!classification}
+            options={SUBCLASS_OPTIONS[classification] || []}
           />
 
           <NumberInput

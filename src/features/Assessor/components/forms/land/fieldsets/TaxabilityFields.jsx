@@ -9,36 +9,36 @@ import useAssessorForm from "../../../../hooks/useFormContext";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { QUATER_OPTIONS } from "../../../../constants/dropdownOptions";
 
-function TaxabilityFields(props) {
-  const { control: landFaasFormControl } = useAssessorForm()
+function TaxabilityFields({ control }) {
 
   return (
     <StyledFieldset title="Taxability & Effectivity">
       <Stack direction="row" gap={1}>
-        <Controller
-          name={FIELDS.TAXABILITY}
-          control={landFaasFormControl}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <RadioGroup {...field} >
-              <FormControlLabel
-                value="Taxable"
-                control={<Radio />}
-                label="Taxable"
-                disabled={props?.readOnly}
-              />
-              <FormControlLabel
-                value="Exempt"
-                control={<Radio />}
-                label="Exempt"
-                disabled={props?.readOnly}
-              />
-            </RadioGroup>
-          )}
-        />
+        <Stack direction="row" width={"100%"}>
+          <Controller
+            name={FIELDS.TAXABILITY}
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <RadioGroup {...field} sx={{ display: "flex", flexDirection: "row" }}>
+                <FormControlLabel
+                  value="Taxable"
+                  control={<Radio />}
+                  label="Taxable"
+                />
+                <FormControlLabel
+                  value="Exempt"
+                  control={<Radio />}
+                  label="Exempt"
+                />
+              </RadioGroup>
+            )}
+          />
+        </Stack>
+
 
         <SelectField
-          control={landFaasFormControl}
+          control={control}
           label="Quarter"
           name={FIELDS.EFFECTIVITY_QTR}
           options={QUATER_OPTIONS}
@@ -49,7 +49,7 @@ function TaxabilityFields(props) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Controller
               name={FIELDS.EFFECTIVITY_YEAR}
-              control={landFaasFormControl}
+              control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <DatePicker
@@ -57,7 +57,6 @@ function TaxabilityFields(props) {
                   value={field.value ? dayjs(field.value) : null}
                   format="YYYY"
                   openTo="year"
-                  readOnly={props?.readOnly}
                   onChange={(newVal) => field.onChange(newVal?.toISOString() ?? null)}
                   slotProps={{
                     textField: { required: true },

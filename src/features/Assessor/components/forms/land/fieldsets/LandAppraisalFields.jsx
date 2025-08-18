@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import { Button, Stack } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { useEffect, useState } from "react";
+import { toastConfig } from "@constants/toastConfig";
 import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
 import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
@@ -11,6 +12,7 @@ import { sumByField } from "../../../../../../utils/math";
 import { useForm, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
+import { toast } from "react-toastify";
 
 function LandAppraisalFields() {
   const { control: landFaasFormControl, setValue: setLandFaasFormVal } = useAssessorForm();
@@ -30,20 +32,21 @@ function LandAppraisalFields() {
 
   }, [subClass, landArea]);
 
-  const onAppraisalSubmit = async (data) => {
+  const onAppraisalSubmit = (data) => {
     try {
       const updatedAppraisals = [...landAppraisal, { ...data, id: v4() }];
-      const totalMarketValue = sumByField(updatedAppraisals, [FIELDS.LAND_MARKET_VALUE]);
-      // Update RHF state
+      const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
+
       setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
       setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
       setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
-      // clear form
       resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
-    } catch (error) {
-      console.error("Error in onAppraisalSubmit:", error);
-    } finally {
+      toast.success("Appraisal added successfully!", toastConfig);
       setModalActive(false);
+
+    } catch (error) {
+      toast.error("Failed to Add appraisal. Please try again.", toastConfig);
+      console.error("Error in onAppraisalSubmit:", error);
     }
   };
 
@@ -58,9 +61,10 @@ function LandAppraisalFields() {
       setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAdj)
       setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
       setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      toast.success("Appraisal deleted successfully!", toastConfig);
     } catch (error) {
+      toast.error("Failed to delete appraisal. Please try again.", toastConfig);
       console.error(error);
-
     }
   };
 

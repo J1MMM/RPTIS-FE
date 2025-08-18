@@ -11,6 +11,7 @@ function NumberInput({
   width,
   margin = "dense",
   size = "medium",
+  maxLength = 15,
   rules, // optional validation rules from RHF
 }) {
   return (
@@ -47,6 +48,12 @@ function NumberInput({
               MozAppearance: "textfield",
             },
             width: width,
+          }}
+          onInput={(e) => {
+            if (maxLength && e.target.value.length > maxLength) {
+              e.target.value = e.target.value.slice(0, maxLength);
+            }
+            field.onChange(e); // ✅ keep RHF in sync
           }}
           slotProps={{
             input: {

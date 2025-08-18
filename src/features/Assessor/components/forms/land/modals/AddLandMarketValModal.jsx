@@ -1,20 +1,18 @@
 // External
-import { useEffect, useState } from "react";
-import { Button, Stack } from "@mui/material";
+import { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { useWatch } from "react-hook-form";
 // Shared components & utils
 import ContainerModal from "@components/shared/ContainerModal";
-import { toFixedTwo } from "@utils/formatters";
+import CancelButton from "@components/ui/CancelButton";
+import SubmitButton from "@components/ui/SubmitButton";
 // Feature-specific constants & utils
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
 import { computeStrippingFields } from "../../../../utils/computeStrippingFields";
-// Feature-specific constants & utils
 import SelectAppraisalTable from "../../../tables/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
-import CancelButton from "../../../../../../components/ui/CancelButton";
-import SubmitButton from "../../../../../../components/ui/SubmitButton";
-import { useWatch } from "react-hook-form";
 
 function AddLandMarketValModal({
   open,
@@ -96,11 +94,10 @@ function AddLandMarketValModal({
       maxWidth="md"
       open={open}
       onClose={onClose}
-      onSubmit={handleSubmit}
       actionButton={
         <>
           <CancelButton onClick={onClose} />
-          <SubmitButton disabled={selectedFactor == ""} />
+          <SubmitButton onClick={handleSubmit} disabled={selectedFactor == "" || inputArea == "" && selectedFactor == "Stripping"} />
         </>
       }
     >

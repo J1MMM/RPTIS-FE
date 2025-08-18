@@ -1,10 +1,11 @@
 import { Button, CircularProgress } from "@mui/material";
 
-function SubmitButton({ disabled, label = "Submit" }) {
+function SubmitButton({ onClick, isSubmitting, disabled, label = "Submit" }) {
   return (
     <Button
       disabled={disabled}
-      startIcon={disabled && <CircularProgress size={16} color="inherit" />}
+      onClick={onClick}
+      startIcon={isSubmitting && <CircularProgress size={16} color="inherit" />}
       variant="contained"
       size="small"
       type="submit"

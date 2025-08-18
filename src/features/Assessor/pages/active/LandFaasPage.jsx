@@ -1,21 +1,12 @@
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Collapse, Stack } from "@mui/material";
-import {
-  DATA_GRID_INITIAL_STATE,
-  DATA_GRID_STYLE,
-  PAGE_SIZE_OPTION,
-} from "@constants/tableStyles";
+import { Stack } from "@mui/material";
+import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { Add, Shuffle } from "@mui/icons-material";
 import useFaasData from "../../hooks/useFaasData";
-import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
-import { FIELDS } from "../../constants/fieldNames";
 import { TableToolbar } from "../../../../components/shared/TableToolbar";
 import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
-import { useForm } from "react-hook-form";
-import { TRANSACTION_CODE } from "../../constants/dropdownOptions";
-import SelectField from "../../../../components/ui/SelectField";
 import useAssessorForm from "../../hooks/useFormContext";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, ToastContainer } from "react-toastify";
@@ -28,8 +19,14 @@ function LandFaasPage() {
 
   const onSubmit = (data) => {
     console.log("Submit from react-hook-form");
+    try {
+      toast.success("Form submitted successfully!", { pauseOnHover: false, pauseOnFocusLoss: false });
+      setAddModalActive(false)
+    } catch (error) {
+      toast.error("Something went wrong while submitting.", { pauseOnHover: false, pauseOnFocusLoss: false });
+    }
     console.log(data);
-    toast.success("Form submitted successfully!")
+
   };
   const handleViewClick = (params) => {
     const id = params?.row?.id;
@@ -109,15 +106,13 @@ function LandFaasPage() {
       />
 
       <AddLandFaasModal
-        modalControl={{
-          open: addModalActive,
-          onClose: () => setAddModalActive(false),
-        }}
+        open={addModalActive}
+        onClose={() => setAddModalActive(false)}
         handleSubmit={handleSubmit(onSubmit)}
       // actionButton={<TaxdecModalButtons />}
       />
 
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer />
 
       {/* <TaxDecModal
         open={openRPTview}

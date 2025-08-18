@@ -46,6 +46,7 @@ function TextInput({
           }
           error={!!error}
           helperText={error ? error.message : ""}
+
           slotProps={{
             input: {
               ...adornment,

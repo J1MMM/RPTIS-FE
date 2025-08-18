@@ -6,7 +6,6 @@ import {
   DialogTitle,
   IconButton,
 } from "@mui/material";
-import React from "react";
 
 function ContainerModal({
   children,
@@ -20,13 +19,11 @@ function ContainerModal({
 }) {
   return (
     <Dialog
-
       fullWidth
       open={open}
       component={"form"}
       maxWidth={maxWidth}
       onSubmit={onSubmit}
-
     >
       <DialogTitle
         sx={{

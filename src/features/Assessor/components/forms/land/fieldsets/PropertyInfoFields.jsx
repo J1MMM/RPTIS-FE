@@ -5,43 +5,36 @@ import TextInput from "../../../../../../components/ui/TextInput";
 import SelectField from "../../../../../../components/ui/SelectField";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import DateInput from "../../../../../../components/ui/DateInput";
-import useAssessorForm from "../../../../hooks/useFormContext";
 
-function PropertyInfoFields() {
-  const { landFaasControl } = useAssessorForm();
-
+function PropertyInfoFields({ control }) {
   return (
     <StyledFieldset title="Property Information">
       <Stack direction="row" gap={1}>
-        <TextInput
-          control={landFaasControl}
-          label="ARP No."
-          name={FIELDS.ARP_NO}
-        />
-        <TextInput control={landFaasControl} label="PIN" name={FIELDS.PIN} />
+        <TextInput control={control} label="ARP No." name={FIELDS.ARP_NO} />
+        <TextInput control={control} label="PIN" name={FIELDS.PIN} />
       </Stack>
       <Stack direction="row" gap={1}>
         <TextInput
-          control={landFaasControl}
+          control={control}
           label="House No. & Street"
           name={FIELDS.NO_AND_STREET}
         />
 
         <SelectField
-          control={landFaasControl}
+          control={control}
           label="Barangay/District"
           name={FIELDS.BARANGAY}
           options={BRGY_OPTIONS}
         />
 
         <TextInput
-          control={landFaasControl}
+          control={control}
           label="City/Municipality"
           name={FIELDS.CITY}
           readOnly={true}
         />
         <TextInput
-          control={landFaasControl}
+          control={control}
           label="Province"
           name={FIELDS.PROVINCE}
           readOnly={true}
@@ -49,27 +42,19 @@ function PropertyInfoFields() {
       </Stack>
       <Stack direction="row" gap={1}>
         <TextInput
-          control={landFaasControl}
+          control={control}
           label="OCT/TCT/No."
           name={FIELDS.OCT_TCT_NO}
         />
-        <DateInput control={landFaasControl} label="Date" name={FIELDS.DATE} />
+        <DateInput control={control} label="Date" name={FIELDS.DATE} />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextInput control={control} label="Lot No" name={FIELDS.LOT_NO} />
+        <TextInput control={control} label="Block No." name={FIELDS.BLOCK_NO} />
       </Stack>
       <Stack direction="row" gap={1}>
         <TextInput
-          control={landFaasControl}
-          label="Lot No"
-          name={FIELDS.LOT_NO}
-        />
-        <TextInput
-          control={landFaasControl}
-          label="Block No."
-          name={FIELDS.BLOCK_NO}
-        />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput
-          control={landFaasControl}
+          control={control}
           multiline={true}
           label="Survey No."
           name="Survey"
@@ -77,6 +62,6 @@ function PropertyInfoFields() {
       </Stack>
     </StyledFieldset>
   );
-};
+}
 
-export default PropertyInfoFields
+export default PropertyInfoFields;

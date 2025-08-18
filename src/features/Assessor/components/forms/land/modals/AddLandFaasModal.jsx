@@ -15,8 +15,7 @@ import useAssessorForm from "../../../../hooks/useFormContext";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
 
-export default function AddLandFaasModal({ modalControl, handleSubmit }) {
-  const { open, onClose } = modalControl;
+export default function AddLandFaasModal({ open, onClose, handleSubmit }) {
   const { landFaasControl } = useAssessorForm();
 
   return (
@@ -45,14 +44,14 @@ export default function AddLandFaasModal({ modalControl, handleSubmit }) {
             options={TRANSACTION_CODE}
           />
         </Stack>
-        <PropertyInfoFields />
-        <OwnerInfoFields />
-        <AdministratorInfoFields />
-        <LandBounderiesFields />
+        <PropertyInfoFields control={landFaasControl} />
+        <OwnerInfoFields control={landFaasControl} />
+        <AdministratorInfoFields control={landFaasControl} />
+        <LandBounderiesFields control={landFaasControl} />
         <LandAppraisalFields />
         <LandMarketValueFields />
         <AssessmentFields />
-        <TaxabilityFields />
+        <TaxabilityFields control={landFaasControl} />
       </ContainerModal>
     </>
   );
