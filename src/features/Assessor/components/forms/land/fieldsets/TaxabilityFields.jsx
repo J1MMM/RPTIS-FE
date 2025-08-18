@@ -20,13 +20,15 @@ function TaxabilityFields({ control }) {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <RadioGroup {...field} sx={{ display: "flex", flexDirection: "row" }}>
+              <RadioGroup {...field} sx={{ display: "flex", flexDirection: "row" }} >
                 <FormControlLabel
+                  required
                   value="Taxable"
                   control={<Radio />}
                   label="Taxable"
                 />
                 <FormControlLabel
+                  required
                   value="Exempt"
                   control={<Radio />}
                   label="Exempt"

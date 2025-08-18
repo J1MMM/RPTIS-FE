@@ -10,32 +10,51 @@ import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
 import useAssessorForm from "../../hooks/useFormContext";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, ToastContainer } from "react-toastify";
+import ConfirmationDialog from "../../../../components/shared/ConfirmationDialog";
+import axios from "axios";
+import { toastConfig } from "../../../../constants/toastConfig";
 
 function LandFaasPage() {
-  const { handleSubmit } = useAssessorForm();
+  const { handleSubmit, formState: { isSubmitting } } = useAssessorForm();
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const [selectedArpNos, setSelectedArpNos] = useState([]);
 
-  const onSubmit = (data) => {
-    console.log("Submit from react-hook-form");
-    try {
-      toast.success("Form submitted successfully!", { pauseOnHover: false, pauseOnFocusLoss: false });
-      setAddModalActive(false)
-    } catch (error) {
-      toast.error("Something went wrong while submitting.", { pauseOnHover: false, pauseOnFocusLoss: false });
-    }
-    console.log(data);
 
+  const onSubmit = async (data) => {
+    // Exit early if already submitting
+    if (isSubmitting) return;
+    setDisabled(true); // disable immediately
+    console.log("Submitting data:", data);
+
+    try {
+      const res = await axios.get("https://mpfb2cea69f43c978176.free.beeceptor.com"); // example request
+      console.log(res.data);
+
+      toast.success("Form submitted successfully!", toastConfig);
+      setAddModalActive(false);
+    } catch (error) {
+      toast.error("Something went wrong while submitting.", toastConfig);
+    } finally {
+      setShowConfirmation(false);
+      setDisabled(false); // re-enable after request
+    }
   };
-  const handleViewClick = (params) => {
-    const id = params?.row?.id;
-  };
+
+  const handleClickSubmit = (e) => {
+    e.preventDefault()
+    e.stopPropagation();
+    setShowConfirmation(true)
+  }
+
 
   const PageButton = () => {
     return (
       <Stack direction="row" gap={1}>
         <Button
+
           disabled={Boolean(selectedArpNos.length < 2)}
           variant="outlined"
           onClick={() => setConsolidateActive(true)}
@@ -44,6 +63,7 @@ function LandFaasPage() {
           consolidate
         </Button>
         <Button
+          disableFocusRipple
           onClick={() => setAddModalActive(true)}
           variant="contained"
           startIcon={<Add />}
@@ -53,6 +73,12 @@ function LandFaasPage() {
       </Stack>
     );
   };
+
+
+  const handleViewClick = (params) => {
+    const id = params?.row?.id;
+  };
+
 
   const TABLE_HEADER = [
     ...LAND_TABLE_COLUMN,
@@ -106,85 +132,23 @@ function LandFaasPage() {
       />
 
       <AddLandFaasModal
+        disabled={disabled}
         open={addModalActive}
         onClose={() => setAddModalActive(false)}
-        handleSubmit={handleSubmit(onSubmit)}
+        handleSubmit={handleClickSubmit}
       // actionButton={<TaxdecModalButtons />}
       />
 
+
+      <ConfirmationDialog
+        disabled={disabled}
+        open={showConfirmation}
+        setOpen={() => setShowConfirmation(false)}
+        confirm={handleSubmit(onSubmit)}
+        title="Add Land FAAS Confirmation"
+        content="Are you sure you want to add this land FAAS data? It will be saved once confirmed."
+      />
       <ToastContainer />
-
-      {/* <TaxDecModal
-        open={openRPTview}
-        handleClose={handleTaxModalClose}
-        row={selectedRow}
-        setSelectedRow={setSelectedRow}
-        readOnly={readOnly}
-        setConfirmationOpen={setConfirmationOpen}
-        setReadOnly={setReadOnly}
-        actionButton={<TaxdecModalButtons />}
-      />
-
-
-
-      <SubdivideModal
-        open={subdivideModalOpen}
-        setOpen={setSubdivideModalOpen}
-        Brgy={selectedRow?.Brgy || null}
-        subdivideForm={subdivideForm}
-        setSubdivideForm={setSubdivideForm}
-        handleSubmit={handleSubdivideSubmit}
-        disabled={isDisable}
-      />
-
-      <ConsolidateModal
-        open={consolidateActive}
-        handleClose={() => setConsolidateActive(false)}
-        row={consolidateFormData}
-        setSelectedRow={setconsolidateFormData}
-        setConfirmationOpen={setConsolidateConfirmation}
-      />
-
-      <ConfirmationDialog
-        open={confirmationOpen}
-        setOpen={setConfirmationOpen}
-        confirm={handleTransferSubmit}
-        title="Transfer Tax Dec Confirmation"
-        content="Are you sure you want to transfer this data? Once confirmed, the new data will be added to the system, and the previous data will be moved to the canceled records."
-        disabled={isDisable}
-      />
-
-      <ConfirmationDialog
-        open={addTaxConfirmation}
-        setOpen={setAddTaxConfirmation}
-        confirm={handleAddTaxSubmit}
-        title="Add Tax Dec Confirmation"
-        content="Are you sure you want to add this data? Once confirmed, it will be permanently added to the system."
-        disabled={isDisable}
-      />
-
-      <ConfirmationDialog
-        open={consolidateConfirmation}
-        setOpen={setConsolidateConfirmation}
-        confirm={handleConsolidateSubmit}
-        title="Consolidate Tax dec Confirmation"
-        content="Are you sure you want to consolidate this tax declaration? Once confirmed, the data will be merged and permanently recorded in the system, and this action cannot be undone."
-        disabled={isDisable}
-      />
-
-      <SnackBar
-        open={alertShown}
-        onClose={setAlertShown}
-        severity={alertSeverity}
-        msg={formMsg}
-      />
-
-      <TaxdecPrintableFormModal
-        open={printableFormOpen}
-        onClose={() => setPrintableFormOpen(false)}
-        row={selectedRow} // Ensure `selectedRow` is defined in your component
-        formType={currentFormType}
-      /> */}
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { formatPercent } from "../../utils/formatters";
+import CustomTextField from "./SyledTextField";
 const numberFormatter = new Intl.NumberFormat("en-US");
 
 function TextInput({
@@ -25,7 +26,7 @@ function TextInput({
       control={control}
       rules={rules}
       render={({ field, fieldState: { error } }) => (
-        <TextField
+        <CustomTextField
           {...field}
           size={size}
           disabled={disabled}

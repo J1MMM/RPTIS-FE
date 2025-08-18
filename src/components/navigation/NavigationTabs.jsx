@@ -27,13 +27,28 @@ const NavigationTabs = ({ links }) => {
             sx={{
               px: 3,
               py: 1.5,
+              pt: 2,
+              // borderRadius: "8px",
               fontFamily: "Poppins",
               fontWeight: 500,
-              color: isActive ? "primary.main" : "#000",
-              borderBottom: isActive
-                ? "2px solid #1E3A8A"
-                : "2px solid transparent",
+              color: isActive ? "#272727" : "#616161",
+              overflow: "hidden",
               cursor: "pointer",
+              position: "relative",
+              '&:before': isActive ? {
+                content: '""',
+                bgcolor: "#1E3A8A",
+                position: "absolute",
+                bottom: "-7px  ",
+                right: "50%",
+                width: "75%",
+                height: "10px",
+                borderRadius: "100px",
+                borderBottomRightRadius: "0",
+                borderBottomLeftRadius: "0",
+                transform: "translate(50%, 0%)",
+
+              } : {}
             }}
             onClick={() => {
               if (!isActive) {

@@ -8,11 +8,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Divider,
-  Slide,
+  Stack,
   Typography,
 } from "@mui/material";
-import { forwardRef } from "react";
+import { useEffect, useState } from "react";
 
 const ConfirmationDialog = ({
   open,
@@ -24,62 +23,73 @@ const ConfirmationDialog = ({
   serverity,
   label,
 }) => {
+  const [disableBtn, setDisableBtn] = useState(false)
+
+  useEffect(() => {
+    if (open) setDisableBtn(false);
+  }, [open]);
+
   return (
     <Dialog
       open={open}
-      aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
       component={"span"}
     >
       <DialogTitle
         component={"span"}
-        id="alert-dialog-title"
-        variant="h6"
-        fontWeight="500"
-        sx={{ bgcolor: "primary.main" }}
+        sx={{ bgcolor: "primary.main", p: .5 }}
         color="white"
       >
-        {title}
       </DialogTitle>
-      <DialogContent component={"span"} dividers>
+      <DialogContent component={"span"} dividers sx={{ p: 2 }}>
         <DialogContentText component={"span"} id="alert-dialog-description">
           <Alert
             component={"span"}
             sx={{
               maxWidth: "450px",
               display: "flex",
+              gap: 2,
               alignItems: "center",
-              flexDirection: "column",
               "& .MuiAlert-icon": {
-                fontSize: 35,
+                fontSize: 48,
+                padding: 0,
+                margin: 0,
+                color: "primary.main"
               },
+              bgcolor: "#FFF"
             }}
-            severity={serverity || "warning"}
+            severity={serverity || "info"}
           >
-            <Typography component={"span"} variant="body1" textAlign="center">
-              {content}
-            </Typography>
+            <Stack gap={1}>
+              <Typography component={"span"} variant="h6">
+                {title}
+              </Typography>
+              <Typography component={"span"} variant="body1" >
+                {content}
+              </Typography>
+            </Stack>
           </Alert>
         </DialogContentText>
       </DialogContent>
       <DialogActions component={"span"}>
         <>
           <Button
-            disabled={!!disabled}
+            disabled={!!disabled || disableBtn}
             variant="outlined"
             size="small"
-            onClick={() => setOpen(false)}
+            onClick={setOpen}
           >
             Cancel
           </Button>
           <Button
             autoFocus
-            disabled={!!disabled}
+            disabled={!!disabled || disableBtn}
             variant="contained"
             size="small"
             color={serverity || "primary"}
             onClick={() => {
-              confirm();
+              setDisableBtn(true)
+              confirm()
             }}
           >
             {!!disabled ? (
