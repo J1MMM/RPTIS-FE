@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { Add, Shuffle } from "@mui/icons-material";
 import useFaasData from "../../hooks/useFaasData";
@@ -106,6 +106,7 @@ function LandFaasPage() {
   return (
     <>
       <DataGrid
+        className="land-faas-table"
         checkboxSelection
         // loading={isAssessorLoading}
         rows={landFaasRecords}
@@ -114,12 +115,12 @@ function LandFaasPage() {
         pageSizeOptions={PAGE_SIZE_OPTION}
         disableRowSelectionOnClick
         disableColumnResize
-        sx={DATA_GRID_STYLE}
+        sx={{ ...DATA_GRID_STYLE }}
         slots={{
           toolbar: () => (
             <TableToolbar
               titleText="Land FAAS Records"
-              subText="Appraisal and Assessment Data"
+              // subText="Appraisal and Assessment Data"
               actionBtn={<PageButton />}
             />
           ),
@@ -127,6 +128,7 @@ function LandFaasPage() {
         slotProps={{
           panel: {
             placement: "bottom-end",
+
           },
         }}
       />

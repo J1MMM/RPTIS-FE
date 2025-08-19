@@ -40,7 +40,7 @@ const Layout = () => {
 
       {/* <Header handleDrawerOpen={handleDrawerOpen} /> */}
       <NavSidePanel />
-      <Stack width={`calc(100% - ${SIDE_NAV_WIDTH})`}>
+      <Stack width={`calc(100vw - ${SIDE_NAV_WIDTH}px)`}>
         <Header />
         <Outlet />
       </Stack>

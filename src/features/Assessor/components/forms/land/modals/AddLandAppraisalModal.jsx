@@ -9,7 +9,7 @@ import { ADORNMENTS } from "@constants/adornments";
 import { CLASSIFICATION_OPTIONS, SUBCLASS_OPTIONS } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
-import { BsFolderPlus } from "react-icons/bs";
+import { BsFolderPlus, BsWallet } from "react-icons/bs";
 
 export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled }) => {
   const classification = watch(FIELDS.LAND_CLASSIFICATION);
@@ -23,7 +23,7 @@ export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, wa
       title="Land Appraisal"
       open={open}
       onClose={onClose}
-      headerIcon={<BsFolderPlus />}
+      headerIcon={<BsWallet />}
       actionButton={
         <>
           <CancelButton disabled={disabled} onClick={onClose} />

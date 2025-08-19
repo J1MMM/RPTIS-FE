@@ -10,7 +10,8 @@ export const PageContainer = ({ children }) => {
         bgcolor: "mono",
       }}
     >
-      <Box height={`calc(100vh - ${230}px)`} width="100%">
+      {/* <Box height={`calc(100vh - ${230}px)`} width="100%"> */}
+      <Box>
         {children}
       </Box>
     </Box>

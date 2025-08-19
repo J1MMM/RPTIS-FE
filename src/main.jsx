@@ -6,9 +6,6 @@ import theme from "./styles/theme.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DataProvider } from "./context/DataProvider.jsx";
-import "@fontsource/inter/400.css"; // Regular
-import "@fontsource/inter/500.css"; // Medium
-import "@fontsource/inter/700.css"; // Bold
 
 const queryClient = new QueryClient({});
 

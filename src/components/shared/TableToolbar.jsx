@@ -1,6 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useGridApiContext } from "@mui/x-data-grid";
 import TableFilterBtn from "../ui/TableFilterBtn";
+import SegmentedTabs from "../navigation/SegmentedTabs";
 
 export const TableToolbar = ({ titleText, subText, actionBtn }) => {
   const apiRef = useGridApiContext();
@@ -20,18 +21,22 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
 
   return (
     <Stack
+      // border={"1px solid"}
+      px={2}
       width="100%"
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      mb={2}
+      mb={1}
+      pt={.3}
     >
-      <Stack>
+      {/* <Stack>
         <Typography variant="h6" fontWeight={600}>
           {titleText}
         </Typography>
         <Typography variant="body2">{subText}</Typography>
-      </Stack>
+      </Stack> */}
+      <SegmentedTabs />
       <Stack direction="row" gap={1} alignItems="center">
         <TableFilterBtn />
         <Button variant="outlined" onClick={handleDownload}>

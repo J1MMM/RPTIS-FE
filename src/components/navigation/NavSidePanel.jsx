@@ -1,8 +1,5 @@
 import {
   AccountBalance,
-  Dashboard,
-  DashboardCustomize,
-  DashboardOutlined,
   FactCheckOutlined,
   PaymentsOutlined,
 } from "@mui/icons-material";
@@ -14,8 +11,8 @@ import {
 } from "../../constants/layout";
 import { teal } from "@mui/material/colors";
 import logoImg from '../../assets/images/seal.png'
-import { BsLayoutSidebar, BsList } from "react-icons/bs";
-
+import { BsList } from "react-icons/bs";
+import { Banknote, BookDashed, Camera, ClipboardList, FileSpreadsheet, Home, Icon, Landmark, Layers, LayoutDashboardIcon, Map, ReceiptText, UserCheck, Wallet } from "lucide-react";
 export default function NavSidePanel() {
   return (
     <Paper sx={{
@@ -25,11 +22,14 @@ export default function NavSidePanel() {
       height: "100%",
       boxSizing: "border-box",
       userSelect: "none",
-      zIndex: 2
+      zIndex: 2,
+      borderTopRightRadius: 0,
+      borderBottomRightRadius: 0
     }}>
+
       <Stack px={2} direction="row" alignItems="center" justifyContent="space-between" height={HEADER_HEIGHT} borderBottom={"1px solid #E5E7EB "}>
         <Stack direction="row" alignItems="center" gap={1}>
-          <img src={logoImg} width={38} style={{}} />
+          <img src={logoImg} width={48} style={{ marginLeft: "8px" }} />
           {/* <Box width={38} height={38} sx={{
               background: "linear-gradient(180deg,rgba(40, 127, 113, 1) 0%, rgba(14, 74, 64, 1) 100%)"
             }} borderRadius="14px"></Box> */}
@@ -46,33 +46,41 @@ export default function NavSidePanel() {
         gap={1} mt={3} mb={3}>
         <Typography variant="button" color="textDisabled" marginLeft={2}>MAIN MENU</Typography>
         <NavLink to="/" className="nav-link">
-          <Stack direction={"row"} alignItems="center" gap={2}>
-            <DashboardOutlined sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>
+          <Stack direction={"row"} alignItems="center" gap={1}>
+            <span>
+              <LayoutDashboardIcon size={24} display="block" />
+            </span>
+            <Typography >
               Overview
             </Typography>
           </Stack>
         </NavLink>
         <NavLink to="/assessor" className="nav-link">
-          <Stack direction={"row"} alignItems="center" gap={2}>
-            <AccountBalance sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>
+          <Stack direction={"row"} alignItems="center" gap={1}>
+            <span>
+              <Landmark size={24} display="block" />
+            </span>
+            <Typography >
               Assessor Office
             </Typography>
           </Stack>
         </NavLink>
         <NavLink to="/landtax-division" className="nav-link">
-          <Stack direction={"row"} alignItems="center" gap={2}>
-            <FactCheckOutlined sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>
+          <Stack direction={"row"} alignItems="center" gap={1}>
+            <span>
+              <Layers size={24} display="block" />
+            </span>
+            <Typography >
               Landtax Division
             </Typography>
           </Stack>
         </NavLink>
         <NavLink to="/cash-division" className="nav-link">
-          <Stack direction={"row"} alignItems="center" gap={2}>
-            <PaymentsOutlined sx={{ fontSize: 28 }} />
-            <Typography minWidth={300}>
+          <Stack direction={"row"} alignItems="center" gap={1}>
+            <span>
+              <Wallet size={24} display="block" />
+            </span>
+            <Typography >
               Cash Division
             </Typography>
           </Stack>

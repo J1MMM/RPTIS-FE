@@ -3,13 +3,29 @@ import NavigationTabs from "../../../../components/navigation/NavigationTabs";
 import { AssessorProvider } from "../../context/AssessorContext";
 import { ASSESSOR_TAB_LINKS } from "../../constants/tabs";
 import { AssessorFormProvider } from "../../context/FormContext";
+import { Box, Paper } from "@mui/material";
 
 const AssessorPageLayout = () => {
   return (
     <AssessorProvider>
       <AssessorFormProvider>
-        <NavigationTabs links={ASSESSOR_TAB_LINKS} />
-        <Outlet />
+        <Box
+          padding={3}
+          // border={"1px solid red"}
+          height={"100%"}
+          boxSizing={"border-box"}
+        >
+          <Paper
+            sx={{
+              // border: "1px solid",
+              borderRadius: "12px",
+              overflow: "hidden",
+            }}
+          >
+            <NavigationTabs links={ASSESSOR_TAB_LINKS} />
+            <Outlet />
+          </Paper>
+        </Box>
       </AssessorFormProvider>
     </AssessorProvider>
   );

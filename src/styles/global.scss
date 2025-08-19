@@ -19,7 +19,7 @@ body {
 .nav-link {
   text-decoration: none;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 12px;
   color: #9ca3af;
   border-radius: 12px;
   transition-duration: 300ms;
@@ -47,22 +47,33 @@ body {
     border-bottom: 2px solid #1e3a8a;
   }
 }
-
+.land-faas-table {
+  .MuiDataGrid-main {
+    outline: none;
+    border-top: 1px solid #e7ebf1;
+  }
+}
 .MuiDataGrid-main {
-  background-color: #fff;
-  border: 1px solid #e7ebf1;
-  border-bottom: none;
-  outline: none;
-  // border-radius: 5px;
+  // background-color: #fff;
+  // border: 1px solid #e7ebf1;
+  // outline: none;
+  // border-bottom: none;
+  // border-radius: 12px;
   // border-bottom-right-radius: 0;
   // border-bottom-left-radius: 0;
 }
+
 .MuiDataGrid-footerContainer {
   background-color: #fff;
   border: 1px solid #e7ebf1;
   border-top: none;
+
   // border-bottom-left-radius: 5px;
   // border-bottom-right-radius: 5px;
+
+  .MuiTablePagination-root {
+    overflow: hidden;
+  }
 }
 
 // calendar overide style

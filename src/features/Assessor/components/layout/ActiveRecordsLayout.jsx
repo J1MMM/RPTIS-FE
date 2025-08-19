@@ -2,13 +2,23 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { PageContainer } from "../../../../components/layout/PageContainer";
 import SegmentedTabs from "../../../../components/navigation/SegmentedTabs";
+import { Box } from "@mui/material";
 
 function ActiveRecordsLayout() {
   return (
-    <PageContainer>
-      <SegmentedTabs />
+    <Box
+      // border={"1px solid violet"}
+      boxSizing={"border-box"}
+      display={"flex"}
+      flexDirection={"column"}
+      // mt={2}
+      height={"calc(100vh - 160px)"}
+    >
+      <Box p={1}>
+        {/* <SegmentedTabs /> */}
+      </Box>
       <Outlet />
-    </PageContainer>
+    </Box>
   );
 }
 
