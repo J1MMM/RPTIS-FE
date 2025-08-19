@@ -2,6 +2,7 @@ import Avatar from "@mui/material/Avatar";
 import { Typography, Box, Stack } from "@mui/material";
 import { useState } from "react";
 import { UserMenu } from "./UserMenu";
+import { teal } from "@mui/material/colors";
 
 const UserAvatar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -24,7 +25,8 @@ const UserAvatar = () => {
         sx={{
           width: 40,
           height: 40,
-          border: "2px solid #FFF",
+          border: "2px solid",
+          borderColor: "secondary.main",
           boxSizing: "border-box",
           cursor: "pointer",
         }}
@@ -32,13 +34,13 @@ const UserAvatar = () => {
 
       {/* Typography for user name and email */}
       <Stack>
-        <Typography variant="body2" fontWeight={600} color="primary.light">
+        <Typography variant="body2" fontWeight={600} color={teal[900]}>
           Juan S. Dela Cruz {/* Replace with dynamic name */}
         </Typography>
         <Typography
           display="block"
           variant="caption"
-          color="primary.light"
+          color={teal[900]}
           fontSize="10px"
           mt={-0.3}
         >

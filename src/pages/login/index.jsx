@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, InputAdornment, TextField, Typography } from "@mui/material";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
 import logo from "../../assets/images/favicon.svg";
 import "./styles.scss";
+import { Person, PersonOutline, PersonRounded } from "@mui/icons-material";
 
 const LoginPage = () => {
   const { auth, setAuth } = useAuth();
@@ -99,6 +100,13 @@ const LoginPage = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            slotProps={
+              {
+                input: {
+                  startAdornment: <PersonRounded />
+                }
+              }
+            }
           />
           <TextField
             disabled={disable}

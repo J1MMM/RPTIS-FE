@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 body {
   padding: 0;
   margin: 0;
 
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
@@ -19,12 +19,17 @@ body {
 .nav-link {
   text-decoration: none;
   box-sizing: border-box;
-  padding: 18px;
-  color: #808080;
-
+  padding: 8px;
+  color: #9ca3af;
+  border-radius: 12px;
+  transition-duration: 300ms;
+  &:hover {
+    // color: #fff;
+    background-color: #e5e7eb;
+  }
   &.active {
-    color: #1e3a8a;
-    background-color: #f2f5f7;
+    color: #fff;
+    background-color: #287f71;
   }
 }
 
@@ -59,3 +64,17 @@ body {
   // border-bottom-left-radius: 5px;
   // border-bottom-right-radius: 5px;
 }
+
+// calendar overide style
+// .MuiPickersFadeTransitionGroup-root {
+//   height: 100% !important;
+// }
+.MuiYearCalendar-root {
+  // border: 1px solid;
+  margin-top: 30px;
+}
+// .MuiPickersDay-root,
+// .MuiPickersYear-yearButton,
+// .MuiPickersMonth-monthButton {
+//   border-radius: 4px !important;
+// }

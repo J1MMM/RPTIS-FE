@@ -4,7 +4,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-function DateInput({ control, name, label, readOnly }) {
+function DateInput({ control, name, label, readOnly, yearOnly }) {
   return (
     <FormControl margin="dense" fullWidth>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -19,7 +19,12 @@ function DateInput({ control, name, label, readOnly }) {
               value={field.value ? field.value : null}
               onChange={(newVal) => field.onChange(newVal)}
               readOnly={readOnly}
-              slotProps={{ textField: { required: true } }}
+              format={yearOnly ? "YYYY" : "MM/DD/YYYY"}
+              openTo={yearOnly ? "year" : "day"}
+              views={yearOnly ? ["year",] : ["year", "month", "day"]}
+              slotProps={{
+                textField: { required: true },
+              }}
             />
           )}
         />

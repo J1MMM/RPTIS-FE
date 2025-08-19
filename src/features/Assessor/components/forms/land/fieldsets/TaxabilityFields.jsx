@@ -8,6 +8,7 @@ import SelectField from "@components/ui/SelectField";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { QUATER_OPTIONS } from "../../../../constants/dropdownOptions";
+import DateInput from "../../../../../../components/ui/DateInput";
 
 function TaxabilityFields({ control }) {
 
@@ -47,27 +48,8 @@ function TaxabilityFields({ control }) {
         />
 
 
-        <FormControl margin="dense" fullWidth>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Controller
-              name={FIELDS.EFFECTIVITY_YEAR}
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <DatePicker
-                  label="Year"
-                  value={field.value ? dayjs(field.value) : null}
-                  format="YYYY"
-                  openTo="year"
-                  onChange={(newVal) => field.onChange(newVal?.toISOString() ?? null)}
-                  slotProps={{
-                    textField: { required: true },
-                  }}
-                />
-              )}
-            />
-          </LocalizationProvider>
-        </FormControl>
+        <DateInput control={control} label="Year" name={FIELDS.EFFECTIVITY_YEAR} yearOnly={true} />
+
       </Stack>
     </StyledFieldset>
   );

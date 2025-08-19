@@ -1,11 +1,15 @@
-import { CloseRounded } from "@mui/icons-material";
+import { AddRounded, CloseRounded, CreateNewFolderOutlined } from "@mui/icons-material";
 import {
+  Box,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
+  Stack,
+  Typography,
 } from "@mui/material";
+import { BsFolderPlus } from "react-icons/bs";
 
 function ContainerModal({
   children,
@@ -15,7 +19,8 @@ function ContainerModal({
   onClose,
   onSubmit,
   maxWidth = "md",
-  disabled
+  disabled,
+  headerIcon
 }) {
   return (
     <Dialog
@@ -24,19 +29,32 @@ function ContainerModal({
       component={"form"}
       maxWidth={maxWidth}
       onSubmit={onSubmit}
+      slotProps={{
+        paper: {
+          sx: {
+            borderRadius: "12px", // adjust as needed
+          },
+        }
+      }}
     >
       <DialogTitle
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          backgroundColor: "primary.main",
-          color: "#ffffff",
-          padding: "8px 24px",
+          py: 1
         }}
       >
-        {title}
-        <IconButton disabled={disabled} sx={{ color: "#FFF" }} onClick={onClose}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+          {headerIcon &&
+            <Stack p={1} bgcolor={"background.lightMain"} borderRadius={2}>
+              {headerIcon}
+            </Stack>
+          }
+          <Typography fontWeight={600} variant="body1">{title}</Typography>
+        </Stack>
+
+        <IconButton disabled={disabled} onClick={onClose}>
           <CloseRounded />
         </IconButton>
       </DialogTitle>
@@ -48,7 +66,9 @@ function ContainerModal({
         {children}
       </DialogContent>
 
-      <DialogActions>{actionButton}</DialogActions>
+      <DialogActions sx={{
+        p: 1.5
+      }}>{actionButton}</DialogActions>
     </Dialog>
   );
 };

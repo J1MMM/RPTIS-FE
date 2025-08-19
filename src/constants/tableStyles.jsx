@@ -1,6 +1,6 @@
 export const DATA_GRID_STYLE = {
   "& .MuiDataGrid-row": {
-    fontFamily: "Poppins",
+    fontFamily: "Inter",
     "&:last-child .MuiDataGrid-cell": {
       borderBottom: "none", // Remove bottom border from last row
     },
@@ -14,7 +14,7 @@ export const DATA_GRID_STYLE = {
     color: "#000",
     ".MuiDataGrid-columnHeaderTitle": {
       fontWeight: "600",
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
     },
     "&.MuiDataGrid-root": {
       border: "none",

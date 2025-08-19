@@ -26,7 +26,7 @@ function TextInput({
       control={control}
       rules={rules}
       render={({ field, fieldState: { error } }) => (
-        <CustomTextField
+        <TextField
           {...field}
           size={size}
           disabled={disabled}

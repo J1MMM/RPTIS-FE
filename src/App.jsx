@@ -10,17 +10,21 @@ import {
   LandFaasPage,
 } from "./features/Assessor";
 import "./styles/global.scss";
+import { ToastContainer } from "react-toastify";
+import { CssBaseline } from "@mui/material";
 
 function App() {
   return (
     <BrowserRouter>
+      <CssBaseline />
       <Routes>
         {/* <Route element={<PersistLogin />}> */}
         <Route path="/login" element={<LoginPage />} />
 
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Navigate to="/assessor" />} />
+          {/* <Route path="/" element={<Navigate to="/assessor" />} /> */}
+
           <Route>
             <Route path="assessor" element={<AssessorPageLayout />}>
               <Route index element={<Navigate to="active" replace />} />
@@ -57,6 +61,13 @@ function App() {
         {/* </Route> */}
         <Route path="*" element={<Missing />} />
       </Routes>
+
+      <ToastContainer
+        autoClose={3000}
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        newestOnTop
+      />
     </BrowserRouter>
   );
 }

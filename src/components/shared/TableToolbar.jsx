@@ -33,10 +33,10 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
         <Typography variant="body2">{subText}</Typography>
       </Stack>
       <Stack direction="row" gap={1} alignItems="center">
+        <TableFilterBtn />
         <Button variant="outlined" onClick={handleDownload}>
           Export CSV
         </Button>
-        <TableFilterBtn />
         {actionBtn}
       </Stack>
     </Stack>

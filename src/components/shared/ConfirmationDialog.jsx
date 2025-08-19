@@ -46,6 +46,7 @@ const ConfirmationDialog = ({
           <Alert
             component={"span"}
             sx={{
+              userSelect: "none",
               maxWidth: "450px",
               display: "flex",
               gap: 2,
@@ -61,7 +62,7 @@ const ConfirmationDialog = ({
             severity={serverity || "info"}
           >
             <Stack gap={1}>
-              <Typography component={"span"} variant="h6">
+              <Typography component={"span"} variant="h6" >
                 {title}
               </Typography>
               <Typography component={"span"} variant="body1" >
@@ -71,7 +72,7 @@ const ConfirmationDialog = ({
           </Alert>
         </DialogContentText>
       </DialogContent>
-      <DialogActions component={"span"}>
+      <DialogActions component={"span"} sx={{ p: 1.5 }}>
         <>
           <Button
             disabled={!!disabled || disableBtn}
@@ -87,10 +88,7 @@ const ConfirmationDialog = ({
             variant="contained"
             size="small"
             color={serverity || "primary"}
-            onClick={() => {
-              setDisableBtn(true)
-              confirm()
-            }}
+            onClick={confirm}
           >
             {!!disabled ? (
               <Box display="flex" alignItems="center" gap={2}>

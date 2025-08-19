@@ -2,21 +2,56 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "'Poppins', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: "Inter",
   },
   palette: {
     primary: {
-      main: "#1E3A8A",
-      light: "#E8EAF6",
+      // main: "#1E3A8A
+      main: "#287F71", // leat
+      contrastText: "#ffffff",
+    },
+    secondary: {
+      main: "#EB862A", // warm amber (great contrast with navy)
+      contrastText: "#000000",
     },
     mono: {
-      main: "#f8fafd",
+      // main: "#E8EAF6"
+      // main: "#f8fafd"
     },
+    success: {
+      main: "#16A34A", // modern green
+      contrastText: "#ffffff",
+    },
+    error: {
+      main: "#DC2626", // red for alerts
+      contrastText: "#ffffff",
+    },
+    warning: {
+      main: "#D97706", // slightly darker amber for warnings
+      contrastText: "#000000",
+    },
+    info: {
+      main: "#0284C7", // bright blue for info states
+      contrastText: "#ffffff",
+    },
+    background: {
+      // default: "#FAFCFE", // light gray background
+      default: "#FBFDFF", // light gray background
+      paper: "#FFFFFF",   // card / surface
+      lightMain: "#F2FAF9"
+    },
+    text: {
+      primary: "#111827",   // near-black
+      secondary: "#374151", // slate gray
+      disabled: "#9CA3AF",  // muted gray
+
+    },
+    // divider: "#E5E7EB", // subtle gray line
   },
   components: {
     MuiTextField: {
       defaultProps: {
-        fullWidth: true, // Apply this to all variants if needed
+        fullWidth: true,
         margin: "dense",
         variant: "outlined",
       },
@@ -24,8 +59,9 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: "none", // disables auto-uppercase
+          textTransform: "none",
           whiteSpace: "nowrap",
+          borderRadius: '7px'
         },
       },
     },
