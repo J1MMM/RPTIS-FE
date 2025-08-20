@@ -13,6 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import ConfirmationDialog from "../../../../components/shared/ConfirmationDialog";
 import axios from "axios";
 import { toastConfig } from "../../../../constants/toastConfig";
+import { Plus, ShuffleIcon } from "lucide-react";
 
 function LandFaasPage() {
   const { handleSubmit, formState: { isSubmitting } } = useAssessorForm();
@@ -55,10 +56,10 @@ function LandFaasPage() {
       <Stack direction="row" gap={1}>
         <Button
 
-          disabled={Boolean(selectedArpNos.length < 2)}
+          // disabled={Boolean(selectedArpNos.length < 2)}
           variant="outlined"
           onClick={() => setConsolidateActive(true)}
-          startIcon={<Shuffle />}
+          startIcon={<ShuffleIcon size={18} />}
         >
           consolidate
         </Button>
@@ -66,7 +67,7 @@ function LandFaasPage() {
           disableFocusRipple
           onClick={() => setAddModalActive(true)}
           variant="contained"
-          startIcon={<Add />}
+          startIcon={<Plus size={18} />}
         >
           Add Faas
         </Button>

@@ -8,7 +8,7 @@ import { BsList } from "react-icons/bs";
 
 
 
-export const Header = (props) => {
+export const Header = () => {
   return (
 
     <Box sx={{
@@ -25,19 +25,9 @@ export const Header = (props) => {
     }}
     >
       <Stack gap={1} direction={"row"} alignItems={"center"}>
-        {/* <Box
-          sx={{
-            width: "64px",
-            position: "relative",
-          }}
-        >
-          <img src={logo} alt="logo" width={"100%"} />
-        </Box> */}
         <Typography variant="h6" fontWeight={600} >
-          {/* REAL PROPERTY TAX INFORMATION SYSTEM */}
-          Land Faas Records
+          REAL PROPERTY TAX INFORMATION SYSTEM
         </Typography>
-        <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.lightMain" }} size="small" label="10,932" />
       </Stack>
       <Stack direction="row" alignItems="center">
         <Divider orientation="vertical" flexItem sx={{ mx: 2 }} />

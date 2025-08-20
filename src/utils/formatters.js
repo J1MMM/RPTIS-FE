@@ -18,3 +18,11 @@ export const toFixedTwo = (num) => {
   if (isNaN(parsed)) return 0;
   return Number(parsed.toFixed(2));
 };
+
+export const splitLastWord = (text = "") => {
+  const words = text.trim().split(" ");
+  return {
+    first: words.slice(0, -1).join(" "),
+    last: words.slice(-1)[0] || "",
+  };
+};

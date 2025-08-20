@@ -9,7 +9,7 @@ const LINKS = [
 
 function SegmentedTabs() {
   return (
-    <ButtonGroup sx={{ backgroundColor: "#FFF" }} variant="outlined">
+    <ButtonGroup sx={{ backgroundColor: "#FFF", }} variant="outlined" >
       {LINKS.map((link) => (
         <SegmentedBtn key={link.to} to={link.to}>
           {link.label}

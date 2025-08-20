@@ -10,10 +10,9 @@ export default function TableFilterBtn() {
         slotProps={{
           button: {
             style: {
-              marginTop: "-3px",
+              marginBottom: "4px",
               padding: "5px 20px",
               border: "0.1px solid",
-              borderColor: "#009689b3"
             },
           },
         }}

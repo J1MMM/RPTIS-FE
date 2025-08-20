@@ -14,8 +14,8 @@ function ActiveRecordsLayout() {
       // mt={2}
       height={"calc(100vh - 160px)"}
     >
-      <Box p={1}>
-        {/* <SegmentedTabs /> */}
+      <Box p={1} mt={1}>
+        <SegmentedTabs />
       </Box>
       <Outlet />
     </Box>

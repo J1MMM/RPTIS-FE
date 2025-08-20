@@ -1,10 +1,13 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Chip, Stack, Typography } from "@mui/material";
 import { useGridApiContext } from "@mui/x-data-grid";
 import TableFilterBtn from "../ui/TableFilterBtn";
 import SegmentedTabs from "../navigation/SegmentedTabs";
+import { splitLastWord } from "../../utils/formatters";
+import { Download, Filter, ListFilter } from "lucide-react";
 
 export const TableToolbar = ({ titleText, subText, actionBtn }) => {
   const apiRef = useGridApiContext();
+  const { first, last } = splitLastWord(titleText)
 
   const handleDownload = () => {
     const confirmDownload = window.confirm(
@@ -19,6 +22,15 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
     }
   };
 
+  const handleOpenFilterPanel = () => {
+    const isOpen = apiRef.current.state.preferencePanel.open;
+    if (isOpen) {
+      apiRef.current.hideFilterPanel();
+    } else {
+      apiRef.current.showFilterPanel();
+    }
+  };
+
   return (
     <Stack
       // border={"1px solid"}
@@ -28,19 +40,20 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
       justifyContent="space-between"
       alignItems="center"
       mb={1}
-      pt={.3}
+      pt={0.1}
     >
-      {/* <Stack>
-        <Typography variant="h6" fontWeight={600}>
-          {titleText}
+      <Stack gap={1} direction={"row"} alignItems={"center"}>
+        <Typography variant="h6" fontWeight={600} >
+          {first} <span style={{ color: "#9CA3AF" }}>{last}</span>
         </Typography>
-        <Typography variant="body2">{subText}</Typography>
-      </Stack> */}
-      <SegmentedTabs />
+        <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.lightMain" }} size="small" label="10,932" />
+      </Stack>
       <Stack direction="row" gap={1} alignItems="center">
-        <TableFilterBtn />
-        <Button variant="outlined" onClick={handleDownload}>
-          Export CSV
+        <Button variant="outlined" onClick={handleOpenFilterPanel} startIcon={<Filter size={18} />}>
+          Filters
+        </Button>
+        <Button variant="outlined" onClick={handleDownload} startIcon={<Download size={18} />}>
+          Download CSV
         </Button>
         {actionBtn}
       </Stack>

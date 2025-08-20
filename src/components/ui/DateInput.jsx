@@ -4,7 +4,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-function DateInput({ control, name, label, readOnly, yearOnly }) {
+function DateInput({ control, name, label, readOnly, yearOnly, popperClass }) {
   return (
     <FormControl margin="dense" fullWidth>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -24,6 +24,9 @@ function DateInput({ control, name, label, readOnly, yearOnly }) {
               views={yearOnly ? ["year",] : ["year", "month", "day"]}
               slotProps={{
                 textField: { required: true },
+                popper: {
+                  className: popperClass,
+                }
               }}
             />
           )}

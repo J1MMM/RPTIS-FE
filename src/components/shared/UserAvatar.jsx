@@ -1,8 +1,9 @@
 import Avatar from "@mui/material/Avatar";
-import { Typography, Box, Stack } from "@mui/material";
+import { Typography, Box, Stack, IconButton } from "@mui/material";
 import { useState } from "react";
 import { UserMenu } from "./UserMenu";
 import { teal } from "@mui/material/colors";
+import { ArrowDown, ChevronDown } from "lucide-react";
 
 const UserAvatar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -21,16 +22,13 @@ const UserAvatar = () => {
     <Stack alignItems="center" direction="row" gap={1}>
       {/* Avatar with click event to trigger popover */}
       <Avatar
-        onClick={handleClick}
         sx={{
           width: 40,
           height: 40,
-          border: "2px solid",
-          borderColor: "secondary.main",
-          boxSizing: "border-box",
-          cursor: "pointer",
+          bgcolor: "secondary.main"
         }}
-      />
+      >JD</Avatar>
+
 
       {/* Typography for user name and email */}
       <Stack>
@@ -47,6 +45,10 @@ const UserAvatar = () => {
           juandelacruzg@example.com {/* Replace with dynamic email */}
         </Typography>
       </Stack>
+
+      <IconButton onClick={handleClick}>
+        <ChevronDown />
+      </IconButton>
 
       {/* Popover with anchorOrigin and transformOrigin layout */}
       <UserMenu open={open} handleClose={handleClose} anchorEl={anchorEl} />

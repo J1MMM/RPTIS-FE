@@ -1,39 +1,34 @@
 import {
   Avatar,
   Box,
+  Button,
   Chip,
+  Divider,
   Menu,
   MenuItem,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import backgroundImage from "../../assets/images/header-bg.jpg";
 import { Logout } from "@mui/icons-material";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
-
-const headerStyle = {
-  width: "100%",
-  height: "100px",
-  position: "absolute",
-  zIndex: "1",
-  top: "-8px",
-  left: "0",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  boxSizing: "border-box",
-  backgroundImage: `linear-gradient(rgba(12, 19, 99, .8), rgba(12, 19, 99, .8)), url(${backgroundImage})`,
-};
+import { LogOutIcon, MessageCircleQuestion, Settings, UserRound } from "lucide-react";
+import ContainerModal from "./ContainerModal";
 
 export const UserMenu = (props) => {
+  const [modal, setModal] = useState(false)
   const navigate = useNavigate();
   const handleLogout = () => {
     Cookies.remove("token");
     // navigate("/login");
     window.location.reload();
     //navigate to login
+  };
+  const handleClick = () => {
+    setModal(true)
   };
 
   return (
@@ -42,42 +37,54 @@ export const UserMenu = (props) => {
       anchorEl={props.anchorEl}
       open={props.open}
       onClose={props.handleClose}
-      MenuListProps={{
-        "aria-labelledby": "basic-button",
-      }}
     >
-      <Stack minWidth="250px" direction="column" alignItems="center" pt={5}>
-        <Box sx={headerStyle} />
-        <Avatar
-          sx={{
-            width: 70,
-            height: 70,
-            zIndex: 1,
-            border: "2px solid #FFF",
-            boxSizing: "border-box",
-          }}
-        />
-        <Typography component={"span"} zIndex="2" variant="h6" mt={1}>
-          Juan S. Dela Cruz
-        </Typography>
-        <Typography component={"span"} zIndex="2" variant="caption">
-          juandelacruzg@example.com
-        </Typography>
-
-        <Chip sx={{ mt: 2 }} label="Admin" color="primary" size="small" />
-
+      <ContainerModal open={modal} onClose={() => setModal(false)} maxWidth="sm" title="Logout Modal">
+        <TextField label="Email" />
+        <TextField label="Password" />
+        <Button variant="contained" onClick={handleLogout}>Logout</Button>
+      </ContainerModal>
+      <Stack minWidth="230px" direction="column" alignItems="center" >
         <MenuItem
-          onClick={handleLogout}
           sx={{
             width: "100%",
-            justifyContent: "center",
-            mt: 3,
-            gap: 1,
+            gap: 2,
             color: "#808080",
           }}
         >
-          <Logout sx={{ color: "grey" }} />
-          Logout
+          <UserRound size={24} display="block" />
+          <Typography>Profile</Typography>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            width: "100%",
+            gap: 2,
+            color: "#808080",
+          }}
+        >
+          <Settings size={24} display="block" />
+          <Typography>Settings</Typography>
+        </MenuItem>
+        <MenuItem
+          sx={{
+            width: "100%",
+            gap: 2,
+            color: "#808080",
+          }}
+        >
+          <MessageCircleQuestion size={24} display="block" />
+          <Typography>Help and docs</Typography>
+        </MenuItem>
+        <Divider flexItem sx={{ mx: 2 }} />
+        <MenuItem
+          onClick={handleClick}
+          sx={{
+            width: "100%",
+            gap: 2,
+            color: "#808080",
+          }}
+        >
+          <LogOutIcon size={24} display="block" />
+          <Typography>Logout</Typography>
         </MenuItem>
       </Stack>
     </Menu>

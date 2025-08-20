@@ -48,7 +48,7 @@ function TaxabilityFields({ control }) {
         />
 
 
-        <DateInput control={control} label="Year" name={FIELDS.EFFECTIVITY_YEAR} yearOnly={true} />
+        <DateInput popperClass="yearOnly" control={control} label="Year" name={FIELDS.EFFECTIVITY_YEAR} yearOnly={true} />
 
       </Stack>
     </StyledFieldset>
