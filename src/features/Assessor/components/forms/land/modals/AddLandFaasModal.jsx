@@ -14,7 +14,7 @@ import AdministratorInfoFields from "../fieldsets/AdministratorInfoFields";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { BsFolderPlus } from "react-icons/bs";
+import { Landmark, } from "lucide-react";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled }) {
   const { landFaasControl } = useAssessorForm();
@@ -26,7 +26,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         open={open}
         onClose={onClose}
         onSubmit={handleSubmit}
-        headerIcon={<BsFolderPlus />}
+        headerIcon={<Landmark />}
         actionButton={
           <>
             <Button size="small" onClick={onClose} variant="outlined">

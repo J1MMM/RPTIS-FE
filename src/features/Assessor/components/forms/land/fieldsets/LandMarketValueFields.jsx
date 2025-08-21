@@ -12,6 +12,7 @@ import { useForm, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { toastConfig } from "@constants/toastConfig";
 import { toast } from "react-toastify";
+import { ArrowUpDown } from "lucide-react";
 
 function LandMarketValueFields() {
   const [modalActive, setModalActive] = useState(false);
@@ -108,7 +109,7 @@ function LandMarketValueFields() {
             onClick={() => setModalActive(true)}
             variant="contained"
             disabled={appraisalEmpty}
-            startIcon={<Add />}
+            startIcon={<ArrowUpDown size={18} />}
           >
             Adjustment
           </Button>

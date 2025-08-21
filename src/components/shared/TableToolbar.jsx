@@ -36,11 +36,12 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
       // border={"1px solid"}
       px={2}
       width="100%"
-      flexDirection="row"
       justifyContent="space-between"
-      alignItems="center"
+      flexDirection={{ md: "column", lg: "row", }}
+      alignItems={{ md: "start", lg: "center" }}
       mb={1}
       pt={0.1}
+      gap={1}
     >
       <Stack gap={1} direction={"row"} alignItems={"center"}>
         <Typography variant="h6" fontWeight={600} >
@@ -48,15 +49,19 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
         </Typography>
         <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.lightMain" }} size="small" label="10,932" />
       </Stack>
-      <Stack direction="row" gap={1} alignItems="center">
-        <Button variant="outlined" onClick={handleOpenFilterPanel} startIcon={<Filter size={18} />}>
-          Filters
-        </Button>
+      <Stack
+        gap={1}
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ md: "start" }}
+      >
         <Button variant="outlined" onClick={handleDownload} startIcon={<Download size={18} />}>
           Download CSV
         </Button>
+        <Button variant="outlined" onClick={handleOpenFilterPanel} startIcon={<Filter size={18} />}>
+          Filters
+        </Button>
         {actionBtn}
       </Stack>
-    </Stack>
+    </Stack >
   );
 };

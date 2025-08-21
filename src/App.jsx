@@ -24,7 +24,6 @@ function App() {
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/" element={<Layout />}>
           {/* <Route path="/" element={<Navigate to="/assessor" />} /> */}
-
           <Route>
             <Route path="assessor" element={<AssessorPageLayout />}>
               <Route index element={<Navigate to="active" replace />} />
@@ -45,7 +44,7 @@ function App() {
               <Route path="pending" element={<LandFaasPage />} />
             </Route>
 
-            <Route path="landtax-division" element={<AssessorPageLayout />}>
+            <Route path="landtax" element={<AssessorPageLayout />}>
               <Route path="" element={<LandFaasPage />} />
               <Route path="computed" element={<LandFaasPage />} />
               <Route path="paidlist" element={<LandFaasPage />} />

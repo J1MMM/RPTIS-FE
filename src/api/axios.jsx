@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../utils/constant";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default axios.create({
   baseURL: BASE_URL,
@@ -8,6 +8,6 @@ export default axios.create({
 
 export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
-  // headers: { "Content-Type": "application/json" },
   withCredentials: false,
+  // headers: { "Content-Type": "application/json" },
 });

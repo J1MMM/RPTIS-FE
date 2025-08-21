@@ -13,6 +13,7 @@ import { computeStrippingFields } from "../../../../utils/computeStrippingFields
 import SelectAppraisalTable from "../../../tables/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
+import { ArrowUpDown, CircleDollarSign, Coins, Scale, TrendingUp } from "lucide-react";
 
 function AddLandMarketValModal({
   open,
@@ -90,11 +91,11 @@ function AddLandMarketValModal({
 
   return (
     <ContainerModal
-
       title="Market Value Adjustment"
       maxWidth="md"
       open={open}
       onClose={onClose}
+      headerIcon={<ArrowUpDown />}
       actionButton={
         <>
           <CancelButton onClick={onClose} />

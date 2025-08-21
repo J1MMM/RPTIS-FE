@@ -2,7 +2,6 @@
 import { Divider, IconButton, Paper, Stack, Typography, } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { HEADER_HEIGHT, PANEL_WIDTH_CLSOE, PANEL_WIDTH_OPEN, SIDE_NAV_WIDTH } from "../../constants/layout";
-import { teal } from "@mui/material/colors";
 import logoImg from "../../assets/images/seal.png";
 
 import {
@@ -22,7 +21,6 @@ export default function NavSidePanel({ open, setOpen }) {
   return (
     <Paper
       sx={{
-        // p: 2,
         // border: "1px solid blue",
         width: open ? PANEL_WIDTH_OPEN : PANEL_WIDTH_CLSOE,
         height: "100%",
@@ -44,25 +42,26 @@ export default function NavSidePanel({ open, setOpen }) {
       // border="1px solid"
       >
         <Stack direction="row" alignItems="center" gap={1} display={open ? "" : "none"}>
-          <img src={logoImg} width={50} />
+          <img src={logoImg} width={48} />
           <Stack >
             <Typography
-              mt={"-12px"}
               color="#004d40"
-              variant="h5"
               fontWeight={600}
+              fontSize={18}
               position="relative"
+              mt={"-10px"}
               sx={{
                 ":after": {
                   content: "'San Pablo City'",
-                  fontSize: 12,
+                  fontSize: 10,
                   position: "absolute",
-                  bottom: "-12px",
+                  bottom: "-10px",
                   left: 0,
                   whiteSpace: "nowrap",
                   fontWeight: 500,
                 },
               }}
+
             >
               RPTIS
             </Typography>
@@ -74,11 +73,7 @@ export default function NavSidePanel({ open, setOpen }) {
         </IconButton>
       </Stack>
 
-      <Stack
-        p={2}
-        gap={1}
-      // border={"1px solid"}
-      >
+      <Stack p={2} gap={1}>
         <Typography variant="button" color="textDisabled" marginLeft={1}>
           {open ? "MAIN" : ""} MENU
         </Typography>
@@ -98,7 +93,7 @@ export default function NavSidePanel({ open, setOpen }) {
             <Typography display={open ? "" : "none"}>Assessor Office</Typography>
           </Stack>
         </NavLink>
-        <NavLink to="/landtax-division" className="nav-link">
+        <NavLink to="/landtax" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={1}>
             <span>
               <Layers size={24} display="block" />
@@ -106,7 +101,7 @@ export default function NavSidePanel({ open, setOpen }) {
             <Typography display={open ? "" : "none"}>Landtax Division</Typography>
           </Stack>
         </NavLink>
-        <NavLink to="/cash-division" className="nav-link">
+        <NavLink to="/cashier" className="nav-link">
           <Stack direction={"row"} alignItems="center" gap={1}>
             <span>
               <Wallet size={24} display="block" />

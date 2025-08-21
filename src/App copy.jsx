@@ -78,13 +78,13 @@ function App() {
               <Route path="pending" element={<LandFaasPage />} />
             </Route>
 
-            <Route path="landtax-division" element={<AssessorPageLayout />}>
+            <Route path="landtax" element={<AssessorPageLayout />}>
               <Route path="" element={<LandFaasPage />} />
               <Route path="computed" element={<LandFaasPage />} />
               <Route path="paidlist" element={<LandFaasPage />} />
             </Route>
 
-            <Route path="cash-division" element={<AssessorPageLayout />}>
+            <Route path="cashier" element={<AssessorPageLayout />}>
               <Route path="" element={<LandFaasPage />} />
               <Route path="paidlist" element={<LandFaasPage />} />
             </Route>

@@ -1,17 +1,17 @@
 export const FIELDS = {
   // property info
-  TRANSACTION_CODE: "transactionCode",
-  ARP_NO: "ArpNo",
-  PIN: "PIN",
-  NO_AND_STREET: "noAndSt",
-  BARANGAY: "Brgy",
+  TRANSACTION_CODE: "transaction_code",
+  ARP_NO: "arp_no",
+  PIN: "pin_no",
+  NO_AND_STREET: "street",
+  BARANGAY: "brgy",
   CITY: "city", // Fixed value
   PROVINCE: "province", // Fixed value
-  OCT_TCT_NO: "oct",
+  OCT_TCT_NO: "oct_tct",
   DATE: "DATE",
-  LOT_NO: "LOT",
-  BLOCK_NO: "block",
-  SURVEY_NO: "Survey",
+  LOT_NO: "lot_no",
+  BLOCK_NO: "blk_no",
+  SURVEY_NO: "survey_no",
   // owner info
   OWNER_FULLNAME: "ownerFullname",
   OWNER_TIN: "TIN",
@@ -28,14 +28,14 @@ export const FIELDS = {
   ADMIN_TEL: "AdminTel",
   ADMINISTRATOR_TIN: "administratorTIN",
   // Boundaries
-  NORTH_BOUNDARY: "northBoundary",
-  SOUTH_BOUNDARY: "southBoundary",
-  EAST_BOUNDARY: "EastBoundary",
-  WEST_BOUNDARY: "westBoundary",
-  NE_BOUNDARY: "NEboundary",
-  SW_BOUNDARY: "SWBoundary",
-  SE_BOUNDARY: "SEBoundary",
-  NW_BOUNDARY: "NWBoundary",
+  NORTH_BOUNDARY: "north",
+  SOUTH_BOUNDARY: "south",
+  EAST_BOUNDARY: "east",
+  WEST_BOUNDARY: "west",
+  NE_BOUNDARY: "northeast",
+  SW_BOUNDARY: "southwest",
+  SE_BOUNDARY: "southeast",
+  NW_BOUNDARY: "northwest",
   // Land Appraisal
   LAND_APPRAISAL: "landAppraisal",
   LAND_CLASSIFICATION: "classification",
@@ -60,12 +60,15 @@ export const FIELDS = {
   INPUT_AREA: "marketValueAdjustmentInputArea",
 
   // TAXABILITY
-  TAXABILITY: "TAXABILITY",
+  TAXABILITY: "taxable",
   // Effectivity of Assessment/Reassessment
-  EFFECTIVITY_QTR: "qtr",
-  EFFECTIVITY_YEAR: "year",
+  EFFECTIVITY_QTR: "effectivity_quarter",
+  EFFECTIVITY_YEAR: "effectivity_year",
   EFFECTIVITY_DATE_OF_EFFECTIVITY: "dateOfEffectivity",
 
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
+
+  //memoranda
+  MEMORANDA: "memoranda",
 };

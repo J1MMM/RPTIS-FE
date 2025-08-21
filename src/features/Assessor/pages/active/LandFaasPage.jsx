@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
-import { Add, Shuffle } from "@mui/icons-material";
 import useFaasData from "../../hooks/useFaasData";
 import { TableToolbar } from "../../../../components/shared/TableToolbar";
 import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
 import useAssessorForm from "../../hooks/useFormContext";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, } from "react-toastify";
 import ConfirmationDialog from "../../../../components/shared/ConfirmationDialog";
-import axios from "axios";
 import { toastConfig } from "../../../../constants/toastConfig";
-import { Plus, ShuffleIcon } from "lucide-react";
+import { PlusCircle, ShuffleIcon } from "lucide-react";
+import axios from "../../../../api/axios";
+import { FIELDS } from "../../constants/fieldNames";
+import { formatAppraisalData } from "../../utils/payloadAppraisalFormatter";
 
 function LandFaasPage() {
   const { handleSubmit, formState: { isSubmitting } } = useAssessorForm();
@@ -25,14 +26,38 @@ function LandFaasPage() {
 
 
   const onSubmit = async (data) => {
-    // Exit early if already submitting
-    if (isSubmitting) return;
-    setDisabled(true); // disable immediately
     console.log("Submitting data:", data);
+    if (isSubmitting) return;
+    const { landAppraisal, marketAdjustment, ...res } = data
+    const landappraisals = formatAppraisalData(data[FIELDS.LAND_APPRAISAL], data[FIELDS.MARKET_ADJUSTMENT])
+    const payload = {
+      ...res,
+      land_ownership: [
+        {
+          type: "person",
+          name: "",
+          firstname: "juan",
+          middlename: "D",
+          lastname: "Cruz",
+          suffix: "juan",
+          status: "active",
+          remarks: "",
+          tin: "93010",
+          contact_no: "09944465989",
+          email: "user@gmail.com",
+          street: "PUROK III",
+          brgy: "San Miguel",
+          city: "San Pablo",
+          province: "laguna",
+          role: "owner"
+        }
+      ],
+      landappraisals
+    }
+    console.log(payload);
 
     try {
-      const res = await axios.get("https://mpfb2cea69f43c978176.free.beeceptor.com"); // example request
-      console.log(res.data);
+      // const res = await axios.get("/asd", payload); 
 
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
@@ -51,29 +76,7 @@ function LandFaasPage() {
   }
 
 
-  const PageButton = () => {
-    return (
-      <Stack direction="row" gap={1}>
-        <Button
 
-          // disabled={Boolean(selectedArpNos.length < 2)}
-          variant="outlined"
-          onClick={() => setConsolidateActive(true)}
-          startIcon={<ShuffleIcon size={18} />}
-        >
-          consolidate
-        </Button>
-        <Button
-          disableFocusRipple
-          onClick={() => setAddModalActive(true)}
-          variant="contained"
-          startIcon={<Plus size={18} />}
-        >
-          Add Faas
-        </Button>
-      </Stack>
-    );
-  };
 
 
   const handleViewClick = (params) => {
@@ -109,7 +112,7 @@ function LandFaasPage() {
       <DataGrid
         className="land-faas-table"
         checkboxSelection
-        // loading={isAssessorLoading}
+        // loading={true}
         rows={landFaasRecords}
         columns={TABLE_HEADER}
         initialState={DATA_GRID_INITIAL_STATE}
@@ -122,7 +125,25 @@ function LandFaasPage() {
             <TableToolbar
               titleText="Land FAAS Records"
               // subText="Appraisal and Assessment Data"
-              actionBtn={<PageButton />}
+              actionBtn={(<>
+                <Button
+                  // disabled={Boolean(selectedArpNos.length < 2)}
+                  variant="outlined"
+                  onClick={() => setConsolidateActive(true)}
+                  startIcon={<ShuffleIcon size={18} />}
+                >
+                  consolidate
+                </Button>
+                <Button
+                  disableFocusRipple
+                  onClick={() => setAddModalActive(true)}
+                  variant="contained"
+                  startIcon={<PlusCircle size={18} />}
+                >
+                  Add FAAS
+                </Button>
+              </>
+              )}
             />
           ),
         }}
@@ -135,7 +156,7 @@ function LandFaasPage() {
       />
 
       <AddLandFaasModal
-        disabled={disabled}
+        disabled={isSubmitting}
         open={addModalActive}
         onClose={() => setAddModalActive(false)}
         handleSubmit={handleClickSubmit}
@@ -144,7 +165,7 @@ function LandFaasPage() {
 
 
       <ConfirmationDialog
-        disabled={disabled}
+        disabled={isSubmitting}
         open={showConfirmation}
         setOpen={() => setShowConfirmation(false)}
         confirm={handleSubmit(onSubmit)}

@@ -1,0 +1,91 @@
+{
+  "transaction_code": "",
+  "arp_no": "",
+  "pin_no": "",
+  "oct_tct": "",
+  "land_ownership": [
+    {
+      "type": "person",
+      "name": "",
+      "firstname": "juan",
+      "middlename": "D",
+      "lastname": "Cruz",
+      "suffix": "juan",
+      "status": "active",
+      "remarks": "",
+      "tin": "93010",
+      "contact_no": "09944465989",
+      "email": "user@gmail.com",
+      "street": "PUROK III",
+      "brgy": "San Miguel",
+      "city": "San Pablo",
+      "province": "laguna",
+      "role": "owner"
+    },
+    {
+      "type": "company",
+      "name": "Nescafe Inc.",
+      "firstname": "",
+      "middlename": "",
+      "lastname": "",
+      "suffix": "",
+      "status": "active",
+      "remarks": "",
+      "tin": "93010",
+      "contact_no": "09944465989",
+      "email": "company@gmail.com",
+      "street": "PUROK III",
+      "brgy": "San Miguel",
+      "city": "San Pablo",
+      "province": "laguna",
+      "role": "administrator"
+    }
+  ],
+  "date": "",
+  "survey_no": "",
+  "lot_no": "",
+  "blk_no": "",
+  "street": "",
+  "brgy": "",
+  "north": "",
+  "northeast": "",
+  "east": "",
+  "southEast": "",
+  "southWest": "",
+  "west": "",
+  "northWest": "",
+  "memoranda": "",
+  "landappraisals": [
+    {
+      "classification": "residential",
+      "subclassification": "r1",
+      "area": 100,
+      "actual_use": "residential",
+      "adjustments": [
+        {
+          "adjustment_factor": "cornerInfluence",
+          "area": 100
+        }
+      ]
+    },
+    {
+      "classification": "commercial",
+      "subclassification": "c4",
+      "area": 2000,
+      "actual_use": "commercial",
+      "adjustments": [
+        {
+          "adjustment_factor": "stripping1st",
+          "area": 30
+        }
+      ]
+    }
+  ],
+  "propertyAssessments": "",
+  "total_property_assessment": "",
+  "taxable": "",
+  "effectivity_quarter": "",
+  "effectivity_year": "",
+  "status": "",
+  "faasLandChain_id": ""
+}
