@@ -87,6 +87,7 @@ function AddLandMarketValModal({
     setSelValue(FIELDS.MARKET_ADJUSTMENT_PERCENT, percent)
     setSelValue(FIELDS.LAND_UNIT_VALUE, unitValue)
     setSelValue(FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT, totalValueAdjustment)
+
   }, [selectedFactor]);
 
   return (

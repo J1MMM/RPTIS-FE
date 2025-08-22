@@ -13,6 +13,7 @@ function TextInput({
   disabled,
   adornment,
   size,
+  type = "text",
   multiline = false,
   margin = "dense",
   required = true,
@@ -22,12 +23,14 @@ function TextInput({
 }) {
   return (
     <Controller
+      key={name}
       name={name}
       control={control}
       rules={rules}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
+          type={type}
           size={size}
           disabled={disabled}
           margin={margin}

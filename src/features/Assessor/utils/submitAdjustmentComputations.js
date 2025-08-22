@@ -6,6 +6,7 @@ export const processStrippingAdjustment = (selectedRow, strippingFields) => {
   const updatedMarketAdj = strippingFields.map((row) => ({
     id: v4(),
     appraisalID: selectedRow.id,
+    area: row.area,
     [FIELDS.LAND_BASE_MARKET_VALUE]: selectedRow[FIELDS.LAND_BASE_MARKET_VALUE],
     [FIELDS.MARKET_ADJUSTMENT_FACTORS]: row.name,
     [FIELDS.MARKET_ADJUSTMENT_PERCENT]: row.percentOfAdj,
@@ -23,10 +24,9 @@ export const processNonStrippingAdjustment = (selectedRow) => ({
   id: v4(),
   appraisalID: selectedRow?.id,
   [FIELDS.LAND_BASE_MARKET_VALUE]: selectedRow[FIELDS.LAND_BASE_MARKET_VALUE],
-  [FIELDS.MARKET_ADJUSTMENT_FACTORS]:
-    selectedRow[FIELDS.MARKET_ADJUSTMENT_FACTORS],
-  [FIELDS.MARKET_ADJUSTMENT_PERCENT]: selectedRow?.percent,
-  [FIELDS.ADJUSTED_MARKETVALUE]: selectedRow?.totalValueAdjustment,
+  [FIELDS.MARKET_ADJUSTMENT_FACTORS]: selectedRow[FIELDS.MARKET_ADJUSTMENT_FACTORS],
+  [FIELDS.MARKET_ADJUSTMENT_PERCENT]: selectedRow[FIELDS.MARKET_ADJUSTMENT_PERCENT],
+  [FIELDS.ADJUSTED_MARKETVALUE]: selectedRow[FIELDS.TOTAL_MARKET_VALUE_ADJUSTMENT],
 });
 
 export const updateLandAppraisal = (prev, updatedValue, selectedRow) => {

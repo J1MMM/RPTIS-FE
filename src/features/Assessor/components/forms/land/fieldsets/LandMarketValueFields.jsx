@@ -1,18 +1,16 @@
 import { Button, Stack } from "@mui/material";
-import { Add } from "@mui/icons-material";
-import StyledFieldset from "@components/ui/StyledFieldset";
+import { useForm, useWatch } from "react-hook-form";
+import { toast } from "react-toastify";
+import { ArrowUpDown } from "lucide-react";
 import { LandMarketValueTable } from "../../../tables/market-value-adjustment/LandMarketValueTable";
 import { useState } from "react";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
 import { sumByField } from "../../../../../../utils/math";
 import { processNonStrippingAdjustment, processStrippingAdjustment, updateLandAppraisal } from "../../../../utils/submitAdjustmentComputations";
+import StyledFieldset from "@components/ui/StyledFieldset";
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
-import { useForm, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
-import { toastConfig } from "@constants/toastConfig";
-import { toast } from "react-toastify";
-import { ArrowUpDown } from "lucide-react";
 
 function LandMarketValueFields() {
   const [modalActive, setModalActive] = useState(false);
@@ -54,10 +52,10 @@ function LandMarketValueFields() {
       setSelectedFactor("");
       resetSelForm(APPRAISAL_FORM_DEFAULT)
       setModalActive(false);
-      toast.success("Adjustment added successfully!", toastConfig);
+      toast.success("Adjustment added successfully!");
 
     } catch (error) {
-      toast.error("Failed to Add Adjustment. Please try again.", toastConfig);
+      toast.error("Failed to Add Adjustment. Please try again.");
       console.error(error);
     }
   };
@@ -85,9 +83,9 @@ function LandMarketValueFields() {
       setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
       setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAjustments)
       setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
-      toast.success("Adjustment deleted successfully!", toastConfig);
+      toast.success("Adjustment deleted successfully!");
     } catch (error) {
-      toast.error("Failed to Delete Adjustment. Please try again.", toastConfig);
+      toast.error("Failed to Delete Adjustment. Please try again.");
     }
 
   };
@@ -103,6 +101,7 @@ function LandMarketValueFields() {
       <StyledFieldset title="Market Value Adjustment">
         <Stack mb={2}>
           <Button
+            disableFocusRipple
             sx={{
               alignSelf: "flex-start",
             }}

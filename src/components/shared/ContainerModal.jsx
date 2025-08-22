@@ -66,9 +66,7 @@ function ContainerModal({
         {children}
       </DialogContent>
 
-      <DialogActions sx={{
-        p: 1.5
-      }}>{actionButton}</DialogActions>
+      <DialogActions sx={{ p: 1.5 }}>{actionButton}</DialogActions>
     </Dialog>
   );
 };

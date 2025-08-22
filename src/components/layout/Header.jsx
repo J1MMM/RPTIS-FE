@@ -11,7 +11,7 @@ export const Header = () => {
   const titles = {
     assessor: "OFFICE OF THE PROPERTY APPRAISER",
     landtax: "OFFICE OF THE REVENUE COMMISSIONER",
-    cashier: "OFFICE OF THE CITY TREASURY",
+    cash: "OFFICE OF THE CITY TREASURY",
   };
 
   // Find the matching title

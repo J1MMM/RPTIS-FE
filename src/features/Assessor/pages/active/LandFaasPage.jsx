@@ -15,6 +15,7 @@ import { PlusCircle, ShuffleIcon } from "lucide-react";
 import axios from "../../../../api/axios";
 import { FIELDS } from "../../constants/fieldNames";
 import { formatAppraisalData } from "../../utils/payloadAppraisalFormatter";
+import { v4 } from "uuid";
 
 function LandFaasPage() {
   const { handleSubmit, formState: { isSubmitting } } = useAssessorForm();
@@ -28,37 +29,36 @@ function LandFaasPage() {
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
-    const { landAppraisal, marketAdjustment, ...res } = data
-    const landappraisals = formatAppraisalData(data[FIELDS.LAND_APPRAISAL], data[FIELDS.MARKET_ADJUSTMENT])
-    const payload = {
-      ...res,
-      land_ownership: [
-        {
-          type: "person",
-          name: "",
-          firstname: "juan",
-          middlename: "D",
-          lastname: "Cruz",
-          suffix: "juan",
-          status: "active",
-          remarks: "",
-          tin: "93010",
-          contact_no: "09944465989",
-          email: "user@gmail.com",
-          street: "PUROK III",
-          brgy: "San Miguel",
-          city: "San Pablo",
-          province: "laguna",
-          role: "owner"
-        }
-      ],
-      landappraisals
-    }
-    console.log(payload);
 
     try {
-      // const res = await axios.get("/asd", payload); 
-
+      const { landAppraisal, marketAdjustment, ...res } = data
+      const landappraisals = formatAppraisalData(data[FIELDS.LAND_APPRAISAL], data[FIELDS.MARKET_ADJUSTMENT])
+      const payload = {
+        ...res,
+        land_ownership: [
+          {
+            type: "person",
+            name: "",
+            firstname: "juan",
+            middlename: "D",
+            lastname: "Cruz",
+            suffix: "juan",
+            status: "active",
+            remarks: "",
+            tin: "93010",
+            contact_no: "09944465989",
+            email: "user@gmail.com",
+            street: "PUROK III",
+            brgy: "San Miguel",
+            city: "San Pablo",
+            province: "laguna",
+            role: "owner"
+          }
+        ],
+        landappraisals
+      }
+      console.log(payload);
+      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {

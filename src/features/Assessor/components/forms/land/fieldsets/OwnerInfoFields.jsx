@@ -1,47 +1,38 @@
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import SelectField from "../../../../../../components/ui/SelectField";
+import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
+import { Add } from "@mui/icons-material";
+import { LandOwnerTable } from "../../../tables/owners-table/LandOwnerTable";
+import AddOwnerModal from "../modals/AddOwnerModal";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
 function OwnerInfoFields({ control }) {
-  return (
-    <StyledFieldset title="Owner's Information">
-      <Stack direction="row" gap={1}>
-        <TextInput
-          control={control}
-          label="Full Name"
-          name={FIELDS.OWNER_FULLNAME}
-          multiline={true}
-        />
-        <TextInput control={control} label="TIN No." name={FIELDS.OWNER_TIN} />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput
-          control={control}
-          label="House No. & Street"
-          name={FIELDS.OWNER_STREET}
-        />
-        <SelectField
-          control={control}
-          label="Barangay/District"
-          name={FIELDS.OWNER_BARANGAY}
-          options={BRGY_OPTIONS}
-        />
+  const { control: ownerFieldControl } = useForm()
+  const ownersForm = useWatch({ control: ownerFieldControl })
+  const [activeModal, setActiveModal] = useState(false)
 
-        <TextInput
-          control={control}
-          label="City/Municipality"
-          name={FIELDS.OWNER_CITY}
-        />
-        <TextInput
-          control={control}
-          label="Province"
-          name={FIELDS.OWNER_PROVINCE}
-        />
+  return (
+    <StyledFieldset title="Owner's / Administrator">
+      <Stack mb={2}>
+        <Button
+          disableFocusRipple
+          variant="contained"
+          startIcon={<Add />}
+          sx={{ alignSelf: "flex-start" }}
+          onClick={() => setActiveModal(true)}
+        >
+          Add Owner
+        </Button>
       </Stack>
-    </StyledFieldset>
+
+      <LandOwnerTable />
+      <AddOwnerModal open={activeModal} onClose={() => setActiveModal(false)} control={ownerFieldControl} form={ownersForm} />
+    </StyledFieldset >
   );
 }
 

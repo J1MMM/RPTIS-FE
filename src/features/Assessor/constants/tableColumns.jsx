@@ -271,3 +271,76 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     },
   },
 ];
+
+export const OWNER_INFO_TABLE_COLUMN = [
+  {
+    field: FIELDS.LAND_CLASSIFICATION,
+    headerName: "Type",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: FIELDS.SUBCLASS,
+    headerName: "Name",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
+  {
+    field: FIELDS.LAND_AREA,
+    headerName: "TIN",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : `${value?.toLocaleString()} m²`;
+    },
+  },
+  {
+    field: FIELDS.LAND_UNIT_VALUE,
+    headerName: "Contact",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
+  },
+  {
+    field: FIELDS.LAND_BASE_MARKET_VALUE,
+    headerName: "Email",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
+  },
+  {
+    field: "role",
+    headerName: "Role",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "" : formatPeso(value);
+    },
+  },
+];

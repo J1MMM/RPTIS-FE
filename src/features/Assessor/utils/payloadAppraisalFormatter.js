@@ -14,7 +14,7 @@ export function formatAppraisalData(appraisals, adjustments) {
         adjustment_factor: adj.marketAdjustmentFactors
           ? camelCase(adj.marketAdjustmentFactors)
           : "",
-        area: Number(appraisal.area), // keep appraisal area here
+        area: Number(adj.area), // keep appraisal area here
       })),
     };
   });

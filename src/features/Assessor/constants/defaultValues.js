@@ -13,6 +13,7 @@ export const APPRAISAL_FORM_DEFAULT = {
   [FIELDS.LAND_ACTUAL_USE]: "",
   [FIELDS.LAND_ASSESSMENT_LEVEL]: "",
   [FIELDS.LAND_ASSESSED_VALUE]: "",
+  [FIELDS.MARKET_ADJUSTMENT_PERCENT]: "",
   totalValueAdjustment: "",
   marketAdjustmentFactors: "",
   marketValueAdjustmentInputArea: "",

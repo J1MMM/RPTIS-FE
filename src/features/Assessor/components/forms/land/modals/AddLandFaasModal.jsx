@@ -48,7 +48,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         </Stack>
         <PropertyInfoFields control={landFaasControl} />
         <OwnerInfoFields control={landFaasControl} />
-        <AdministratorInfoFields control={landFaasControl} />
+        {/* <AdministratorInfoFields control={landFaasControl} /> */}
         <LandBounderiesFields control={landFaasControl} />
         <LandAppraisalFields />
         <LandMarketValueFields />

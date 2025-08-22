@@ -6,21 +6,25 @@
   "land_ownership": [
     {
       "type": "person",
+      "role": "owner",
+
       "name": "",
       "firstname": "juan",
       "middlename": "D",
       "lastname": "Cruz",
       "suffix": "juan",
-      "status": "active",
-      "remarks": "",
-      "tin": "93010",
-      "contact_no": "09944465989",
-      "email": "user@gmail.com",
+
       "street": "PUROK III",
       "brgy": "San Miguel",
       "city": "San Pablo",
       "province": "laguna",
-      "role": "owner"
+
+      "contact_no": "09944465989",
+      "email": "user@gmail.com",
+      "tin": "93010",
+      "remarks": "",
+
+      "status": "active"
     },
     {
       "type": "company",

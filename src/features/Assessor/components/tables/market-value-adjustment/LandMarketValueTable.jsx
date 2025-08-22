@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import { sumByField } from "../../../../../utils/math";
 import MarketAdjustmentTableFooter from "./MarketAdjustmentTableFooter";
+import { X } from "lucide-react";
 
 export const LandMarketValueTable = (props) => {
   const { handleDelete, marketAdjustment } = props;
@@ -31,7 +32,7 @@ export const LandMarketValueTable = (props) => {
               color="mono.main"
               onClick={() => handleDelete(params.row.appraisalID)}
             >
-              <Close />
+              <X />
             </IconButton>
           ),
         },
