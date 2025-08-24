@@ -26,3 +26,14 @@ export const splitLastWord = (text = "") => {
     last: words.slice(-1)[0] || "",
   };
 };
+
+export const toUpperCase = (text) => {
+  if (!text) return "";
+  return String(text).toUpperCase();
+};
+
+export const capitalizeFirstLetter = (text) => {
+  if (!text) return "";
+  const str = String(text).toLowerCase(); // optional: convert the rest to lowercase
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};

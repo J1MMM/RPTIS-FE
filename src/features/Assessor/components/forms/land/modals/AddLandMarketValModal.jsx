@@ -10,7 +10,7 @@ import SubmitButton from "@components/ui/SubmitButton";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
 import { computeStrippingFields } from "../../../../utils/computeStrippingFields";
-import SelectAppraisalTable from "../../../tables/select-appraisal/SelectAppraisalTable";
+import SelectAppraisalTable from "../../../tables/land/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
 import { ArrowUpDown, CircleDollarSign, Coins, Scale, TrendingUp } from "lucide-react";

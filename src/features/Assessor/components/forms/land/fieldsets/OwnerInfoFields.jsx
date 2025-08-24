@@ -1,20 +1,52 @@
 import { Button, Stack } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
-import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
-import SelectField from "../../../../../../components/ui/SelectField";
-import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
 import { Add } from "@mui/icons-material";
-import { LandOwnerTable } from "../../../tables/owners-table/LandOwnerTable";
+import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
 import AddOwnerModal from "../modals/AddOwnerModal";
 import { useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useFormContext, useWatch } from "react-hook-form";
+import { toast } from "react-toastify";
+import { v4 } from "uuid";
 
-function OwnerInfoFields({ control }) {
-  const { control: ownerFieldControl } = useForm()
-  const ownersForm = useWatch({ control: ownerFieldControl })
+const DEFAULT_OWNER_FORM = {
+  regions: "",
+  province: "",
+  city: "",
+  barangay: "",
+  type: "",
+  role: "",
+  contact_no: "",
+  email: "",
+  name: ""
+}
+
+function OwnerInfoFields() {
   const [activeModal, setActiveModal] = useState(false)
+  const { control: landFormControl, getValues, setValue: setLandFormVal, } = useFormContext()
+  const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
+  const ownersForm = useWatch({ control: ownerFieldControl })
+  const land_ownership = useWatch({ control: landFormControl, name: "land_ownership" }) || [];
+
+  console.log(ownersForm);
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation()
+
+    handleSubmit((data) => {
+      try {
+        const updatedOwners = [...land_ownership, { ...data, id: v4() }];
+        setLandFormVal("land_ownership", updatedOwners);
+
+        setActiveModal(false);
+        reset(DEFAULT_OWNER_FORM);
+        toast.success("Owner added successfully!");
+      } catch (error) {
+        console.error("Error adding owner:", error);
+        toast.error("Failed to add owner. Please try again.");
+      }
+    })()
+  }
 
   return (
     <StyledFieldset title="Owner's / Administrator">
@@ -30,8 +62,15 @@ function OwnerInfoFields({ control }) {
         </Button>
       </Stack>
 
-      <LandOwnerTable />
-      <AddOwnerModal open={activeModal} onClose={() => setActiveModal(false)} control={ownerFieldControl} form={ownersForm} />
+      <LandOwnerTable rows={land_ownership} />
+      <AddOwnerModal
+        open={activeModal}
+        onClose={() => setActiveModal(false)}
+        control={ownerFieldControl}
+        form={ownersForm}
+        setValue={setValue}
+        onSubmit={onFormSubmit}
+      />
     </StyledFieldset >
   );
 }

@@ -1,5 +1,5 @@
-import { Chip, Stack } from "@mui/material";
-import { formatPercent, formatPeso } from "../../../utils/formatters";
+import { Chip, Stack, Typography } from "@mui/material";
+import { capitalizeFirstLetter, formatPercent, formatPeso, toUpperCase } from "../../../utils/formatters";
 import { roundToNearestTen } from "../../../utils/math";
 import { FIELDS } from "./fieldNames";
 
@@ -274,73 +274,58 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
 
 export const OWNER_INFO_TABLE_COLUMN = [
   {
-    field: FIELDS.LAND_CLASSIFICATION,
+    field: "type",
     headerName: "Type",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: FIELDS.SUBCLASS,
-    headerName: "Name",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-  },
-  {
-    field: FIELDS.LAND_AREA,
-    headerName: "TIN",
-    flex: 1,
+    width: 100,
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
     valueFormatter: (params) => {
-      const value = Number(params);
-      return isNaN(value) ? "" : `${value?.toLocaleString()} m²`;
-    },
-  },
-  {
-    field: FIELDS.LAND_UNIT_VALUE,
-    headerName: "Contact",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-    valueFormatter: (params) => {
-      const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
-    },
-  },
-  {
-    field: FIELDS.LAND_BASE_MARKET_VALUE,
-    headerName: "Email",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-    valueFormatter: (params) => {
-      const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
+      return capitalizeFirstLetter(params);
     },
   },
   {
     field: "role",
     headerName: "Role",
-    flex: 1,
+    width: 100,
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
     valueFormatter: (params) => {
-      const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
+      return capitalizeFirstLetter(params);
+    },
+  },
+  {
+    field: "name",
+    headerName: "Full Name",
+    width: 225,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+      if (params.row?.name) {
+        return params.row.name
+      }
+      return (
+        `${params.row?.lastname} ${params.row?.firstname} ${params.row?.middlename} ${params.row?.suffix}`
+      )
+    },
+  },
+  {
+    field: 'address',
+    headerName: "Complete Address",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    renderCell: (params) => {
+      return (
+        `${params.row?.barangay} ${params.row?.city} ${params.row?.province} ${params.row?.regions}`
+      )
     },
   },
 ];

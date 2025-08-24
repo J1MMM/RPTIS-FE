@@ -80,3 +80,8 @@ export const ACTUAL_USE_OPTIONS = [
   // { value: "Special(Charitable)", label: "Special(Charitable)" },
   // { value: "Special(OTHERS)", label: "Special(OTHERS)" },
 ];
+
+export const TAXABLE_OPTIONS = [
+  { label: "Taxable", value: "taxable" },
+  { label: "Exempt", value: "exempt" },
+];

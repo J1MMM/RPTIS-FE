@@ -5,7 +5,7 @@ import SegmentedTabs from "../navigation/SegmentedTabs";
 import { splitLastWord } from "../../utils/formatters";
 import { Download, Filter, ListFilter } from "lucide-react";
 
-export const TableToolbar = ({ titleText, subText, actionBtn }) => {
+const TableToolbar = ({ titleText, subText, actionBtn }) => {
   const apiRef = useGridApiContext();
   const { first, last } = splitLastWord(titleText)
 
@@ -65,3 +65,5 @@ export const TableToolbar = ({ titleText, subText, actionBtn }) => {
     </Stack >
   );
 };
+
+export default TableToolbar

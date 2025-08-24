@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import { formatPeso } from "../../../../../utils/formatters";
+import { formatPeso } from "../../../../../../utils/formatters";
 
 const LandAppraisalTableFooter = ({ totalBaseMarketVal }) => {
   return (

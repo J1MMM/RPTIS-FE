@@ -1,14 +1,14 @@
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { LandPropAssTable } from "../../../tables/property-assessment/LandPropAssTable";
+import { LandPropAssTable } from "../../../tables/land/property-assessment/LandPropAssTable";
 import { sumByField } from "../../../../../../utils/math";
 import useAssessorForm from "../../../../hooks/useFormContext";
-import { useWatch } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
 function AssessmentFields() {
-  const { control: landFaasFormControl, setValue: setLandFaasFormVal } = useAssessorForm()
-  const formData = useWatch({ control: landFaasFormControl })
+  const { control: landFormControl, setValue: setLandFormVal } = useFormContext()
+  const formData = useWatch({ control: landFormControl })
 
   const handleActualUseChange = (id, actualUseVal) => {
     const updatedAppraisals = formData[FIELDS.LAND_APPRAISAL].map((row) =>
@@ -25,8 +25,8 @@ function AssessmentFields() {
         : row
     );
 
-    setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
-    setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, sumByField(updatedAppraisals, FIELDS.LAND_ASSESSED_VALUE));
+    setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+    setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, sumByField(updatedAppraisals, FIELDS.LAND_ASSESSED_VALUE));
   };
 
 

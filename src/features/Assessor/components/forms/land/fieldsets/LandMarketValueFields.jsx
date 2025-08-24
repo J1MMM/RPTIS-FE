@@ -1,8 +1,8 @@
 import { Button, Stack } from "@mui/material";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useFormContext, useWatch } from "react-hook-form";
 import { toast } from "react-toastify";
 import { ArrowUpDown } from "lucide-react";
-import { LandMarketValueTable } from "../../../tables/market-value-adjustment/LandMarketValueTable";
+import { LandMarketValueTable } from "../../../tables/land/market-value-adjustment/LandMarketValueTable";
 import { useState } from "react";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
@@ -17,11 +17,11 @@ function LandMarketValueFields() {
   const [strippingFields, setStrippingFields] = useState(STRIPPING_FIELDS_DEFAULT);
   const [selectedFactor, setSelectedFactor] = useState("");
 
-  const { control: landFaasFormControl, setValue: setLandFaasFormVal, getValues: getLandFaasFormVal } = useAssessorForm();
+  const { control: landFormControl, setValue: setLandFormVal, getValues: getLandFormVal } = useFormContext();
   const { control: selControl, getValues: getSelValues, setValue: setSelValue, reset: resetSelForm } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT })
-  const faasFormData = useWatch({ control: landFaasFormControl })
-  const landAppraisals = useWatch({ control: landFaasFormControl, name: FIELDS.LAND_APPRAISAL }) || []
-  const marketAdjustment = useWatch({ control: landFaasFormControl, name: FIELDS.MARKET_ADJUSTMENT }) || []
+  const faasFormData = useWatch({ control: landFormControl })
+  const landAppraisals = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []
+  const marketAdjustment = useWatch({ control: landFormControl, name: FIELDS.MARKET_ADJUSTMENT }) || []
   const selectedRowData = useWatch({ control: selControl })
   const appraisalEmpty = landAppraisals?.length === 0;
 
@@ -34,17 +34,17 @@ function LandMarketValueFields() {
         const { updatedMarketAdj, totalMarketVal } = processStrippingAdjustment(selectedRowData, strippingFields);
         const { updatedAppraisal, totalAssessedValue } = updateLandAppraisal(faasFormData, totalMarketVal, selectedRowData);
 
-        setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, ...updatedMarketAdj])
-        setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
-        setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+        setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, ...updatedMarketAdj])
+        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
 
       } else {
         const updatedMarketAdj = processNonStrippingAdjustment(selectedRowData);
         const { updatedAppraisal, totalAssessedValue } = updateLandAppraisal(faasFormData, selectedRowData?.totalValueAdjustment, selectedRowData);
 
-        setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, updatedMarketAdj])
-        setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
-        setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+        setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, updatedMarketAdj])
+        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       }
 
       // Reset state
@@ -80,9 +80,9 @@ function LandMarketValueFields() {
       const updatedMarketAjustments = marketAdjustment.filter((item) => item?.appraisalID !== id);
       const totalAssessedValue = sumByField(updatedAppraisal, FIELDS.LAND_ASSESSED_VALUE);
 
-      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
-      setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAjustments)
-      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+      setLandFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAjustments)
+      setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       toast.success("Adjustment deleted successfully!");
     } catch (error) {
       toast.error("Failed to Delete Adjustment. Please try again.");

@@ -1,12 +1,12 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { PROPERTY_ASS_TABLE_COLUMN } from "../../../constants/tableColumns";
-import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
-import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
+import { PROPERTY_ASS_TABLE_COLUMN } from "../../../../constants/tableColumns";
+import { DATA_GRID_INITIAL_STATE } from "../../../../constants/defaultValues";
+import { LAND_INNER_TABLE_WIDTH } from "../../../../constants/styles";
 import { DATA_GRID_STYLE } from "@constants/tableStyles";
 import { MenuItem, Select } from "@mui/material";
-import { FIELDS } from "../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/fieldNames";
 import PropAssessmentTableFooter from "./PropAssessmentTableFooter";
-import { CLASSIFICATION_OPTIONS } from "../../../constants/dropdownOptions";
+import { CLASSIFICATION_OPTIONS } from "../../../../constants/dropdownOptions";
 
 export const LandPropAssTable = (props) => {
   const { formData, handleChange } = props;

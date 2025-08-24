@@ -4,15 +4,27 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-function DateInput({ control, name, label, readOnly, yearOnly, popperClass }) {
+function DateInput({
+  control,
+  name,
+  label,
+  readOnly,
+  yearOnly,
+  popperClass,
+  rules,
+  required = true,
+}) {
   return (
     <FormControl margin="dense" fullWidth>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Controller
           name={name}
           control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
+          rules={{
+            required: `${label || name} is required`,
+            ...rules,
+          }}
+          render={({ field, fieldState: { error } }) => (
             <DatePicker
               {...field}
               label={label}
@@ -21,12 +33,16 @@ function DateInput({ control, name, label, readOnly, yearOnly, popperClass }) {
               readOnly={readOnly}
               format={yearOnly ? "YYYY" : "MM/DD/YYYY"}
               openTo={yearOnly ? "year" : "day"}
-              views={yearOnly ? ["year",] : ["year", "month", "day"]}
+              views={yearOnly ? ["year"] : ["year", "month", "day"]}
               slotProps={{
-                textField: { required: true },
+                textField: {
+                  error: !!error,
+                  helperText: error?.message,
+                  required: required,
+                },
                 popper: {
                   className: popperClass,
-                }
+                },
               }}
             />
           )}

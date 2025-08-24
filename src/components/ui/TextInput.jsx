@@ -1,7 +1,6 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { formatPercent } from "../../utils/formatters";
-import CustomTextField from "./SyledTextField";
 const numberFormatter = new Intl.NumberFormat("en-US");
 
 function TextInput({
@@ -13,10 +12,10 @@ function TextInput({
   disabled,
   adornment,
   size,
+  required = true,
   type = "text",
   multiline = false,
   margin = "dense",
-  required = true,
   isNumeric = false,
   isPercent = false,
   rules = {},
@@ -26,16 +25,19 @@ function TextInput({
       key={name}
       name={name}
       control={control}
-      rules={rules}
+      rules={{
+        ...rules,
+        ...(required && { required: `${label || name} is required` }),
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
+          required={required}
           type={type}
           size={size}
           disabled={disabled}
           margin={margin}
           fullWidth
-          required={required}
           variant="outlined"
           multiline={multiline}
           label={label}
@@ -49,12 +51,14 @@ function TextInput({
                 : field.value ?? ""
           }
           error={!!error}
-          helperText={error ? error.message : ""}
-
+          // helperText={error ? error.message : ""}
           slotProps={{
             input: {
               ...adornment,
               readOnly: readOnly || pendingPage,
+              inputRef: field.ref,
+              ref: field.ref,
+
             },
           }}
         />

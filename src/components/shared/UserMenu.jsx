@@ -18,7 +18,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { LogOutIcon, MessageCircleQuestion, Settings, UserRound } from "lucide-react";
 import ContainerModal from "./ContainerModal";
 
-export const UserMenu = (props) => {
+const UserMenu = (props) => {
   const [modal, setModal] = useState(false)
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -90,3 +90,5 @@ export const UserMenu = (props) => {
     </Menu>
   );
 };
+
+export default UserMenu

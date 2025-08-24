@@ -4,23 +4,23 @@ import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { toastConfig } from "@constants/toastConfig";
-import { LandAppraisalTable } from "../../../tables/land-appraisal/LandAppraisalTable";
+import { LandAppraisalTable } from "../../../tables/land/land-appraisal/LandAppraisalTable";
 import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { UNITVAL_TABLE } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useFormContext, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
 
 function LandAppraisalFields() {
-  const { control: landFaasFormControl, setValue: setLandFaasFormVal } = useAssessorForm();
+  const { control: landFormControl, setValue: setLandFormVal } = useFormContext();
   const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
 
   const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
-  const [landAppraisal, marketAdjustment] = useWatch({ control: landFaasFormControl, name: [FIELDS.LAND_APPRAISAL, FIELDS.MARKET_ADJUSTMENT] }) || []; //array
+  const [landAppraisal, marketAdjustment] = useWatch({ control: landFormControl, name: [FIELDS.LAND_APPRAISAL, FIELDS.MARKET_ADJUSTMENT] }) || []; //array
 
   useEffect(() => {
     const unitValue = UNITVAL_TABLE[classification?.toLowerCase()]?.[subClass?.toLowerCase()] || 0;
@@ -37,9 +37,9 @@ function LandAppraisalFields() {
       const updatedAppraisals = [...landAppraisal, { ...data, id: v4() }];
       const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
 
-      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
-      setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
-      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
+      setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
+      setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
       resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
       toast.success("Appraisal added successfully!", toastConfig);
       setModalActive(false);
@@ -57,10 +57,10 @@ function LandAppraisalFields() {
       const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
       const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
       // Update RHF state
-      setLandFaasFormVal(FIELDS.LAND_APPRAISAL, updatedLandAppraisal)
-      setLandFaasFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAdj)
-      setLandFaasFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
-      setLandFaasFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      setLandFormVal(FIELDS.LAND_APPRAISAL, updatedLandAppraisal)
+      setLandFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAdj)
+      setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
+      setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       toast.success("Appraisal deleted successfully!", toastConfig);
     } catch (error) {
       toast.error("Failed to delete appraisal. Please try again.", toastConfig);

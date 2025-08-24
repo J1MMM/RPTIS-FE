@@ -1,7 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import ContainerModal from "@components/shared/ContainerModal";
 import SelectField from "@components/ui/SelectField";
-
 import OwnerInfoFields from "../fieldsets/OwnerInfoFields";
 import PropertyInfoFields from "../fieldsets/PropertyInfoFields";
 import LandBounderiesFields from "../fieldsets/LandBounderiesFields";
@@ -9,15 +8,13 @@ import LandAppraisalFields from "../fieldsets/LandAppraisalFields";
 import LandMarketValueFields from "../fieldsets/LandMarketValueFields";
 import AssessmentFields from "../fieldsets/AssessmentFields";
 import TaxabilityFields from "../fieldsets/TaxabilityFields";
-import AdministratorInfoFields from "../fieldsets/AdministratorInfoFields";
-
-import useAssessorForm from "../../../../hooks/useFormContext";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { Landmark, } from "lucide-react";
+import { useFormContext } from "react-hook-form";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled }) {
-  const { landFaasControl } = useAssessorForm();
+  const { control: landFormControl } = useFormContext();
 
   return (
     <>
@@ -40,20 +37,19 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
       >
         <Stack width={230} direction="row" justifyContent="space-between">
           <SelectField
-            control={landFaasControl}
+            control={landFormControl}
             label="Transaction Code"
             name={FIELDS.TRANSACTION_CODE}
             options={TRANSACTION_CODE}
           />
         </Stack>
-        <PropertyInfoFields control={landFaasControl} />
-        <OwnerInfoFields control={landFaasControl} />
-        {/* <AdministratorInfoFields control={landFaasControl} /> */}
-        <LandBounderiesFields control={landFaasControl} />
+        <PropertyInfoFields control={landFormControl} />
+        <OwnerInfoFields />
+        <LandBounderiesFields control={landFormControl} />
         <LandAppraisalFields />
         <LandMarketValueFields />
         <AssessmentFields />
-        <TaxabilityFields control={landFaasControl} />
+        <TaxabilityFields control={landFormControl} />
       </ContainerModal>
     </>
   );

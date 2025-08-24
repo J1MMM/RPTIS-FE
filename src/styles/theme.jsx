@@ -56,12 +56,19 @@ const theme = createTheme({
         variant: "outlined",
       },
     },
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: {
+          display: "none !important"
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: "none",
           whiteSpace: "nowrap",
-          borderRadius: '7px'
+          borderRadius: '7px',
         },
       },
     },

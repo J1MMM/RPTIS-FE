@@ -11,7 +11,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 
 const ConfirmationDialog = ({
   open,
@@ -23,11 +22,6 @@ const ConfirmationDialog = ({
   serverity,
   label,
 }) => {
-  const [disableBtn, setDisableBtn] = useState(false)
-
-  useEffect(() => {
-    if (open) setDisableBtn(false);
-  }, [open]);
 
   return (
     <Dialog
@@ -75,7 +69,7 @@ const ConfirmationDialog = ({
       <DialogActions component={"span"} sx={{ p: 1.5 }}>
         <>
           <Button
-            disabled={!!disabled || disableBtn}
+            disabled={disabled}
             variant="outlined"
             size="small"
             onClick={setOpen}
@@ -84,7 +78,7 @@ const ConfirmationDialog = ({
           </Button>
           <Button
             autoFocus
-            disabled={!!disabled || disableBtn}
+            disabled={disabled}
             variant="contained"
             size="small"
             color={serverity || "primary"}

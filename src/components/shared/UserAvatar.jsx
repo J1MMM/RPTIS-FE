@@ -1,9 +1,9 @@
 import Avatar from "@mui/material/Avatar";
 import { Typography, Box, Stack, IconButton } from "@mui/material";
 import { useState } from "react";
-import { UserMenu } from "./UserMenu";
 import { teal } from "@mui/material/colors";
 import { ArrowDown, ChevronDown } from "lucide-react";
+import UserMenu from "./UserMenu";
 
 const UserAvatar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
