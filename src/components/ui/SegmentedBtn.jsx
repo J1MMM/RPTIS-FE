@@ -8,7 +8,7 @@ const navTabStyles = {
   color: "#000",
 
   "&.active": {
-    bgcolor: "background.lightMain", // soft indigo background (from indigo[50])
+    bgcolor: "background.default", // soft indigo background (from indigo[50])
     color: "primary.main", // your theme blue
     borderColor: "primary.main",
     zIndex: 1,

@@ -75,9 +75,10 @@ function SelectAppraisalTable({
         disableRowSelectionOnClick
         sx={{
           ...DATA_GRID_STYLE,
-          borderBottom: "1px solid #e3e3e3",
+          border: "1px solid neutral.main",
           minHeight: 220,
           maxHeight: 220,
+
 
           "& .disabled-row": {
             opacity: 0.5,

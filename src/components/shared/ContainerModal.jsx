@@ -47,7 +47,7 @@ function ContainerModal({
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
           {headerIcon &&
-            <Stack p={1} bgcolor={"background.lightMain"} borderRadius={2}>
+            <Stack p={1} bgcolor={"background.default"} borderRadius={2}>
               {headerIcon}
             </Stack>
           }

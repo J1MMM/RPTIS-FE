@@ -43,6 +43,7 @@ export const LandAppraisalTable = ({ currentAppraisals, handleDelete }) => {
       sx={{
         ...DATA_GRID_STYLE,
         width: LAND_INNER_TABLE_WIDTH,
+        border: "1px solid neutral.main",
         // minHeight: 215,
         // maxHeight: 215,
       }}

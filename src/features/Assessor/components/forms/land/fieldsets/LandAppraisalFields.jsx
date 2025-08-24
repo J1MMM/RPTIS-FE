@@ -13,6 +13,7 @@ import { useForm, useFormContext, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
+import { logger } from "../../../../../../utils/logger";
 
 function LandAppraisalFields() {
   const { control: landFormControl, setValue: setLandFormVal } = useFormContext();

@@ -11,6 +11,7 @@ import { processNonStrippingAdjustment, processStrippingAdjustment, updateLandAp
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
 import useAssessorForm from "../../../../hooks/useFormContext";
+import { logger } from "../../../../../../utils/logger";
 
 function LandMarketValueFields() {
   const [modalActive, setModalActive] = useState(false);
@@ -24,7 +25,7 @@ function LandMarketValueFields() {
   const marketAdjustment = useWatch({ control: landFormControl, name: FIELDS.MARKET_ADJUSTMENT }) || []
   const selectedRowData = useWatch({ control: selControl })
   const appraisalEmpty = landAppraisals?.length === 0;
-
+  logger("SELECTED ROW", selectedRowData)
   const handleAdjustmentSubmit = () => {
     const adjustmentFactor = selectedRowData[FIELDS.MARKET_ADJUSTMENT_FACTORS];
     const prevMartketAdj = faasFormData[FIELDS.MARKET_ADJUSTMENT]
@@ -34,8 +35,19 @@ function LandMarketValueFields() {
         const { updatedMarketAdj, totalMarketVal } = processStrippingAdjustment(selectedRowData, strippingFields);
         const { updatedAppraisal, totalAssessedValue } = updateLandAppraisal(faasFormData, totalMarketVal, selectedRowData);
 
-        setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, ...updatedMarketAdj])
+        const tempLandApp = updatedAppraisal?.map(row => {
+          if (row?.id == selectedRowData.id) {
+            return {
+              ...row,
+              adjustments: strippingFields
+            }
+          }
+          return row
+        })
+
+        logger("TEMP", tempLandApp)
         setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+        setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, ...updatedMarketAdj])
         setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
 
       } else {

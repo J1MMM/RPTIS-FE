@@ -12,15 +12,14 @@ const Layout = () => {
 
   return (
     <Box sx={{
+      // border: "2px solid red"
       position: "relative",
       display: "flex",
       width: "100vw",
       height: "100vh",
       boxSizing: "border-box",
-      bgcolor: "#F2FAF9",
-      // border: "2px solid red"
+      bgcolor: "background.default",
     }}>
-
       <NavSidePanel open={open} setOpen={setOpen} />
       <Stack width={`calc(100vw - ${open ? PANEL_WIDTH_OPEN : PANEL_WIDTH_CLSOE}px)`}>
         <Header />

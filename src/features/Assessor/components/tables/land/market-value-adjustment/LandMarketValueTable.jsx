@@ -41,6 +41,7 @@ export const LandMarketValueTable = (props) => {
       initialState={DATA_GRID_INITIAL_STATE}
       sx={{
         ...DATA_GRID_STYLE,
+        border: "1px solid neutral.main",
         width: LAND_INNER_TABLE_WIDTH,
         maxHeight: 280,
       }}

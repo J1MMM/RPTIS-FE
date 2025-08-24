@@ -47,7 +47,7 @@ const TableToolbar = ({ titleText, subText, actionBtn }) => {
         <Typography variant="h6" fontWeight={600} >
           {first} <span style={{ color: "#9CA3AF" }}>{last}</span>
         </Typography>
-        <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.lightMain" }} size="small" label="10,932" />
+        <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.default" }} size="small" label="10,932" />
       </Stack>
       <Stack
         gap={1}

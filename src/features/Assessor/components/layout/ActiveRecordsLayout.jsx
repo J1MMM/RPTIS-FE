@@ -11,7 +11,6 @@ function ActiveRecordsLayout() {
       boxSizing={"border-box"}
       display={"flex"}
       flexDirection={"column"}
-      // mt={2}
       height={"calc(100vh - 160px)"}
     >
       <Box p={1} mt={1}>

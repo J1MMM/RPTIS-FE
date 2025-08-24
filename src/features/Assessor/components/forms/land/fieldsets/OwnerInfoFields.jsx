@@ -13,6 +13,8 @@ const DEFAULT_OWNER_FORM = {
   province: "",
   city: "",
   barangay: "",
+  street: "",
+  postal: "",
   type: "",
   role: "",
   contact_no: "",
@@ -27,7 +29,6 @@ function OwnerInfoFields() {
   const ownersForm = useWatch({ control: ownerFieldControl })
   const land_ownership = useWatch({ control: landFormControl, name: "land_ownership" }) || [];
 
-  console.log(ownersForm);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -48,6 +49,17 @@ function OwnerInfoFields() {
     })()
   }
 
+  const deleteOwner = (id) => {
+    try {
+      const updatedOwners = land_ownership.filter(owner => owner.id !== id);
+      setLandFormVal("land_ownership", updatedOwners);
+      toast.success("Owner deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting owner:", error);
+      toast.error("Failed to delete owner. Please try again.");
+    }
+  };
+
   return (
     <StyledFieldset title="Owner's / Administrator">
       <Stack mb={2}>
@@ -62,7 +74,8 @@ function OwnerInfoFields() {
         </Button>
       </Stack>
 
-      <LandOwnerTable rows={land_ownership} />
+      <LandOwnerTable rows={land_ownership} handleDelete={deleteOwner} />
+
       <AddOwnerModal
         open={activeModal}
         onClose={() => setActiveModal(false)}

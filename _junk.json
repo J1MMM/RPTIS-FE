@@ -93,3 +93,91 @@
   "status": "",
   "faasLandChain_id": ""
 }
+
+{
+  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
+  "appraisalID": "",
+  "adjusted": false,
+  "classification": "Residential",
+  "subClass": "R1",
+  "area": "30",
+  "unitValue": 2860,
+  "baseMarketValue": 85800,
+  "marketValue": 85800,
+  "actualUse": "",
+  "assessmentLevel": "",
+  "assessedValue": "",
+  "marketAdjustmentPercent": "",
+  "totalValueAdjustment": "",
+  "marketAdjustmentFactors": "",
+  "marketValueAdjustmentInputArea": ""
+},
+{
+  "classification": "Residential",
+  "subClass": "R1",
+  "area": "30",
+  "actualUse": "Residential",
+  "unitValue": 2860,
+  "baseMarketValue": 85800,
+  "marketValue": 85800,
+  "assessmentLevel": 0.15,
+  "assessedValue": 12870,
+
+  "marketAdjustmentPercent": "",
+  "totalValueAdjustment": "",
+  "marketAdjustmentFactors": "",
+  "marketValueAdjustmentInputArea": "",
+
+  "appraisalID": "",
+  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
+  "adjusted": false,
+}
+// adjusted appraisal
+{
+  "classification": "Residential",
+  "subClass": "R1",
+  "area": "30",
+  "actualUse": "Residential",
+  "unitValue": 2860,
+  "baseMarketValue": 85800,
+  "marketValue": 207350,
+  "assessmentLevel": 0.15,
+  "assessedValue": 31102.5,
+  // "marketAdjustmentPercent": "", 
+  // "totalValueAdjustment": "",
+  // "marketAdjustmentFactors": "",
+  // "marketValueAdjustmentInputArea": "",  temp inputs
+  "appraisalID": "",
+  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
+  "adjusted": true,
+}
+
+{
+  "classification": "residential",
+  "subclassification": "r1",
+  "area": 100,
+  "actual_use": "residential",
+  "adjustments": [
+    {
+      "adjustment_factor": "cornerInfluence",
+      "area": 100
+    }
+  ]
+},
+
+
+    //adjustment
+{
+  "marketAdjustmentFactors": "1stStripping",
+  "area": 30,
+  "marketAdjustmentPercent": 1,
+  "adjustedMarketValue": 85800,
+  // "baseMarketValue": 286000, nasa appraisal
+  // "id": "c88fac78-796c-49a2-845f-88ba1aec2763",  generate den
+  // "appraisalID": "0b353733-4f80-49b7-b2dc-8d1f5b3b2710", generate pag gagawa ng array for tables
+}
+
+{
+  "adjustment_factor": "stripping1st",
+  "area": 30
+}

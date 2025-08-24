@@ -10,8 +10,8 @@ const AssessorPageLayout = () => {
     <AssessorProvider>
       <AssessorFormProvider>
         <Box
-          padding={3}
           // border={"1px solid red"}
+          padding={3}
           height={"100%"}
           boxSizing={"border-box"}
         >

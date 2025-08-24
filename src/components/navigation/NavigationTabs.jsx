@@ -30,15 +30,12 @@ const NavigationTabs = ({ links }) => {
               // borderRadius: "8px",
               fontWeight: 500,
               color: isActive ? "primary.main" : "#616161",
-              // bgcolor: isActive ? "background.lightMain" : "",
               overflow: "hidden",
               cursor: "pointer",
               position: "relative",
               borderBottom: isActive ? "2px solid" : 'none',
               borderColor: 'primary.main',
-              "&:hover": {
-                // bgcolor: "background.lightMain"
-              }
+
             }}
             onClick={() => {
               if (!isActive) {

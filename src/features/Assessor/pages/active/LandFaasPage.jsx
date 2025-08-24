@@ -37,26 +37,6 @@ function LandFaasPage() {
       const landappraisals = formatAppraisalData(data[FIELDS.LAND_APPRAISAL], data[FIELDS.MARKET_ADJUSTMENT])
       const payload = {
         ...res,
-        land_ownership: [
-          {
-            type: "person",
-            name: "",
-            firstname: "juan",
-            middlename: "D",
-            lastname: "Cruz",
-            suffix: "juan",
-            status: "active",
-            remarks: "",
-            tin: "93010",
-            contact_no: "09944465989",
-            email: "user@gmail.com",
-            street: "PUROK III",
-            brgy: "San Miguel",
-            city: "San Pablo",
-            province: "laguna",
-            role: "owner"
-          }
-        ],
         landappraisals
       }
       await new Promise(r => setTimeout(r, 3000))
@@ -72,20 +52,9 @@ function LandFaasPage() {
     }
   };
 
-  const handleClickSubmit = handleSubmit(() => {
-    setShowConfirmation(true);
-  });
-
-
-
-
-
   const handleViewClick = (params) => {
     const id = params?.row?.id;
   };
-
-
-
 
   return (
     <>

@@ -6,11 +6,6 @@ import TextInput from "@components/ui/TextInput";
 import SelectField from "@components/ui/SelectField";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import Row from "@components/ui/Row";
-import { BRGY_LIST } from "../../../../../../constants/barangays";
-import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
-import { regions as getRegions } from "select-philippines-address"
-import { logger } from "../../../../../../utils/logger";
-import { useEffect, useState } from "react";
 import getPhLocations from "../../../../../../utils/getPhLocations";
 import { isEmptyArray } from "../../../../../../utils/validator";
 
@@ -24,7 +19,7 @@ const ROLES = [
   { label: "Administrator", value: "administrator" },
 ];
 
-function AddOwnerModal({ open, onClose, control, form, onSubmit, errors, setValue }) {
+function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
 
 
   const { regionsOptions, provinceOptions, cityOptions, barangayOptions }
@@ -107,6 +102,9 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, errors, setValu
               name="email"
               label="Email Address"
             />
+
+          </Row>
+          <Row>
             <TextInput
               required={false}
               control={control}
@@ -146,7 +144,8 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, errors, setValu
                 setValue("barangay", "");
               }}
             />
-
+          </Row>
+          <Row>
             <SelectField
               disabled={isEmptyArray(cityOptions)}
               control={control}
@@ -165,8 +164,24 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, errors, setValu
               label="Barangay"
               options={barangayOptions}
             />
-
           </Row>
+          <Row>
+            <TextInput
+              disabled={isEmptyArray(barangayOptions)}
+              required={false}
+              control={control}
+              name="street"
+              label="House No. / Street"
+            />
+            <TextInput
+              disabled={isEmptyArray(barangayOptions)}
+              required={false}
+              control={control}
+              name="postal"
+              label="Postal Code"
+            />
+          </Row>
+
         </StyledFieldset>
       </Stack>
     </ContainerModal >

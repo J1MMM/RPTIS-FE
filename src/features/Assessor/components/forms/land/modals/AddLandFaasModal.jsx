@@ -11,10 +11,12 @@ import TaxabilityFields from "../fieldsets/TaxabilityFields";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { Landmark, } from "lucide-react";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
+import { logger } from "../../../../../../utils/logger";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled }) {
   const { control: landFormControl } = useFormContext();
+  logger("data", useWatch({ control: landFormControl }))
 
   return (
     <>

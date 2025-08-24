@@ -4,7 +4,7 @@ import { formatPeso } from "@utils/formatters";
 
 const PropAssessmentTableFooter = ({ total }) => {
   return (
-    <Stack direction="row" border="1px solid #E0E0E0" p={1}>
+    <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
       <Typography sx={styledText} variant="body2" />
       <Typography sx={styledText} variant="body2" />
       <Typography sx={{ ...styledText, fontWeight: "600" }} variant="body2">

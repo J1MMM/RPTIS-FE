@@ -1,10 +1,8 @@
 import { DataGrid } from '@mui/x-data-grid'
-import React from 'react'
 import { LAND_TABLE_COLUMN } from '../../../../constants/tableColumns';
 import { Button } from '@mui/material';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { TableToolbar } from '../../../../../../components/shared';
-import { PlusCircle, ShuffleIcon } from 'lucide-react';
 
 const TABLE_HEADER = [
     ...LAND_TABLE_COLUMN,

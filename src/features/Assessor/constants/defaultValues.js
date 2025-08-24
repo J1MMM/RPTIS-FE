@@ -2,7 +2,7 @@ import { FIELDS } from "./fieldNames";
 
 export const APPRAISAL_FORM_DEFAULT = {
   id: "",
-  appraisalID: "",
+  // appraisalID: "",
   adjusted: false,
   [FIELDS.LAND_CLASSIFICATION]: "",
   [FIELDS.SUBCLASS]: "",
@@ -13,10 +13,10 @@ export const APPRAISAL_FORM_DEFAULT = {
   [FIELDS.LAND_ACTUAL_USE]: "",
   [FIELDS.LAND_ASSESSMENT_LEVEL]: "",
   [FIELDS.LAND_ASSESSED_VALUE]: "",
-  [FIELDS.MARKET_ADJUSTMENT_PERCENT]: "",
-  totalValueAdjustment: "",
-  marketAdjustmentFactors: "",
-  marketValueAdjustmentInputArea: "",
+  // [FIELDS.MARKET_ADJUSTMENT_PERCENT]: "",
+  // totalValueAdjustment: "",
+  // marketAdjustmentFactors: "",
+  // marketValueAdjustmentInputArea: "",
 };
 
 export const DATA_GRID_INITIAL_STATE = {
@@ -27,8 +27,6 @@ export const DATA_GRID_INITIAL_STATE = {
     },
   },
 };
-
-
 
 export const DEFAULT_FIELD_VALUES = {
   // property info
@@ -44,24 +42,8 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.LOT_NO]: "",
   [FIELDS.BLOCK_NO]: "",
   [FIELDS.SURVEY_NO]: "",
-
-  // owner info
-  [FIELDS.OWNER_FULLNAME]: "",
-  [FIELDS.OWNER_TIN]: "",
-  [FIELDS.OWNER_STREET]: "",
-  [FIELDS.OWNER_BARANGAY]: "",
-  [FIELDS.OWNER_CITY]: "",
-  [FIELDS.OWNER_PROVINCE]: "",
-
-  // admin info
-  [FIELDS.ADMINISTRATOR_FULLNAME]: "",
-  [FIELDS.ADMINISTRATOR_STREET]: "",
-  [FIELDS.ADMINISTRATOR_BRGY]: "",
-  [FIELDS.ADMINISTRATOR_CITY]: "",
-  [FIELDS.ADMINISTRATOR_PROVINCE]: "",
-  [FIELDS.ADMIN_TEL]: "",
-  [FIELDS.ADMINISTRATOR_TIN]: "",
-
+  //owner info
+  land_ownership: [],
   // boundaries
   [FIELDS.NORTH_BOUNDARY]: "",
   [FIELDS.SOUTH_BOUNDARY]: "",
@@ -71,22 +53,20 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.SW_BOUNDARY]: "",
   [FIELDS.SE_BOUNDARY]: "",
   [FIELDS.NW_BOUNDARY]: "",
-
   // land appraisal
   [FIELDS.LAND_APPRAISAL]: [],
-
   // market adjustment
   [FIELDS.MARKET_ADJUSTMENT]: [],
-  [FIELDS.MARKET_ADJUSTMENT_CLASSIFICATION]: "",
-  [FIELDS.MARKET_ADJUSTMENT_SUB_CLASS]: "",
-  [FIELDS.MARKET_ADJUSTMENT_UNIT_VALUE]: "",
-  [FIELDS.MARKET_ADJUSTMENT_BASE_MARKET_VALUE]: "",
+  // [FIELDS.MARKET_ADJUSTMENT_CLASSIFICATION]: "",
+  // [FIELDS.MARKET_ADJUSTMENT_SUB_CLASS]: "",
+  // [FIELDS.MARKET_ADJUSTMENT_UNIT_VALUE]: "",
+  // [FIELDS.MARKET_ADJUSTMENT_BASE_MARKET_VALUE]: "",
 
   // property assessment
-  [FIELDS.PROPERTY_ASSESSMENT]: [],
-  [FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
-  [FIELDS.PROPERTY_ASSESSMENT_LEVEL]: 0,
-  [FIELDS.PROPERTY_MARKET_VALUE]: "",
+  // [FIELDS.PROPERTY_ASSESSMENT]: [],
+  // [FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
+  // [FIELDS.PROPERTY_ASSESSMENT_LEVEL]: 0,
+  // [FIELDS.PROPERTY_MARKET_VALUE]: "",
 
   // taxability
   [FIELDS.TAXABILITY]: "",

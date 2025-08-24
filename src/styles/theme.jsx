@@ -5,6 +5,10 @@ const theme = createTheme({
     fontFamily: "Inter",
   },
   palette: {
+    neutral: {
+      main: '#E5E7EB', // custom color
+      contrastText: '#000', // optional: text color on this background
+    },
     primary: {
       // main: "#1E3A8A
       main: "#287F71", // leat
@@ -35,10 +39,8 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     background: {
-      // default: "#FAFCFE", // light gray background
-      default: "#FBFDFF", // light gray background
-      paper: "#FFFFFF",   // card / surface
-      lightMain: "#F2FAF9"
+      default: "#F2FAF9",
+      paper: "#FFFFFF",
     },
     text: {
       primary: "#111827",   // near-black
