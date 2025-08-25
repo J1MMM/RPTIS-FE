@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { Stack } from "@mui/material";
 import { useWatch } from "react-hook-form";
 // Shared components & utils
+import SubmitButton from "@components/ui/SubmitButton";
 import ContainerModal from "@components/shared/ContainerModal";
 import CancelButton from "@components/ui/CancelButton";
-import SubmitButton from "@components/ui/SubmitButton";
 // Feature-specific constants & utils
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
@@ -13,7 +13,7 @@ import { computeStrippingFields } from "../../../../utils/computeStrippingFields
 import SelectAppraisalTable from "../../../tables/land/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
-import { ArrowUpDown, CircleDollarSign, Coins, Scale, TrendingUp } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 
 function AddLandMarketValModal({
   open,

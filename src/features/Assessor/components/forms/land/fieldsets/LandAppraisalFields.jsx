@@ -21,7 +21,7 @@ function LandAppraisalFields() {
   const [modalActive, setModalActive] = useState(false);
 
   const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
-  const [landAppraisal, marketAdjustment] = useWatch({ control: landFormControl, name: [FIELDS.LAND_APPRAISAL, FIELDS.MARKET_ADJUSTMENT] }) || []; //array
+  const landAppraisal = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []; //array
 
   useEffect(() => {
     const unitValue = UNITVAL_TABLE[classification?.toLowerCase()]?.[subClass?.toLowerCase()] || 0;
@@ -54,12 +54,10 @@ function LandAppraisalFields() {
   const handleDelete = (id) => {
     try {
       const updatedLandAppraisal = landAppraisal.filter(item => item?.id !== id)
-      const updatedMarketAdj = marketAdjustment.filter(item => item?.appraisalID !== id);
       const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
       const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
       // Update RHF state
       setLandFormVal(FIELDS.LAND_APPRAISAL, updatedLandAppraisal)
-      setLandFormVal(FIELDS.MARKET_ADJUSTMENT, updatedMarketAdj)
       setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
       setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       toast.success("Appraisal deleted successfully!", toastConfig);

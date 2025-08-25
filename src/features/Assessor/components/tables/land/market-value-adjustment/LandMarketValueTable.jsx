@@ -10,12 +10,12 @@ import { X } from "lucide-react";
 import { sumByField } from "../../../../../../utils/math";
 
 export const LandMarketValueTable = (props) => {
-  const { handleDelete, marketAdjustment } = props;
-  const totalMarketVal = sumByField(marketAdjustment, "adjustedMarketValue");
+  const { handleDelete, rows } = props;
+  const totalMarketVal = sumByField(rows, "adjustedMarketValue");
 
   return (
     <DataGrid
-      rows={marketAdjustment}
+      rows={rows}
       columns={[
         {
           field: "actions",
