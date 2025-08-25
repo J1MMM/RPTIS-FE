@@ -6,8 +6,8 @@ const theme = createTheme({
   },
   palette: {
     neutral: {
-      main: '#E5E7EB', // custom color
-      contrastText: '#000', // optional: text color on this background
+      main: "#E5E7EB", // custom color
+      contrastText: "#000", // optional: text color on this background
     },
     primary: {
       // main: "#1E3A8A
@@ -42,11 +42,17 @@ const theme = createTheme({
       default: "#F2FAF9",
       paper: "#FFFFFF",
     },
+    bg: {
+      default: "#F2FAF9",
+      paper: "#FFFFFF",
+      grey: "#F5F5F5",
+      gray: "#EAEAEA",
+    },
     text: {
-      primary: "#111827",   // near-black
+      primary: "#111827", // near-black
       secondary: "#374151", // slate gray
-      disabled: "#9CA3AF",  // muted gray
-
+      disabled: "#9CA3AF", // muted gray
+      gray: "#818182", //mas matingkad ng conti sa muted gray
     },
     // divider: "#E5E7EB", // subtle gray line
   },
@@ -61,16 +67,16 @@ const theme = createTheme({
     MuiFormLabel: {
       styleOverrides: {
         asterisk: {
-          display: "none !important"
-        }
-      }
+          display: "none !important",
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: "none",
           whiteSpace: "nowrap",
-          borderRadius: '7px',
+          borderRadius: "7px",
         },
       },
     },

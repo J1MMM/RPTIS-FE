@@ -1,7 +1,5 @@
 import { Button, Chip, Stack, Typography } from "@mui/material";
 import { useGridApiContext } from "@mui/x-data-grid";
-import TableFilterBtn from "../ui/TableFilterBtn";
-import SegmentedTabs from "../navigation/SegmentedTabs";
 import { splitLastWord } from "../../utils/formatters";
 import { Download, Filter, ListFilter } from "lucide-react";
 

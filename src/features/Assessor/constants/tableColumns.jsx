@@ -328,4 +328,13 @@ export const OWNER_INFO_TABLE_COLUMN = [
       )
     },
   },
+  {
+    field: 'tin',
+    headerName: "TIN",
+    width: 125,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+  },
 ];

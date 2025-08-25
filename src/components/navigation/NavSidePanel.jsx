@@ -1,10 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { Divider, IconButton, Paper, Stack, Typography } from "@mui/material";
-import { HEADER_HEIGHT, PANEL_WIDTH_CLSOE, PANEL_WIDTH_OPEN } from "../../constants/layout";
+import {
+  HEADER_HEIGHT,
+  PANEL_WIDTH_CLSOE,
+  PANEL_WIDTH_OPEN,
+} from "../../constants/layout";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import CustomNavLink from "./CustomNavLink";
 import logoImg from "../../assets/images/seal.png";
-import { FOOTER_LINKS, MAIN_LINKS } from "../../features/Assessor/constants/routes";
+import {
+  FOOTER_LINKS,
+  MAIN_LINKS,
+} from "../../features/Assessor/constants/routes";
 
 export default function NavSidePanel({ open, setOpen }) {
   const toggleSideBar = () => setOpen((v) => !v);
@@ -31,7 +38,12 @@ export default function NavSidePanel({ open, setOpen }) {
         height={HEADER_HEIGHT}
         borderBottom={"1px solid #E5E7EB "}
       >
-        <Stack direction="row" alignItems="center" gap={1} display={open ? "" : "none"}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          gap={1}
+          display={open ? "" : "none"}
+        >
           <img src={logoImg} width={48} alt="logo" />
           <Stack>
             <Typography
@@ -58,7 +70,11 @@ export default function NavSidePanel({ open, setOpen }) {
         </Stack>
 
         <IconButton onClick={toggleSideBar}>
-          {open ? <PanelLeftClose color="#9CA3AF" /> : <PanelLeftOpen color="#9CA3AF" />}
+          {open ? (
+            <PanelLeftClose color="#9CA3AF" />
+          ) : (
+            <PanelLeftOpen color="#9CA3AF" />
+          )}
         </IconButton>
       </Stack>
 
