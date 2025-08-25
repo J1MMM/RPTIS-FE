@@ -13,7 +13,6 @@ import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import axios from "../../../../api/axios";
 import { FIELDS } from "../../constants/fieldNames";
-import { formatAppraisalData } from "../../utils/payloadAppraisalFormatter";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
@@ -34,7 +33,7 @@ function LandFaasPage() {
     if (isSubmitting) return;
     try {
       const { landAppraisal, marketAdjustment, ...res } = data
-      const landappraisals = formatAppraisalData(data[FIELDS.LAND_APPRAISAL], data[FIELDS.MARKET_ADJUSTMENT])
+      const landappraisals = []
       const payload = {
         ...res,
         landappraisals

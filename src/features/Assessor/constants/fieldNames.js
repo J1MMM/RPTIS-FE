@@ -39,19 +39,19 @@ export const FIELDS = {
   // Land Appraisal
   LAND_APPRAISAL: "landAppraisal",
   LAND_CLASSIFICATION: "classification",
-  SUBCLASS: "subClass",
+  SUBCLASS: "subclassification",
   LAND_AREA: "area",
   LAND_UNIT_VALUE: "unitValue",
   LAND_BASE_MARKET_VALUE: "baseMarketValue",
   LAND_MARKET_VALUE: "marketValue",
   // Property Assessment
-  LAND_ACTUAL_USE: "actualUse",
+  LAND_ACTUAL_USE: "actual_use",
   LAND_ASSESSMENT_LEVEL: "assessmentLevel",
   LAND_ASSESSED_VALUE: "assessedValue",
 
   // market adjustment
   MARKET_ADJUSTMENT: "marketAdjustment",
-  MARKET_ADJUSTMENT_FACTORS: "marketAdjustmentFactors",
+  MARKET_ADJUSTMENT_FACTORS: "adjustment_factor",
   MARKET_ADJUSTMENT_PERCENT: "marketAdjustmentPercent",
   MARKET_VALUE_ADJUSTMENT_AREA: "marketValueAdjustmentArea",
   _VALUE_ADJUSTMENT: "marketValueAdjustment",

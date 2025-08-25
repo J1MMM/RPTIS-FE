@@ -7,7 +7,7 @@ import { useState } from "react";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
 import { sumByField } from "../../../../../../utils/math";
-import { processNonStrippingAdjustment, processStrippingAdjustment, updateLandAppraisal } from "../../../../utils/submitAdjustmentComputations";
+import { normalizeNonStripping, normalizeStripping, processNonStrippingAdjustment, processStrippingAdjustment, updateAppraisals, updateLandAppraisal } from "../../../../utils/submitAdjustmentComputations";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
 import useAssessorForm from "../../../../hooks/useFormContext";
@@ -25,7 +25,7 @@ function LandMarketValueFields() {
   const marketAdjustment = useWatch({ control: landFormControl, name: FIELDS.MARKET_ADJUSTMENT }) || []
   const selectedRowData = useWatch({ control: selControl })
   const appraisalEmpty = landAppraisals?.length === 0;
-  logger("SELECTED ROW", selectedRowData)
+
   const handleAdjustmentSubmit = () => {
     const adjustmentFactor = selectedRowData[FIELDS.MARKET_ADJUSTMENT_FACTORS];
     const prevMartketAdj = faasFormData[FIELDS.MARKET_ADJUSTMENT]
@@ -33,30 +33,23 @@ function LandMarketValueFields() {
     try {
       if (adjustmentFactor === FACTOR_TYPES.STRIPPING) {
         const { updatedMarketAdj, totalMarketVal } = processStrippingAdjustment(selectedRowData, strippingFields);
-        const { updatedAppraisal, totalAssessedValue } = updateLandAppraisal(faasFormData, totalMarketVal, selectedRowData);
+        //for testing
+        const { adjustments, adjustedMarketVal } = normalizeStripping(strippingFields);
+        const { updatedAppraisals, assessedValue } = updateAppraisals(landAppraisals, adjustedMarketVal, selectedRowData?.id, adjustments);
 
-        const tempLandApp = updatedAppraisal?.map(row => {
-          if (row?.id == selectedRowData.id) {
-            return {
-              ...row,
-              adjustments: strippingFields
-            }
-          }
-          return row
-        })
-
-        logger("TEMP", tempLandApp)
-        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
+        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals)
+        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, assessedValue)
         setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, ...updatedMarketAdj])
-        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
 
       } else {
         const updatedMarketAdj = processNonStrippingAdjustment(selectedRowData);
-        const { updatedAppraisal, totalAssessedValue } = updateLandAppraisal(faasFormData, selectedRowData?.totalValueAdjustment, selectedRowData);
+        //for testing
+        const adjustments = normalizeNonStripping(selectedRowData, selectedRowData?.area);
+        const { updatedAppraisals, assessedValue } = updateAppraisals(landAppraisals, selectedRowData?.totalValueAdjustment, selectedRowData?.id, adjustments);
 
+        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals)
+        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, assessedValue)
         setLandFormVal(FIELDS.MARKET_ADJUSTMENT, [...prevMartketAdj, updatedMarketAdj])
-        setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
-        setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       }
 
       // Reset state

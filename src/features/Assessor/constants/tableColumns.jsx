@@ -299,7 +299,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
   },
   {
     field: "name",
-    headerName: "Full Name",
+    headerName: "Name",
     width: 225,
     headerClassName: "data-grid-header",
     sortable: false,

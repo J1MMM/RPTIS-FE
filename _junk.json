@@ -181,3 +181,39 @@
   "adjustment_factor": "stripping1st",
   "area": 30
 }
+
+[
+    {
+        "id": "0b79cde5-3c6c-4050-9cfe-20ebd6d54e07",
+        "adjusted": true,
+        "classification": "Residential",
+        "subclassification": "R1",
+        "area": "123",
+        "unitValue": 2860,
+        "baseMarketValue": 351780,
+        "marketValue": 207350,
+        "actual_use": "Commercial",
+        "assessmentLevel": 0.4,
+        "assessedValue": 82940,
+        "adjustments": [
+            {
+                "adjustment_factor": "1stStripping",
+                "marketAdjustmentPercent": 1,
+                "adjustedMarketValue": 85800,
+                "area": 30
+            },
+            {
+                "adjustment_factor": "2ndStripping",
+                "marketAdjustmentPercent": 0.75,
+                "adjustedMarketValue": 64350,
+                "area": 30
+            },
+            {
+                "adjustment_factor": "3rdStripping",
+                "marketAdjustmentPercent": 0.5,
+                "adjustedMarketValue": 57200,
+                "area": 40
+            }
+        ]
+    }
+]
