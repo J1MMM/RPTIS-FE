@@ -89,3 +89,21 @@ body {
 .MuiPickersMonth-monthButton {
   border-radius: 4px !important;
 }
+
+::-webkit-scrollbar {
+  width: 8px; /* width of vertical scrollbar */
+  height: 8px; /* height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1; /* scrollbar handle */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1; /* handle color on hover */
+}

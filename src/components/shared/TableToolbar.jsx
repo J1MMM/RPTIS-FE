@@ -5,7 +5,7 @@ import { Download, Filter, ListFilter } from "lucide-react";
 
 const TableToolbar = ({ titleText, subText, actionBtn }) => {
   const apiRef = useGridApiContext();
-  const { first, last } = splitLastWord(titleText)
+  const { first, last } = splitLastWord(titleText);
 
   const handleDownload = () => {
     const confirmDownload = window.confirm(
@@ -35,33 +35,49 @@ const TableToolbar = ({ titleText, subText, actionBtn }) => {
       px={2}
       width="100%"
       justifyContent="space-between"
-      flexDirection={{ md: "column", lg: "row", }}
+      flexDirection={{ md: "column", lg: "row" }}
       alignItems={{ md: "start", lg: "center" }}
       mb={1}
       pt={0.1}
       gap={1}
     >
       <Stack gap={1} direction={"row"} alignItems={"center"}>
-        <Typography variant="h6" fontWeight={600} >
+        <Typography variant="h5" fontWeight={600}>
           {first} <span style={{ color: "#9CA3AF" }}>{last}</span>
         </Typography>
-        <Chip sx={{ fontWeight: 600, color: "primary.main", bgcolor: "background.default" }} size="small" label="10,932" />
+        <Chip
+          sx={{
+            fontWeight: 600,
+            color: "primary.main",
+            bgcolor: "background.default",
+          }}
+          size="small"
+          label="10,932"
+        />
       </Stack>
       <Stack
         gap={1}
         direction={{ xs: "column", sm: "row" }}
         alignItems={{ md: "start" }}
       >
-        <Button variant="outlined" onClick={handleDownload} startIcon={<Download size={18} />}>
+        <Button
+          variant="outlined"
+          onClick={handleDownload}
+          startIcon={<Download size={18} />}
+        >
           Download CSV
         </Button>
-        <Button variant="outlined" onClick={handleOpenFilterPanel} startIcon={<Filter size={18} />}>
+        <Button
+          variant="outlined"
+          onClick={handleOpenFilterPanel}
+          startIcon={<Filter size={18} />}
+        >
           Filters
         </Button>
         {actionBtn}
       </Stack>
-    </Stack >
+    </Stack>
   );
 };
 
-export default TableToolbar
+export default TableToolbar;

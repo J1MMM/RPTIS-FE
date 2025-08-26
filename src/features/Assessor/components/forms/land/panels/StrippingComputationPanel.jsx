@@ -10,7 +10,7 @@ function StrippingComputationPanel({ open, selectedRowEmpty, strippingFields, se
 
   return (
     <Collapse in={open} timeout={0} easing="ease-in-out" unmountOnExit>
-      <DividerHeading mt={2}>Stripping Computation</DividerHeading>
+      <DividerHeading mt={2}>Stripping computation</DividerHeading>
       <Stack direction="row" gap={1}>
         <NumberInput
           control={selControl}

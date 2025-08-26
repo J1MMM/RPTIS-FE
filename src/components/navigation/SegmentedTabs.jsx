@@ -8,12 +8,11 @@ const LINKS = [
   { path: "./machinery", label: "Machinery" },
 ];
 
-const padding = "8px";
-const minWidth = 90;
+const minWidth = 100;
+const btnPaddingY = 1;
 
 function SegmentedTabs() {
   const navigate = useNavigate();
-  const tabs = ["Land", "Building", "Machinery"];
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (path, i) => {
@@ -30,10 +29,10 @@ function SegmentedTabs() {
           elevation={1}
           sx={{
             borderRadius: "8px",
-            py: 0.5,
+            py: btnPaddingY,
             px: 1.5,
             bgcolor: "white",
-            minWidth: minWidth,
+            width: minWidth,
             height: "100%",
             display: "flex",
             alignItems: "center",
@@ -41,9 +40,9 @@ function SegmentedTabs() {
             userSelect: "none",
             cursor: "pointer",
             position: "absolute",
-            left: `${activeIndex * (minWidth + 8)}px`, // 100px minWidth + 8px gap approx
+            left: `${activeIndex * (minWidth + 8)}px`,
             bottom: 0,
-            transition: "left 0.3s ease", // smooth movement
+            transition: "left 0.3s ease",
           }}
         />
 
@@ -51,9 +50,9 @@ function SegmentedTabs() {
           <Box
             key={row.label}
             borderRadius="8px"
-            py={0.5}
+            py={btnPaddingY}
             px={1.5}
-            minWidth={minWidth}
+            width={minWidth}
             display="flex"
             alignItems="center"
             justifyContent="center"

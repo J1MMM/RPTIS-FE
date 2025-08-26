@@ -17,6 +17,7 @@ import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
+import { logger } from "../../../../utils/logger";
 
 function LandFaasPage() {
 
@@ -32,14 +33,7 @@ function LandFaasPage() {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      const { landAppraisal, marketAdjustment, ...res } = data
-      const landappraisals = []
-      const payload = {
-        ...res,
-        landappraisals
-      }
-      await new Promise(r => setTimeout(r, 3000))
-      console.log(payload);
+      await new Promise(r => setTimeout(r, 1000))
       setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
@@ -51,14 +45,17 @@ function LandFaasPage() {
     }
   };
 
-  const handleViewClick = (params) => {
-    const id = params?.row?.id;
+  const handleShowDetails = (params) => {
+    const { id } = params.row;
+    console.log(params.row);
+
   };
 
   return (
     <>
       <FormProvider {...methods}>
         <LandFaasTable
+          handleShowDetails={handleShowDetails}
           rows={landFaasRecords}
           toolbarButtons={(<>
             <Button

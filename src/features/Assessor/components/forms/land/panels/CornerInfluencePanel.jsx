@@ -3,11 +3,12 @@ import DividerHeading from "@components/ui/DividerHeading";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
 import TextInput from "@components/ui/TextInput";
+import { formatCamelCase } from "../../../../../../utils/formatters";
 
 function CornerInfluencePanel({ open, selectedFactor, selControl }) {
   return (
     <Collapse in={open} timeout={0} unmountOnExit>
-      <DividerHeading mt={2}>{selectedFactor} Computation</DividerHeading>
+      <DividerHeading mt={2}>{formatCamelCase(selectedFactor)} computation</DividerHeading>
 
       <Stack spacing={1}>
         <Stack direction="row" spacing={1}>

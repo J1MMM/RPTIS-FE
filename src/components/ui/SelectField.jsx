@@ -44,6 +44,14 @@ function SelectField({
                 field.onChange(e); // use form hook function
                 if (onChange) onChange(e); // use custom onChange function
               }}
+
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 200, // 👈 set dropdown max height
+                  },
+                },
+              }}
             >
               {options.map((obj, index) => (
                 <MenuItem key={index} value={obj.value}>
@@ -56,6 +64,7 @@ function SelectField({
         )}
 
       />
+      {/* <FormHelperText sx={{ fontSize: 8 }}>Tip: start typing to quickly find an option</FormHelperText> */}
     </FormControl>
   );
 }

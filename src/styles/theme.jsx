@@ -15,7 +15,7 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#EB862A", // warm amber (great contrast with navy)
+      main: "#FF8C42",
       contrastText: "#000000",
     },
     mono: {
@@ -31,7 +31,7 @@ const theme = createTheme({
       contrastText: "#ffffff",
     },
     warning: {
-      main: "#D97706", // slightly darker amber for warnings
+      main: "#FF8C42",
       contrastText: "#000000",
     },
     info: {
@@ -47,6 +47,8 @@ const theme = createTheme({
       paper: "#FFFFFF",
       grey: "#F5F5F5",
       gray: "#EAEAEA",
+      blue: "#2C5282", // muted navy blue
+      green: "#4A7C3A", // earthy green
     },
     text: {
       primary: "#111827", // near-black

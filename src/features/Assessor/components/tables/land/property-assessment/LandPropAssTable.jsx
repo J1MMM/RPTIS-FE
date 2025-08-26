@@ -28,6 +28,7 @@ export const LandPropAssTable = (props) => {
           renderCell: (params) => {
             return (
               <Select
+                required
                 value={params.row[FIELDS.LAND_ACTUAL_USE]}
                 onChange={(e) => handleChange(params.row.id, e.target.value)}
                 fullWidth

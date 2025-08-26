@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Input, Stack } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { Add } from "@mui/icons-material";
 import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
@@ -64,6 +64,7 @@ function OwnerInfoFields() {
     <StyledFieldset title="Owner's / Administrator">
       <Stack mb={2}>
         <Button
+
           disableFocusRipple
           variant="contained"
           startIcon={<Add />}
@@ -71,6 +72,7 @@ function OwnerInfoFields() {
           onClick={() => setActiveModal(true)}
         >
           Add Owner
+          <input style={{ position: "absolute", width: 100, opacity: 0 }} required={land_ownership?.length == 0} />
         </Button>
       </Stack>
 

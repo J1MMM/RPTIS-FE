@@ -1,219 +1,124 @@
 {
-  "transaction_code": "",
-  "arp_no": "",
-  "pin_no": "",
-  "oct_tct": "",
+  "transaction_code": "DT",
+  "arp_no": "ARP-123",
+  "pin_no": "PIN-123",
+  "street": "1650 Peñafrancia",
+  "brgy": "IV-B",
+  "city": "San Pablo City",
+  "province": "Laguna",
+  "oct_tct": "OCT-123",
+  "DATE": "2025-08-25T16:00:00.000Z",
+  "lot_no": "Lot-123",
+  "blk_no": "blk-123",
+  "survey_no": "SUR-123",
   "land_ownership": [
     {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Quezon",
+      "city": "Tiaong",
+      "barangay": "San Jose",
+      "street": "120 McArthur Highway",
+      "postal": "4003",
       "type": "person",
       "role": "owner",
-
+      "contact_no": "09626425618",
+      "email": "",
       "name": "",
-      "firstname": "juan",
-      "middlename": "D",
-      "lastname": "Cruz",
-      "suffix": "juan",
-
-      "street": "PUROK III",
-      "brgy": "San Miguel",
-      "city": "San Pablo",
-      "province": "laguna",
-
-      "contact_no": "09944465989",
-      "email": "user@gmail.com",
-      "tin": "93010",
-      "remarks": "",
-
-      "status": "active"
+      "lastname": "Bonifacio",
+      "firstname": "Leonardo",
+      "middlename": "Jacinto",
+      "suffix": "Sr.",
+      "remarks": "Kasal kay Ines Agness",
+      "id": "af26bac0-6856-4d82-96d2-f28234406c5c"
     },
     {
-      "type": "company",
-      "name": "Nescafe Inc.",
-      "firstname": "",
-      "middlename": "",
-      "lastname": "",
-      "suffix": "",
-      "status": "active",
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "Los Baños",
+      "barangay": "Bayog",
+      "street": "322 Purok 3",
+      "postal": "4001",
+      "type": "person",
+      "role": "administrator",
+      "contact_no": "0912314121123",
+      "email": "",
+      "name": "",
+      "lastname": "Doe",
+      "firstname": "John",
+      "middlename": "Polgoso",
+      "suffix": "Jr.",
       "remarks": "",
-      "tin": "93010",
-      "contact_no": "09944465989",
-      "email": "company@gmail.com",
-      "street": "PUROK III",
-      "brgy": "San Miguel",
-      "city": "San Pablo",
-      "province": "laguna",
-      "role": "administrator"
+      "tin": "",
+      "id": "d9899089-83a2-457c-b185-f980063b078c"
     }
   ],
-  "date": "",
-  "survey_no": "",
-  "lot_no": "",
-  "blk_no": "",
-  "street": "",
-  "brgy": "",
-  "north": "",
-  "northeast": "",
-  "east": "",
-  "southEast": "",
-  "southWest": "",
-  "west": "",
-  "northWest": "",
-  "memoranda": "",
-  "landappraisals": [
+  "north": "1",
+  "south": "23",
+  "east": "34",
+  "west": "56",
+  "northeast": "56",
+  "southwest": "687",
+  "southeast": "89",
+  "northwest": "7",
+  "landAppraisal": [
     {
+      "id": "ed770b23-b4f8-4537-b33a-8f94095f155d",
+      "adjusted": true,
       "classification": "residential",
       "subclassification": "r1",
-      "area": 100,
+      "area": "30",
+      "unitValue": 2860,
+      "baseMarketValue": 85800,
+      "marketValue": 207350,
       "actual_use": "residential",
-      "adjustments": [
-        {
-          "adjustment_factor": "cornerInfluence",
-          "area": 100
-        }
-      ]
-    },
-    {
-      "classification": "commercial",
-      "subclassification": "c4",
-      "area": 2000,
-      "actual_use": "commercial",
+      "assessmentLevel": 0.15,
+      "assessedValue": 31102.5,
       "adjustments": [
         {
           "adjustment_factor": "stripping1st",
+          "marketAdjustmentPercent": 1,
+          "adjustedMarketValue": 85800,
           "area": 30
+        },
+        {
+          "adjustment_factor": "stripping2nd",
+          "marketAdjustmentPercent": 0.75,
+          "adjustedMarketValue": 64350,
+          "area": 30
+        },
+        {
+          "adjustment_factor": "stripping3rd",
+          "marketAdjustmentPercent": 0.5,
+          "adjustedMarketValue": 57200,
+          "area": 40
+        }
+      ]
+    },
+    {
+      "id": "8ec3067f-9538-4429-b22f-c8942a086351",
+      "adjusted": true,
+      "classification": "commercial",
+      "subclassification": "c2",
+      "area": "10",
+      "unitValue": 5260,
+      "baseMarketValue": 52600,
+      "marketValue": 15780,
+      "actual_use": "commercial",
+      "assessmentLevel": 0.4,
+      "assessedValue": 6312,
+      "adjustments": [
+        {
+          "adjustment_factor": "openSpaces",
+          "marketAdjustmentPercent": 0.3,
+          "adjustedMarketValue": 15780,
+          "area": "10"
         }
       ]
     }
   ],
-  "propertyAssessments": "",
-  "total_property_assessment": "",
-  "taxable": "",
-  "effectivity_quarter": "",
-  "effectivity_year": "",
-  "status": "",
-  "faasLandChain_id": ""
+  "taxable": "taxable",
+  "effectivity_quarter": "1st Quarter",
+  "effectivity_year": "2025-08-25T16:00:00.000Z",
+  "totalMarketValue": 138400,
+  "totalAssessedValue": 37414.5
 }
-
-{
-  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
-  "appraisalID": "",
-  "adjusted": false,
-  "classification": "Residential",
-  "subClass": "R1",
-  "area": "30",
-  "unitValue": 2860,
-  "baseMarketValue": 85800,
-  "marketValue": 85800,
-  "actualUse": "",
-  "assessmentLevel": "",
-  "assessedValue": "",
-  "marketAdjustmentPercent": "",
-  "totalValueAdjustment": "",
-  "marketAdjustmentFactors": "",
-  "marketValueAdjustmentInputArea": ""
-},
-{
-  "classification": "Residential",
-  "subClass": "R1",
-  "area": "30",
-  "actualUse": "Residential",
-  "unitValue": 2860,
-  "baseMarketValue": 85800,
-  "marketValue": 85800,
-  "assessmentLevel": 0.15,
-  "assessedValue": 12870,
-
-  "marketAdjustmentPercent": "",
-  "totalValueAdjustment": "",
-  "marketAdjustmentFactors": "",
-  "marketValueAdjustmentInputArea": "",
-
-  "appraisalID": "",
-  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
-  "adjusted": false,
-}
-// adjusted appraisal
-{
-  "classification": "Residential",
-  "subClass": "R1",
-  "area": "30",
-  "actualUse": "Residential",
-  "unitValue": 2860,
-  "baseMarketValue": 85800,
-  "marketValue": 207350,
-  "assessmentLevel": 0.15,
-  "assessedValue": 31102.5,
-  // "marketAdjustmentPercent": "", 
-  // "totalValueAdjustment": "",
-  // "marketAdjustmentFactors": "",
-  // "marketValueAdjustmentInputArea": "",  temp inputs
-  "appraisalID": "",
-  "id": "d9681b4e-461b-4383-9d4b-f45675234276",
-  "adjusted": true,
-}
-
-{
-  "classification": "residential",
-  "subclassification": "r1",
-  "area": 100,
-  "actual_use": "residential",
-  "adjustments": [
-    {
-      "adjustment_factor": "cornerInfluence",
-      "area": 100
-    }
-  ]
-},
-
-
-    //adjustment
-{
-  "marketAdjustmentFactors": "1stStripping",
-  "area": 30,
-  "marketAdjustmentPercent": 1,
-  "adjustedMarketValue": 85800,
-  // "baseMarketValue": 286000, nasa appraisal
-  // "id": "c88fac78-796c-49a2-845f-88ba1aec2763",  generate den
-  // "appraisalID": "0b353733-4f80-49b7-b2dc-8d1f5b3b2710", generate pag gagawa ng array for tables
-}
-
-{
-  "adjustment_factor": "stripping1st",
-  "area": 30
-}
-
-[
-    {
-        "id": "0b79cde5-3c6c-4050-9cfe-20ebd6d54e07",
-        "adjusted": true,
-        "classification": "Residential",
-        "subclassification": "R1",
-        "area": "123",
-        "unitValue": 2860,
-        "baseMarketValue": 351780,
-        "marketValue": 207350,
-        "actual_use": "Commercial",
-        "assessmentLevel": 0.4,
-        "assessedValue": 82940,
-        "adjustments": [
-            {
-                "adjustment_factor": "1stStripping",
-                "marketAdjustmentPercent": 1,
-                "adjustedMarketValue": 85800,
-                "area": 30
-            },
-            {
-                "adjustment_factor": "2ndStripping",
-                "marketAdjustmentPercent": 0.75,
-                "adjustedMarketValue": 64350,
-                "area": 30
-            },
-            {
-                "adjustment_factor": "3rdStripping",
-                "marketAdjustmentPercent": 0.5,
-                "adjustedMarketValue": 57200,
-                "area": 40
-            }
-        ]
-    }
-]

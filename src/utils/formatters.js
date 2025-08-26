@@ -32,8 +32,23 @@ export const toUpperCase = (text) => {
   return String(text).toUpperCase();
 };
 
+export const toLowerCase = (text) => {
+  if (!text) return "";
+  return String(text).toLowerCase();
+};
+
 export const capitalizeFirstLetter = (text) => {
   if (!text) return "";
   const str = String(text).toLowerCase(); // optional: convert the rest to lowercase
   return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export const formatCamelCase = (text) => {
+  if (!text) return "";
+
+  // Insert a space before capital letters, then lowercase the rest
+  const spaced = text.replace(/([A-Z])/g, " $1").toLowerCase();
+
+  // Capitalize the first letter only
+  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 };

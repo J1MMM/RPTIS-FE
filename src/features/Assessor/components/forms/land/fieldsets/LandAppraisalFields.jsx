@@ -81,6 +81,7 @@ function LandAppraisalFields() {
             }}
           >
             Appraisal
+            <input style={{ position: "absolute", width: 100, opacity: 0 }} required={landAppraisal?.length == 0} />
           </Button>
         </Stack>
         <LandAppraisalTable

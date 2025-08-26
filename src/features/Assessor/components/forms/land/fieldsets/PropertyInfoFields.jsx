@@ -5,8 +5,11 @@ import TextInput from "../../../../../../components/ui/TextInput";
 import SelectField from "../../../../../../components/ui/SelectField";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import DateInput from "../../../../../../components/ui/DateInput";
+import { useFormContext } from "react-hook-form";
+import { BRGY_ARP_CODE } from "../../../../../../constants/barangayCode";
 
 function PropertyInfoFields({ control }) {
+  const { setValue } = useFormContext()
   return (
     <StyledFieldset title="Property Information">
       <Stack direction="row" gap={1}>
@@ -25,6 +28,9 @@ function PropertyInfoFields({ control }) {
           label="Barangay/District"
           name={FIELDS.BARANGAY}
           options={BRGY_OPTIONS}
+          onChange={(e) => {
+            setValue(FIELDS.ARP_NO, `${BRGY_ARP_CODE[e.target.value]}-`);
+          }}
         />
 
         <TextInput
@@ -57,7 +63,7 @@ function PropertyInfoFields({ control }) {
           control={control}
           multiline={true}
           label="Survey No."
-          name="Survey"
+          name={FIELDS.SURVEY_NO}
         />
       </Stack>
     </StyledFieldset>

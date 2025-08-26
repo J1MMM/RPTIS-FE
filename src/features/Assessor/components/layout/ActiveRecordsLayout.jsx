@@ -13,7 +13,7 @@ function ActiveRecordsLayout() {
       flexDirection={"column"}
       height={"calc(100vh - 160px)"}
     >
-      <Box p={1} mt={1}>
+      <Box p={1} my={1} ml={2}>
         <SegmentedTabs />
       </Box>
       <Outlet />

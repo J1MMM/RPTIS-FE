@@ -39,7 +39,6 @@ export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, wa
             options={CLASSIFICATION_OPTIONS}
             onChange={(e) => {
               setValue(FIELDS.SUBCLASS, "");
-              setValue(FIELDS.LAND_CLASSIFICATION, e.target.value);
             }}
           />
 

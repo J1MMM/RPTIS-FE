@@ -8,7 +8,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
     updatedFields = [
       {
         id: v4(),
-        name: "1stStripping",
+        name: "stripping1st",
         label: "1st Stripping",
         area: 30,
         percentOfAdj: 1,
@@ -17,7 +17,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
       {
         id: v4(),
-        name: "2ndStripping",
+        name: "stripping2nd",
         label: "2nd Stripping",
         area: 30,
         percentOfAdj: 0.75,
@@ -26,7 +26,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
       {
         id: v4(),
-        name: "3rdStripping",
+        name: "stripping3rd",
         label: "3rd Stripping",
         area: inputArea - 60,
         percentOfAdj: 0.5,
@@ -38,7 +38,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
     updatedFields = [
       {
         id: v4(),
-        name: "1stStripping",
+        name: "stripping1st",
         label: "1st Stripping",
         area: 30,
         percentOfAdj: 1,
@@ -47,7 +47,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
       },
       {
         id: v4(),
-        name: "2ndStripping",
+        name: "stripping2nd",
         label: "2nd Stripping",
         area: inputArea - 30,
         percentOfAdj: 0.75,
@@ -59,7 +59,7 @@ export const computeStrippingFields = (inputArea, baseUnitVal) => {
     updatedFields = [
       {
         id: v4(),
-        name: "1stStripping",
+        name: "stripping1st",
         label: "1st Stripping",
         area: inputArea,
         percentOfAdj: 1,

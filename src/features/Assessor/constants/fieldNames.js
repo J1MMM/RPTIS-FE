@@ -64,7 +64,6 @@ export const FIELDS = {
   // Effectivity of Assessment/Reassessment
   EFFECTIVITY_QTR: "effectivity_quarter",
   EFFECTIVITY_YEAR: "effectivity_year",
-  EFFECTIVITY_DATE_OF_EFFECTIVITY: "dateOfEffectivity",
 
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
