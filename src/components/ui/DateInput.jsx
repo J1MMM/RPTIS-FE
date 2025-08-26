@@ -3,6 +3,7 @@ import { FormControl } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
 function DateInput({
   control,
@@ -28,7 +29,7 @@ function DateInput({
             <DatePicker
               {...field}
               label={label}
-              value={field.value ? field.value : null}
+              value={field.value ? dayjs(field.value) : null}
               onChange={(newVal) => field.onChange(newVal)}
               readOnly={readOnly}
               format={yearOnly ? "YYYY" : "MM/DD/YYYY"}

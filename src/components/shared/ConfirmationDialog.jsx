@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 
 const ConfirmationDialog = ({
-  open,
-  setOpen,
+  open = true,
   title,
-  content,
-  confirm,
+  onConfirm,
+  message,
+  onCancel,
   disabled,
   serverity,
   label,
@@ -60,7 +60,7 @@ const ConfirmationDialog = ({
                 {title}
               </Typography>
               <Typography component={"span"} variant="body1" >
-                {content}
+                {message}
               </Typography>
             </Stack>
           </Alert>
@@ -72,7 +72,7 @@ const ConfirmationDialog = ({
             disabled={disabled}
             variant="outlined"
             size="small"
-            onClick={setOpen}
+            onClick={onCancel}
           >
             Cancel
           </Button>
@@ -81,8 +81,8 @@ const ConfirmationDialog = ({
             disabled={disabled}
             variant="contained"
             size="small"
-            color={serverity || "primary"}
-            onClick={confirm}
+            color={"primary"}
+            onClick={onConfirm}
           >
             {!!disabled ? (
               <Box display="flex" alignItems="center" gap={2}>

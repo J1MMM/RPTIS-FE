@@ -18,16 +18,19 @@ import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import { logger } from "../../../../utils/logger";
+import useConfirm from "../../../../hooks/useConfirm";
 
 function LandFaasPage() {
 
   const methods = useForm({ defaultValues: DEFAULT_FIELD_VALUES });
-  const { handleSubmit, formState: { isSubmitting } } = methods;
+  const { handleSubmit, formState: { isSubmitting, isDirty }, reset, setValue, } = methods;
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  const confirm = useConfirm()
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
+  const [formMode, setFormMode] = useState("add");
   const [disabled, setDisabled] = useState(false);
-  const [selectedArpNos, setSelectedArpNos] = useState([]);
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
@@ -44,11 +47,32 @@ function LandFaasPage() {
       setDisabled(false); // re-enable after request
     }
   };
+  const handleAddBtnClick = () => {
+    setFormMode("add");
+    setAddModalActive(true);
+
+  };
 
   const handleShowDetails = (params) => {
-    const { id } = params.row;
-    console.log(params.row);
+    setFormMode("view")
+    reset(params.row);
+    setAddModalActive(true);
+  };
 
+  const handleCloseModal = () => {
+    if (isDirty) {
+      confirm({
+        title: "Unsaved Changes",
+        message: "You have unsaved changes. Discard them?",
+        onConfirm: () => {
+          reset(DEFAULT_FIELD_VALUES);
+          setAddModalActive(false);
+        },
+      });
+      return;
+    }
+    reset(DEFAULT_FIELD_VALUES);
+    setAddModalActive(false);
   };
 
   return (
@@ -68,7 +92,7 @@ function LandFaasPage() {
             </Button>
             <Button
               disableFocusRipple
-              onClick={() => setAddModalActive(true)}
+              onClick={handleAddBtnClick}
               variant="contained"
               startIcon={<PlusCircle size={18} />}
             >
@@ -80,20 +104,23 @@ function LandFaasPage() {
         <AddLandFaasModal
           disabled={isSubmitting}
           open={addModalActive}
-          onClose={() => setAddModalActive(false)}
-          handleSubmit={handleSubmit(() => setShowConfirmation(true))}
+          onClose={handleCloseModal}
+          handleSubmit={handleSubmit(() => confirm({
+            title: "Add Land FAAS Confirmation",
+            message: "Are you sure you want to add this land FAAS data? It will be saved once confirmed.",
+            onConfirm: handleSubmit(onSubmit)
+          }))}
         />
       </FormProvider>
-
-
+      {/* 
       <ConfirmationDialog
         disabled={isSubmitting}
         open={showConfirmation}
         setOpen={() => setShowConfirmation(false)}
-        confirm={handleSubmit(onSubmit)}
+        onConfirm={handleSubmit(onSubmit)}
         title="Add Land FAAS Confirmation"
-        content="Are you sure you want to add this land FAAS data? It will be saved once confirmed."
-      />
+        message="Are you sure you want to add this land FAAS data? It will be saved once confirmed."
+      /> */}
 
     </>
   );

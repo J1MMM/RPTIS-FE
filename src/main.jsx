@@ -6,6 +6,7 @@ import theme from "./styles/theme.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DataProvider } from "./context/DataProvider.jsx";
+import { ConfirmProvider } from "./context/ConfirmProvider.jsx";
 
 const queryClient = new QueryClient({});
 
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
       <AuthProvider>
         <DataProvider>
           <ThemeProvider theme={theme}>
-            <App />
+            <ConfirmProvider>
+              <App />
+            </ConfirmProvider>
           </ThemeProvider>
         </DataProvider>
       </AuthProvider>
