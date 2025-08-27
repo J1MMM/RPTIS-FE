@@ -19,7 +19,6 @@ import { LogOutIcon, MessageCircleQuestion, Settings, UserRound } from "lucide-r
 import ContainerModal from "./ContainerModal";
 
 const UserMenu = (props) => {
-  const [modal, setModal] = useState(false)
   const navigate = useNavigate();
   const handleLogout = () => {
     Cookies.remove("token");
@@ -27,9 +26,7 @@ const UserMenu = (props) => {
     window.location.reload();
     //navigate to login
   };
-  const handleClick = () => {
-    setModal(true)
-  };
+
 
   return (
     <Menu
@@ -38,11 +35,6 @@ const UserMenu = (props) => {
       open={props.open}
       onClose={props.handleClose}
     >
-      <ContainerModal open={modal} onClose={() => setModal(false)} maxWidth="sm" title="Logout Modal">
-        <TextField label="Email" />
-        <TextField label="Password" />
-        <Button variant="contained" onClick={handleLogout}>Logout</Button>
-      </ContainerModal>
       <Stack minWidth="230px" direction="column" alignItems="center" >
         <MenuItem
           sx={{
@@ -76,7 +68,6 @@ const UserMenu = (props) => {
         </MenuItem>
         <Divider flexItem sx={{ mx: 2 }} />
         <MenuItem
-          onClick={handleClick}
           sx={{
             width: "100%",
             gap: 2,

@@ -9,16 +9,17 @@ import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { UNITVAL_TABLE } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
-import { useForm, useFormContext, useWatch } from "react-hook-form";
+import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
 import { logger } from "../../../../../../utils/logger";
 
 function LandAppraisalFields() {
-  const { control: landFormControl, setValue: setLandFormVal } = useFormContext();
+  const { control: landFormControl, setValue: setLandFormVal, reset, resetField: resetFaasFormField, getValues } = useFormContext();
   const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
+  const { fields, append, remove } = useFieldArray({ control: landFormControl, name: FIELDS.LAND_APPRAISAL });
 
   const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
   const landAppraisal = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []; //array
@@ -38,7 +39,7 @@ function LandAppraisalFields() {
       const updatedAppraisals = [...landAppraisal, { ...data, id: v4() }];
       const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
 
-      setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+      append({ ...data, id: v4() })
       setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
       setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
       resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
@@ -53,13 +54,20 @@ function LandAppraisalFields() {
 
   const handleDelete = (id) => {
     try {
-      const updatedLandAppraisal = landAppraisal.filter(item => item?.id !== id)
+      const updatedLandAppraisal = fields.filter(item => item?.id !== id)
+      console.log("updatedLandAppraisal");
+      console.log(updatedLandAppraisal);
+
       const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
       const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
       // Update RHF state
-      setLandFormVal(FIELDS.LAND_APPRAISAL, updatedLandAppraisal)
-      setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue)
-      setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
+      remove(id)
+      reset({
+        ...getValues(), // keep existing values
+        [FIELDS.TOTAL_MARKET_VALUE]: totalMarketValue,
+        [FIELDS.TOTAL_ASSESSED_VALUE]: totalAssessedValue
+      });
+
       toast.success("Appraisal deleted successfully!", toastConfig);
     } catch (error) {
       toast.error("Failed to delete appraisal. Please try again.", toastConfig);
@@ -81,11 +89,10 @@ function LandAppraisalFields() {
             }}
           >
             Appraisal
-            <input style={{ position: "absolute", width: 100, opacity: 0 }} required={landAppraisal?.length == 0} />
           </Button>
         </Stack>
         <LandAppraisalTable
-          currentAppraisals={landAppraisal}
+          currentAppraisals={fields}
           handleDelete={handleDelete} />
       </StyledFieldset>
 

@@ -13,6 +13,7 @@ export const FIELDS = {
   BLOCK_NO: "blk_no",
   SURVEY_NO: "survey_no",
   // owner info
+  OWNERSHIP: "land_ownership",
   OWNER_FULLNAME: "ownerFullname",
   OWNER_TIN: "TIN",
   OWNER_STREET: "Street",

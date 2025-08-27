@@ -1,34 +1,21 @@
-import { Button, Input, Stack } from "@mui/material";
-import StyledFieldset from "@components/ui/StyledFieldset";
-import { Add } from "@mui/icons-material";
-import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
-import AddOwnerModal from "../modals/AddOwnerModal";
-import { useState } from "react";
-import { useForm, useFormContext, useWatch } from "react-hook-form";
-import { toast } from "react-toastify";
 import { v4 } from "uuid";
-
-const DEFAULT_OWNER_FORM = {
-  regions: "",
-  province: "",
-  city: "",
-  barangay: "",
-  street: "",
-  postal: "",
-  type: "",
-  role: "",
-  contact_no: "",
-  email: "",
-  name: ""
-}
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { Button, Input, Stack } from "@mui/material";
+import { Add } from "@mui/icons-material";
+import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
+import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
+import { DEFAULT_OWNER_FORM } from "../../../../constants/defaultValues";
+import StyledFieldset from "@components/ui/StyledFieldset";
+import AddOwnerModal from "../modals/AddOwnerModal";
+import { FIELDS } from "../../../../constants/fieldNames";
 
 function OwnerInfoFields() {
   const [activeModal, setActiveModal] = useState(false)
-  const { control: landFormControl, getValues, setValue: setLandFormVal, } = useFormContext()
+  const { control: landFormControl } = useFormContext()
   const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
   const ownersForm = useWatch({ control: ownerFieldControl })
-  const land_ownership = useWatch({ control: landFormControl, name: "land_ownership" }) || [];
-
+  const { fields, append, remove } = useFieldArray({ control: landFormControl, name: FIELDS.OWNERSHIP });
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -36,9 +23,7 @@ function OwnerInfoFields() {
 
     handleSubmit((data) => {
       try {
-        const updatedOwners = [...land_ownership, { ...data, id: v4() }];
-        setLandFormVal("land_ownership", updatedOwners);
-
+        append({ ...data, id: v4() })
         setActiveModal(false);
         reset(DEFAULT_OWNER_FORM);
         toast.success("Owner added successfully!");
@@ -51,8 +36,7 @@ function OwnerInfoFields() {
 
   const deleteOwner = (id) => {
     try {
-      const updatedOwners = land_ownership.filter(owner => owner.id !== id);
-      setLandFormVal("land_ownership", updatedOwners);
+      remove({ id })
       toast.success("Owner deleted successfully!");
     } catch (error) {
       console.error("Error deleting owner:", error);
@@ -64,7 +48,6 @@ function OwnerInfoFields() {
     <StyledFieldset title="Owner's / Administrator">
       <Stack mb={2}>
         <Button
-
           disableFocusRipple
           variant="contained"
           startIcon={<Add />}
@@ -72,11 +55,10 @@ function OwnerInfoFields() {
           onClick={() => setActiveModal(true)}
         >
           Add Owner
-          <input style={{ position: "absolute", width: 100, opacity: 0 }} required={land_ownership?.length == 0} />
         </Button>
       </Stack>
 
-      <LandOwnerTable rows={land_ownership} handleDelete={deleteOwner} />
+      <LandOwnerTable rows={fields} handleDelete={deleteOwner} />
 
       <AddOwnerModal
         open={activeModal}

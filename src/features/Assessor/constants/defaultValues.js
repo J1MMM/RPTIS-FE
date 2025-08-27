@@ -44,6 +44,7 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.SURVEY_NO]: "",
   //owner info
   land_ownership: [],
+  landAppraisal: [],
   // boundaries
   [FIELDS.NORTH_BOUNDARY]: "",
   [FIELDS.SOUTH_BOUNDARY]: "",
@@ -53,21 +54,6 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.SW_BOUNDARY]: "",
   [FIELDS.SE_BOUNDARY]: "",
   [FIELDS.NW_BOUNDARY]: "",
-  // land appraisal
-  [FIELDS.LAND_APPRAISAL]: [],
-  // market adjustment
-  // [FIELDS.MARKET_ADJUSTMENT]: [],
-  // [FIELDS.MARKET_ADJUSTMENT_CLASSIFICATION]: "",
-  // [FIELDS.MARKET_ADJUSTMENT_SUB_CLASS]: "",
-  // [FIELDS.MARKET_ADJUSTMENT_UNIT_VALUE]: "",
-  // [FIELDS.MARKET_ADJUSTMENT_BASE_MARKET_VALUE]: "",
-
-  // property assessment
-  // [FIELDS.PROPERTY_ASSESSMENT]: [],
-  // [FIELDS.PROPERTY_ASSESSMENT_ACTUAL_USE]: "",
-  // [FIELDS.PROPERTY_ASSESSMENT_LEVEL]: 0,
-  // [FIELDS.PROPERTY_MARKET_VALUE]: "",
-
   // taxability
   [FIELDS.TAXABILITY]: "",
 
@@ -76,6 +62,7 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.EFFECTIVITY_YEAR]: null,
 
   [FIELDS.TOTAL_MARKET_VALUE]: 0,
+  [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {
@@ -412,3 +399,18 @@ export const SAMPLE_DATA = [
     totalAssessedValue: 2843.7,
   }
 ];
+
+
+export const DEFAULT_OWNER_FORM = {
+  regions: "",
+  province: "",
+  city: "",
+  barangay: "",
+  street: "",
+  postal: "",
+  type: "",
+  role: "",
+  contact_no: "",
+  email: "",
+  name: ""
+}

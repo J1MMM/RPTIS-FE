@@ -8,6 +8,7 @@ import LoginPage from "./pages/login/index.jsx";
 import { Missing } from "./pages/404.jsx";
 import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./features/Assessor";
 import "./styles/global.scss";
+import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
 
 function App() {
   return (
@@ -30,23 +31,23 @@ function App() {
               {/* <Route path="building" element={<BuildingFaasPage />} />
                 <Route path="machinery" element={<MachineryFaasPage />} /> */}
             </Route>
-            <Route path="archived" element={<LandFaasPage />}>
+            <Route path="archived" element={<ArchivedRecordsLayout />}>
               <Route index element={<Navigate to="land" replace />} />
               <Route path="land" element={<LandFaasPage />} />
-              <Route path="building" element={<LandFaasPage />} />
-              <Route path="machinery" element={<LandFaasPage />} />
+              <Route path="building" />
+              <Route path="machinery" />
             </Route>
             <Route path="pending" element={<LandFaasPage />} />
           </Route>
 
-          <Route path="landtax" element={<AssessorPageLayout />}>
-            <Route path="" element={<LandFaasPage />} />
+          <Route path="landtax">
+            <Route path="" />
             <Route path="computed" element={<LandFaasPage />} />
             <Route path="paidlist" element={<LandFaasPage />} />
           </Route>
 
-          <Route path="cash-division" element={<AssessorPageLayout />}>
-            <Route path="" element={<LandFaasPage />} />
+          <Route path="cash-division">
+            <Route path="" />
             <Route path="paidlist" element={<LandFaasPage />} />
           </Route>
         </Route>

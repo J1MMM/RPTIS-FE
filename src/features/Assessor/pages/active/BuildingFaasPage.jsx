@@ -19,8 +19,9 @@ import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
+import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 
-function LandFaasPage() {
+function BuildingFaasPage() {
 
   const methods = useForm({ defaultValues: DEFAULT_FIELD_VALUES });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
@@ -78,7 +79,7 @@ function LandFaasPage() {
   return (
     <>
       <FormProvider {...methods}>
-        <LandFaasTable
+        <BuildingFaasTable
           handleShowDetails={handleShowDetails}
           rows={landFaasRecords}
           toolbarButtons={(<>
@@ -102,7 +103,6 @@ function LandFaasPage() {
         />
 
         <AddLandFaasModal
-          formMode={formMode}
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}
@@ -117,4 +117,4 @@ function LandFaasPage() {
   );
 }
 
-export default LandFaasPage;
+export default BuildingFaasPage;
