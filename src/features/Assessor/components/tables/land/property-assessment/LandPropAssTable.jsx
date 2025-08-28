@@ -9,7 +9,7 @@ import PropAssessmentTableFooter from "./PropAssessmentTableFooter";
 import { CLASSIFICATION_OPTIONS } from "../../../../constants/dropdownOptions";
 
 export const LandPropAssTable = (props) => {
-  const { formData, handleChange } = props;
+  const { formData, handleChange, readOnly } = props;
 
   const totalAssessedValue = formData[FIELDS.TOTAL_ASSESSED_VALUE] || 0;
 
@@ -29,6 +29,7 @@ export const LandPropAssTable = (props) => {
             return (
               <Select
                 required
+                disabled={readOnly}
                 value={params.row[FIELDS.LAND_ACTUAL_USE]}
                 onChange={(e) => handleChange(params.row.id, e.target.value)}
                 fullWidth

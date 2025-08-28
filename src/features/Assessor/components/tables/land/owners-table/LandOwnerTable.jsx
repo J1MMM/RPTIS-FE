@@ -18,7 +18,7 @@ const columnProps = {
   align: "center",
 }
 
-export const LandOwnerTable = ({ rows, handleDelete }) => {
+export const LandOwnerTable = ({ rows, handleDelete, readOnly }) => {
 
   return (
     <DataGrid
@@ -27,7 +27,7 @@ export const LandOwnerTable = ({ rows, handleDelete }) => {
         {
           ...columnProps,
           renderCell: (params) => (
-            <IconButton color="mono.main" onClick={() => handleDelete(params.row.id)}>
+            <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(params.row.id)}>
               <X />
             </IconButton>
           ),

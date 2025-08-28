@@ -9,6 +9,7 @@ import { Missing } from "./pages/404.jsx";
 import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./features/Assessor";
 import "./styles/global.scss";
 import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
+import BuildingFaasPage from "./features/Assessor/pages/active/BuildingFaasPage.jsx";
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
             <Route path="active" element={<ActiveRecordsLayout />}>
               <Route index element={<Navigate to="land" replace />} />
               <Route path="land" element={<LandFaasPage />} />
-              <Route path="building" element={<LandFaasPage />} />
+              <Route path="building" element={<BuildingFaasPage />} />
               <Route path="machinery" element={<LandFaasPage />} />
               {/* <Route path="building" element={<BuildingFaasPage />} />
                 <Route path="machinery" element={<MachineryFaasPage />} /> */}
@@ -34,7 +35,7 @@ function App() {
             <Route path="archived" element={<ArchivedRecordsLayout />}>
               <Route index element={<Navigate to="land" replace />} />
               <Route path="land" element={<LandFaasPage />} />
-              <Route path="building" />
+              <Route path="building" element={<BuildingFaasPage />} />
               <Route path="machinery" />
             </Route>
             <Route path="pending" element={<LandFaasPage />} />

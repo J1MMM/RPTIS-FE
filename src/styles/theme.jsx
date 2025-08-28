@@ -79,6 +79,7 @@ const theme = createTheme({
           textTransform: "none",
           whiteSpace: "nowrap",
           borderRadius: "7px",
+          paddingTop: "5px",
         },
       },
     },

@@ -21,7 +21,7 @@ const columnProps = {
   align: "center",
 }
 
-export const LandAppraisalTable = ({ currentAppraisals, handleDelete }) => {
+export const LandAppraisalTable = ({ currentAppraisals, handleDelete, readOnly }) => {
   const totalBaseMarketVal = sumByField(currentAppraisals, FIELDS.LAND_BASE_MARKET_VALUE);
 
   return (
@@ -31,7 +31,7 @@ export const LandAppraisalTable = ({ currentAppraisals, handleDelete }) => {
         {
           ...columnProps,
           renderCell: (params) => (
-            <IconButton color="mono.main" onClick={() => handleDelete(params.row.id)}>
+            <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(params.row.id)}>
               <X />
             </IconButton>
           ),

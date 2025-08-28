@@ -10,7 +10,7 @@ import StyledFieldset from "@components/ui/StyledFieldset";
 import AddOwnerModal from "../modals/AddOwnerModal";
 import { FIELDS } from "../../../../constants/fieldNames";
 
-function OwnerInfoFields() {
+function OwnerInfoFields({ readOnly }) {
   const [activeModal, setActiveModal] = useState(false)
   const { control: landFormControl } = useFormContext()
   const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
@@ -48,6 +48,7 @@ function OwnerInfoFields() {
     <StyledFieldset title="Owner's / Administrator">
       <Stack mb={2}>
         <Button
+          disabled={readOnly}
           disableFocusRipple
           variant="contained"
           startIcon={<Add />}
@@ -58,7 +59,7 @@ function OwnerInfoFields() {
         </Button>
       </Stack>
 
-      <LandOwnerTable rows={fields} handleDelete={deleteOwner} />
+      <LandOwnerTable readOnly={readOnly} rows={fields} handleDelete={deleteOwner} />
 
       <AddOwnerModal
         open={activeModal}

@@ -6,7 +6,7 @@ import { sumByField } from "../../../../../../utils/math";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { useFormContext, useWatch } from "react-hook-form";
 
-function AssessmentFields() {
+function AssessmentFields({ readOnly }) {
   const { control: landFormControl, setValue: setLandFormVal } = useFormContext()
   const formData = useWatch({ control: landFormControl })
 
@@ -34,6 +34,7 @@ function AssessmentFields() {
     <>
       <StyledFieldset title="Property Assessment">
         <LandPropAssTable
+          readOnly={readOnly}
           formData={formData}
           handleChange={handleActualUseChange}
         />

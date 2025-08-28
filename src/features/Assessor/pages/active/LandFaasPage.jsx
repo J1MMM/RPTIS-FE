@@ -103,6 +103,7 @@ function LandFaasPage() {
 
         <AddLandFaasModal
           formMode={formMode}
+          setFormMode={setFormMode}
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}

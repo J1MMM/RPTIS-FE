@@ -15,7 +15,7 @@ import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
 import { logger } from "../../../../../../utils/logger";
 
-function LandAppraisalFields() {
+function LandAppraisalFields({ readOnly }) {
   const { control: landFormControl, setValue: setLandFormVal, reset, resetField: resetFaasFormField, getValues } = useFormContext();
   const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
@@ -55,15 +55,12 @@ function LandAppraisalFields() {
   const handleDelete = (id) => {
     try {
       const updatedLandAppraisal = fields.filter(item => item?.id !== id)
-      console.log("updatedLandAppraisal");
-      console.log(updatedLandAppraisal);
-
       const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
       const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
       // Update RHF state
       remove(id)
       reset({
-        ...getValues(), // keep existing values
+        ...getValues(),
         [FIELDS.TOTAL_MARKET_VALUE]: totalMarketValue,
         [FIELDS.TOTAL_ASSESSED_VALUE]: totalAssessedValue
       });
@@ -80,6 +77,7 @@ function LandAppraisalFields() {
       <StyledFieldset title="Land Appraisal">
         <Stack mb={2}>
           <Button
+            disabled={readOnly}
             disableFocusRipple
             variant="contained"
             startIcon={<Add />}
@@ -92,6 +90,7 @@ function LandAppraisalFields() {
           </Button>
         </Stack>
         <LandAppraisalTable
+          readOnly={readOnly}
           currentAppraisals={fields}
           handleDelete={handleDelete} />
       </StyledFieldset>

@@ -10,7 +10,7 @@ import { X } from "lucide-react";
 import { sumByField } from "../../../../../../utils/math";
 
 export const LandMarketValueTable = (props) => {
-  const { handleDelete, rows } = props;
+  const { handleDelete, rows, readOnly } = props;
   const totalMarketVal = sumByField(rows, "adjustedMarketValue");
 
   return (
@@ -29,6 +29,7 @@ export const LandMarketValueTable = (props) => {
           align: "center",
           renderCell: (params) => (
             <IconButton
+              disabled={readOnly}
               color="mono.main"
               onClick={() => handleDelete(params.row.appraisalID)}
             >

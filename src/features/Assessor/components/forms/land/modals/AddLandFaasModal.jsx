@@ -14,8 +14,9 @@ import { Landmark, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
 
-export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode }) {
+export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: landFormControl } = useFormContext();
+  const readOnly = formMode == "view"
   logger("data", useWatch({ control: landFormControl }))
 
   return (
@@ -27,7 +28,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         onSubmit={handleSubmit}
         headerIcon={<Landmark />}
         actionButton={
-          formMode == "add" ?
+          formMode !== "view" ?
             <>
               <Button size="small" onClick={onClose} variant="outlined">
                 Cancel
@@ -49,8 +50,8 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
                 <Button size="small" variant="outlined" disabled={disabled}>
                   Transfer
                 </Button>
-                <Button size="small" variant="contained" disabled={disabled}>
-                  Edit
+                <Button size="small" variant="contained" disabled={disabled} onClick={() => setFormMode("edit")}>
+                  Update
                 </Button>
               </Stack>
             </Stack>
@@ -59,19 +60,20 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
       >
         <Stack width={230} direction="row" justifyContent="space-between">
           <SelectField
+            readOnly={readOnly}
             control={landFormControl}
             label="Transaction Code"
             name={FIELDS.TRANSACTION_CODE}
             options={TRANSACTION_CODE}
           />
         </Stack>
-        <PropertyInfoFields control={landFormControl} />
-        <OwnerInfoFields />
-        <LandBounderiesFields control={landFormControl} />
-        <LandAppraisalFields />
-        <LandMarketValueFields />
-        <AssessmentFields />
-        <TaxabilityFields control={landFormControl} />
+        <PropertyInfoFields readOnly={readOnly} control={landFormControl} />
+        <OwnerInfoFields readOnly={readOnly} />
+        <LandBounderiesFields readOnly={readOnly} control={landFormControl} />
+        <LandAppraisalFields readOnly={readOnly} />
+        <LandMarketValueFields readOnly={readOnly} />
+        <AssessmentFields readOnly={readOnly} />
+        <TaxabilityFields readOnly={readOnly} control={landFormControl} />
       </ContainerModal >
     </>
   );

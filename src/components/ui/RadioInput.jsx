@@ -1,7 +1,7 @@
 import { FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material'
 import { Controller } from 'react-hook-form'
 
-function RadioInput({ name, control, rules, options = [], required = true }) {
+function RadioInput({ name, control, rules, options = [], required = true, readOnly = false }) {
     return (
         <Stack direction="row" width={"100%"} alignItems="center">
             <Controller
@@ -17,7 +17,7 @@ function RadioInput({ name, control, rules, options = [], required = true }) {
                                     key={i}
                                     label={v?.label}
                                     value={v?.value}
-                                    control={<Radio />}
+                                    control={<Radio disabled={readOnly} />}
                                 />
                             ))}
                         </RadioGroup>

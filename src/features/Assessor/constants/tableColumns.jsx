@@ -16,6 +16,8 @@ export const LAND_TABLE_COLUMN = [
     flex: 1,
     editable: false,
     headerClassName: "data-grid-header",
+    headerAlign: 'center',
+    align: "center"
   },
   {
     field: FIELDS.PIN,
@@ -285,7 +287,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
   {
     field: "type",
     headerName: "Type",
-    width: 100,
+    flex: 1,
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
@@ -295,7 +297,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
   {
     field: "role",
     headerName: "Role",
-    width: 100,
+    flex: 1,
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
@@ -307,7 +309,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
     headerName: "Name",
     width: 225,
     headerClassName: "data-grid-header",
-    sortable: false,
+    flex: 1,
     filterable: false,
     disableColumnMenu: true,
     renderCell: (params) => {
@@ -332,7 +334,8 @@ export const OWNER_INFO_TABLE_COLUMN = [
   {
     field: "tin",
     headerName: "TIN",
-    width: 125,
+    flex: 1,
+
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,

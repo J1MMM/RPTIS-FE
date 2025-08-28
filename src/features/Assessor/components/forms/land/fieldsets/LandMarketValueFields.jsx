@@ -12,7 +12,7 @@ import { normalizeNonStripping, normalizeStripping, updateAppraisals } from "../
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
 
-function LandMarketValueFields() {
+function LandMarketValueFields({ readOnly }) {
   const [adjustmentRows, setAdjustmentRows] = useState([])
   const [modalActive, setModalActive] = useState(false);
   const [strippingFields, setStrippingFields] = useState(STRIPPING_FIELDS_DEFAULT);
@@ -108,17 +108,17 @@ function LandMarketValueFields() {
       <StyledFieldset title="Market Value Adjustment">
         <Stack mb={2}>
           <Button
+            disabled={readOnly || appraisalEmpty}
             disableFocusRipple
             sx={{ alignSelf: "flex-start" }}
             onClick={() => setModalActive(true)}
             variant="contained"
-            disabled={appraisalEmpty}
             startIcon={<ArrowUpDown size={18} />}
           >
             Adjustment
           </Button>
         </Stack>
-        <LandMarketValueTable rows={adjustmentRows} handleDelete={handleDelete} />
+        <LandMarketValueTable readOnly={readOnly} rows={adjustmentRows} handleDelete={handleDelete} />
       </StyledFieldset>
 
       <AddLandMarketValModal

@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    regions as fetchRegions,
-    provinces as fetchProvinces,
-    cities as fetchCities,
-    barangays as fetchBarangays,
-} from "select-philippines-address";
+import { getBarangays, getCities, getProvinces, getRegions } from "./locationUtils";
 
 function usePhLocations({ selectedRegion, selectedProvince, selectedCity }) {
     const [regions, setRegions] = useState([]);
@@ -14,40 +9,53 @@ function usePhLocations({ selectedRegion, selectedProvince, selectedCity }) {
 
     // Fetch regions on mount
     useEffect(() => {
-        fetchRegions().then((data) => setRegions(data));
+        setRegions(getRegions());
     }, []);
 
     // Fetch provinces when region changes
     useEffect(() => {
-        if (selectedRegion) {
-            const regionObj = regions.find((r) => r.region_name === selectedRegion);
-            if (regionObj) {
-                fetchProvinces(regionObj.region_code).then((data) => setProvinces(data));
+        const fetchProvinces = async () => {
+            if (selectedRegion) {
+                const regionObj = regions.find((r) => r.region_name === selectedRegion);
+                if (regionObj) {
+                    const regionsResult = await getProvinces(regionObj.region_code);
+                    setProvinces(regionsResult);
+                }
+                setCities([]);
+                setBarangays([]);
             }
-            setCities([]);
-            setBarangays([]);
-        }
+        };
+
+        fetchProvinces();
     }, [selectedRegion, regions]);
 
-    // Fetch cities when province changes
     useEffect(() => {
-        if (selectedProvince) {
-            const provinceObj = provinces.find((p) => p.province_name === selectedProvince);
-            if (provinceObj) {
-                fetchCities(provinceObj.province_code).then((data) => setCities(data));
+        const fetchCities = async () => {
+            if (selectedProvince) {
+                const provinceObj = provinces.find((p) => p.province_name === selectedProvince);
+                if (provinceObj) {
+                    const citiesResult = await getCities(provinceObj.province_code)
+                    setCities(citiesResult);
+                }
+                setBarangays([]);
             }
-            setBarangays([]);
         }
+        fetchCities()
     }, [selectedProvince, provinces]);
 
     // Fetch barangays when city changes
     useEffect(() => {
-        if (selectedCity) {
-            const cityObj = cities.find((c) => c.city_name === selectedCity);
-            if (cityObj) {
-                fetchBarangays(cityObj.city_code).then((data) => setBarangays(data));
+        const fetchBarangays = async () => {
+
+            if (selectedCity) {
+                const cityObj = cities.find((c) => c.city_name === selectedCity);
+                if (cityObj) {
+                    const barangaysResult = await getBarangays(cityObj.city_code)
+                    setBarangays(barangaysResult);
+                }
             }
         }
+        fetchBarangays()
     }, [selectedCity, cities]);
 
     // Map to { label, value, code } format
