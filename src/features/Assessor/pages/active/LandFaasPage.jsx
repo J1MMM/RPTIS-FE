@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
 import { Stack } from "@mui/material";
@@ -74,6 +74,22 @@ function LandFaasPage() {
     reset(DEFAULT_FIELD_VALUES);
     setAddModalActive(false);
   };
+
+  useEffect(() => {
+    if (!open || !isDirty) return;
+
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [open, isDirty]);
+
 
   return (
     <>

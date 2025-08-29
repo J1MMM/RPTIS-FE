@@ -10,14 +10,18 @@ import AssessmentFields from "../fieldsets/AssessmentFields";
 import TaxabilityFields from "../fieldsets/TaxabilityFields";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { Landmark, } from "lucide-react";
+import { ArrowLeftRight, Edit, Landmark, Printer, Split, SplitSquareHorizontal, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
+import { useEffect } from "react";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: landFormControl } = useFormContext();
   const readOnly = formMode == "view"
   logger("data", useWatch({ control: landFormControl }))
+
+
+
 
   return (
     <>
@@ -44,13 +48,16 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
                 Cancel
               </Button>
               <Stack direction={"row"} alignItems={"center"} gap={1}>
-                <Button size="small" variant="outlined" disabled={disabled}>
+                <Button startIcon={<Printer size={18} />} size="small" variant="outlined" disabled={disabled}>
+                  Forms
+                </Button>
+                <Button startIcon={<Split size={18} />} size="small" variant="outlined" disabled={disabled}>
                   Subdivide
                 </Button>
-                <Button size="small" variant="outlined" disabled={disabled}>
+                <Button startIcon={<ArrowLeftRight size={18} />} size="small" variant="outlined" disabled={disabled}>
                   Transfer
                 </Button>
-                <Button size="small" variant="contained" disabled={disabled} onClick={() => setFormMode("edit")}>
+                <Button startIcon={<Edit size={18} />} size="small" variant="contained" disabled={disabled} onClick={() => setFormMode("edit")}>
                   Update
                 </Button>
               </Stack>
