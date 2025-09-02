@@ -5,6 +5,7 @@ const AssessorContext = createContext({});
 
 export const AssessorProvider = ({ children }) => {
   const [landFaasRecords, setLandFaasRecords] = useState([]);
+  const [buildingFaasRecords, setBuildingFaasRecords] = useState([]);
   const [loading, setLoading] = useState([]);
 
   useEffect(() => {
@@ -28,6 +29,8 @@ export const AssessorProvider = ({ children }) => {
       value={{
         landFaasRecords,
         setLandFaasRecords,
+        buildingFaasRecords,
+        setBuildingFaasRecords
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Button, IconButton, InputAdornment, Stack } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
@@ -7,13 +7,41 @@ import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import DateInput from "../../../../../../components/ui/DateInput";
 import { useFormContext } from "react-hook-form";
 import { BRGY_ARP_CODE } from "../../../../../../constants/barangayCode";
+import { SYMBOLS } from "../../../../../../constants/symbols";
+import { FolderSearch, Search, X } from "lucide-react";
 
 function PropertyInfoFields({ control, readOnly }) {
-  const { setValue } = useFormContext()
+  const { setValue, getValues } = useFormContext()
   return (
     <StyledFieldset title="Property Information">
       <Stack direction="row" gap={1}>
-        <TextInput readOnly={readOnly} control={control} label="ARP No." name={FIELDS.ARP_NO} />
+        <TextInput
+          placeholder={!getValues("arpAdornment") && "Select a barangay first"}
+          readOnly={readOnly || !getValues("arpAdornment")}
+          control={control}
+          label="ARP No."
+          name={FIELDS.ARP_NO}
+          adornment={{
+            startAdornment: (
+              <InputAdornment position="end">{getValues("arpAdornment")}</InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                {
+                  getValues("arpAdornment") &&
+                  <IconButton onClick={() => {
+                    setValue("arpAdornment", "")
+                    setValue(FIELDS.ARP_NO, "")
+                  }}>
+                    <X />
+                  </IconButton>
+                }
+                <IconButton color="primary">
+                  <FolderSearch />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }} />
         <TextInput readOnly={readOnly} control={control} label="PIN" name={FIELDS.PIN} />
       </Stack>
       <Stack direction="row" gap={1}>
@@ -31,7 +59,7 @@ function PropertyInfoFields({ control, readOnly }) {
           name={FIELDS.BARANGAY}
           options={BRGY_OPTIONS}
           onChange={(e) => {
-            setValue(FIELDS.ARP_NO, `${BRGY_ARP_CODE[e.target.value]}-`);
+            setValue("arpAdornment", `${BRGY_ARP_CODE[e.target.value]}-`);
           }}
         />
 

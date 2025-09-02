@@ -31,6 +31,7 @@ export const DATA_GRID_INITIAL_STATE = {
 export const DEFAULT_FIELD_VALUES = {
   // property info
   [FIELDS.TRANSACTION_CODE]: "",
+  arpAdornment: "",
   [FIELDS.ARP_NO]: "",
   [FIELDS.PIN]: "",
   [FIELDS.NO_AND_STREET]: "",

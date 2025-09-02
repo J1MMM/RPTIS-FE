@@ -10,27 +10,23 @@ import AssessmentFields from "../fieldsets/AssessmentFields";
 import TaxabilityFields from "../fieldsets/TaxabilityFields";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { ArrowLeftRight, Edit, Landmark, Printer, Split, SplitSquareHorizontal, } from "lucide-react";
+import { ArrowLeftRight, Building, Building2, Edit, Landmark, Printer, Split, SplitSquareHorizontal, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
-import { useEffect } from "react";
 
-export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
+export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: landFormControl } = useFormContext();
   const readOnly = formMode == "view"
   logger("data", useWatch({ control: landFormControl }))
 
-
-
-
   return (
     <>
       <ContainerModal
-        title="FIELD APPRAISAL & ASSESSMENT SHEET - LAND"
+        title="FIELD APPRAISAL & ASSESSMENT SHEET - BUILDING & OTHER STRUCTURES"
         open={open}
         onClose={onClose}
         onSubmit={handleSubmit}
-        headerIcon={<Landmark />}
+        headerIcon={<Building2 />}
         actionButton={
           formMode !== "view" ?
             <>

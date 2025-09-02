@@ -1,31 +1,22 @@
 import { useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
-import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import useFaasData from "../../hooks/useFaasData";
-import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
-import useAssessorForm from "../../hooks/useFormContext";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
-import ConfirmationDialog from "../../../../components/shared/ConfirmationDialog";
 import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
-import axios from "../../../../api/axios";
-import { FIELDS } from "../../constants/fieldNames";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
-import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
-import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
+import AddBuildingFaasModal from "../../components/forms/land/modals/AddBuildingFaasModal";
 
 function BuildingFaasPage() {
 
   const methods = useForm({ defaultValues: DEFAULT_FIELD_VALUES });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  const { buildingFaasRecords, setBuildingFaasRecords } = useFaasData();
   const confirm = useConfirm()
 
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -38,7 +29,7 @@ function BuildingFaasPage() {
     if (isSubmitting) return;
     try {
       await new Promise(r => setTimeout(r, 1000))
-      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
+      setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {
@@ -48,6 +39,7 @@ function BuildingFaasPage() {
       setDisabled(false); // re-enable after request
     }
   };
+
   const handleAddBtnClick = () => {
     setFormMode("add");
     setAddModalActive(true);
@@ -81,7 +73,7 @@ function BuildingFaasPage() {
       <FormProvider {...methods}>
         <BuildingFaasTable
           handleShowDetails={handleShowDetails}
-          rows={landFaasRecords}
+          rows={buildingFaasRecords}
           toolbarButtons={(<>
             <Button
               // disabled={Boolean(selectedArpNos.length < 2)}
@@ -102,7 +94,7 @@ function BuildingFaasPage() {
           </>)}
         />
 
-        <AddLandFaasModal
+        <AddBuildingFaasModal
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}

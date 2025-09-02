@@ -12,6 +12,8 @@ function TextInput({
   disabled,
   adornment,
   size,
+  onChange,
+  placeholder,
   required = true,
   type = "text",
   multiline = false,
@@ -41,6 +43,11 @@ function TextInput({
           variant="outlined"
           multiline={multiline}
           label={label}
+          placeholder={placeholder}
+          onChange={(e) => {
+            field.onChange(e); // use form hook function
+            if (onChange) onChange(e); // use custom onChange function
+          }}
           value={
             isPercent
               ? formatPercent(field.value)

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LINKS = [
   { path: "./land", label: "Land" },
@@ -13,10 +13,21 @@ const btnPaddingY = 1;
 
 function SegmentedTabs() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleClick = (path, i) => {
-    setActiveIndex(i);
+  useEffect(() => {
+    if (pathname.includes("land")) {
+      setActiveIndex(0);
+    } else if (pathname.includes("building")) {
+      setActiveIndex(1);
+    } else if (pathname.includes("machinery")) {
+      setActiveIndex(2);
+    }
+  }, [pathname]);
+
+
+  const handleClick = (path) => {
     navigate(path);
   };
 
@@ -57,7 +68,7 @@ function SegmentedTabs() {
             alignItems="center"
             justifyContent="center"
             sx={{ cursor: "pointer" }}
-            onClick={() => handleClick(row.path, i)}
+            onClick={() => handleClick(row.path)}
           >
             <Typography
               sx={{ userSelect: "none", transitionDuration: "0.1s" }}
