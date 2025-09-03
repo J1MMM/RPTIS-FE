@@ -7,13 +7,13 @@ import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import DateInput from "../../../../../../components/ui/DateInput";
 import { useFormContext } from "react-hook-form";
 import { BRGY_CODE, BRGY_DISTRICTS } from "../../../../../../constants/barangayCode";
-import { SYMBOLS } from "../../../../../../constants/symbols";
-import { FolderSearch, Search, X } from "lucide-react";
+import { FolderSearch, } from "lucide-react";
 
-function PropertyInfoFields({ control, readOnly }) {
+function BuildingLocFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
+
   return (
-    <StyledFieldset title="Property Information">
+    <StyledFieldset title="Building Information">
       <Stack direction="row" gap={1}>
         <TextInput
           placeholder={getValues(FIELDS.BARANGAY) ? undefined : "Select a barangay first"}
@@ -27,7 +27,7 @@ function PropertyInfoFields({ control, readOnly }) {
             ),
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton color="primary" disabled={!getValues(FIELDS.BARANGAY)}>
+                <IconButton title="Find latest ARP" color="primary" disabled={!getValues(FIELDS.BARANGAY)}>
                   <FolderSearch />
                 </IconButton>
               </InputAdornment>
@@ -81,30 +81,8 @@ function PropertyInfoFields({ control, readOnly }) {
 
         />
       </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="OCT/TCT/No."
-          name={FIELDS.OCT_TCT_NO}
-        />
-        <DateInput readOnly={readOnly} control={control} label="Date" name={FIELDS.DATE} />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput readOnly={readOnly} control={control} label="Lot No" name={FIELDS.LOT_NO} />
-        <TextInput readOnly={readOnly} control={control} label="Block No." name={FIELDS.BLOCK_NO} />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          multiline={true}
-          label="Survey No."
-          name={FIELDS.SURVEY_NO}
-        />
-      </Stack>
     </StyledFieldset>
   );
 }
 
-export default PropertyInfoFields;
+export default BuildingLocFields;

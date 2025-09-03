@@ -71,4 +71,22 @@ export const FIELDS = {
 
   //memoranda
   MEMORANDA: "memoranda",
+
+  LAND_OWNER_REF: "landOwnerRef",
+  TD_ARP_REF: "tdArpRef",
+  LAND_AREA_REF: "landAreaRef",
+  // general desc 
+  KIND_OF_BUILDING: "kindOfBuilding",
+  BUILDING_AGE: "buildingAge",
+  STRUCTURAL_CLASS: "structuralClass",
+  BUILDING_TYPE: "buidingType",
+  NO_OF_STOREYS: "noOfStories",
+  BLDG_PERMIT: "bldgPermit",
+  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDateIssue",
+  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDate",
+  CCT: "condominiumCertificateOfTitle",
+  CO_COMPLITION: "certificateOfCompletionIssuedOn",
+  CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
+  DATE_CONSTRUCTED: "dateConstructed",
+  DATE_OCCUPIED: "dateOccupied",
 };

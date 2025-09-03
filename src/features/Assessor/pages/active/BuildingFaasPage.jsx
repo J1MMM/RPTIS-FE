@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
@@ -7,14 +7,14 @@ import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
+import { BUILDING_DEFAULT, DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
-import AddBuildingFaasModal from "../../components/forms/land/modals/AddBuildingFaasModal";
+import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
 
 function BuildingFaasPage() {
 
-  const methods = useForm({ defaultValues: DEFAULT_FIELD_VALUES });
+  const methods = useForm({ defaultValues: BUILDING_DEFAULT });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { buildingFaasRecords, setBuildingFaasRecords } = useFaasData();
   const confirm = useConfirm()
@@ -67,6 +67,22 @@ function BuildingFaasPage() {
     reset(DEFAULT_FIELD_VALUES);
     setAddModalActive(false);
   };
+
+  useEffect(() => {
+    if (!open || !isDirty) return;
+
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [open, isDirty]);
+
 
   return (
     <>

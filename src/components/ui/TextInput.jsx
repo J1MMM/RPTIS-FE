@@ -16,6 +16,7 @@ function TextInput({
   placeholder,
   required = true,
   type = "text",
+  value,
   multiline = false,
   margin = "dense",
   isNumeric = false,
@@ -49,7 +50,7 @@ function TextInput({
             if (onChange) onChange(e); // use custom onChange function
           }}
           value={
-            isPercent
+            value ? value : isPercent
               ? formatPercent(field.value)
               : isNumeric
                 ? field.value === "" || field.value == null

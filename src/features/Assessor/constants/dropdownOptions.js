@@ -85,3 +85,41 @@ export const TAXABLE_OPTIONS = [
   { label: "Taxable", value: "taxable" },
   { label: "Exempt", value: "exempt" },
 ];
+
+export const STRUC_CLASS_OPTIONS = [
+  { label: "I", value: "I" },
+  { label: "II-A", value: "II-A" },
+  { label: "II-B", value: "II-B" },
+  { label: "III-A", value: "III-A" },
+  { label: "III-B", value: "III-B" },
+  { label: "III-C", value: "III-C" },
+  { label: "III-D", value: "III-D" },
+  { label: "III-E", value: "III-E" },
+  { label: "IV-A", value: "IV-A" },
+  { label: "IV-B", value: "IV-B" },
+  { label: "V-A", value: "V-A" },
+  { label: "V-B", value: "V-B" },
+  { label: "V-C", value: "V-C" },
+];
+
+export const BUILDING_TYPE_OPTIONS = [
+  { label: "One Family Residence", value: "1" },
+  { label: "Two Family Residence", value: "2" },
+  { label: "Multiple Dwelling", value: "3" },
+  { label: "Accessoria or Town House", value: "4" },
+  { label: "Apartment", value: "5" },
+  { label: "Boarding House", value: "6" },
+  { label: "Lodging / Motel", value: "7" },
+  { label: "Accessory Bldg. (Quarters, Laundry, Guard House, etc.)", value: "8" },
+  { label: "School Building", value: "9" },
+  { label: "Office Building / Condo / Hospital / Hotel", value: "10" },
+  { label: "Theater / Church / Assembly House", value: "11" },
+  { label: "Factory / Warehouse / Industrial / Hangar", value: "12" },
+  { label: "Market Shopping Center", value: "13" },
+  { label: "Gymnasium Coliseum", value: "14" },
+  { label: "Recreation (3 Lanes, Club)", value: "15" },
+  { label: "Saw Mills and Lumber Shields", value: "16" },
+  { label: "Gasoline Station / Gas Refilling", value: "17" },
+  { label: "Swimming pool / Bath House", value: "18" },
+  { label: "Barn House, Poultry Grain House Livestock", value: "19" },
+];

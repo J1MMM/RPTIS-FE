@@ -1,8 +1,8 @@
 import { Stack } from '@mui/material'
 
-function Row({ children }) {
+function Row({ children, sx }) {
     return (
-        <Stack direction="row" gap={1}>{children}</Stack>
+        <Stack direction="row" gap={1} sx={sx}>{children}</Stack>
     )
 }
 

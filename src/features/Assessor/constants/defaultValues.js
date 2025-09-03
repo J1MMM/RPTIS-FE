@@ -31,13 +31,12 @@ export const DATA_GRID_INITIAL_STATE = {
 export const DEFAULT_FIELD_VALUES = {
   // property info
   [FIELDS.TRANSACTION_CODE]: "",
-  arpAdornment: "",
   [FIELDS.ARP_NO]: "",
   [FIELDS.PIN]: "",
   [FIELDS.NO_AND_STREET]: "",
   [FIELDS.BARANGAY]: "",
-  [FIELDS.CITY]: "SAN PABLO CITY", // example fixed value
-  [FIELDS.PROVINCE]: "LAGUNA", // example fixed value
+  [FIELDS.CITY]: "San Pablo City", // example fixed value
+  [FIELDS.PROVINCE]: "Laguna", // example fixed value
   [FIELDS.OCT_TCT_NO]: "",
   [FIELDS.DATE]: null,
   [FIELDS.LOT_NO]: "",
@@ -55,6 +54,38 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.SW_BOUNDARY]: "",
   [FIELDS.SE_BOUNDARY]: "",
   [FIELDS.NW_BOUNDARY]: "",
+  // taxability
+  [FIELDS.TAXABILITY]: "",
+
+  // effectivity of assessment/reassessment
+  [FIELDS.EFFECTIVITY_QTR]: "",
+  [FIELDS.EFFECTIVITY_YEAR]: null,
+
+  [FIELDS.TOTAL_MARKET_VALUE]: 0,
+  [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
+};
+
+export const BUILDING_DEFAULT = {
+  [FIELDS.TRANSACTION_CODE]: "",
+  // building info 
+  [FIELDS.ARP_NO]: "",
+  [FIELDS.PIN]: "",
+  [FIELDS.NO_AND_STREET]: "",
+  [FIELDS.BARANGAY]: "",
+  [FIELDS.CITY]: "San Pablo City", // example fixed value
+  [FIELDS.PROVINCE]: "Laguna", // example fixed value
+  // land ref 
+  [FIELDS.TD_ARP_REF]: "",
+  [FIELDS.LAND_OWNER_REF]: "",
+  [FIELDS.LAND_AREA_REF]: "",
+  [FIELDS.OCT_TCT_NO]: "",
+  [FIELDS.LOT_NO]: "",
+  [FIELDS.BLOCK_NO]: "",
+  [FIELDS.SURVEY_NO]: "",
+  // gen desc 
+  [FIELDS.NO_OF_STOREYS]: "",
+  //owner info
+  land_ownership: [],
   // taxability
   [FIELDS.TAXABILITY]: "",
 
