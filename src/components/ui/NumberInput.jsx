@@ -9,6 +9,7 @@ function NumberInput({
   adornment,
   disabled,
   width,
+  onChange,
   margin = "dense",
   size = "medium",
   maxLength = 15,
@@ -49,12 +50,20 @@ function NumberInput({
             },
             width: width,
           }}
-          onInput={(e) => {
-            if (maxLength && e.target.value.length > maxLength) {
-              e.target.value = e.target.value.slice(0, maxLength);
+          onChange={(e) => {
+            let val = e.target.value;
+
+            if (maxLength && val.length > maxLength) {
+              val = val.slice(0, maxLength);
             }
-            field.onChange(e); // ✅ keep RHF in sync
+
+            // Convert to number unless empty string
+            const numValue = val === "" ? "" : Number(val);
+
+            field.onChange(numValue); // ✅ ensure RHF stores number
+            if (onChange) onChange(numValue);
           }}
+
           slotProps={{
             input: {
               ...adornment,

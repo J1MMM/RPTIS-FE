@@ -95,6 +95,7 @@ export const BUILDING_DEFAULT = {
 
   [FIELDS.TOTAL_MARKET_VALUE]: 0,
   [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
+  floorAreas: []
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {

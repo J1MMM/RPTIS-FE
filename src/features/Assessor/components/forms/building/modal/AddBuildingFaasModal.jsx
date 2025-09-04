@@ -16,7 +16,6 @@ import { logger } from "../../../../../../utils/logger";
 import BuildingLocFields from "../fieldsets/BuildingLocFields";
 import BuildingLandRefFields from "../fieldsets/BuildingLandRefFields";
 import BuildingGenDescFields from "../fieldsets/BuildingGenDescFields";
-import BuildingFloorAreaFields from "../fieldsets/BuildingFloorAreaFields";
 
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl } = useFormContext();
@@ -77,7 +76,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
         <BuildingLocFields readOnly={readOnly} control={buildingFormControl} />
         <BuildingLandRefFields readOnly={readOnly} control={buildingFormControl} />
         <OwnerInfoFields readOnly={readOnly} />
-        <BuildingFloorAreaFields readOnly={readOnly} control={buildingFormControl} />
+        {/* <BuildingFloorAreaFields readOnly={readOnly} control={buildingFormControl} /> */}
         <BuildingGenDescFields readOnly={readOnly} control={buildingFormControl} />
 
 

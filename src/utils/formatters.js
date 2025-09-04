@@ -52,3 +52,9 @@ export const formatCamelCase = (text) => {
   // Capitalize the first letter only
   return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 };
+
+export function toOrdinal(n) {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}

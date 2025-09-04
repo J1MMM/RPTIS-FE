@@ -10,9 +10,9 @@ function DateInput({
   name,
   label,
   readOnly,
-  yearOnly,
   popperClass,
   rules,
+  yearOnly = false,
   required = true,
 }) {
   return (
@@ -42,7 +42,7 @@ function DateInput({
                   required: required,
                 },
                 popper: {
-                  className: popperClass,
+                  className: yearOnly ? "yearOnly" : "",
                 },
               }}
             />

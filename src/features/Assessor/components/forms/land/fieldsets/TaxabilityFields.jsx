@@ -25,11 +25,10 @@ function TaxabilityFields({ control, readOnly }) {
 
         <DateInput
           readOnly={readOnly}
-          popperClass="yearOnly"
           control={control}
           label="Year"
           name={FIELDS.EFFECTIVITY_YEAR}
-          yearOnly={true}
+          yearOnly
         />
 
       </Stack>
