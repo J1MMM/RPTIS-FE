@@ -13,17 +13,21 @@ function NumberInput({
   margin = "dense",
   size = "medium",
   maxLength = 15,
+  required = true,
   rules, // optional validation rules from RHF
 }) {
   return (
     <Controller
       name={name}
       control={control}
-      rules={rules}
+      rules={{
+        ...rules,
+        ...(required && { required: `${label || name} is required` }),
+      }}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
-          required
+          required={required}
           size={size}
           type="number"
           margin={margin}
@@ -58,7 +62,8 @@ function NumberInput({
             }
 
             // Convert to number unless empty string
-            const numValue = val === "" ? "" : Number(val);
+            // const numValue = val === "" ? "" : Number(val);
+            const numValue = val === "" ? "" : val;
 
             field.onChange(numValue); // ✅ ensure RHF stores number
             if (onChange) onChange(numValue);

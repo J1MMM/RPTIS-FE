@@ -20,9 +20,10 @@ function LandAppraisalFields({ readOnly }) {
   const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
   const { fields, append, remove } = useFieldArray({ control: landFormControl, name: FIELDS.LAND_APPRAISAL });
+  const { append: appendAssessment, remove: removeAssessment } = useFieldArray({ control: landFormControl, name: "propertyAssessments" });
 
   const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
-  const landAppraisal = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []; //array
+  const landappraisals = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []; //array
 
   useEffect(() => {
     const unitValue = UNITVAL_TABLE[classification?.toLowerCase()]?.[subClass?.toLowerCase()] || 0;
@@ -36,10 +37,12 @@ function LandAppraisalFields({ readOnly }) {
 
   const onAppraisalSubmit = (data) => {
     try {
-      const updatedAppraisals = [...landAppraisal, { ...data, id: v4() }];
+      const updatedAppraisals = [...landappraisals, { ...data, id: v4() }];
       const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
-
-      append({ ...data, id: v4() })
+      const newAppraisal = { ...data, id: v4() }
+      append(newAppraisal)
+      appendAssessment(newAppraisal)
+      // setLandFormVal("propertyAssessments", newAppraisal);
       setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
       setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
       resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
@@ -59,6 +62,7 @@ function LandAppraisalFields({ readOnly }) {
       const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
       // Update RHF state
       remove(id)
+      removeAssessment(id)
       reset({
         ...getValues(),
         [FIELDS.TOTAL_MARKET_VALUE]: totalMarketValue,

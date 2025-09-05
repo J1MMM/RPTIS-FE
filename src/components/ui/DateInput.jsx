@@ -22,8 +22,8 @@ function DateInput({
           name={name}
           control={control}
           rules={{
-            required: `${label || name} is required`,
             ...rules,
+            ...(required && { required: `${label || name} is required` }),
           }}
           render={({ field, fieldState: { error } }) => (
             <DatePicker

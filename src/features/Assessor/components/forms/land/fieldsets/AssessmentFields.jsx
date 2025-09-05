@@ -11,20 +11,18 @@ function AssessmentFields({ readOnly }) {
   const formData = useWatch({ control: landFormControl })
 
   const handleActualUseChange = (id, actualUseVal) => {
-    const updatedAppraisals = formData[FIELDS.LAND_APPRAISAL].map((row) =>
+    const updatedAppraisals = formData["propertyAssessments"].map((row) =>
       row.id === id
         ? {
           ...row,
           [FIELDS.LAND_ACTUAL_USE]: actualUseVal,
-          [FIELDS.LAND_ASSESSMENT_LEVEL]:
-            ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0,
-          [FIELDS.LAND_ASSESSED_VALUE]:
-            (ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0) *
-            (row[FIELDS.LAND_MARKET_VALUE] ?? 0),
+          [FIELDS.LAND_ASSESSMENT_LEVEL]: ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0,
+          [FIELDS.LAND_ASSESSED_VALUE]: (ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0) * (row[FIELDS.LAND_MARKET_VALUE] ?? 0),
         }
         : row
     );
 
+    setLandFormVal("propertyAssessments", updatedAppraisals);
     setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
     setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, sumByField(updatedAppraisals, FIELDS.LAND_ASSESSED_VALUE));
   };
@@ -37,6 +35,7 @@ function AssessmentFields({ readOnly }) {
           readOnly={readOnly}
           formData={formData}
           handleChange={handleActualUseChange}
+          control={landFormControl}
         />
       </StyledFieldset>
     </>

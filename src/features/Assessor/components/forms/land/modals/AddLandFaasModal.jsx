@@ -14,6 +14,7 @@ import { ArrowLeftRight, Edit, Landmark, Printer, Split, SplitSquareHorizontal, 
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
 import { useEffect } from "react";
+import PreviousRecFields from "../fieldsets/PreviousRecFields";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: landFormControl } = useFormContext();
@@ -81,6 +82,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         <LandMarketValueFields readOnly={readOnly} />
         <AssessmentFields readOnly={readOnly} />
         <TaxabilityFields readOnly={readOnly} control={landFormControl} />
+        <PreviousRecFields readOnly={readOnly} control={landFormControl} />
       </ContainerModal >
     </>
   );

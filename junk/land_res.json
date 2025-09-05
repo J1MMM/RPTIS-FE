@@ -1,0 +1,231 @@
+{
+  "id": 4,
+  "transaction_code": "SP",
+  "arp_no": "ARP-123",
+  "pin_no": "PIN-123",
+  "oct_tct": "OCT-123",
+  "date": null,
+  "survey_no": "sur-123",
+  "lot_no": "Lot-123",
+  "blk_no": "blk-123",
+  "street": "322 Purok 4",
+  "brgy": "SAN GREGORIO",
+  "north": "12",
+  "northeast": "",
+  "east": "234",
+  "southEast": null,
+  "southWest": null,
+  "west": "12345",
+  "northWest": null,
+  "total_property_assessment": "59143.50",
+  "taxable": true,
+  "effectivity_quarter": "1st",
+  "effectivity_year": "2025-08-26",
+  "status": null,
+  "memoranda": null,
+  "faasLandChain_id": 4,
+  "createdAt": "2025-09-04T23:05:55.853Z",
+  "updatedAt": "2025-09-04T23:05:55.889Z",
+  "province": "Laguna",
+  "city": "San Pablo City",
+  "landowners": [
+    {
+      "id": 6,
+      "status": null,
+      "ownership_type": null,
+      "remarks": null,
+      "createdAt": "2025-09-04T23:05:55.877Z",
+      "updatedAt": "2025-09-04T23:05:55.877Z",
+      "landFaas_id": 4,
+      "party_id": 7,
+      "role_id": 2,
+      "parties": {
+        "id": 7,
+        "type": "person",
+        "name": null,
+        "firstname": "Jose",
+        "middlename": "Polgoso",
+        "lastname": "Doe",
+        "suffix": "Jr.",
+        "status": null,
+        "tin": "TIN-1233456",
+        "contactno": null,
+        "email": "jimuelbaraero00@gmail.com",
+        "street": "322 Purok 3",
+        "brgy": null,
+        "city": "San Pablo City",
+        "province": "Laguna",
+        "createdAt": "2025-09-04T23:05:55.873Z",
+        "updatedAt": "2025-09-04T23:05:55.873Z"
+      },
+      "roles": {
+        "id": 2,
+        "name": "administrator",
+        "createdAt": "2025-09-04T16:00:00.000Z",
+        "updatedAt": "2025-09-04T16:00:00.000Z"
+      }
+    },
+    {
+      "id": 5,
+      "status": null,
+      "ownership_type": null,
+      "remarks": null,
+      "createdAt": "2025-09-04T23:05:55.869Z",
+      "updatedAt": "2025-09-04T23:05:55.869Z",
+      "landFaas_id": 4,
+      "party_id": 6,
+      "role_id": 1,
+      "parties": {
+        "id": 6,
+        "type": "company",
+        "name": "Jollibee",
+        "firstname": null,
+        "middlename": null,
+        "lastname": null,
+        "suffix": null,
+        "status": null,
+        "tin": "TIN-1233456",
+        "contactno": null,
+        "email": "email@example.com",
+        "street": "322 Purok 4",
+        "brgy": null,
+        "city": "San Pablo City",
+        "province": "Laguna",
+        "createdAt": "2025-09-04T23:05:55.862Z",
+        "updatedAt": "2025-09-04T23:05:55.862Z"
+      },
+      "roles": {
+        "id": 1,
+        "name": "owner",
+        "createdAt": "2025-09-04T16:00:00.000Z",
+        "updatedAt": "2025-09-04T16:00:00.000Z"
+      }
+    }
+  ],
+  "landappraisals": [
+    {
+      "id": 5,
+      "classification": "residential",
+      "subclassification": "r1",
+      "area": 30,
+      "unitValue": 2860,
+      "base_market_value": null,
+      "market_value": 107250,
+      "createdAt": "2025-09-04T23:05:55.879Z",
+      "updatedAt": "2025-09-04T23:05:55.879Z",
+      "landFaas_id": 4,
+      "adjusments": [
+        {
+          "id": 7,
+          "unit_value": 2860,
+          "adjustment_factor": "stripping1st",
+          "area": 30,
+          "adjustment_value": 85800,
+          "createdAt": "2025-09-04T23:05:55.881Z",
+          "updatedAt": "2025-09-04T23:05:55.881Z",
+          "land_appraisal_id": 5
+        },
+        {
+          "id": 8,
+          "unit_value": 2145,
+          "adjustment_factor": "stripping2nd",
+          "area": 10,
+          "adjustment_value": 21450,
+          "createdAt": "2025-09-04T23:05:55.882Z",
+          "updatedAt": "2025-09-04T23:05:55.882Z",
+          "land_appraisal_id": 5
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "classification": "commercial",
+      "subclassification": "c1",
+      "area": 10,
+      "unitValue": 8280,
+      "base_market_value": null,
+      "market_value": 107640,
+      "createdAt": "2025-09-04T23:05:55.883Z",
+      "updatedAt": "2025-09-04T23:05:55.883Z",
+      "landFaas_id": 4,
+      "adjusments": [
+        {
+          "id": 9,
+          "unit_value": 2484,
+          "adjustment_factor": "cornerInfluence",
+          "area": 10,
+          "adjustment_value": 107640,
+          "createdAt": "2025-09-04T23:05:55.883Z",
+          "updatedAt": "2025-09-04T23:05:55.883Z",
+          "land_appraisal_id": 6
+        }
+      ]
+    }
+  ],
+  "previous_records": null,
+  "propertyAssessments": [
+    {
+      "id": 5,
+      "actual_use": "residential",
+      "market_value": 107250,
+      "assessment_level": 15,
+      "assessed_value": null,
+      "createdAt": "2025-09-04T23:05:55.884Z",
+      "updatedAt": "2025-09-04T23:05:55.884Z",
+      "landFaas_id": 4
+    },
+    {
+      "id": 6,
+      "actual_use": "commercial",
+      "market_value": 107640,
+      "assessment_level": 40,
+      "assessed_value": null,
+      "createdAt": "2025-09-04T23:05:55.887Z",
+      "updatedAt": "2025-09-04T23:05:55.887Z",
+      "landFaas_id": 4
+    }
+  ],
+  "appraisers": [],
+  "land_ownership": [
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": null,
+      "street": "322 Purok 3",
+      "postal": "4001",
+      "type": "person",
+      "role": "administrator",
+      "contact_no": null,
+      "email": "jimuelbaraero00@gmail.com",
+      "name": "",
+      "lastname": "Doe",
+      "firstname": "Jose",
+      "middlename": "Polgoso",
+      "suffix": "Jr.",
+      "remarks": null,
+      "tin": "TIN-1233456",
+      "id": 6
+    },
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": null,
+      "street": "322 Purok 4",
+      "postal": "4001",
+      "type": "company",
+      "role": "owner",
+      "contact_no": null,
+      "email": "email@example.com",
+      "name": "Jollibee",
+      "lastname": null,
+      "firstname": null,
+      "middlename": null,
+      "suffix": null,
+      "remarks": null,
+      "tin": "TIN-1233456",
+      "id": 5
+    }
+  ]
+}

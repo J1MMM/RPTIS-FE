@@ -28,7 +28,7 @@ export const DATA_GRID_INITIAL_STATE = {
   },
 };
 
-export const DEFAULT_FIELD_VALUES = {
+export const LAND_DEFAULT_FIELD = {
   // property info
   [FIELDS.TRANSACTION_CODE]: "",
   [FIELDS.ARP_NO]: "",
@@ -44,7 +44,7 @@ export const DEFAULT_FIELD_VALUES = {
   [FIELDS.SURVEY_NO]: "",
   //owner info
   land_ownership: [],
-  landAppraisal: [],
+  landappraisals: [],
   // boundaries
   [FIELDS.NORTH_BOUNDARY]: "",
   [FIELDS.SOUTH_BOUNDARY]: "",
@@ -63,6 +63,8 @@ export const DEFAULT_FIELD_VALUES = {
 
   [FIELDS.TOTAL_MARKET_VALUE]: 0,
   [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
+  propertyAssessments: [],
+  previous_records: undefined
 };
 
 export const BUILDING_DEFAULT = {
@@ -185,7 +187,7 @@ export const SAMPLE_DATA = [
     southwest: '',
     southeast: '',
     northwest: '',
-    landAppraisal: [
+    landappraisals: [
       {
         id: '7a3b62fc-7e6d-4842-a99d-1b2622be9dee',
         adjusted: true,
@@ -285,7 +287,7 @@ export const SAMPLE_DATA = [
     southwest: "",
     southeast: "",
     northwest: "",
-    landAppraisal: [
+    landappraisals: [
       {
         id: "e1706989-0633-4938-8627-072eab5c6917",
         adjusted: false,
@@ -369,7 +371,7 @@ export const SAMPLE_DATA = [
     southwest: "687",
     southeast: "89",
     northwest: "7",
-    landAppraisal: [
+    landappraisals: [
       {
         id: "d5e80d50-e4dc-4ba9-b5c8-fb96f2412093",
         adjusted: true,

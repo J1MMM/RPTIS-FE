@@ -8,10 +8,11 @@ import { Close } from "@mui/icons-material";
 import MarketAdjustmentTableFooter from "./MarketAdjustmentTableFooter";
 import { X } from "lucide-react";
 import { sumByField } from "../../../../../../utils/math";
+import { FIELDS } from "../../../../constants/fieldNames";
 
 export const LandMarketValueTable = (props) => {
   const { handleDelete, rows, readOnly } = props;
-  const totalMarketVal = sumByField(rows, "adjustedMarketValue");
+  const totalMarketVal = sumByField(rows, FIELDS.ADJUSTED_MARKETVALUE);
 
   return (
     <DataGrid
@@ -31,7 +32,7 @@ export const LandMarketValueTable = (props) => {
             <IconButton
               disabled={readOnly}
               color="mono.main"
-              onClick={() => handleDelete(params.row.appraisalID)}
+              onClick={() => handleDelete(params.row.land_appraisal_id)}
             >
               <X />
             </IconButton>

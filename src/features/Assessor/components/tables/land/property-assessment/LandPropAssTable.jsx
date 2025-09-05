@@ -7,15 +7,17 @@ import { MenuItem, Select } from "@mui/material";
 import { FIELDS } from "../../../../constants/fieldNames";
 import PropAssessmentTableFooter from "./PropAssessmentTableFooter";
 import { CLASSIFICATION_OPTIONS } from "../../../../constants/dropdownOptions";
+import { useWatch } from "react-hook-form";
+import { sumByField } from "@utils/math";
 
 export const LandPropAssTable = (props) => {
-  const { formData, handleChange, readOnly } = props;
-
-  const totalAssessedValue = formData[FIELDS.TOTAL_ASSESSED_VALUE] || 0;
+  const { control, handleChange, readOnly } = props;
+  const propertyAssessments = useWatch({ control, name: "propertyAssessments" })
+  const totalAssessedValue = sumByField(propertyAssessments, FIELDS.LAND_ASSESSED_VALUE)
 
   return (
     <DataGrid
-      rows={formData[FIELDS.LAND_APPRAISAL]}
+      rows={propertyAssessments}
       columns={[
         {
           field: FIELDS.LAND_ACTUAL_USE,

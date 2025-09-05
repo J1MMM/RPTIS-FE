@@ -82,8 +82,8 @@ export const ACTUAL_USE_OPTIONS = [
 ];
 
 export const TAXABLE_OPTIONS = [
-  { label: "Taxable", value: "taxable" },
-  { label: "Exempt", value: "exempt" },
+  { label: "Taxable", value: true },
+  { label: "Exempt", value: false },
 ];
 
 export const STRUC_CLASS_OPTIONS = [

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { SAMPLE_DATA } from "../constants/defaultValues";
+import axios from "../../../api/axios";
 
 const AssessorContext = createContext({});
 
@@ -12,7 +13,8 @@ export const AssessorProvider = ({ children }) => {
     const fetchLandFaas = async () => {
       try {
         // const data = await getLandFaasRecords();
-        setLandFaasRecords(SAMPLE_DATA);
+        const res = await axios('/faasLandFetch')
+        setLandFaasRecords(res.data.data);
       } catch (err) {
         setError(err);
         console.error("Failed to fetch land FAAS records:", err);

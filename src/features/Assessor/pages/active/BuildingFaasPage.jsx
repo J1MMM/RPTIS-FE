@@ -7,7 +7,7 @@ import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { BUILDING_DEFAULT, DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
+import { BUILDING_DEFAULT, LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
@@ -58,13 +58,13 @@ function BuildingFaasPage() {
         title: "Unsaved Changes",
         message: "You have unsaved changes. Discard them?",
         onConfirm: () => {
-          reset(DEFAULT_FIELD_VALUES);
+          reset(LAND_DEFAULT_FIELD);
           setAddModalActive(false);
         },
       });
       return;
     }
-    reset(DEFAULT_FIELD_VALUES);
+    reset(LAND_DEFAULT_FIELD);
     setAddModalActive(false);
   };
 

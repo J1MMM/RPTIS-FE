@@ -6,7 +6,7 @@ const MarketAdjustmentTableFooter = ({ total }) => {
     <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
       <Typography sx={{ ...styledText, maxWidth: 70 }} />
       <Typography sx={styledText} />
-      <Typography sx={styledText} />
+      {/* <Typography sx={styledText} /> */}
 
       <Typography sx={{ ...styledText, fontWeight: "600" }} variant="body2">
         Total:

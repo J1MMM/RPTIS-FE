@@ -15,14 +15,14 @@ import axios from "../../../../api/axios";
 import { FIELDS } from "../../constants/fieldNames";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { DEFAULT_FIELD_VALUES } from "../../constants/defaultValues";
+import { LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
-
+import seed from '../../../../../junk/land_res.json'
 function LandFaasPage() {
 
-  const methods = useForm({ defaultValues: DEFAULT_FIELD_VALUES });
+  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const confirm = useConfirm()
@@ -36,11 +36,15 @@ function LandFaasPage() {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      await new Promise(r => setTimeout(r, 1000))
-      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
+      // const test = { propertyAssessments, ...data }
+      const response = await axios.post('/faasLand', data)
+      logger("land faas fetch response", response.data)
+      // setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {
+      console.error("Error submitting form:", error);
+
       toast.error("Something went wrong while submitting.", toastConfig);
     } finally {
       setShowConfirmation(false);
@@ -65,13 +69,13 @@ function LandFaasPage() {
         title: "Unsaved Changes",
         message: "You have unsaved changes. Discard them?",
         onConfirm: () => {
-          reset(DEFAULT_FIELD_VALUES);
+          reset(LAND_DEFAULT_FIELD);
           setAddModalActive(false);
         },
       });
       return;
     }
-    reset(DEFAULT_FIELD_VALUES);
+    reset(LAND_DEFAULT_FIELD);
     setAddModalActive(false);
   };
 

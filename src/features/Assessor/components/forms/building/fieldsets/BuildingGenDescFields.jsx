@@ -35,20 +35,26 @@ function BuildingGenDescFields({ control, readOnly }) {
   console.log("fields", floorAreas);
 
   useEffect(() => {
-    const floorAreasArr = [...Array(Number(numberOfStoreys))].map((_, index) => ({
+    let numStoreys = parseInt(numberOfStoreys, 10);
+    if (isNaN(numStoreys) || numStoreys < 1) numStoreys = 0;
+    if (numStoreys > 20) numStoreys = 20;
+
+    const floorAreasArr = [...Array(numStoreys)].map((_, index) => ({
       id: v4(),
       label: `Area of ${toOrdinal(index + 1)} floor`,
       area: ""
-    }))
+    }));
 
-    setValue("floorAreas", floorAreasArr)
-  }, [numberOfStoreys])
+    setValue("floorAreas", floorAreasArr);
+  }, [numberOfStoreys]);
 
   useEffect(() => {
-    const totalArea = floorAreas.reduce((acc, curr) => {
-      const area = parseFloat(curr.area);
-      return acc + (isNaN(area) ? 0 : area);
-    }, 0);
+    const totalArea = Array.isArray(floorAreas)
+      ? floorAreas.reduce((acc, curr) => {
+        const area = parseFloat(curr.area);
+        return acc + (isNaN(area) ? 0 : area);
+      }, 0)
+      : 0;
 
     setValue("totalFloorArea", totalArea || "")
   }, [floorAreas])
@@ -169,7 +175,7 @@ function BuildingGenDescFields({ control, readOnly }) {
       <Divider sx={{ my: 1, borderColor: "primary.main" }} />
       <Box display="grid" gridTemplateColumns={"repeat(2, 1fr)"} gap={1}>
         {
-          floorAreas.map((floor, index) => (
+          floorAreas && floorAreas?.map((floor, index) => (
             <Row sx={{ alignItems: "center" }} key={floor?.id}>
               <Typography variant="body2" whiteSpace={"nowrap"}>{floor?.label}:</Typography>
               <NumberInput

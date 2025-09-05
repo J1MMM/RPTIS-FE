@@ -66,9 +66,9 @@ export const LAND_TABLE_COLUMN = [
     flex: 1,
     headerClassName: "data-grid-header",
     renderCell: (params) => {
-      const { landAppraisal } = params.row;
+      const { landappraisals } = params.row;
 
-      if (!Array.isArray(landAppraisal)) return null;
+      if (!Array.isArray(landappraisals)) return null;
 
       const classificationMap = {
         residential: { label: "RESIDENTIAL", color: "primary.main" },
@@ -79,7 +79,7 @@ export const LAND_TABLE_COLUMN = [
 
       return (
         <>
-          {landAppraisal.map((item, idx) => {
+          {landappraisals.map((item, idx) => {
             const chipProps = classificationMap[item.classification];
             return chipProps ? (
               <Chip
@@ -188,7 +188,7 @@ export const APPRAISAL_COLUMN = [
 
 export const MARKET_VALUE_TABLE_COLUMN = [
   {
-    field: "baseMarketValue",
+    field: FIELDS.LAND_BASE_MARKET_VALUE,
     headerName: "Base Market Value",
     flex: 1,
     headerClassName: "data-grid-header",
@@ -212,19 +212,19 @@ export const MARKET_VALUE_TABLE_COLUMN = [
 
   },
 
-  {
-    field: FIELDS.MARKET_ADJUSTMENT_PERCENT,
-    headerName: "% Adjustment ",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-    valueFormatter: (params) => {
-      const value = Number(params);
-      return isNaN(value) ? "" : formatPercent(value);
-    },
-  },
+  // {
+  //   field: FIELDS.MARKET_ADJUSTMENT_PERCENT,
+  //   headerName: "% Adjustment ",
+  //   flex: 1,
+  //   headerClassName: "data-grid-header",
+  //   sortable: false,
+  //   filterable: false,
+  //   disableColumnMenu: true,
+  //   valueFormatter: (params) => {
+  //     const value = Number(params);
+  //     return isNaN(value) ? "" : formatPercent(value);
+  //   },
+  // },
   {
     field: FIELDS.ADJUSTED_MARKETVALUE,
     headerName: "Value Adjustment",
@@ -265,7 +265,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPercent(value);
+      return isNaN(value) ? "" : formatPercent(value > 1 ? value / 100 : value);
     },
   },
   {

@@ -38,17 +38,17 @@ export const FIELDS = {
   SE_BOUNDARY: "southeast",
   NW_BOUNDARY: "northwest",
   // Land Appraisal
-  LAND_APPRAISAL: "landAppraisal",
+  LAND_APPRAISAL: "landappraisals",
   LAND_CLASSIFICATION: "classification",
   SUBCLASS: "subclassification",
   LAND_AREA: "area",
   LAND_UNIT_VALUE: "unitValue",
-  LAND_BASE_MARKET_VALUE: "baseMarketValue",
-  LAND_MARKET_VALUE: "marketValue",
+  LAND_BASE_MARKET_VALUE: "base_market_value",
+  LAND_MARKET_VALUE: "market_value",
   // Property Assessment
   LAND_ACTUAL_USE: "actual_use",
-  LAND_ASSESSMENT_LEVEL: "assessmentLevel",
-  LAND_ASSESSED_VALUE: "assessedValue",
+  LAND_ASSESSMENT_LEVEL: "assessment_level",
+  LAND_ASSESSED_VALUE: "assessed_value",
 
   // market adjustment
   MARKET_ADJUSTMENT: "marketAdjustment",
@@ -57,7 +57,7 @@ export const FIELDS = {
   MARKET_VALUE_ADJUSTMENT_AREA: "marketValueAdjustmentArea",
   _VALUE_ADJUSTMENT: "marketValueAdjustment",
   TOTAL_MARKET_VALUE_ADJUSTMENT: "totalValueAdjustment",
-  ADJUSTED_MARKETVALUE: "adjustedMarketValue",
+  ADJUSTED_MARKETVALUE: "adjustment_value",
   INPUT_AREA: "marketValueAdjustmentInputArea",
 
   // TAXABILITY
@@ -89,4 +89,11 @@ export const FIELDS = {
   CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
   DATE_CONSTRUCTED: "dateConstructed",
   DATE_OCCUPIED: "dateOccupied",
+
+  PIN_NO_PREV: "pinNoPrevRec",
+  ARP_NO_PREV: "arpNoPrevRec",
+  TD_ARP_PREV: "tdArpPrevRec",
+  ASSESSED_VALUE_PREV: "assessedValuePrevRec",
+  OWNER_PREV: "ownerPrevRec",
+  EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
 };

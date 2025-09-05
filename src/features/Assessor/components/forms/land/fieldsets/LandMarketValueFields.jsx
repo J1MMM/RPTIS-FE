@@ -20,24 +20,24 @@ function LandMarketValueFields({ readOnly }) {
 
   const { control: landFormControl, setValue: setLandFormVal } = useFormContext();
   const { control: selControl, getValues: getSelValues, setValue: setSelValue, reset: resetSelForm } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT })
-  const landAppraisals = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []
+  const landappraisals = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []
   const selectedRowData = useWatch({ control: selControl })
-  const appraisalEmpty = landAppraisals?.length === 0;
+  const appraisalEmpty = landappraisals?.length === 0;
 
   useEffect(() => {
     setAdjustmentRows(() => {
-      return landAppraisals?.flatMap(row =>
+      return landappraisals?.flatMap(row =>
         row?.adjustments?.map(v => (
           {
             ...v,
             id: v4(),
-            appraisalID: row.id,
-            baseMarketValue: row[FIELDS.LAND_BASE_MARKET_VALUE],
+            land_appraisal_id: row.id,
+            [FIELDS.LAND_BASE_MARKET_VALUE]: row[FIELDS.LAND_BASE_MARKET_VALUE],
           }
         )) || []
       );
     });
-  }, [landAppraisals]);
+  }, [landappraisals]);
 
   const handleAdjustmentSubmit = () => {
     const adjustmentFactor = selectedRowData[FIELDS.MARKET_ADJUSTMENT_FACTORS];
@@ -45,15 +45,17 @@ function LandMarketValueFields({ readOnly }) {
     try {
       if (adjustmentFactor === FACTOR_TYPES.STRIPPING) {
         const { adjustments, adjustedMarketVal } = normalizeStripping(strippingFields);
-        const { updatedAppraisals, assessedValue } = updateAppraisals(landAppraisals, adjustedMarketVal, selectedRowData?.id, adjustments);
+        const { updatedAppraisals, assessedValue } = updateAppraisals(landappraisals, adjustedMarketVal, selectedRowData?.id, adjustments);
 
         setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals)
+        setLandFormVal("propertyAssessments", updatedAppraisals)
         setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, assessedValue)
       } else {
         const adjustments = normalizeNonStripping(selectedRowData, selectedRowData?.area);
-        const { updatedAppraisals, assessedValue } = updateAppraisals(landAppraisals, selectedRowData?.totalValueAdjustment, selectedRowData?.id, adjustments);
+        const { updatedAppraisals, assessedValue } = updateAppraisals(landappraisals, selectedRowData?.totalValueAdjustment, selectedRowData?.id, adjustments);
 
         setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals)
+        setLandFormVal("propertyAssessments", updatedAppraisals)
         setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, assessedValue)
       }
       // Reset state
@@ -71,7 +73,7 @@ function LandMarketValueFields({ readOnly }) {
 
   const handleDelete = (id) => {
     try {
-      const updatedAppraisal = landAppraisals.map((item) => {
+      const updatedAppraisal = landappraisals.map((item) => {
         if (item?.id == id) {
           const initialMarketVal = item[FIELDS.LAND_BASE_MARKET_VALUE];
           const { adjustments, ...rest } = item; // remove adjustments
@@ -81,13 +83,13 @@ function LandMarketValueFields({ readOnly }) {
             [FIELDS.LAND_ACTUAL_USE]: "",
             [FIELDS.LAND_ASSESSMENT_LEVEL]: 0,
             [FIELDS.LAND_ASSESSED_VALUE]: 0,
-            adjusted: false,
           };
         }
         return item;
       });
       const totalAssessedValue = sumByField(updatedAppraisal, FIELDS.LAND_ASSESSED_VALUE);
 
+      setLandFormVal("propertyAssessments", updatedAppraisal)
       setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisal)
       setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, totalAssessedValue)
       toast.success("Adjustment deleted successfully!");
@@ -129,7 +131,7 @@ function LandMarketValueFields({ readOnly }) {
         setStrippingFields={setStrippingFields}
         selectedFactor={selectedFactor}
         setSelectedFactor={setSelectedFactor}
-        landAppraisal={landAppraisals}
+        landappraisals={landappraisals}
         selControl={selControl}
         getSelValues={getSelValues}
         setSelValue={setSelValue}
