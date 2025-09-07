@@ -37,15 +37,7 @@ function NumberInput({
           error={!!error}
           helperText={error?.message}
           value={field.value || ""}
-          onKeyDown={(e) => {
-            // Allow: navigation keys, numbers, decimal point, and Ctrl combinations
-            if ("/^[0-9]$/".test(e.key) ||
-              e.key === "."
-            ) {
-              return;
-            }
-            e.preventDefault();
-          }}
+
           sx={{
             width: width,
           }}
