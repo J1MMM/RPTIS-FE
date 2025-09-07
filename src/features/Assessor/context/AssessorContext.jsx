@@ -16,7 +16,7 @@ export const AssessorProvider = ({ children }) => {
         const res = await axios('/faasLandFetch')
         setLandFaasRecords(res.data.data);
       } catch (err) {
-        setError(err);
+        // setError(err);
         console.error("Failed to fetch land FAAS records:", err);
       } finally {
         setLoading(false);

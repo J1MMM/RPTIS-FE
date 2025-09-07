@@ -79,3 +79,34 @@ export const BRGY_OPTIONS = [
   { label: "STA. VERONICA (Bae)", value: "STA. VERONICA (Bae)" },
   { label: "SAN VICENTE", value: "SAN VICENTE" },
 ];
+
+export const ROOF_MATERIALS = [
+  { label: "Reinforced Concrete", value: "reinforced_concrete" },
+  { label: "G.I. Sheet", value: "g.i." },
+  { label: "Aluminum", value: "aluminum" },
+  { label: "Asbestos", value: "asbestos" },
+  { label: "Long Span", value: "long_span" },
+  { label: "Concrete Desk", value: "concrete_desk" },
+  { label: "Nipa/Anahaw/Cogon", value: "nipa_anahaw_cogon" },
+  { label: "Others(Specify)", value: "others" },
+]
+export const FLOORING_MATERIALS = [
+  { label: "Reinforced Concrete", value: "reinforced_concrete" },
+  { label: "Plain Cement", value: "plain_cement" },
+  { label: "Marble", value: "marble" },
+  { label: "Wood", value: "wood" },
+  { label: "Titles", value: "titles" },
+  { label: "Others(Specify)", value: "others" },
+]
+
+export const WALLS_MATERIALS = [
+  { label: "Reinforced Concrete", value: "reinforced_concrete" },
+  { label: "Plain Cement", value: "plain_cement" },
+  { label: "Wood", value: "wood" },
+  { label: "CHB", value: "chb" },
+  { label: "G.I. Sheet", value: "g.i." },
+  { label: "Build-a-wall", value: "build-a-wall" },
+  { label: "Sawali", value: "sawali" },
+  { label: "Bamboo", value: "bamboo" },
+  { label: "Others(Specify)", value: "others" },
+]

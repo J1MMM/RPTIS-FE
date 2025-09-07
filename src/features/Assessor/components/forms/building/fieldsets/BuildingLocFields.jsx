@@ -20,7 +20,10 @@ function BuildingLocFields({ control, readOnly }) {
           readOnly={readOnly || !getValues("arpAdornment")}
           control={control}
           label="ARP NO."
-          name={FIELDS.ARP_NO}
+          name={"arpInput"}
+          onChange={(e) => {
+            setValue(FIELDS.ARP_NO, `${getValues("arpAdornment")}${e.target.value}`)
+          }}
           adornment={{
             startAdornment: (
               <InputAdornment position="start" sx={{ marginRight: "1px" }} >{getValues("arpAdornment")}</InputAdornment>
@@ -38,8 +41,11 @@ function BuildingLocFields({ control, readOnly }) {
           placeholder={getValues(FIELDS.BARANGAY) ? undefined : "Select a barangay first"}
           readOnly={readOnly || !getValues(FIELDS.BARANGAY)}
           control={control}
-          label="PIN NO"
-          name={FIELDS.PIN}
+          label="PIN NO."
+          name={"pinInput"}
+          onChange={(e) => {
+            setValue(FIELDS.PIN, `${getValues("pinAdornment")}${e.target.value}`)
+          }}
           adornment={{
             startAdornment: (
               <InputAdornment position="start" sx={{ marginRight: "1px" }}>{getValues("pinAdornment")}</InputAdornment>
@@ -62,8 +68,12 @@ function BuildingLocFields({ control, readOnly }) {
           options={BRGY_OPTIONS}
           onChange={(e) => {
             const { value } = e.target;
-            setValue("arpAdornment", `${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`);
-            setValue("pinAdornment", `130-${BRGY_DISTRICTS[value]}-`);
+            const arpAdornment = `${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`;
+            const pinAdornment = `130-${BRGY_DISTRICTS[value]}-`;
+            setValue("arpAdornment", arpAdornment);
+            setValue("pinAdornment", pinAdornment);
+            setValue(FIELDS.ARP_NO, `${arpAdornment}${getValues("arpInput")}`)
+            setValue(FIELDS.PIN, `${pinAdornment}${getValues("pinInput")}`)
           }}
         />
 

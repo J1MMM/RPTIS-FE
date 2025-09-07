@@ -4,7 +4,7 @@ import { SYMBOLS } from "./symbols";
 export const ADORNMENTS = {
   PESO: {
     startAdornment: (
-      <InputAdornment position="start">{SYMBOLS.PESO}</InputAdornment>
+      <InputAdornment position="start">Php</InputAdornment>
     ),
   },
   PERCENT: {

@@ -36,10 +36,8 @@ function LandFaasPage() {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      // const test = { propertyAssessments, ...data }
-      const response = await axios.post('/faasLand', data)
-      logger("land faas fetch response", response.data)
-      // setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
+      // const response = await axios.post('/faasLand', data)
+      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {

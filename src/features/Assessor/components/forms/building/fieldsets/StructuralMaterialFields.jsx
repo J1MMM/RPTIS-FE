@@ -19,6 +19,7 @@ import { v4 } from "uuid";
 import { use } from "react";
 import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
+import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -29,7 +30,7 @@ const MenuProps = {
     },
   },
 };
-function BuildingGenDescFields({ control, readOnly }) {
+function StructuralMaterialFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
 
   const numberOfStoreys = useWatch({
@@ -84,95 +85,89 @@ function BuildingGenDescFields({ control, readOnly }) {
   };
 
   return (
-    <StyledFieldset title="General Description">
-      <Stack direction="row" gap={1}>
-        <SelectField
-          control={control}
-          name={FIELDS.KIND_OF_BUILDING}
-          label="Kind of Building"
-          options={CLASSIFICATION_OPTIONS}
-        />
-
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="Building Age"
-          name={FIELDS.BUILDING_AGE}
-        />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <SelectField
-          control={control}
-          name={FIELDS.BUILDING_TYPE}
-          label="Building/Occupancy Type"
-          options={BUILDING_TYPE_OPTIONS}
-        />
-        <SelectField
-          control={control}
-          name={FIELDS.STRUCTURAL_CLASS}
-          label="Structural Classification"
-          options={STRUC_CLASS_OPTIONS}
-        />
-      </Stack>
-
-      <Stack direction="row" gap={1}>
-        <Stack direction="row" gap={1} width={"100%"}>
-          <TextInput
-            readOnly={readOnly}
-            control={control}
-            label="Bldg. Permit No."
-            name={FIELDS.BLDG_PERMIT}
-          />
-          <DateInput
-            readOnly={readOnly}
-            control={control}
-            label="Date Issued"
-            name={FIELDS.BLDG_PERMIT_DATE_ISSUE}
-          />
-        </Stack>
-
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="Condominium Certificate of Title (CCT)"
-          name={FIELDS.CCT}
-        />
-      </Stack>
-
-      <Stack direction="row" gap={1}>
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="Certificate of Completion Issue On"
-          name={FIELDS.CO_COMPLITION}
-        />
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="Certificate of Occupancy Issue On"
-          name={FIELDS.CO_OCCUPANCY}
-        />
-
-      </Stack>
-
+    <StyledFieldset title="Structural Materials">
       <Row>
-        <DateInput
+        <NumberInput
+          name={FIELDS.NO_OF_STOREYS}
           readOnly={readOnly}
           control={control}
-          label="Date Constructed / Completed"
-          name={FIELDS.DATE_CONSTRUCTED}
+          label="Number of Storeys"
+          maxLength={2}
+          onChange={() => {
+            const numStoreys = getValues(FIELDS.NO_OF_STOREYS);
+            if (numStoreys > 20) {
+              setValue(FIELDS.NO_OF_STOREYS, 20);
+            }
+          }}
         />
-        <DateInput
-          readOnly={readOnly}
+        <FormControl fullWidth margin="dense">
+          <InputLabel>Roof</InputLabel>
+          <Select
+            multiple
+            value={personName}
+            onChange={handleChange}
+            input={<OutlinedInput label="Roof" />}
+            renderValue={(selected) =>
+              selected
+                .map((val) => ROOF_MATERIALS.find((opt) => opt.value === val)?.label)
+                .join(', ')
+            }
+          >
+            {ROOF_MATERIALS.map((opt) => (
+              <MenuItem key={opt.label} value={opt.value}>
+                <Checkbox checked={personName.includes(opt.value)} />
+                <ListItemText primary={opt.label} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <TextInput
+          readOnly={true}
           control={control}
-          label="Date Occupied"
-          name={FIELDS.DATE_OCCUPIED}
-          yearOnly
+          label="Total Floor Area"
+          name={"totalFloorArea"}
+          isNumeric
+          adornment={ADORNMENTS.SQM}
         />
       </Row>
 
+      <Divider sx={{ my: 1, borderColor: "primary.main" }} />
+      <Box display="grid" gridTemplateColumns={"repeat(1, 1fr)"} gap={1} >
+        {
+          floorAreas && floorAreas?.map((floor, index) => (
+            <Box display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
+              <Typography variant="body1" color={grey[900]} whiteSpace={"nowrap"} textAlign={"end"} alignSelf={"center"} width={80} >{floor?.label}:</Typography>
+              <SelectFieldMulti
+                size="small"
+                control={control}
+                label="Flooring"
+                name={`floorAreas.${index}.flooring`}
+                options={FLOORING_MATERIALS}
+              />
+
+              <SelectFieldMulti
+                size="small"
+                control={control}
+                label="Walls & Partition"
+                name={`floorAreas.${index}.walls`}
+                options={WALLS_MATERIALS}
+              />
+
+              <NumberInput
+                label="Area"
+                readOnly={readOnly}
+                size="small"
+                maxLength={10}
+                control={control}
+                name={`floorAreas.${index}.area`}
+                adornment={ADORNMENTS.SQM}
+              />
+            </Box>
+          ))
+        }
+      </Box>
     </StyledFieldset >
   );
 }
 
-export default BuildingGenDescFields;
+export default StructuralMaterialFields;
