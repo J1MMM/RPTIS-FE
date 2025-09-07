@@ -18,6 +18,7 @@ import BuildingLandRefFields from "../fieldsets/BuildingLandRefFields";
 import BuildingGenDescFields from "../fieldsets/BuildingGenDescFields";
 import StructuralMaterialFields from "../fieldsets/StructuralMaterialFields";
 import PropertyAppraisalFields from "../fieldsets/PropertyAppraisalFields";
+import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl } = useFormContext();
@@ -83,6 +84,8 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
         <PropertyAppraisalFields readOnly={readOnly} control={buildingFormControl} />
 
         <TaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <PreviousRecFields readOnly={readOnly} control={buildingFormControl} />
+
       </ContainerModal >
     </>
   );

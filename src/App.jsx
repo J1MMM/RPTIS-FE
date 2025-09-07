@@ -10,6 +10,7 @@ import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./feature
 import "./styles/global.scss";
 import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
 import BuildingFaasPage from "./features/Assessor/pages/active/BuildingFaasPage.jsx";
+import Dashboard from "./features/dashboard/pages/dashboard.jsx";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
 
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+
           {/* <Route path="/" element={<Navigate to="/assessor" />} /> */}
           <Route path="assessor" element={<AssessorPageLayout />}>
             <Route index element={<Navigate to="active" replace />} />

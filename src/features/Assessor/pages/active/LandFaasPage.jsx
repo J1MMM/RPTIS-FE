@@ -114,7 +114,7 @@ function LandFaasPage() {
               variant="contained"
               startIcon={<PlusCircle size={18} />}
             >
-              Add FAAS
+              New FAAS
             </Button>
           </>)}
         />

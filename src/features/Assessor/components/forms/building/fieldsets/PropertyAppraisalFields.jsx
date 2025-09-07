@@ -20,6 +20,7 @@ import { use } from "react";
 import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
 import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
+import { SYMBOLS } from "../../../../../../constants/symbols";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -48,7 +49,54 @@ function PropertyAppraisalFields({ control, readOnly }) {
               <InputAdornment position="start">Php</InputAdornment>
             ),
             endAdornment: (
-              <InputAdornment position="end">/sq.m.</InputAdornment>
+              <InputAdornment position="end">/ {SYMBOLS.SQUARE_METER}</InputAdornment>
+            ),
+          }}
+        />
+        <NumberInput
+          readOnly={true}
+          control={control}
+          label="Sub-Total"
+          name={"unit_construction_cost_sub_total"}
+          adornment={{
+            startAdornment: (
+              <InputAdornment position="start">Php</InputAdornment>
+            ),
+          }}
+        />
+      </Row>
+      <Row>
+        <NumberInput
+          readOnly={readOnly}
+          control={control}
+          label="Depreciation Rate"
+          name={"depreciation_rate"}
+          maxLength={3}
+          adornment={ADORNMENTS.PERCENT}
+        />
+        <NumberInput
+          readOnly={readOnly}
+          control={control}
+          label="Depreciation Cost"
+          name={"depreciation_cost"}
+          adornment={ADORNMENTS.PESO}
+        />
+      </Row>
+
+      <Divider sx={{ my: 1, borderColor: "primary.main" }} />
+
+      <Row>
+        <NumberInput
+          readOnly={readOnly}
+          control={control}
+          label="Unit Construction Cost"
+          name={"unit_construction_cost"}
+          adornment={{
+            startAdornment: (
+              <InputAdornment position="start">Php</InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">/ {SYMBOLS.SQUARE_METER}</InputAdornment>
             ),
           }}
         />
