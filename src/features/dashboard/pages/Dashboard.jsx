@@ -47,7 +47,7 @@ function StatCard({ icon, label, value, delta, color }) {
                         {icon}
                     </Box>
                     <Box>
-                        <Typography variant="overline" color="text.secondary">{label}</Typography>
+                        <Typography variant="subtitle2" color="text.secondary">{label}</Typography>
                         <Typography variant="h5" fontWeight={700}>{value}</Typography>
                     </Box>
                 </Stack>
