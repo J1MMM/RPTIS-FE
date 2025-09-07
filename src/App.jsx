@@ -10,7 +10,7 @@ import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./feature
 import "./styles/global.scss";
 import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
 import BuildingFaasPage from "./features/Assessor/pages/active/BuildingFaasPage.jsx";
-import Dashboard from "./features/dashboard/pages/dashboard.jsx";
+import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
 
 function App() {
   return (
