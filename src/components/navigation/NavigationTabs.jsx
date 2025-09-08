@@ -1,53 +1,30 @@
-import { Paper, Stack, Typography } from "@mui/material";
+import { Tab, Tabs, } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NavigationTabs = ({ links }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const handleChange = (e, val) => {
+    navigate(links[val]?.to)
+  }
+
+  const currentTab = links.findIndex(link =>
+    location.pathname.startsWith(link.to)
+  );
+
+  console.log(currentTab);
+
+
   return (
-    <Paper
-      component={Stack}
-      direction={"row"}
-      elevation={0}
-      sx={{
-        borderRadius: 0,
-        borderBottom: "1px solid #e2e2e2",
-        userSelect: "none",
-      }}
-    >
-      {links.map((obj, index) => {
-        const isActive = location.pathname.startsWith(`/assessor/${obj.to}`);
+    <Tabs value={currentTab === -1 ? 0 : currentTab} onChange={handleChange} sx={{ borderBottom: "1px solid #e2e2e2" }} >
+      {
+        links?.map((obj, index) => (
+          <Tab key={obj?.to} sx={{ textTransform: "none", ml: index == 0 ? 3 : 0, }} label={obj?.label} />
+        ))
+      }
+    </Tabs>
 
-        return (
-          <Typography
-            variant="subtitle2"
-            key={index}
-            sx={{
-              px: 3,
-              py: 1.5,
-              ml: index == 0 ? 3 : 0,
-              // borderRadius: "8px",
-              fontWeight: 500,
-              color: isActive ? "primary.main" : "#616161",
-              overflow: "hidden",
-              cursor: "pointer",
-              position: "relative",
-              borderBottom: isActive ? "2px solid" : 'none',
-              borderColor: 'primary.main',
-
-            }}
-            onClick={() => {
-              if (!isActive) {
-                navigate(obj.to);
-              }
-            }}
-          >
-            {obj.label}
-          </Typography>
-        );
-      })}
-    </Paper>
   );
 };
 

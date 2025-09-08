@@ -14,6 +14,7 @@ function BuildingLandRefFields({ control, readOnly }) {
 
   return (
     <StyledFieldset title="Land Reference">
+
       <Stack direction="row" gap={1}>
         <TextInput
           control={control}
@@ -32,6 +33,14 @@ function BuildingLandRefFields({ control, readOnly }) {
         <TextInput
           readOnly={readOnly}
           control={control}
+          label="Area"
+          name={FIELDS.LAND_AREA_REF}
+        />
+      </Stack>
+      <Stack direction="row" gap={1}>
+        <TextInput
+          readOnly={readOnly}
+          control={control}
           label="Owner"
           name={FIELDS.LAND_OWNER_REF}
         />
@@ -40,28 +49,20 @@ function BuildingLandRefFields({ control, readOnly }) {
         <TextInput
           readOnly={readOnly}
           control={control}
-          label="Area"
-          name={FIELDS.LAND_AREA_REF}
+          label="OCT/TCT/CLOA No."
+          name={FIELDS.OCT_TCT_NO}
         />
         <TextInput
           readOnly={readOnly}
           control={control}
-          label="OCT/TCT/CLOA No."
-          name={FIELDS.OCT_TCT_NO}
+          // multiline={true}
+          label="Survey No."
+          name={FIELDS.SURVEY_NO}
         />
         <TextInput readOnly={readOnly} control={control} label="Lot No." name={FIELDS.LOT_NO} />
         <TextInput readOnly={readOnly} control={control} label="Block No." name={FIELDS.BLOCK_NO} />
       </Stack>
-      <Stack direction="row" gap={1}>
 
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          multiline={true}
-          label="Survey No."
-          name={FIELDS.SURVEY_NO}
-        />
-      </Stack>
     </StyledFieldset>
   );
 }

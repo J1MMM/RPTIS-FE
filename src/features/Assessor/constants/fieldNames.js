@@ -96,4 +96,14 @@ export const FIELDS = {
   ASSESSED_VALUE_PREV: "assessedValuePrevRec",
   OWNER_PREV: "ownerPrevRec",
   EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
+
+  UNIT_CONSTRUCTION_COST: "unit_construction_cost",
+  UCC_SUB_TOTAL: "unit_construction_cost_sub_total",
+  DEPRECIATION_RATE: "depreciation_rate",
+  DEPRECIATION_COST: "depreciation_cost",
+
+  ADDITIONAL_ITEMS: "additional_items",
+  ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
+  TOTAL_CONSTRUCTION_COST: "total_construction_cost",
+  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
 };

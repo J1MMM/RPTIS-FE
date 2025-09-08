@@ -21,9 +21,6 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
   const readOnly = formMode == "view"
   logger("data", useWatch({ control: landFormControl }))
 
-
-
-
   return (
     <>
       <ContainerModal

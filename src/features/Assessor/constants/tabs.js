@@ -1,14 +1,14 @@
 export const ASSESSOR_TAB_LINKS = [
   {
-    to: "active",
+    to: "/assessor/active",
     label: "Active Records",
   },
   {
-    to: "archived",
+    to: "/assessor/archived",
     label: "Archived Records",
   },
   {
-    to: "pending",
+    to: "/assessor/pending",
     label: "Pending",
   },
 ];

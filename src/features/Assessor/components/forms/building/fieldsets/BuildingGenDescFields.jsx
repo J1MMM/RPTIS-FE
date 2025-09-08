@@ -19,16 +19,7 @@ import { v4 } from "uuid";
 import { use } from "react";
 import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+
 function BuildingGenDescFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
 
@@ -103,15 +94,15 @@ function BuildingGenDescFields({ control, readOnly }) {
       <Stack direction="row" gap={1}>
         <SelectField
           control={control}
-          name={FIELDS.BUILDING_TYPE}
-          label="Building/Occupancy Type"
-          options={BUILDING_TYPE_OPTIONS}
-        />
-        <SelectField
-          control={control}
           name={FIELDS.STRUCTURAL_CLASS}
           label="Structural Classification"
           options={STRUC_CLASS_OPTIONS}
+        />
+        <SelectField
+          control={control}
+          name={FIELDS.BUILDING_TYPE}
+          label="Building/Occupancy Type"
+          options={BUILDING_TYPE_OPTIONS}
         />
       </Stack>
 
@@ -123,6 +114,7 @@ function BuildingGenDescFields({ control, readOnly }) {
             label="Bldg. Permit No."
             name={FIELDS.BLDG_PERMIT}
           />
+
           <DateInput
             readOnly={readOnly}
             control={control}

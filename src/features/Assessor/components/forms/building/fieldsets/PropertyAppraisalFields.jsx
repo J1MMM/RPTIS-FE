@@ -21,29 +21,32 @@ import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
 import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
 import { SYMBOLS } from "../../../../../../constants/symbols";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+import { structuralType } from "../../../../constants/structuralType";
+
 function PropertyAppraisalFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
+  const [strucClass, buildingType] = useWatch({ control: control, name: [FIELDS.STRUCTURAL_CLASS, FIELDS.BUILDING_TYPE] })
+  console.log(strucClass);
+  console.log(buildingType);
 
 
+  useEffect(() => {
+    if (!strucClass || !buildingType) return
+
+
+    const unitConstructionCost = structuralType[buildingType][strucClass] || 0
+    setValue(FIELDS.UNIT_CONSTRUCTION_COST, unitConstructionCost)
+
+  }, [strucClass, buildingType])
 
   return (
     <StyledFieldset title="Property Appraisals">
       <Row>
         <NumberInput
-          readOnly={readOnly}
+          readOnly={true}
           control={control}
           label="Unit Construction Cost"
-          name={"unit_construction_cost"}
+          name={FIELDS.UNIT_CONSTRUCTION_COST}
           adornment={{
             startAdornment: (
               <InputAdornment position="start">Php</InputAdornment>
@@ -53,24 +56,26 @@ function PropertyAppraisalFields({ control, readOnly }) {
             ),
           }}
         />
+
         <NumberInput
           readOnly={true}
           control={control}
           label="Sub-Total"
-          name={"unit_construction_cost_sub_total"}
+          name={FIELDS.UCC_SUB_TOTAL}
           adornment={{
             startAdornment: (
               <InputAdornment position="start">Php</InputAdornment>
             ),
           }}
         />
+
       </Row>
       <Row>
         <NumberInput
           readOnly={readOnly}
           control={control}
           label="Depreciation Rate"
-          name={"depreciation_rate"}
+          name={FIELDS.DEPRECIATION_RATE}
           maxLength={3}
           adornment={ADORNMENTS.PERCENT}
         />
@@ -78,60 +83,12 @@ function PropertyAppraisalFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Depreciation Cost"
-          name={"depreciation_cost"}
+          name={FIELDS.DEPRECIATION_COST}
           adornment={ADORNMENTS.PESO}
         />
       </Row>
 
       <Divider sx={{ my: 1, borderColor: "primary.main" }} />
-
-      <Row>
-        <NumberInput
-          readOnly={readOnly}
-          control={control}
-          label="Unit Construction Cost"
-          name={"unit_construction_cost"}
-          adornment={{
-            startAdornment: (
-              <InputAdornment position="start">Php</InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">/ {SYMBOLS.SQUARE_METER}</InputAdornment>
-            ),
-          }}
-        />
-        <NumberInput
-          readOnly={true}
-          control={control}
-          label="Sub-Total"
-          name={"unit_construction_cost_sub_total"}
-          adornment={{
-            startAdornment: (
-              <InputAdornment position="start">Php</InputAdornment>
-            ),
-          }}
-        />
-      </Row>
-      <Row>
-        <NumberInput
-          readOnly={readOnly}
-          control={control}
-          label="Depreciation Rate"
-          name={"depreciation_rate"}
-          maxLength={3}
-          adornment={ADORNMENTS.PERCENT}
-        />
-        <NumberInput
-          readOnly={readOnly}
-          control={control}
-          label="Depreciation Cost"
-          name={"depreciation_cost"}
-          adornment={ADORNMENTS.PESO}
-        />
-      </Row>
-
-
-
     </StyledFieldset >
   );
 }

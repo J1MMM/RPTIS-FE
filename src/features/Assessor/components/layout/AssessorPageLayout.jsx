@@ -3,9 +3,11 @@ import NavigationTabs from "../../../../components/navigation/NavigationTabs";
 import { AssessorProvider } from "../../context/AssessorContext";
 import { ASSESSOR_TAB_LINKS } from "../../constants/tabs";
 import { AssessorFormProvider } from "../../context/FormContext";
-import { Box, Paper } from "@mui/material";
+import { Box, Paper, Tab, Tabs } from "@mui/material";
+import { useState } from "react";
 
 const AssessorPageLayout = () => {
+
   return (
     <AssessorProvider>
       <AssessorFormProvider>
@@ -23,6 +25,7 @@ const AssessorPageLayout = () => {
             }}
           >
             <NavigationTabs links={ASSESSOR_TAB_LINKS} />
+
             <Outlet />
           </Paper>
         </Box>

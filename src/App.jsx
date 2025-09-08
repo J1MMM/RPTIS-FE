@@ -11,6 +11,8 @@ import "./styles/global.scss";
 import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
 import BuildingFaasPage from "./features/Assessor/pages/active/BuildingFaasPage.jsx";
 import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
+import LandTaxPage from "./features/LandTax/pages/LandTaxPage.jsx";
+import LandTaxLayout from "./features/LandTax/components/layout/LandTaxLayout.jsx";
 
 function App() {
   return (
@@ -44,10 +46,10 @@ function App() {
             <Route path="pending" element={<LandFaasPage />} />
           </Route>
 
-          <Route path="landtax">
-            <Route path="" />
-            <Route path="computed" element={<LandFaasPage />} />
-            <Route path="paidlist" element={<LandFaasPage />} />
+          <Route path="landtax" element={<LandTaxLayout />}>
+            <Route index element={<LandTaxPage />} />
+            <Route path="tax-assessment" element={<LandTaxPage />} />
+            <Route path="payment-records" element={<LandTaxPage />} />
           </Route>
 
           <Route path="cash-division">

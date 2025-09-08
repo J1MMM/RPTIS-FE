@@ -77,8 +77,8 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
           />
         </Stack>
         <BuildingLocFields readOnly={readOnly} control={buildingFormControl} />
-        <BuildingLandRefFields readOnly={readOnly} control={buildingFormControl} />
         <OwnerInfoFields readOnly={readOnly} />
+        <BuildingLandRefFields readOnly={readOnly} control={buildingFormControl} />
         <BuildingGenDescFields readOnly={readOnly} control={buildingFormControl} />
         <StructuralMaterialFields readOnly={readOnly} control={buildingFormControl} />
         <PropertyAppraisalFields readOnly={readOnly} control={buildingFormControl} />

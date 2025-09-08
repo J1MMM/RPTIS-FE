@@ -1,4 +1,4 @@
-const structuralType = {
+export const structuralType = {
     oneFamilyResidence: {
         "I": 700,
         "II-A": 1130,
