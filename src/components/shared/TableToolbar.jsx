@@ -65,7 +65,7 @@ const TableToolbar = ({ titleText, subText, actionBtn }) => {
           onClick={handleDownload}
           startIcon={<Download size={18} />}
         >
-          Download CSV
+          Export CSV
         </Button>
         <Button
           variant="outlined"

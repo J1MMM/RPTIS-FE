@@ -10,7 +10,8 @@ import {
     useTheme,
     Divider,
     ToggleButton,
-    ToggleButtonGroup
+    ToggleButtonGroup,
+    Grid2
 } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import { Chart } from 'react-charts'
@@ -29,8 +30,8 @@ import { formatPeso } from '../../../utils/formatters'
 function StatCard({ icon, label, value, delta, color }) {
     const theme = useTheme()
     return (
-        <Paper elevation={0} sx={{ p: 2.5, borderRadius: 2, border: `1px solid ${theme.palette.divider}` }}>
-            <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+        <Paper elevation={0} sx={{ p: 2.5, borderRadius: 2, border: `1px solid ${theme.palette.divider}`, overflow: "hidden" }}>
+            <Stack direction={{ xs: "column-reverse", sm: "row" }} alignItems={{ xs: "start", sm: "center" }} justifyContent="space-between" spacing={1}>
                 <Stack direction="row" spacing={1.5} alignItems="center">
                     <Box
                         sx={{
@@ -47,7 +48,7 @@ function StatCard({ icon, label, value, delta, color }) {
                         {icon}
                     </Box>
                     <Box>
-                        <Typography variant="subtitle2" color="text.secondary">{label}</Typography>
+                        <Typography variant="subtitle2" noWrap color="text.secondary">{label}</Typography>
                         <Typography variant="h5" fontWeight={700}>{value}</Typography>
                     </Box>
                 </Stack>
@@ -114,36 +115,38 @@ function Dashboard() {
     ]), [])
     const breakdownPrimaryAxis = React.useMemo(() => ({ getValue: d => d.primary }), [])
     const breakdownSecondaryAxes = React.useMemo(() => ([{ getValue: d => d.secondary, elementType: 'bar', min: 0 }]), [])
+
     return (
-        <Box p={2}>
+        <Box p={2} sx={{ height: "calc(100vh - 60px)", display: "flex", flexDirection: "column" }} >
             <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between" spacing={2} sx={{ mb: 2 }}>
                 <Box>
                     <Typography variant="h5" fontWeight={700}>Real Property Intelligence</Typography>
                     <Typography variant="body2" color="text.secondary">Monitor assessments, renewals, and revenues across land, buildings, and machinery</Typography>
                 </Box>
-                <Stack direction="row" spacing={1}>
+                <Stack direction="row" spacing={1} alignItems="center">
                     <Button variant="outlined" startIcon={<Download size={18} />}>Export CSV</Button>
                     <Button variant="contained" startIcon={<PlusCircle size={18} />}>New FAAS</Button>
                 </Stack>
             </Stack>
+            {/* ============================ stats cards ================================================= */}
+            <Grid2 container spacing={2} sx={{ mb: 2 }} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
+                <Grid2>
+                    <StatCard icon={<Landmark />} label="Total Land Records" value="2,143" delta={4.2} color="success" />
+                </Grid2>
+                <Grid2>
+                    <StatCard icon={<Building2 />} label="Total Building Records" value="1,087" delta={-1.3} color="info" />
+                </Grid2>
+                <Grid2>
+                    <StatCard icon={<Factory />} label="Total Machinery Records" value="312" delta={2.8} color="warning" />
+                </Grid2>
+                <Grid2>
+                    <StatCard icon={<LineChart />} label="Assessed Value (M)" value="₱ 4,560" delta={3.1} color="primary" />
+                </Grid2>
+            </Grid2>
 
-            <Grid container spacing={2} sx={{ mb: 2 }}>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Landmark size={20} />} label="Total Land Records" value="2,143" delta={4.2} color="success" />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Building2 size={20} />} label="Total Building Records" value="1,087" delta={-1.3} color="info" />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Factory size={20} />} label="Total Machinery Records" value="312" delta={2.8} color="warning" />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<LineChart size={20} />} label="Assessed Value (M)" value="₱ 4,560" delta={3.1} color="primary" />
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
+            {/* ============================ charts ================================================= */}
+            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }} border={"1px solid"} alignItems="stretch">
+                <Grid2>
                     <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}`, mb: 2, display: 'flex', flexDirection: 'column' }}>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
                             <Typography variant="subtitle1" fontWeight={600}>Revenue Insights</Typography>
@@ -175,25 +178,9 @@ function Dashboard() {
                             </Box>
                         </Stack>
                     </Paper>
+                </Grid2>
+                <Grid2>
 
-                    <Paper elevation={0} sx={{ height: 270, p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
-                            <Typography variant="subtitle1" fontWeight={600}>Recent FAAS Records</Typography>
-                            <Button size="small" startIcon={<Search size={16} />}>See all</Button>
-                        </Stack>
-                        <DataGrid
-                            density="compact"
-                            disableRowSelectionOnClick
-                            rows={recentRows}
-                            columns={recentColumns}
-                            hideFooter
-                            sx={{
-                                height: 185
-                            }}
-                        />
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} md={6} >
                     <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}`, mb: 2 }}>
                         <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1 }}>Revenue Breakdown</Typography>
                         <Box sx={{
@@ -209,8 +196,29 @@ function Dashboard() {
                             />
                         </Box>
                     </Paper>
-
-                    <Paper elevation={0} sx={{ height: 270, p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
+                </Grid2>
+            </Grid2>
+            {/* ============================ others ================================================= */}
+            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }}>
+                <Grid2>
+                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
+                        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
+                            <Typography variant="subtitle1" fontWeight={600}>Recent FAAS Records</Typography>
+                            <Button size="small" startIcon={<Search size={16} />}>See all</Button>
+                        </Stack>
+                        <DataGrid
+                            density="compact"
+                            disableRowSelectionOnClick
+                            rows={recentRows}
+                            columns={recentColumns}
+                            hideFooter
+                            sx={{
+                            }}
+                        />
+                    </Paper>
+                </Grid2>
+                <Grid2>
+                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
                         <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1.5 }}>Quick Actions</Typography>
                         <Stack spacing={1}>
                             <Button fullWidth variant="outlined" startIcon={<Search size={18} />}>Search TD</Button>
@@ -218,8 +226,8 @@ function Dashboard() {
                             <Button fullWidth variant="outlined" startIcon={<PlusCircle size={18} />}>Import Data</Button>
                         </Stack>
                     </Paper>
-                </Grid>
-            </Grid>
+                </Grid2>
+            </Grid2>
         </Box >
     )
 }
