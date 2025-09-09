@@ -145,7 +145,7 @@ function Dashboard() {
             </Grid2>
 
             {/* ============================ charts ================================================= */}
-            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }} border={"1px solid"} alignItems="stretch">
+            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }} alignItems="stretch">
                 <Grid2>
                     <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}`, mb: 2, display: 'flex', flexDirection: 'column' }}>
                         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
