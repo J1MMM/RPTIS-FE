@@ -9,6 +9,7 @@ import { DEFAULT_OWNER_FORM } from "../../../../constants/defaultValues";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddOwnerModal from "../modals/AddOwnerModal";
 import { FIELDS } from "../../../../constants/fieldNames";
+import { Plus, PlusCircle } from "lucide-react";
 
 function OwnerInfoFields({ readOnly }) {
   const [activeModal, setActiveModal] = useState(false)
@@ -51,7 +52,7 @@ function OwnerInfoFields({ readOnly }) {
           disabled={readOnly}
           disableFocusRipple
           variant="contained"
-          startIcon={<Add />}
+          startIcon={<PlusCircle size="18" />}
           sx={{ alignSelf: "flex-start" }}
           onClick={() => setActiveModal(true)}
         >

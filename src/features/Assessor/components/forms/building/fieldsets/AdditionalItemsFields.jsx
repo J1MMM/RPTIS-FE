@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { toastConfig } from "@constants/toastConfig";
-import { LandAppraisalTable } from "../../../tables/land/land-appraisal/LandAppraisalTable";
 import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { UNITVAL_TABLE } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
 import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
-import useAssessorForm from "../../../../hooks/useFormContext";
-import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
-import { logger } from "../../../../../../utils/logger";
+import { AdditionalItemsTable } from "../../../tables/building/AdditionalItemsTable";
 import { PlusCircle } from "lucide-react";
+import { AdditionalItemModal } from "../modal/AdditionalItemModal";
 
-function LandAppraisalFields({ readOnly }) {
+function AdditionalItemsFields({ readOnly }) {
   const { control: landFormControl, setValue: setLandFormVal, reset, resetField: resetFaasFormField, getValues } = useFormContext();
   const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
@@ -36,7 +34,7 @@ function LandAppraisalFields({ readOnly }) {
 
   }, [subClass, landArea]);
 
-  const onAppraisalSubmit = (data) => {
+  const onSubmit = (data) => {
     try {
       const updatedAppraisals = [...landappraisals, { ...data, id: v4() }];
       const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
@@ -79,7 +77,7 @@ function LandAppraisalFields({ readOnly }) {
 
   return (
     <>
-      <StyledFieldset title="Land Appraisal">
+      <StyledFieldset title="Cost of Additional Items">
         <Stack mb={2}>
           <Button
             disabled={readOnly}
@@ -91,20 +89,20 @@ function LandAppraisalFields({ readOnly }) {
               alignSelf: "flex-start",
             }}
           >
-            Appraisal
+            Add Items
           </Button>
         </Stack>
-        <LandAppraisalTable
+        <AdditionalItemsTable
           readOnly={readOnly}
           currentAppraisals={fields}
           handleDelete={handleDelete} />
       </StyledFieldset>
 
-      <AddLandAppraisalModal
+      <AdditionalItemModal
         disabled={isSubmitting}
         open={modalActive}
         onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(onAppraisalSubmit)}
+        handleSubmit={handleSubmit(AdditionalItemsFields)}
         control={addAppraisalControl}
         watch={watch}
         setValue={setValue}
@@ -113,4 +111,4 @@ function LandAppraisalFields({ readOnly }) {
   );
 };
 
-export default LandAppraisalFields
+export default AdditionalItemsFields

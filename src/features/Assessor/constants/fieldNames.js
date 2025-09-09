@@ -97,13 +97,16 @@ export const FIELDS = {
   OWNER_PREV: "ownerPrevRec",
   EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
 
-  UNIT_CONSTRUCTION_COST: "unit_construction_cost",
-  UCC_SUB_TOTAL: "unit_construction_cost_sub_total",
-  DEPRECIATION_RATE: "depreciation_rate",
-  DEPRECIATION_COST: "depreciation_cost",
-
   ADDITIONAL_ITEMS: "additional_items",
   ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
-  TOTAL_CONSTRUCTION_COST: "total_construction_cost",
   TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
+  TOTAL_FLOOR_AREA: "total_floor_areas",
+  // property_appraisal
+  UNIT_CONSTRUCTION_COST: "property_appraisal.ucc",
+  UCC_SUB_TOTAL: "property_appraisal.bcst",
+  TOTAL_CONSTRUCTION_COST: "property_appraisal.totalConstructionCost",
+  DEPRECIATION_RATE: "property_appraisal.depreciationRate",
+  DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
+  DEPRECIATION_COST: "property_appraisal.depreciationCost",
+  BUILDING_MARKET_VALUE: "marketValue",
 };

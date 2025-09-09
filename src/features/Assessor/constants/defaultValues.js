@@ -97,16 +97,27 @@ export const BUILDING_DEFAULT = {
 
   [FIELDS.TOTAL_MARKET_VALUE]: 0,
   [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
-  floorAreas: [],
 
   [FIELDS.UNIT_CONSTRUCTION_COST]: "",
   [FIELDS.UCC_SUB_TOTAL]: "",
   [FIELDS.DEPRECIATION_RATE]: "",
   [FIELDS.DEPRECIATION_COST]: "",
+  [FIELDS.DEPRECIATION_YEARS]: "",
   [FIELDS.ADDITIONAL_ITEMS]: "",
   [FIELDS.ADDITIONAL_ITEM_COST_SUB]: "",
   [FIELDS.TOTAL_CONSTRUCTION_COST]: "",
   [FIELDS.TOTAL_PERCENT_DEPRECIATION]: "",
+  floorAreas: [],
+  property_appraisal: {
+    ucc: "",
+    bcst: "",
+    totalConstructionCost: "",
+    depreciationRate: "",
+    yearsToDepreciate: "",
+    depreciationCost: "",
+    marketValue: "",
+    coa: [],
+  },
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {

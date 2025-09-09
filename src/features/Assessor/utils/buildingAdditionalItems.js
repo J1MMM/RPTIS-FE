@@ -1,5 +1,5 @@
 
-const additionalItemsComputations = {
+export const additionalItemsComputations = {
     foundation: ({ type, area, noFloors }) => {
         switch (type) {
             case "type3":
@@ -10,7 +10,7 @@ const additionalItemsComputations = {
                 return area * 440 * noFloors;
 
             default:
-                throw new HttpError("invalid Input for foundation", 400);
+                return 0
         }
     },
     flooring: ({ material, cost, affectedArea }) => {
@@ -22,7 +22,7 @@ const additionalItemsComputations = {
         if (material === "Crazy-cut marble") {
             return cost * affectedArea;
         } else {
-            throw new HttpError("invalid input for flooring", 400);
+            return 0
         }
     },
     wallingAndPartitioning: ({ material, affectedArea }) => {
@@ -34,7 +34,8 @@ const additionalItemsComputations = {
             case "wash-out":
                 return cost * affectedArea;
             default:
-                throw new HttpError("invalid input for walling and partitioning", 400);
+                return 0
+
         }
     },
     ceiling: ({ material, affectedArea }) => {
@@ -46,7 +47,8 @@ const additionalItemsComputations = {
             case "Ordinary drop Ceiling on R.C. building":
                 return 140 * affectedArea;
             default:
-                throw new HttpError("invalid material", 400);
+                return 0
+
         }
     },
     specialAluminumGlassPanel: ({ material, cost, affectedArea }) => {
@@ -56,7 +58,8 @@ const additionalItemsComputations = {
             case "extra size":
                 return cost * affectedArea;
             default:
-                throw new HttpError("invalid material", 400);
+                return 0
+
         }
     },
     height: ({ height, structuralType, area, storey }) => {
@@ -69,7 +72,8 @@ const additionalItemsComputations = {
                 standardHeight = standardHeightTwoStorey;
                 break;
             default:
-                throw new HttpError("Invalid input for storey", 400);
+                return 0
+
         }
 
         let ratePerSqm = structuralType;
@@ -84,6 +88,7 @@ const additionalItemsComputations = {
 
         return ratePerSqm * area;
     },
+
     otherIncrement: ({ structuralType }) => structuralType * 0.75,
     //swimmingPools to be decided
 };

@@ -20,16 +20,7 @@ import { use } from "react";
 import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
 import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+
 function StructuralMaterialFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
 
@@ -69,7 +60,7 @@ function StructuralMaterialFields({ control, readOnly }) {
       }, 0)
       : 0;
 
-    setValue("totalFloorArea", totalArea || "")
+    setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
   }, [floorAreas])
 
   const [personName, setPersonName] = useState([]);
@@ -125,7 +116,7 @@ function StructuralMaterialFields({ control, readOnly }) {
           readOnly={true}
           control={control}
           label="Total Floor Area"
-          name={"totalFloorArea"}
+          name={FIELDS.TOTAL_FLOOR_AREA}
           isNumeric
           adornment={ADORNMENTS.SQM}
         />
@@ -135,7 +126,7 @@ function StructuralMaterialFields({ control, readOnly }) {
       <Box display="grid" gridTemplateColumns={"repeat(1, 1fr)"} gap={1} >
         {
           floorAreas && floorAreas?.map((floor, index) => (
-            <Box display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
+            <Box key={floor?.label} display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
               <Typography variant="body1" color={grey[900]} whiteSpace={"nowrap"} textAlign={"end"} alignSelf={"center"} width={80} >{floor?.label}:</Typography>
               <SelectFieldMulti
                 size="small"

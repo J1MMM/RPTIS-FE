@@ -1,48 +1,75 @@
-import { Box, Button, Checkbox, Divider, FormControl, Grid2, IconButton, InputAdornment, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Stack, TextField, Typography } from "@mui/material";
+import { useFormContext, useWatch } from "react-hook-form";
+import { Divider, InputAdornment } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
-import SelectField from "../../../../../../components/ui/SelectField";
-import { BRGY_OPTIONS, FLOORING_MATERIALS, ROOF_MATERIALS, WALLS_MATERIALS } from "../../../../../../constants/dropdown";
-import DateInput from "../../../../../../components/ui/DateInput";
-import { Controller, useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
-import { BRGY_CODE, BRGY_DISTRICTS } from "../../../../../../constants/barangayCode";
-import { Grid, UserSearch } from "lucide-react";
-import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
 import NumberInput from "@components/ui/NumberInput";
-import DividerHeading from "@components/ui/DividerHeading";
 import { ADORNMENTS } from "@constants/adornments";
-import { toOrdinal } from "@utils/formatters";
 import Row from "../../../../../../components/ui/Row";
 import { useEffect, useState } from "react";
-import { v4 } from "uuid";
-import { use } from "react";
-import { formatPeso } from "../../../../../../utils/formatters";
-import { grey } from "@mui/material/colors";
-import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
 import { SYMBOLS } from "../../../../../../constants/symbols";
 import { structuralType } from "../../../../constants/structuralType";
 
 function PropertyAppraisalFields({ control, readOnly }) {
-  const { setValue, getValues } = useFormContext()
-  const [strucClass, buildingType] = useWatch({ control: control, name: [FIELDS.STRUCTURAL_CLASS, FIELDS.BUILDING_TYPE] })
-  console.log(strucClass);
-  console.log(buildingType);
+  const { setValue, getValues } = useFormContext();
+  const [
+    strucClass,
+    buildingType,
+    totalFloorArea,
+    uccSubTotal,
+    totalPercentDep,
+    depreciationCost,
+  ] = useWatch({
+    control,
+    name: [
+      FIELDS.STRUCTURAL_CLASS,
+      FIELDS.BUILDING_TYPE,
+      FIELDS.TOTAL_FLOOR_AREA,
+      FIELDS.UCC_SUB_TOTAL,
+      FIELDS.TOTAL_PERCENT_DEPRECIATION,
+      FIELDS.DEPRECIATION_COST,
+    ],
+  });
 
-
+  // Calculate unit cost & subtotal
   useEffect(() => {
-    if (!strucClass || !buildingType) return
+    if (!strucClass || !buildingType) return;
 
+    const unitConstructionCost = structuralType?.[buildingType]?.[strucClass] || 0;
 
-    const unitConstructionCost = structuralType[buildingType][strucClass] || 0
-    setValue(FIELDS.UNIT_CONSTRUCTION_COST, unitConstructionCost)
+    const area = Number(totalFloorArea) || 0;
+    const subTotal = unitConstructionCost * area;
 
-  }, [strucClass, buildingType])
+    setValue(FIELDS.UNIT_CONSTRUCTION_COST, unitConstructionCost);
+    setValue(FIELDS.UCC_SUB_TOTAL, subTotal);
+  }, [strucClass, buildingType, totalFloorArea, structuralType]);
+
+  // Calculate depreciation cost
+  useEffect(() => {
+    const subTotal = Number(uccSubTotal) || 0;
+    const totalPercent = Number(totalPercentDep) || 0;
+
+    const depCost = subTotal * (totalPercent / 100);
+
+    setValue(FIELDS.DEPRECIATION_COST, depCost || "");
+  }, [uccSubTotal, totalPercentDep]);
+
+  // Calculate market value
+  useEffect(() => {
+    if (!uccSubTotal && !depreciationCost) return;
+
+    const subTotal = Number(uccSubTotal) || 0;
+    const depCost = Number(depreciationCost) || 0;
+    const marketVal = subTotal - depCost;
+
+    setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
+  }, [uccSubTotal, depreciationCost]);
 
   return (
     <StyledFieldset title="Property Appraisals">
       <Row>
-        <NumberInput
+        <TextInput
+          isNumeric
           readOnly={true}
           control={control}
           label="Unit Construction Cost"
@@ -57,7 +84,8 @@ function PropertyAppraisalFields({ control, readOnly }) {
           }}
         />
 
-        <NumberInput
+        <TextInput
+          isNumeric
           readOnly={true}
           control={control}
           label="Sub-Total"
@@ -71,20 +99,60 @@ function PropertyAppraisalFields({ control, readOnly }) {
 
       </Row>
       <Row>
+        <Row>
+
+          <NumberInput
+            maxLength={3}
+            readOnly={readOnly}
+            control={control}
+            label="Depreciation Rate"
+            name={FIELDS.DEPRECIATION_RATE}
+            adornment={ADORNMENTS.PERCENT}
+            onChange={() => {
+              const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
+              setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
+            }}
+          />
+          <NumberInput
+            maxLength={2}
+            readOnly={readOnly}
+            control={control}
+            label="Years of Depreciation"
+            name={FIELDS.DEPRECIATION_YEARS}
+            onChange={() => {
+              const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
+              setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
+            }}
+          />
+        </Row>
         <NumberInput
-          readOnly={readOnly}
+          readOnly={true}
           control={control}
-          label="Depreciation Rate"
-          name={FIELDS.DEPRECIATION_RATE}
-          maxLength={3}
+          label="Total % Depreciation"
+          name={FIELDS.TOTAL_PERCENT_DEPRECIATION}
           adornment={ADORNMENTS.PERCENT}
+
         />
-        <NumberInput
-          readOnly={readOnly}
+
+
+      </Row>
+      <Row>
+        <TextInput
+          isNumeric
+          readOnly={true}
           control={control}
           label="Depreciation Cost"
           name={FIELDS.DEPRECIATION_COST}
           adornment={ADORNMENTS.PESO}
+        />
+        <TextInput
+          isNumeric
+          readOnly={true}
+          control={control}
+          label="Market Value"
+          name={FIELDS.BUILDING_MARKET_VALUE}
+          adornment={ADORNMENTS.PESO}
+
         />
       </Row>
 

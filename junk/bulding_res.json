@@ -1,0 +1,100 @@
+{
+  "transaction_code": "DC",
+  "arp_no": "123",
+  "pin_no": "123",
+  "bldg_ownership": [
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "Santiago I",
+      "street": "322 Purok 4",
+      "postal": "4001",
+      "type": "company",
+      "role": "owner",
+      "contact_no": "8700",
+      "email": "email@example.com",
+      "name": "Jollibee",
+      "remarks": "Tapat ng MCDO",
+      "tin": "TIN-1233456"
+    }
+  ],
+  "land_reference": {
+    "td": "arp-land",
+    "owner": "sample person",
+    "street": "322 Purok 4",
+    "brgy": "SAN GREGORIO",
+    "city": "San Pablo City",
+    "province": "Laguna",
+    "oct_tct-cloa_no": "OCT-123",
+    "lot_no": "Lot-123",
+    "blk_no": "blk-123",
+    "survey_no": "sur-123",
+    "area": 2101
+  },
+  "kindBldg": "",
+  "structuralType": {
+    "category": "marketShoppingCenter",
+    "type": "type5A"
+  },
+  "bldgPermit": "",
+  "date_issued": "2025-09-08",
+  "cct": "",
+  "cocIssue": "2025-09-08",
+  "dateConstructed": "2025-09-08",
+  "dateOccupied": "2025-09-08",
+  "buildingAge": "new",
+  "noOfStorey": 1,
+  "floors": [
+    {
+      "area": 167.25
+    }
+  ],
+  "property_appraisal": {
+    "ucc": "",
+    "bcst": "",
+    "coai": [
+      {
+        "category": "foundation",
+        "type": "type5",
+        "area": 167.25,
+        "noFloors": 1,
+        "material": "vinyl",
+        "cost": 300,
+        "affectedArea": 80
+      }
+    ],
+    "totalConstructionCost": "",
+    "depreciationRate": 0,
+    "yearsToDepreciate": 0,
+    "depreciationCost": "",
+    "marketValue": ""
+  },
+  "property_assessment": {
+    "actualUse": "commercial",
+    "assessmentLevel": "",
+    "assessedValue": "",
+    "marketValue": ""
+  },
+  "taxable": true,
+  "effectivityOfAssessment": "2025-09-08",
+  "quarter": "",
+  "yearAssessment": "2025-09-08",
+  "appraisers": {},
+  "approvedBy": "",
+  "dateApproved": "2025-09-08",
+  "memoranda": "",
+  "dateEncoded": "2025-09-08",
+  "encoderName": "",
+  "previous_records": {
+    "pin": "",
+    "arp_no": "",
+    "td": "",
+    "ownerName": "",
+    "effectivity_assessment": "2024",
+    "ar_page_no": "",
+    "recording_person": "",
+    "from_faas_id": null,
+    "to_faas_id": null
+  }
+}
