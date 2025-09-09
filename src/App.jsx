@@ -13,6 +13,8 @@ import BuildingFaasPage from "./features/assessor/pages/active/BuildingFaasPage.
 import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
 import LandTaxPage from "./features/landtax/pages/LandTaxPage.jsx";
 import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.jsx";
+import PendingFaasPage from "./features/assessor/pages/pending/PendingFaasPage.jsx";
+import MachineryFaasPage from "./features/assessor/pages/active/MachineryFaasPage.jsx";
 
 function App() {
   return (
@@ -33,7 +35,7 @@ function App() {
               <Route index element={<Navigate to="land" replace />} />
               <Route path="land" element={<LandFaasPage />} />
               <Route path="building" element={<BuildingFaasPage />} />
-              <Route path="machinery" element={<LandFaasPage />} />
+              <Route path="machinery" element={<MachineryFaasPage />} />
               {/* <Route path="building" element={<BuildingFaasPage />} />
                 <Route path="machinery" element={<MachineryFaasPage />} /> */}
             </Route>
@@ -41,9 +43,14 @@ function App() {
               <Route index element={<Navigate to="land" replace />} />
               <Route path="land" element={<LandFaasPage />} />
               <Route path="building" element={<BuildingFaasPage />} />
-              <Route path="machinery" />
+              <Route path="machinery" element={<MachineryFaasPage />} />
             </Route>
-            <Route path="pending" element={<LandFaasPage />} />
+            <Route path="pending" element={<ActiveRecordsLayout />}>
+              <Route index element={<Navigate to="land" replace />} />
+              <Route path="land" element={<PendingFaasPage />} />
+              <Route path="building" element={<BuildingFaasPage />} />
+              <Route path="machinery" element={<MachineryFaasPage />} />
+            </Route>
           </Route>
 
           <Route path="landtax" element={<LandTaxLayout />}>
