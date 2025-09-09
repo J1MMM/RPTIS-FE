@@ -11,7 +11,7 @@ import logoImg from "../../assets/images/seal.png";
 import {
   FOOTER_LINKS,
   MAIN_LINKS,
-} from "../../features/Assessor/constants/routes";
+} from "../../features/assessor/constants/routes";
 
 export default function NavSidePanel({ open, setOpen }) {
   const toggleSideBar = () => setOpen((v) => !v);

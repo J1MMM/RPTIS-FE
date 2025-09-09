@@ -6,13 +6,13 @@ import RequireAuth from "./components/auth/RequireAuth.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import LoginPage from "./pages/login/index.jsx";
 import { Missing } from "./pages/404.jsx";
-import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./features/Assessor";
+import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./features/assessor";
 import "./styles/global.scss";
-import ArchivedRecordsLayout from "./features/Assessor/components/layout/ArchivedRecordsLayout.jsx";
-import BuildingFaasPage from "./features/Assessor/pages/active/BuildingFaasPage.jsx";
+import ArchivedRecordsLayout from "./features/assessor/components/layout/ArchivedRecordsLayout.jsx";
+import BuildingFaasPage from "./features/assessor/pages/active/BuildingFaasPage.jsx";
 import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
-import LandTaxPage from "./features/LandTax/pages/LandTaxPage.jsx";
-import LandTaxLayout from "./features/LandTax/components/layout/LandTaxLayout.jsx";
+import LandTaxPage from "./features/landtax/pages/LandTaxPage.jsx";
+import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.jsx";
 
 function App() {
   return (

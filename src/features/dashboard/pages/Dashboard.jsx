@@ -129,13 +129,13 @@ function Dashboard() {
 
             <Grid container spacing={2} sx={{ mb: 2 }}>
                 <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Landmark size={20} />} label="Total Land TDs" value="2,143" delta={4.2} color="success" />
+                    <StatCard icon={<Landmark size={20} />} label="Total Land Records" value="2,143" delta={4.2} color="success" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Building2 size={20} />} label="Total Building TDs" value="1,087" delta={-1.3} color="info" />
+                    <StatCard icon={<Building2 size={20} />} label="Total Building Records" value="1,087" delta={-1.3} color="info" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
-                    <StatCard icon={<Factory size={20} />} label="Total Machinery TDs" value="312" delta={2.8} color="warning" />
+                    <StatCard icon={<Factory size={20} />} label="Total Machinery Records" value="312" delta={2.8} color="warning" />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                     <StatCard icon={<LineChart size={20} />} label="Assessed Value (M)" value="₱ 4,560" delta={3.1} color="primary" />
