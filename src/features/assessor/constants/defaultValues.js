@@ -469,3 +469,17 @@ export const DEFAULT_OWNER_FORM = {
   email: "",
   name: ""
 }
+
+export const ADDITIONAL_ITEMS_DEFAULT = {
+  category: "",
+  type: "",
+  area: "",
+  noFloors: "",
+  material: "",
+  cost: "",
+  affectedArea: "",
+
+  height: "",
+  storey: "",
+  sub_total: ""
+}

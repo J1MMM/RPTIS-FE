@@ -292,6 +292,8 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: (params) => capitalizeFirstLetter(params)
   },
   {
@@ -302,6 +304,8 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: (params) => capitalizeFirstLetter(params),
   },
   {
@@ -312,6 +316,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
     flex: 1,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
     renderCell: (params) => {
       if (params.row?.name) {
         return params.row.name;
@@ -327,6 +332,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
     renderCell: (params) => {
       return `${params.row?.barangay} ${params.row?.city} ${params.row?.province} ${params.row?.regions}`;
     },
@@ -335,10 +341,33 @@ export const OWNER_INFO_TABLE_COLUMN = [
     field: "tin",
     headerName: "TIN",
     flex: 1,
-
+    headerAlign: "center",
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+  },
+];
+
+export const ADDITIONAL_ITEMS_TABLE_COLUMN = [
+  {
+    field: "category",
+    headerName: "Types of Items",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => capitalizeFirstLetter(params)
+  },
+  {
+    field: "sub_total",
+    headerName: "TIN",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => formatPeso(params)
   },
 ];

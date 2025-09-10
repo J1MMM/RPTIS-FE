@@ -108,5 +108,7 @@ export const FIELDS = {
   DEPRECIATION_RATE: "property_appraisal.depreciationRate",
   DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
   DEPRECIATION_COST: "property_appraisal.depreciationCost",
+  DEPRECIATION_COST: "property_appraisal.depreciationCost",
+  ADDITIONAL_ITEMS: "property_appraisal.coai",
   BUILDING_MARKET_VALUE: "marketValue",
 };

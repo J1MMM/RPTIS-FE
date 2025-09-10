@@ -6,6 +6,7 @@ import { FIELDS } from "../../../constants/fieldNames";
 import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
 import { sumByField } from "../../../../../utils/math";
+import { ADDITIONAL_ITEMS_TABLE_COLUMN } from "../../../constants/tableColumns";
 
 const columnProps = {
   field: "actions",
@@ -34,6 +35,7 @@ export const AdditionalItemsTable = ({ currentAppraisals, handleDelete, readOnly
             </IconButton>
           ),
         },
+        ...ADDITIONAL_ITEMS_TABLE_COLUMN
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick

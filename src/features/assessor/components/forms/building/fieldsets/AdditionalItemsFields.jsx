@@ -4,7 +4,7 @@ import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { toastConfig } from "@constants/toastConfig";
-import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
+import { ADDITIONAL_ITEMS_DEFAULT, APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { UNITVAL_TABLE } from "../../../../constants/unitValues";
 import { sumByField } from "../../../../../../utils/math";
@@ -13,64 +13,58 @@ import { toast } from "react-toastify";
 import { AdditionalItemsTable } from "../../../tables/building/AdditionalItemsTable";
 import { PlusCircle } from "lucide-react";
 import { AdditionalItemModal } from "../modal/AdditionalItemModal";
+import { additionalItemsComputations } from "../../../../utils/buildingAdditionalItems";
 
 function AdditionalItemsFields({ readOnly }) {
-  const { control: landFormControl, setValue: setLandFormVal, reset, resetField: resetFaasFormField, getValues } = useFormContext();
-  const { control: addAppraisalControl, watch, setValue, handleSubmit, reset: resetAddAppraisalForm, formState: { isSubmitting } } = useForm({ defaultValues: APPRAISAL_FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
-  const { fields, append, remove } = useFieldArray({ control: landFormControl, name: FIELDS.LAND_APPRAISAL });
-  const { append: appendAssessment, remove: removeAssessment } = useFieldArray({ control: landFormControl, name: "propertyAssessments" });
+  const { control: buildingControl, getValues: getBldgValue, watch: watchBldg } = useFormContext();
+  const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
+  const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm({ defaultValues: ADDITIONAL_ITEMS_DEFAULT });
+  const { affectedArea, area, category, cost, height, material, noFloors, storey, sub_total, type } = useWatch({ control })
+  console.log(useWatch({ control }));
 
-  const [classification, subClass, landArea] = useWatch({ control: addAppraisalControl, name: [FIELDS.LAND_CLASSIFICATION, FIELDS.SUBCLASS, FIELDS.LAND_AREA] });
-  const landappraisals = useWatch({ control: landFormControl, name: FIELDS.LAND_APPRAISAL }) || []; //array
-
+  //compute subtotal
   useEffect(() => {
-    const unitValue = UNITVAL_TABLE[classification?.toLowerCase()]?.[subClass?.toLowerCase()] || 0;
-    const baseMarketValue = unitValue * (parseFloat(landArea) || 0);
+    if (!category) return; // exit early if not set
 
-    setValue(FIELDS.LAND_UNIT_VALUE, unitValue);
-    setValue(FIELDS.LAND_MARKET_VALUE, baseMarketValue);
-    setValue(FIELDS.LAND_BASE_MARKET_VALUE, baseMarketValue);
+    const computeFn = additionalItemsComputations[category];
+    if (typeof computeFn !== "function") {
+      console.warn("No compute function for category:", category);
+      return;
+    }
+    const structuralType = getBldgValue(FIELDS.UNIT_CONSTRUCTION_COST) || 0
+    console.log("structuralType");
+    console.log(structuralType);
 
-  }, [subClass, landArea]);
+    const subTotal = computeFn({ type, area, noFloors, cost, height, material, storey, sub_total, affectedArea, structuralType }) || 0;
+
+    setValue("sub_total", subTotal);
+  }, [category, noFloors, area, type, material, cost, affectedArea, height, storey]);
+
+  // reset fields when category cahnge 
+  useEffect(() => {
+    reset({ ...ADDITIONAL_ITEMS_DEFAULT, category });
+  }, [category, reset]);
 
   const onSubmit = (data) => {
     try {
-      const updatedAppraisals = [...landappraisals, { ...data, id: v4() }];
-      const totalMarketValue = sumByField(updatedAppraisals, FIELDS.LAND_MARKET_VALUE);
-      const newAppraisal = { ...data, id: v4() }
-      append(newAppraisal)
-      appendAssessment(newAppraisal)
-      // setLandFormVal("propertyAssessments", newAppraisal);
-      setLandFormVal(FIELDS.TOTAL_MARKET_VALUE, totalMarketValue);
-      setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, 0);
-      resetAddAppraisalForm(APPRAISAL_FORM_DEFAULT);
-      toast.success("Appraisal added successfully!", toastConfig);
+      const newAdditionItem = { ...data, id: v4() };
+      append(newAdditionItem);
+      toast.success("Item added successfully!", toastConfig);
       setModalActive(false);
-
+      reset(ADDITIONAL_ITEMS_DEFAULT)
     } catch (error) {
-      toast.error("Failed to Add appraisal. Please try again.", toastConfig);
+      toast.error("Failed to Add Items. Please try again.", toastConfig);
       console.error("Error in onAppraisalSubmit:", error);
     }
   };
 
   const handleDelete = (id) => {
     try {
-      const updatedLandAppraisal = fields.filter(item => item?.id !== id)
-      const totalMarketValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_MARKET_VALUE]);
-      const totalAssessedValue = sumByField(updatedLandAppraisal, [FIELDS.LAND_ASSESSED_VALUE]);
-      // Update RHF state
       remove(id)
-      removeAssessment(id)
-      reset({
-        ...getValues(),
-        [FIELDS.TOTAL_MARKET_VALUE]: totalMarketValue,
-        [FIELDS.TOTAL_ASSESSED_VALUE]: totalAssessedValue
-      });
-
-      toast.success("Appraisal deleted successfully!", toastConfig);
+      toast.success("Item deleted successfully!", toastConfig);
     } catch (error) {
-      toast.error("Failed to delete appraisal. Please try again.", toastConfig);
+      toast.error("Failed to delete Item. Please try again.", toastConfig);
       console.error(error);
     }
   };
@@ -99,13 +93,11 @@ function AdditionalItemsFields({ readOnly }) {
       </StyledFieldset>
 
       <AdditionalItemModal
+        control={control}
         disabled={isSubmitting}
         open={modalActive}
         onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(AdditionalItemsFields)}
-        control={addAppraisalControl}
-        watch={watch}
-        setValue={setValue}
+        handleSubmit={handleSubmit(onSubmit)}
       />
     </>
   );
