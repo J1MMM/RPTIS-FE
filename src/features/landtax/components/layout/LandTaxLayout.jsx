@@ -9,7 +9,7 @@ export const LANDTAX_TAB_LINKS = [
     },
     {
         to: "tax-assessment",
-        label: "Tax Assessment",
+        label: "COMPUTATION",
     },
     {
         to: "payment-records",
