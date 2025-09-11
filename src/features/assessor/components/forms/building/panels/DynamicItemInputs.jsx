@@ -81,7 +81,7 @@ function DynamicItemInputs({ control, itemType }) {
                 <Row>
                     <SelectField
                         control={control}
-                        label="Materials"
+                        label="Storey"
                         name="storey"
                         options={ADDITION_HEIGHT_OPTIONS}
                     />
@@ -92,7 +92,8 @@ function DynamicItemInputs({ control, itemType }) {
                     <NumberInput control={control} label="Area" name="area" />
                 </Row>
             </Stack>
-        )
+        ),
+
     };
 
     return renderInputs[itemType] || null;

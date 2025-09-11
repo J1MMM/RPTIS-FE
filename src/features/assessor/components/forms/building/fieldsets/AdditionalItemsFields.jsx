@@ -17,11 +17,11 @@ import { additionalItemsComputations } from "../../../../utils/buildingAdditiona
 
 function AdditionalItemsFields({ readOnly }) {
   const [modalActive, setModalActive] = useState(false);
-  const { control: buildingControl, getValues: getBldgValue, watch: watchBldg } = useFormContext();
+  const { control: buildingControl, getValues: getBldgValue } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
-  const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm({ defaultValues: ADDITIONAL_ITEMS_DEFAULT });
+  const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm();
   const { affectedArea, area, category, cost, height, material, noFloors, storey, sub_total, type } = useWatch({ control })
-  console.log(useWatch({ control }));
+  console.log(watch());
 
   //compute subtotal
   useEffect(() => {
@@ -33,8 +33,6 @@ function AdditionalItemsFields({ readOnly }) {
       return;
     }
     const structuralType = getBldgValue(FIELDS.UNIT_CONSTRUCTION_COST) || 0
-    console.log("structuralType");
-    console.log(structuralType);
 
     const subTotal = computeFn({ type, area, noFloors, cost, height, material, storey, sub_total, affectedArea, structuralType }) || 0;
 
@@ -43,8 +41,16 @@ function AdditionalItemsFields({ readOnly }) {
 
   // reset fields when category cahnge 
   useEffect(() => {
-    reset({ ...ADDITIONAL_ITEMS_DEFAULT, category });
-  }, [category, reset]);
+    setValue("affectedArea", "");
+    setValue("area", "");
+    setValue("cost", "");
+    setValue("height", "");
+    setValue("noFloors", "");
+    setValue("material", "");
+    setValue("storey", "");
+    setValue("type", "");
+
+  }, [category]);
 
   const onSubmit = (data) => {
     try {
@@ -59,9 +65,9 @@ function AdditionalItemsFields({ readOnly }) {
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (index) => {
     try {
-      remove(id)
+      remove(index)
       toast.success("Item deleted successfully!", toastConfig);
     } catch (error) {
       toast.error("Failed to delete Item. Please try again.", toastConfig);
@@ -86,10 +92,13 @@ function AdditionalItemsFields({ readOnly }) {
             Add Items
           </Button>
         </Stack>
+
         <AdditionalItemsTable
           readOnly={readOnly}
-          currentAppraisals={fields}
-          handleDelete={handleDelete} />
+          fields={fields}
+          handleDelete={handleDelete}
+        />
+
       </StyledFieldset>
 
       <AdditionalItemModal
@@ -98,6 +107,7 @@ function AdditionalItemsFields({ readOnly }) {
         open={modalActive}
         onClose={() => setModalActive(false)}
         handleSubmit={handleSubmit(onSubmit)}
+
       />
     </>
   );

@@ -10,12 +10,12 @@ import { FIELDS } from "../../../../constants/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
 import { FileText, ListPlus, } from "lucide-react";
 import Row from "../../../../../../components/ui/Row";
-import DynamicItemInputs from "../panels/AdditionalItemsInputs";
+import DynamicItemInputs from "../panels/DynamicItemInputs";
 import { useWatch } from "react-hook-form";
+import { ADDITIONAL_ITEMS_DEFAULT } from "../../../../constants/defaultValues";
 
-export const AdditionalItemModal = ({ open, onClose, handleSubmit, control, disabled }) => {
+export const AdditionalItemModal = ({ open, onClose, handleSubmit, control, disabled, }) => {
   const [itemType] = useWatch({ control: control, name: ["category"] })
-
 
   return (
     <ContainerModal

@@ -73,7 +73,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
           />
         </Stack>
         <PropertyInfoFields readOnly={readOnly} control={landFormControl} />
-        <OwnerInfoFields readOnly={readOnly} />
+        <OwnerInfoFields readOnly={readOnly} ownerFieldName={"land_ownership"} />
         <LandBounderiesFields readOnly={readOnly} control={landFormControl} />
         <LandAppraisalFields readOnly={readOnly} />
         <LandMarketValueFields readOnly={readOnly} />

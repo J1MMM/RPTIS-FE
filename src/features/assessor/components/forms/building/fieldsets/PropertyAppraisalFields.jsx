@@ -22,8 +22,8 @@ function PropertyAppraisalFields({ control, readOnly }) {
   ] = useWatch({
     control,
     name: [
-      FIELDS.STRUCTURAL_CLASS,
-      FIELDS.BUILDING_TYPE,
+      FIELDS.STRUCTURAL_TYPE,
+      FIELDS.STRUCTURAL_CATEGORY,
       FIELDS.TOTAL_FLOOR_AREA,
       FIELDS.UCC_SUB_TOTAL,
       FIELDS.TOTAL_PERCENT_DEPRECIATION,

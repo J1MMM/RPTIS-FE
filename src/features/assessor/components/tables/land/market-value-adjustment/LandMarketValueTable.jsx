@@ -28,15 +28,17 @@ export const LandMarketValueTable = (props) => {
           disableColumnMenu: true,
           headerAlign: "center",
           align: "center",
-          renderCell: (params) => (
-            <IconButton
-              disabled={readOnly}
-              color="mono.main"
-              onClick={() => handleDelete(params.row.land_appraisal_id)}
-            >
-              <X />
-            </IconButton>
-          ),
+          renderCell: (params) => {
+            return (
+              <IconButton
+                disabled={readOnly}
+                color="mono.main"
+                onClick={() => handleDelete(params.row.land_appraisal_id)}
+              >
+                <X />
+              </IconButton>
+            )
+          },
         },
         ...MARKET_VALUE_TABLE_COLUMN,
       ]}

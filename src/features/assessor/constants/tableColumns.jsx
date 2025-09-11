@@ -265,7 +265,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPercent(value > 1 ? value / 100 : value);
+      return isNaN(value) ? "" : formatPercent(value / 100);
     },
   },
   {
@@ -358,11 +358,41 @@ export const ADDITIONAL_ITEMS_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
-    valueFormatter: (params) => capitalizeFirstLetter(params)
+    valueFormatter: (params) => formatCamelCase(params)
+  },
+  {
+    field: "area",
+    headerName: "Area",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => params ? params : "-"
+  },
+  {
+    field: "material",
+    headerName: "Material",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => params ? formatCamelCase(params) : "-"
+  },
+  {
+    field: "cost",
+    headerName: "Cost /m²",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => formatPeso(params)
   },
   {
     field: "sub_total",
-    headerName: "TIN",
+    headerName: "Sub-Total",
     flex: 1,
     headerClassName: "data-grid-header",
     sortable: false,

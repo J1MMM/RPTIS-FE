@@ -26,11 +26,15 @@ export const LandOwnerTable = ({ rows, handleDelete, readOnly }) => {
       columns={[
         {
           ...columnProps,
-          renderCell: (params) => (
-            <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(params.row.id)}>
-              <X />
-            </IconButton>
-          ),
+          renderCell: (params) => {
+            const index = rows.findIndex((f) => f.id === params.row.id);
+
+            return (
+              <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(index)}>
+                <X />
+              </IconButton>
+            )
+          },
         },
         ...OWNER_INFO_TABLE_COLUMN,
       ]}

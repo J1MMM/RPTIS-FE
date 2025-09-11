@@ -71,25 +71,30 @@ export const FIELDS = {
 
   //memoranda
   MEMORANDA: "memoranda",
+  // land reference 
+  TD_ARP_REF: "land_reference.arp-land",
+  LAND_OWNER_REF: "land_reference.owner",
+  LAND_AREA_REF: "land_reference.area",
+  OCT_REF: "land_reference.oct_tct-cloa_no",
+  SURVEY_NO_REF: "land_reference.oct_tct-survey_no",
+  BLOCK_NO_REF: "land_reference.blk_no",
+  LOT_NO_REF: "land_reference.lot_no",
 
-  LAND_OWNER_REF: "landOwnerRef",
-  TD_ARP_REF: "tdArpRef",
-  LAND_AREA_REF: "landAreaRef",
   // general desc 
-  KIND_OF_BUILDING: "kindOfBuilding",
+  KIND_OF_BUILDING: "kindBldg",
   BUILDING_AGE: "buildingAge",
-  STRUCTURAL_CLASS: "structuralClass",
-  BUILDING_TYPE: "buidingType",
-  NO_OF_STOREYS: "noOfStories",
+  STRUCTURAL_TYPE: "structuralType.type",
+  STRUCTURAL_CATEGORY: "structuralType.category",
+  NO_OF_STOREYS: "noOfStorey",
   BLDG_PERMIT: "bldgPermit",
-  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDateIssue",
-  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDate",
-  CCT: "condominiumCertificateOfTitle",
-  CO_COMPLITION: "certificateOfCompletionIssuedOn",
-  CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
-  DATE_CONSTRUCTED: "dateConstructed",
+  BLDG_PERMIT_DATE_ISSUE: "date_issued",
+  CCT: "cct",
+  CO_COMPLITION: "cocIssue",
   DATE_OCCUPIED: "dateOccupied",
+  DATE_CONSTRUCTED: "dateConstructed",
+  CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
 
+  // previous record 
   PIN_NO_PREV: "pinNoPrevRec",
   ARP_NO_PREV: "arpNoPrevRec",
   TD_ARP_PREV: "tdArpPrevRec",
@@ -97,7 +102,6 @@ export const FIELDS = {
   OWNER_PREV: "ownerPrevRec",
   EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
 
-  ADDITIONAL_ITEMS: "additional_items",
   ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
   TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
   TOTAL_FLOOR_AREA: "total_floor_areas",
@@ -111,4 +115,10 @@ export const FIELDS = {
   DEPRECIATION_COST: "property_appraisal.depreciationCost",
   ADDITIONAL_ITEMS: "property_appraisal.coai",
   BUILDING_MARKET_VALUE: "marketValue",
+
+  // Property Assesment 
+  BLDG_ASSESSMENT_ACTUAL_USE: "property_assessment.actualUse",
+  BLDG_ASSESSMENT_LEVEL: "property_assessment.assessmentLevel",
+  BLDG_ASSESSED_VALUE: "property_assessment.assessedValue",
+  BLDG_MARKET_VALUE: "property_assessment.marketValue",
 };

@@ -1,12 +1,13 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { DATA_GRID_STYLE } from "@constants/tableStyles";
-import { IconButton } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
 import { X } from "lucide-react";
 import { FIELDS } from "../../../constants/fieldNames";
 import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
 import { sumByField } from "../../../../../utils/math";
 import { ADDITIONAL_ITEMS_TABLE_COLUMN } from "../../../constants/tableColumns";
+import { formatPeso } from "../../../../../utils/formatters";
 
 const columnProps = {
   field: "actions",
@@ -20,20 +21,27 @@ const columnProps = {
   align: "center",
 }
 
-export const AdditionalItemsTable = ({ currentAppraisals, handleDelete, readOnly }) => {
-  const totalBaseMarketVal = sumByField(currentAppraisals, FIELDS.LAND_BASE_MARKET_VALUE);
+export const AdditionalItemsTable = ({ fields, handleDelete, readOnly }) => {
+  const total = sumByField(fields, "sub_total");
 
   return (
     <DataGrid
-      rows={currentAppraisals}
+      rows={fields}
       columns={[
         {
           ...columnProps,
-          renderCell: (params) => (
-            <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(params.row.id)}>
-              <X />
-            </IconButton>
-          ),
+          renderCell: (params) => {
+            const index = fields.findIndex((f) => f.id === params.row.id);
+            return (
+              <IconButton
+                disabled={readOnly}
+                color="mono.main"
+                onClick={() => handleDelete(index)}
+              >
+                <X />
+              </IconButton>
+            );
+          },
         },
         ...ADDITIONAL_ITEMS_TABLE_COLUMN
       ]}
@@ -49,11 +57,33 @@ export const AdditionalItemsTable = ({ currentAppraisals, handleDelete, readOnly
       hideFooterPagination
       disableColumnResize
       showCellVerticalBorder
-    // slots={{
-    //   footer: () => (
-    //     <LandAppraisalTableFooter totalBaseMarketVal={totalBaseMarketVal} />
-    //   ),
-    // }}
+      slots={{
+        footer: () => (
+          <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
+            <Typography sx={{ ...styledText, maxWidth: 70 }} />
+            <Typography sx={styledText} />
+            <Typography sx={styledText} />
+
+            <Typography sx={styledText} variant="body2"></Typography>
+            <Typography sx={{ ...styledText, fontWeight: "600" }} variant="body2">
+              Total:
+            </Typography>
+            <Typography
+              sx={{ ...styledText, borderRight: "none", fontWeight: "600" }}
+              variant="body2"
+            >
+              {formatPeso(total)}
+            </Typography>
+          </Stack>
+        ),
+      }}
     />
   );
 };
+
+const styledText = {
+  flex: 1,
+  borderRight: "1px solid #E0E0E0",
+  padding: "8px",
+};
+

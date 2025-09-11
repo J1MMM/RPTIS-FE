@@ -30,11 +30,15 @@ export const LandAppraisalTable = ({ currentAppraisals, handleDelete, readOnly }
       columns={[
         {
           ...columnProps,
-          renderCell: (params) => (
-            <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(params.row.id)}>
-              <X />
-            </IconButton>
-          ),
+          renderCell: (params) => {
+            const index = currentAppraisals.findIndex((f) => f.id === params.row.id);
+
+            return (
+              <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(index)}>
+                <X />
+              </IconButton>
+            )
+          },
         },
         ...APPRAISAL_COLUMN,
       ]}

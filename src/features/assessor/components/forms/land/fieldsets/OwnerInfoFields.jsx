@@ -2,21 +2,20 @@ import { v4 } from "uuid";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Button, Input, Stack } from "@mui/material";
-import { Add } from "@mui/icons-material";
 import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
 import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
 import { DEFAULT_OWNER_FORM } from "../../../../constants/defaultValues";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddOwnerModal from "../modals/AddOwnerModal";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { Plus, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 
-function OwnerInfoFields({ readOnly }) {
+function OwnerInfoFields({ readOnly, ownerFieldName }) {
   const [activeModal, setActiveModal] = useState(false)
-  const { control: landFormControl } = useFormContext()
-  const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
+  const { control: bldgControl } = useFormContext()
+  const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: ownerFieldName })
   const ownersForm = useWatch({ control: ownerFieldControl })
-  const { fields, append, remove } = useFieldArray({ control: landFormControl, name: FIELDS.OWNERSHIP });
+  const { fields, append, remove } = useFieldArray({ control: bldgControl, name: FIELDS.OWNERSHIP });
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +36,7 @@ function OwnerInfoFields({ readOnly }) {
 
   const deleteOwner = (id) => {
     try {
-      remove({ id })
+      remove(id)
       toast.success("Owner deleted successfully!");
     } catch (error) {
       console.error("Error deleting owner:", error);

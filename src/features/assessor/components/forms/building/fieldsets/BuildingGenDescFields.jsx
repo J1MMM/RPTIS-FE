@@ -61,13 +61,13 @@ function BuildingGenDescFields({ control, readOnly }) {
       <Stack direction="row" gap={1}>
         <SelectField
           control={control}
-          name={FIELDS.STRUCTURAL_CLASS}
+          name={FIELDS.STRUCTURAL_TYPE}
           label="Structural Classification"
           options={STRUC_CLASS_OPTIONS}
         />
         <SelectField
           control={control}
-          name={FIELDS.BUILDING_TYPE}
+          name={FIELDS.STRUCTURAL_CATEGORY}
           label="Building/Occupancy Type"
           options={BUILDING_TYPE_OPTIONS}
         />

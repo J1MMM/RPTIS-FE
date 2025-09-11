@@ -93,7 +93,6 @@ export const additionalItemsComputations = {
     },
 
     otherIncrement: ({ structuralType }) => {
-        console.log("=============");
         return structuralType * 0.75
     },
     //swimmingPools to be decided
