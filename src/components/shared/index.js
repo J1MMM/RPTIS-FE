@@ -4,3 +4,4 @@ export { default as SnackBar } from "./SnackBar.jsx";
 export { default as TableToolbar } from "./TableToolbar.jsx";
 export { default as UserAvatar } from "./UserAvatar.jsx";
 export { default as UserMenu } from "./UserMenu.jsx";
+export { default as PrintableFaasTable } from "./PrintablesTable.jsx";

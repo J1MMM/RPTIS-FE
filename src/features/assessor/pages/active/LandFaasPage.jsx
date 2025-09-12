@@ -20,6 +20,11 @@ import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaa
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
 import seed from '../../../../../junk/land_res.json'
+import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
+import PrintablesMenu from "../../components/forms/land/modals/printableModal/PrintablesMenu";
+import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
+// import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
+
 function LandFaasPage() {
 
   const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD });
@@ -29,6 +34,8 @@ function LandFaasPage() {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
+  const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
+  const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
   const [disabled, setDisabled] = useState(false);
 
@@ -55,6 +62,8 @@ function LandFaasPage() {
 
   };
 
+
+
   const handleShowDetails = (params) => {
     setFormMode("view")
     reset(params.row);
@@ -76,6 +85,30 @@ function LandFaasPage() {
     reset(LAND_DEFAULT_FIELD);
     setAddModalActive(false);
   };
+
+  const handleFaasForm = () => {
+    setPrintFaasModalActive(true);
+  };
+  const handleClosePrintModal = () => {
+    setPrintFaasModalActive(false);
+    setPrintTacdecModalActive(false);
+  };
+
+  const handleTaxdecForm = () => {
+    setPrintTacdecModalActive(true);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     if (!open || !isDirty) return;
@@ -130,6 +163,25 @@ function LandFaasPage() {
             message: "Are you sure you want to add this land FAAS data? It will be saved once confirmed.",
             onConfirm: handleSubmit(onSubmit)
           }))}
+          handleForm={handleClick}
+        />
+
+        <PrintableLandFaasFormModal 
+          open={printFaasModalActive}
+          onClose={handleClosePrintModal}
+        />
+
+        <PrintableTaxdecFormModal 
+          open={printTacdecModalActive}
+          onClose={handleClosePrintModal}
+        />
+
+        <PrintablesMenu
+        open={open} 
+        handleClose={handleClose} 
+        anchorEl={anchorEl}
+        handleFaas={handleFaasForm}
+        handleTaxdec={handleTaxdecForm}
         />
       </FormProvider>
     </>
