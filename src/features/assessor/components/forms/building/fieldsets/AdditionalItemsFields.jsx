@@ -17,7 +17,7 @@ import { additionalItemsComputations } from "../../../../utils/buildingAdditiona
 
 function AdditionalItemsFields({ readOnly }) {
   const [modalActive, setModalActive] = useState(false);
-  const { control: buildingControl, getValues: getBldgValue } = useFormContext();
+  const { control: buildingControl, getValues: getBldgValue, setValue: setBldgVal } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
   const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm();
   const { affectedArea, area, category, cost, height, material, noFloors, storey, sub_total, type } = useWatch({ control })
@@ -55,6 +55,10 @@ function AdditionalItemsFields({ readOnly }) {
   const onSubmit = (data) => {
     try {
       const newAdditionItem = { ...data, id: v4() };
+      const totalCost = sumByField([...fields, newAdditionItem], "sub_total");
+      console.log(totalCost);
+
+      setBldgVal(FIELDS.ADDITIONAL_ITEM_COST_SUB, totalCost);
       append(newAdditionItem);
       toast.success("Item added successfully!", toastConfig);
       setModalActive(false);

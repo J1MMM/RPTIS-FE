@@ -251,7 +251,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
+      return isNaN(value) ? "-" : formatPeso(value);
     },
   },
 
@@ -265,7 +265,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPercent(value / 100);
+      return isNaN(value) ? "-" : formatPercent(value / 100);
     },
   },
   {
@@ -278,7 +278,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(roundToNearestTen(value));
+      return isNaN(value) ? "-" : formatPeso(roundToNearestTen(value));
     },
   },
 ];

@@ -18,7 +18,10 @@ function BuildingAssessmentFields({ readOnly }) {
       <StyledFieldset title="Property Assessment">
         <BuildingAssessmentTable
           readOnly={readOnly}
-          formData={[]}
+          rows={[{
+            ...propertyAssessment,
+            id: 1
+          }]}
           handleChange={() => { }}
           control={landFormControl}
         />

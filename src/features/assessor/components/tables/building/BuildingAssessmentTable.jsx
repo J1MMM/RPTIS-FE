@@ -10,16 +10,15 @@ import { useWatch } from "react-hook-form";
 import { sumByField } from "@utils/math";
 
 export const BuildingAssessmentTable = (props) => {
-  const { control, handleChange, readOnly } = props;
-  const propertyAssessments = useWatch({ control, name: "propertyAssessments" })
-  const totalAssessedValue = sumByField(propertyAssessments, FIELDS.LAND_ASSESSED_VALUE)
+  const { handleChange, readOnly, rows } = props;
+  const totalAssessedValue = sumByField(rows, FIELDS.LAND_ASSESSED_VALUE)
 
   return (
     <DataGrid
-      rows={propertyAssessments}
+      rows={rows}
       columns={[
         {
-          field: FIELDS.LAND_ACTUAL_USE,
+          field: FIELDS.BLDG_ASSESSMENT_ACTUAL_USE,
           headerName: "Actual Use",
           flex: 1,
           headerClassName: "data-grid-header",
