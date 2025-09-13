@@ -69,22 +69,42 @@ export const FIELDS = {
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
 
+
+
   //memoranda
   MEMORANDA: "memoranda",
   // land reference 
+  STREET_REF: "land_reference.street",
+  BRGY_REF: "land_reference.brgy",
+  CITY_REF: "land_reference.city",
+  PROVINCE_REF: "land_reference.province",
+
   TD_ARP_REF: "land_reference.arp-land",
-  LAND_OWNER_REF: "land_reference.owner",
   LAND_AREA_REF: "land_reference.area",
+  LAND_OWNER_REF: "land_reference.owner",
+
   OCT_REF: "land_reference.oct_tct-cloa_no",
   SURVEY_NO_REF: "land_reference.oct_tct-survey_no",
-  BLOCK_NO_REF: "land_reference.blk_no",
   LOT_NO_REF: "land_reference.lot_no",
+  BLOCK_NO_REF: "land_reference.blk_no",
+
+  STRUCTURAL_TYPE: "structuralType.type",
+  STRUCTURAL_CATEGORY: "structuralType.category",
+
+  // property_appraisal
+  UNIT_CONSTRUCTION_COST: "property_appraisal.ucc",
+  UCC_SUB_TOTAL: "property_appraisal.bcst",
+  TOTAL_CONSTRUCTION_COST: "property_appraisal.totalConstructionCost",
+  DEPRECIATION_RATE: "property_appraisal.depreciationRate",
+  DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
+  DEPRECIATION_COST: "property_appraisal.depreciationCost",
+  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
+  ADDITIONAL_ITEMS: "property_appraisal.coai",
+  BUILDING_MARKET_VALUE: "marketValue",
 
   // general desc 
   KIND_OF_BUILDING: "kindBldg",
   BUILDING_AGE: "buildingAge",
-  STRUCTURAL_TYPE: "structuralType.type",
-  STRUCTURAL_CATEGORY: "structuralType.category",
   NO_OF_STOREYS: "noOfStorey",
   BLDG_PERMIT: "bldgPermit",
   BLDG_PERMIT_DATE_ISSUE: "date_issued",
@@ -103,22 +123,11 @@ export const FIELDS = {
   EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
 
   ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
-  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
   TOTAL_FLOOR_AREA: "total_floor_areas",
-  // property_appraisal
-  UNIT_CONSTRUCTION_COST: "property_appraisal.ucc",
-  UCC_SUB_TOTAL: "property_appraisal.bcst",
-  TOTAL_CONSTRUCTION_COST: "property_appraisal.totalConstructionCost",
-  DEPRECIATION_RATE: "property_appraisal.depreciationRate",
-  DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
-  DEPRECIATION_COST: "property_appraisal.depreciationCost",
-  DEPRECIATION_COST: "property_appraisal.depreciationCost",
-  ADDITIONAL_ITEMS: "property_appraisal.coai",
-  BUILDING_MARKET_VALUE: "marketValue",
 
   // Property Assesment 
   BLDG_ASSESSMENT_ACTUAL_USE: "property_assessment.actualUse",
   BLDG_ASSESSMENT_LEVEL: "property_assessment.assessmentLevel",
   BLDG_ASSESSED_VALUE: "property_assessment.assessedValue",
-  BLDG_MARKET_VALUE: "property_assessment.marketValue",
+  BLDG_ASSESSED_MARKET_VALUE: "property_assessment.marketValue",
 };

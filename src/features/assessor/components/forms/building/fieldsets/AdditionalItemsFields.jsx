@@ -21,7 +21,6 @@ function AdditionalItemsFields({ readOnly }) {
   const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
   const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm();
   const { affectedArea, area, category, cost, height, material, noFloors, storey, sub_total, type } = useWatch({ control })
-  console.log(watch());
 
   //compute subtotal
   useEffect(() => {
@@ -37,6 +36,7 @@ function AdditionalItemsFields({ readOnly }) {
     const subTotal = computeFn({ type, area, noFloors, cost, height, material, storey, sub_total, affectedArea, structuralType }) || 0;
 
     setValue("sub_total", subTotal);
+
   }, [category, noFloors, area, type, material, cost, affectedArea, height, storey]);
 
   // reset fields when category cahnge 
@@ -55,10 +55,10 @@ function AdditionalItemsFields({ readOnly }) {
   const onSubmit = (data) => {
     try {
       const newAdditionItem = { ...data, id: v4() };
-      const totalCost = sumByField([...fields, newAdditionItem], "sub_total");
-      console.log(totalCost);
+      // const unitCostSubTotal = getBldgValue(FIELDS.UCC_SUB_TOTAL) || 0
+      // const totalAdditionalCost = sumByField([...fields, newAdditionItem], "sub_total");
 
-      setBldgVal(FIELDS.ADDITIONAL_ITEM_COST_SUB, totalCost);
+      // setBldgVal(FIELDS.BUILDING_MARKET_VALUE, totalAdditionalCost + unitCostSubTotal);
       append(newAdditionItem);
       toast.success("Item added successfully!", toastConfig);
       setModalActive(false);

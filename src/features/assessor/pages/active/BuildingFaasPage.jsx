@@ -14,7 +14,7 @@ import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuild
 
 function BuildingFaasPage() {
 
-  const methods = useForm({ defaultValues: BUILDING_DEFAULT });
+  const methods = useForm({ defaultValues: BUILDING_DEFAULT, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { buildingFaasRecords, setBuildingFaasRecords } = useFaasData();
   const confirm = useConfirm()

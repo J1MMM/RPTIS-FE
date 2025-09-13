@@ -72,12 +72,24 @@ export const BUILDING_DEFAULT = {
   [FIELDS.ARP_NO]: "",
   [FIELDS.PIN]: "",
   bldg_ownership: [],
-  "land_reference": {},
+  land_reference: {
+    city: "San Pablo",
+    province: "Laguna"
+  },
   structuralType: {},
   floorAreas: [],
-  property_appraisal: {},
+  property_appraisal: {
+    ucc: "",
+    bcst: "",
+    coai: [],
+    totalConstructionCost: "",
+    depreciationRate: "",
+    yearsToDepreciate: "",
+    depreciationCost: "",
+    marketValue: ""
+  },
   property_assessment: {
-    "actualUse": "commercial",
+    "actualUse": "",
     "assessmentLevel": "",
     "assessedValue": "",
     "marketValue": ""
@@ -90,6 +102,7 @@ export const BUILDING_DEFAULT = {
   [FIELDS.CO_COMPLITION]: "",
   [FIELDS.DATE_CONSTRUCTED]: "",
   [FIELDS.DATE_OCCUPIED]: "",
+  [FIELDS.BUILDING_MARKET_VALUE]: "",
 
   [FIELDS.NO_OF_STOREYS]: "",
   [FIELDS.TAXABILITY]: "",

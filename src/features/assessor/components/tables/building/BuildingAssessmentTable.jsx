@@ -18,7 +18,7 @@ export const BuildingAssessmentTable = (props) => {
       rows={rows}
       columns={[
         {
-          field: FIELDS.BLDG_ASSESSMENT_ACTUAL_USE,
+          field: "actualUse",
           headerName: "Actual Use",
           flex: 1,
           headerClassName: "data-grid-header",
@@ -30,8 +30,8 @@ export const BuildingAssessmentTable = (props) => {
               <Select
                 required
                 disabled={readOnly}
-                value={params.row[FIELDS.LAND_ACTUAL_USE]}
-                onChange={(e) => handleChange(params.row.id, e.target.value)}
+                value={params.row?.actualUse}
+                onChange={(e) => handleChange(e.target.value)}
                 fullWidth
                 variant="standard"
               >

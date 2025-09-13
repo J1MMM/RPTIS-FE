@@ -21,24 +21,26 @@
   ],
 
   "land_reference": {
-    "td": "arp-land",
-    "owner": "sample person",
-    "area": 2101,
-
     "street": "322 Purok 4",
     "brgy": "SAN GREGORIO",
     "city": "San Pablo City",
     "province": "Laguna",
+
+    "td": "arp-land",
+    "area": 2101,
+    "owner": "sample person",
+
     "oct_tct-cloa_no": "OCT-123",
+    "survey_no": "sur-123",
     "lot_no": "Lot-123",
-    "blk_no": "blk-123",
-    "survey_no": "sur-123"
+    "blk_no": "blk-123"
   },
 
   "structuralType": {
     "category": "marketShoppingCenter",
     "type": "type5A"
   },
+
   "floors": [
     {
       "area": 167.25
@@ -73,14 +75,14 @@
   },
 
   "kindBldg": "",
+  "buildingAge": "new",
+  "noOfStorey": 1,
   "bldgPermit": "",
   "date_issued": "2025-09-08",
   "cct": "",
   "cocIssue": "2025-09-08",
   "dateConstructed": "2025-09-08",
   "dateOccupied": "2025-09-08",
-  "buildingAge": "new",
-  "noOfStorey": 1,
   "taxable": true,
   "effectivityOfAssessment": "2025-09-08",
   "quarter": "",

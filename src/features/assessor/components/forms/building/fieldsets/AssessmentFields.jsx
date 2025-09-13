@@ -6,13 +6,13 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { BuildingAssessmentTable } from "../../../tables/building/BuildingAssessmentTable";
 
 function BuildingAssessmentFields({ readOnly }) {
-  const { control: landFormControl, setValue: setLandFormVal } = useFormContext()
-  const propertyAssessment = useWatch({ control: landFormControl, name: "property_assessment" })
-  console.log("propertyAssessment");
-  console.log(propertyAssessment);
+  const { control, setValue } = useFormContext()
+  const propertyAssessment = useWatch({ control, name: "property_assessment" })
 
+  const handleChange = (value) => {
+    setValue(FIELDS.BLDG_ASSESSMENT_ACTUAL_USE, value)
 
-
+  }
   return (
     <>
       <StyledFieldset title="Property Assessment">
@@ -22,8 +22,8 @@ function BuildingAssessmentFields({ readOnly }) {
             ...propertyAssessment,
             id: 1
           }]}
-          handleChange={() => { }}
-          control={landFormControl}
+          handleChange={handleChange}
+          control={control}
         />
       </StyledFieldset>
     </>

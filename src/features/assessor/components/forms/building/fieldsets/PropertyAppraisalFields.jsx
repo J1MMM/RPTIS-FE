@@ -9,6 +9,7 @@ import Row from "../../../../../../components/ui/Row";
 import { useEffect, useState } from "react";
 import { SYMBOLS } from "../../../../../../constants/symbols";
 import { structuralType } from "../../../../constants/structuralType";
+import { sumByField } from "../../../../../../utils/math";
 
 function PropertyAppraisalFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext();
@@ -19,6 +20,9 @@ function PropertyAppraisalFields({ control, readOnly }) {
     uccSubTotal,
     totalPercentDep,
     depreciationCost,
+    additionalItems,
+    depRate,
+    depYears
   ] = useWatch({
     control,
     name: [
@@ -28,6 +32,9 @@ function PropertyAppraisalFields({ control, readOnly }) {
       FIELDS.UCC_SUB_TOTAL,
       FIELDS.TOTAL_PERCENT_DEPRECIATION,
       FIELDS.DEPRECIATION_COST,
+      FIELDS.ADDITIONAL_ITEMS,
+      FIELDS.DEPRECIATION_RATE,
+      FIELDS.DEPRECIATION_YEARS,
     ],
   });
 
@@ -44,26 +51,31 @@ function PropertyAppraisalFields({ control, readOnly }) {
     setValue(FIELDS.UCC_SUB_TOTAL, subTotal);
   }, [strucClass, buildingType, totalFloorArea, structuralType]);
 
+  // Calculate total depreciation rate
+  useEffect(() => {
+    setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, depRate * depYears);
+  }, [depRate, depYears]);
+
   // Calculate depreciation cost
   useEffect(() => {
     const subTotal = Number(uccSubTotal) || 0;
-    const totalPercent = Number(totalPercentDep) || 0;
+    const totalDepPercent = Number(totalPercentDep) || 0;
 
-    const depCost = subTotal * (totalPercent / 100);
+    const depCost = subTotal * (totalDepPercent / 100);
 
-    setValue(FIELDS.DEPRECIATION_COST, depCost || "");
+    setValue(FIELDS.DEPRECIATION_COST, depCost);
   }, [uccSubTotal, totalPercentDep]);
 
   // Calculate market value
   useEffect(() => {
     if (!uccSubTotal && !depreciationCost) return;
-
     const subTotal = Number(uccSubTotal) || 0;
+    const totalAdditionalCost = sumByField(additionalItems, "sub_total");
     const depCost = Number(depreciationCost) || 0;
-    const marketVal = subTotal - depCost;
 
+    const marketVal = (subTotal + totalAdditionalCost) - depCost
     setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
-  }, [uccSubTotal, depreciationCost]);
+  }, [uccSubTotal, depreciationCost, additionalItems]);
 
   return (
     <StyledFieldset title="Property Appraisals">
@@ -108,10 +120,10 @@ function PropertyAppraisalFields({ control, readOnly }) {
             label="Depreciation Rate"
             name={FIELDS.DEPRECIATION_RATE}
             adornment={ADORNMENTS.PERCENT}
-            onChange={() => {
-              const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
-              setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
-            }}
+          // onChange={() => {
+          //   const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
+          //   setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
+          // }}
           />
           <NumberInput
             maxLength={2}
@@ -119,10 +131,10 @@ function PropertyAppraisalFields({ control, readOnly }) {
             control={control}
             label="Years of Depreciation"
             name={FIELDS.DEPRECIATION_YEARS}
-            onChange={() => {
-              const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
-              setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
-            }}
+          // onChange={() => {
+          //   const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
+          //   setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
+          // }}
           />
         </Row>
         <NumberInput
