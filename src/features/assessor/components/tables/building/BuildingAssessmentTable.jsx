@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { PROPERTY_ASS_TABLE_COLUMN } from "../../../constants/tableColumns";
+import { BLDG_ASSESSMENT_COLUMNS } from "../../../constants/tableColumns";
 import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
 import { DATA_GRID_STYLE } from "@constants/tableStyles";
@@ -44,7 +44,7 @@ export const BuildingAssessmentTable = (props) => {
             );
           },
         },
-        ...PROPERTY_ASS_TABLE_COLUMN,
+        ...BLDG_ASSESSMENT_COLUMNS,
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick

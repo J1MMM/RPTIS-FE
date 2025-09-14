@@ -108,13 +108,20 @@ export const BUILDING_DEFAULT = {
   [FIELDS.TAXABILITY]: "",
   [FIELDS.EFFECTIVITY_YEAR]: null,
   [FIELDS.EFFECTIVITY_QTR]: "",
+
+  appraisers: {},
+  approvedBy: "",
+  dateApproved: "2025-09-08",
+  encoderName: "",
+  dateEncoded: "2025-09-08",
+  [FIELDS.MEMORANDA]: "",
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {
-  residential: 0.15,
-  agricultural: 0.4,
-  commercial: 0.4,
-  industrial: 0.4,
+  residential: 15,
+  agricultural: 40,
+  commercial: 40,
+  industrial: 40,
 };
 
 export const STRIPPING_FIELDS_DEFAULT = [

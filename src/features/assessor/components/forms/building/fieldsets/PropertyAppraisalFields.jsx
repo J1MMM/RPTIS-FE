@@ -68,13 +68,14 @@ function PropertyAppraisalFields({ control, readOnly }) {
 
   // Calculate market value
   useEffect(() => {
-    if (!uccSubTotal && !depreciationCost) return;
+    // if (!uccSubTotal && !depreciationCost) return;
     const subTotal = Number(uccSubTotal) || 0;
     const totalAdditionalCost = sumByField(additionalItems, "sub_total");
     const depCost = Number(depreciationCost) || 0;
 
     const marketVal = (subTotal + totalAdditionalCost) - depCost
     setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
+    setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
   }, [uccSubTotal, depreciationCost, additionalItems]);
 
   return (

@@ -18,6 +18,8 @@ function TextInput({
   type = "text",
   value,
   multiline = false,
+  rows,
+  shrink,
   margin = "dense",
   isNumeric = false,
   isPercent = false,
@@ -43,6 +45,7 @@ function TextInput({
           fullWidth
           variant="outlined"
           multiline={multiline}
+          rows={multiline && rows}
           label={label}
           placeholder={placeholder}
           onChange={(e) => {
@@ -66,8 +69,10 @@ function TextInput({
               readOnly: readOnly || pendingPage,
               inputRef: field.ref,
               ref: field.ref,
-
             },
+            inputLabel: {
+              shrink: shrink
+            }
           }}
         />
       )}

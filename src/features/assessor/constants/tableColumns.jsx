@@ -283,6 +283,49 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
   },
 ];
 
+export const BLDG_ASSESSMENT_COLUMNS = [
+  {
+    field: "marketValue",
+    headerName: "Market Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPeso(value);
+    },
+  },
+
+  {
+    field: "assessmentLevel",
+    headerName: "Assessment Level",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPercent(value);
+    },
+  },
+  {
+    field: "assessedValue",
+    headerName: "Assessed Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPeso(roundToNearestTen(value));
+    },
+  },
+];
+
 export const OWNER_INFO_TABLE_COLUMN = [
   {
     field: "type",

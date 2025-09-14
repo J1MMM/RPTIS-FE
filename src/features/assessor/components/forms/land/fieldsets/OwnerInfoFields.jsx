@@ -15,7 +15,7 @@ function OwnerInfoFields({ readOnly, ownerFieldName }) {
   const { control: bldgControl } = useFormContext()
   const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: ownerFieldName })
   const ownersForm = useWatch({ control: ownerFieldControl })
-  const { fields, append, remove } = useFieldArray({ control: bldgControl, name: FIELDS.OWNERSHIP });
+  const { fields, append, remove } = useFieldArray({ control: bldgControl, name: ownerFieldName });
 
   const onFormSubmit = (e) => {
     e.preventDefault();

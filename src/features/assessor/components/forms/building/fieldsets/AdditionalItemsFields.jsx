@@ -55,10 +55,6 @@ function AdditionalItemsFields({ readOnly }) {
   const onSubmit = (data) => {
     try {
       const newAdditionItem = { ...data, id: v4() };
-      // const unitCostSubTotal = getBldgValue(FIELDS.UCC_SUB_TOTAL) || 0
-      // const totalAdditionalCost = sumByField([...fields, newAdditionItem], "sub_total");
-
-      // setBldgVal(FIELDS.BUILDING_MARKET_VALUE, totalAdditionalCost + unitCostSubTotal);
       append(newAdditionItem);
       toast.success("Item added successfully!", toastConfig);
       setModalActive(false);
@@ -84,7 +80,7 @@ function AdditionalItemsFields({ readOnly }) {
       <StyledFieldset title="Cost of Additional Items">
         <Stack mb={2}>
           <Button
-            disabled={readOnly}
+            disabled={readOnly || !getBldgValue(FIELDS.BUILDING_MARKET_VALUE)}
             disableFocusRipple
             variant="contained"
             startIcon={<PlusCircle size="18" />}

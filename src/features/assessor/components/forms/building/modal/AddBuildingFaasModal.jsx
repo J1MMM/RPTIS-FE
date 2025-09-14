@@ -1,7 +1,7 @@
 import { Button, Stack } from "@mui/material";
 import { useFormContext, useWatch } from "react-hook-form";
 import { ArrowLeftRight, Building2, Edit, Printer, Split } from "lucide-react";
-import SelectField from "@components/ui/SelectField";
+import { SelectField, TextInput } from "@components/ui";
 import ContainerModal from "@components/shared/ContainerModal";
 import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
 import TaxabilityFields from "../../land/fieldsets/TaxabilityFields";
@@ -14,7 +14,7 @@ import StructuralMaterialFields from "../fieldsets/StructuralMaterialFields";
 import PropertyAppraisalFields from "../fieldsets/PropertyAppraisalFields";
 import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
-import BuildingAssessmentFields from "../fieldsets/AssessmentFields";
+import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
 
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl } = useFormContext();
@@ -81,6 +81,15 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
 
         <BuildingAssessmentFields readOnly={readOnly} />
         <TaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <TextInput
+          multiline
+          shrink={true}
+          rows={3}
+          readOnly={readOnly}
+          control={buildingFormControl}
+          label="Memoranda"
+          name={FIELDS.MEMORANDA}
+        />
         <PreviousRecFields readOnly={readOnly} control={buildingFormControl} />
 
       </ContainerModal >
