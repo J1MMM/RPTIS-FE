@@ -20,7 +20,6 @@ import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaa
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
 
-import seed from '../../../../../junk/land_res.json'
 import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
 import PrintablesMenu from "../../components/forms/land/modals/printableModal/PrintablesMenu";
 import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
@@ -165,22 +164,22 @@ function LandFaasPage() {
           handleForm={handleClick}
         />
 
-        <PrintableLandFaasFormModal 
+        <PrintableLandFaasFormModal
           open={printFaasModalActive}
           onClose={handleClosePrintModal}
         />
 
-        <PrintableTaxdecFormModal 
+        <PrintableTaxdecFormModal
           open={printTacdecModalActive}
           onClose={handleClosePrintModal}
         />
 
         <PrintablesMenu
-        open={open} 
-        handleClose={handleClose} 
-        anchorEl={anchorEl}
-        handleFaas={handleFaasForm}
-        handleTaxdec={handleTaxdecForm}
+          open={open}
+          handleClose={handleClose}
+          anchorEl={anchorEl}
+          handleFaas={handleFaasForm}
+          handleTaxdec={handleTaxdecForm}
         />
       </FormProvider>
     </>
