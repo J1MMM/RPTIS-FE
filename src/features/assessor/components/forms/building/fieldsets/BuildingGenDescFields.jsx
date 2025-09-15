@@ -10,9 +10,8 @@ import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } fr
 function BuildingGenDescFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
   const numberOfStoreys = useWatch({ control, name: FIELDS.NO_OF_STOREYS })
-  const floorAreas = useWatch({ control, name: "floorAreas" })
+  const floors = useWatch({ control, name: "floors" })
 
-  console.log("fields", floorAreas);
 
   useEffect(() => {
     let numStoreys = parseInt(numberOfStoreys, 10);
@@ -27,19 +26,19 @@ function BuildingGenDescFields({ control, readOnly }) {
       walls: []
     }));
 
-    setValue("floorAreas", floorAreasArr);
+    setValue("floors", floorAreasArr);
   }, [numberOfStoreys]);
 
   useEffect(() => {
-    const totalArea = Array.isArray(floorAreas)
-      ? floorAreas.reduce((acc, curr) => {
+    const totalArea = Array.isArray(floors)
+      ? floors.reduce((acc, curr) => {
         const area = parseFloat(curr.area);
         return acc + (isNaN(area) ? 0 : area);
       }, 0)
       : 0;
 
     setValue("totalFloorArea", totalArea || "")
-  }, [floorAreas])
+  }, [floors])
 
   return (
     <StyledFieldset title="General Description">

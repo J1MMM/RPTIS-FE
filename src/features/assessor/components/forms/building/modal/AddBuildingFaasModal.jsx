@@ -16,11 +16,15 @@ import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
 import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
 
+import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
-  const { control: buildingFormControl } = useFormContext();
+  const { control: buildingFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
   logger("data", useWatch({ control: buildingFormControl }))
 
+  const handleAutoFill = () => {
+    reset(seedBldgReq)
+  }
   return (
     <>
       <ContainerModal
@@ -32,6 +36,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
         actionButton={
           formMode !== "view" ?
             <>
+
               <Button size="small" onClick={onClose} variant="outlined">
                 Cancel
               </Button>
@@ -63,7 +68,11 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
 
         }
       >
+        <Button size="small" onClick={handleAutoFill} variant="outlined">
+          seeder
+        </Button>
         <Stack width={230} direction="row" justifyContent="space-between">
+
           <SelectField
             readOnly={readOnly}
             control={buildingFormControl}

@@ -328,18 +328,6 @@ export const BLDG_ASSESSMENT_COLUMNS = [
 
 export const OWNER_INFO_TABLE_COLUMN = [
   {
-    field: "type",
-    headerName: "Type",
-    flex: 1,
-    headerClassName: "data-grid-header",
-    sortable: false,
-    filterable: false,
-    disableColumnMenu: true,
-    headerAlign: "center",
-    align: "center",
-    valueFormatter: (params) => capitalizeFirstLetter(params)
-  },
-  {
     field: "role",
     headerName: "Role",
     flex: 1,

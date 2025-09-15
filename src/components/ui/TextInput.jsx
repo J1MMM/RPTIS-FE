@@ -45,7 +45,7 @@ function TextInput({
           fullWidth
           variant="outlined"
           multiline={multiline}
-          rows={multiline && rows}
+          rows={multiline ? rows : "auto"}
           label={label}
           placeholder={placeholder}
           onChange={(e) => {

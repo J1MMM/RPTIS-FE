@@ -79,12 +79,12 @@ export const FIELDS = {
   CITY_REF: "land_reference.city",
   PROVINCE_REF: "land_reference.province",
 
-  TD_ARP_REF: "land_reference.arp-land",
+  TD_ARP_REF: "land_reference.td",
   LAND_AREA_REF: "land_reference.area",
   LAND_OWNER_REF: "land_reference.owner",
 
   OCT_REF: "land_reference.oct_tct-cloa_no",
-  SURVEY_NO_REF: "land_reference.oct_tct-survey_no",
+  SURVEY_NO_REF: "land_reference.survey_no",
   LOT_NO_REF: "land_reference.lot_no",
   BLOCK_NO_REF: "land_reference.blk_no",
 
@@ -98,9 +98,9 @@ export const FIELDS = {
   DEPRECIATION_RATE: "property_appraisal.depreciationRate",
   DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
   DEPRECIATION_COST: "property_appraisal.depreciationCost",
-  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
+  TOTAL_PERCENT_DEPRECIATION: "property_appraisal.total_percent_depreciation",
   ADDITIONAL_ITEMS: "property_appraisal.coai",
-  BUILDING_MARKET_VALUE: "marketValue",
+  BUILDING_MARKET_VALUE: "property_appraisal.marketValue",
 
   // general desc 
   KIND_OF_BUILDING: "kindBldg",

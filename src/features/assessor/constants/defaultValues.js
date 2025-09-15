@@ -73,11 +73,23 @@ export const BUILDING_DEFAULT = {
   [FIELDS.PIN]: "",
   bldg_ownership: [],
   land_reference: {
+    area: "",
     city: "San Pablo",
-    province: "Laguna"
+    province: "Laguna",
+    street: "",
+    brgy: "",
+    "arp-land": "",
+    area: "",
+    owner: "",
+    "oct_tct-cloa_no": "",
+    "oct_tct-survey_no": "",
+    lot_no: "",
+    blk_no: ""
+
   },
   structuralType: {},
-  floorAreas: [],
+  floors: [],
+  roofMaterials: [],
   property_appraisal: {
     ucc: "",
     bcst: "",
@@ -85,8 +97,9 @@ export const BUILDING_DEFAULT = {
     totalConstructionCost: "",
     depreciationRate: "",
     yearsToDepreciate: "",
+    total_percent_depreciation: "",
     depreciationCost: "",
-    marketValue: ""
+    marketValue: "",
   },
   property_assessment: {
     "actualUse": "",
@@ -115,6 +128,11 @@ export const BUILDING_DEFAULT = {
   encoderName: "",
   dateEncoded: "2025-09-08",
   [FIELDS.MEMORANDA]: "",
+
+  arpInput: "",
+  pinInput: "",
+  arpAdornment: "",
+  pinAdornment: "",
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {

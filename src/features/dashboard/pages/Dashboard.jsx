@@ -30,7 +30,7 @@ import { formatPeso } from '../../../utils/formatters'
 function StatCard({ icon, label, value, delta, color }) {
     const theme = useTheme()
     return (
-        <Paper elevation={0} sx={{ p: 2.5, borderRadius: 2, border: `1px solid ${theme.palette.divider}`, overflow: "hidden" }}>
+        <Paper elevation={0} sx={{ p: 2.5, borderRadius: 2, border: `1px solid ${theme.palette.divider}`, overflow: "hidden", height: '100%' }}>
             <Stack direction={{ xs: "column-reverse", sm: "row" }} alignItems={{ xs: "start", sm: "center" }} justifyContent="space-between" spacing={1}>
                 <Stack direction="row" spacing={1.5} alignItems="center">
                     <Box
@@ -48,7 +48,7 @@ function StatCard({ icon, label, value, delta, color }) {
                         {icon}
                     </Box>
                     <Box>
-                        <Typography variant="subtitle2" noWrap color="text.secondary">{label}</Typography>
+                        <Typography variant="subtitle2" color="text.secondary">{label}</Typography>
                         <Typography variant="h5" fontWeight={700}>{value}</Typography>
                     </Box>
                 </Stack>
@@ -117,17 +117,7 @@ function Dashboard() {
     const breakdownSecondaryAxes = React.useMemo(() => ([{ getValue: d => d.secondary, elementType: 'bar', min: 0 }]), [])
 
     return (
-        <Box p={2} sx={{ height: "calc(100vh - 60px)", display: "flex", flexDirection: "column" }} >
-            <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between" spacing={2} sx={{ mb: 2 }}>
-                <Box>
-                    <Typography variant="h5" fontWeight={700}>Real Property Intelligence</Typography>
-                    <Typography variant="body2" color="text.secondary">Monitor assessments, renewals, and revenues across land, buildings, and machinery</Typography>
-                </Box>
-                <Stack direction="row" spacing={1} alignItems="center">
-                    <Button variant="outlined" startIcon={<Download size={18} />}>Export CSV</Button>
-                    <Button variant="contained" startIcon={<PlusCircle size={18} />}>New FAAS</Button>
-                </Stack>
-            </Stack>
+        <Box p={2} sx={{ height: "calc(100vh - 60px)", display: "flex", flexDirection: "column" }}  >
             {/* ============================ stats cards ================================================= */}
             <Grid2 container spacing={2} sx={{ mb: 2 }} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
                 <Grid2>
@@ -145,18 +135,90 @@ function Dashboard() {
             </Grid2>
 
             {/* ============================ charts ================================================= */}
-            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }} alignItems="stretch">
-                <Grid2>
-                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}`, mb: 2, display: 'flex', flexDirection: 'column' }}>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
-                            <Typography variant="subtitle1" fontWeight={600}>Revenue Insights</Typography>
-                            <ToggleButtonGroup size="small" color="primary" exclusive value={period} onChange={handlePeriod} sx={{ mb: .3 }}>
-                                <ToggleButton value="daily" sx={{ px: 2, py: 0.8, fontSize: 12, textTransform: "none", }}>Daily</ToggleButton>
-                                <ToggleButton value="monthly" sx={{ px: 2, py: 0.8, fontSize: 12, textTransform: "none", }}>Monthly</ToggleButton>
-                                <ToggleButton value="annual" sx={{ px: 2, py: 0.8, fontSize: 12, textTransform: "none", }}>Annual</ToggleButton>
+            <Grid2 container spacing={2} mb={2}>
+                <Grid2 size={{ xs: 12, sm: 12, md: 7 }}>
+                    <Paper
+                        elevation={0}
+                        sx={{
+                            p: { xs: 1.5, sm: 2 },
+                            borderRadius: 2,
+                            border: theme => `1px solid ${theme.palette.divider}`,
+                            mb: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            height: "100%"
+                        }}
+                    >
+                        <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            alignItems={{ xs: "flex-start", sm: "center" }}
+                            justifyContent="space-between"
+                            spacing={{ xs: 1, sm: 0 }}
+                            sx={{ mb: 1 }}
+                        >
+                            <Typography
+                                variant="subtitle1"
+                                fontWeight={600}
+                                sx={{ fontSize: { xs: '1rem', sm: '1.1rem' } }}
+                            >
+                                Revenue Insights
+                            </Typography>
+                            <ToggleButtonGroup
+                                size="small"
+                                color="primary"
+                                exclusive
+                                value={period}
+                                onChange={handlePeriod}
+                                sx={{
+                                    mb: .3,
+                                    width: { xs: '100%', sm: 'auto' },
+                                    '& .MuiToggleButton-root': {
+                                        flex: { xs: 1, sm: 'none' }
+                                    }
+                                }}
+                            >
+                                <ToggleButton
+                                    value="daily"
+                                    sx={{
+                                        px: { xs: 1, sm: 2 },
+                                        py: 0.8,
+                                        fontSize: { xs: 11, sm: 12 },
+                                        textTransform: "none"
+                                    }}
+                                >
+                                    Daily
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="monthly"
+                                    sx={{
+                                        px: { xs: 1, sm: 2 },
+                                        py: 0.8,
+                                        fontSize: { xs: 11, sm: 12 },
+                                        textTransform: "none"
+                                    }}
+                                >
+                                    Monthly
+                                </ToggleButton>
+                                <ToggleButton
+                                    value="annual"
+                                    sx={{
+                                        px: { xs: 1, sm: 2 },
+                                        py: 0.8,
+                                        fontSize: { xs: 11, sm: 12 },
+                                        textTransform: "none"
+                                    }}
+                                >
+                                    Annual
+                                </ToggleButton>
                             </ToggleButtonGroup>
                         </Stack>
-                        <Box sx={{ width: '100%', aspectRatio: '16/4.5' }} >
+                        <Box
+                            sx={{
+                                width: '100%',
+                                aspectRatio: { xs: '16/6', sm: '16/5', md: '16/4' },
+                                minHeight: { xs: 200, sm: 250 }
+                            }}
+                        >
                             <Chart
                                 options={{
                                     data: revenueSeries,
@@ -166,26 +228,37 @@ function Dashboard() {
                                 }}
                             />
                         </Box>
-                        <Divider sx={{ my: 1 }} />
-                        <Stack direction="row" spacing={3} sx={{ flexWrap: 'wrap' }}>
-                            <Box>
-                                <Typography variant="overline" color="text.secondary">YTD Income</Typography>
-                                <Typography variant="h6" fontWeight={700}>₱ 6.57M</Typography>
-                            </Box>
-                            <Box>
-                                <Typography variant="overline" color="text.secondary">MoM Change</Typography>
-                                <Typography variant="h6" fontWeight={700} color="success.main">+6.8%</Typography>
-                            </Box>
-                        </Stack>
                     </Paper>
                 </Grid2>
-                <Grid2>
 
-                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}`, mb: 2 }}>
-                        <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1 }}>Revenue Breakdown</Typography>
-                        <Box sx={{
-                            width: '100%', aspectRatio: '2.5 / 1'
-                        }}>
+                <Grid2 size={{ xs: 12, sm: 12, md: 5 }}>
+                    <Paper
+                        elevation={0}
+                        sx={{
+                            p: { xs: 1.5, sm: 2 },
+                            borderRadius: 2,
+                            border: theme => `1px solid ${theme.palette.divider}`,
+                            mb: 2,
+                            height: "100%"
+                        }}
+                    >
+                        <Typography
+                            variant="subtitle1"
+                            fontWeight={600}
+                            sx={{
+                                mb: 1,
+                                fontSize: { xs: '1rem', sm: '1.1rem' }
+                            }}
+                        >
+                            Revenue Breakdown
+                        </Typography>
+                        <Box
+                            sx={{
+                                width: '100%',
+                                aspectRatio: { xs: '16/6', sm: '16/5', md: '16/4' },
+                                minHeight: { xs: 200, sm: 250 }
+                            }}
+                        >
                             <Chart
                                 options={{
                                     data: breakdownSeries,
@@ -199,35 +272,25 @@ function Dashboard() {
                 </Grid2>
             </Grid2>
             {/* ============================ others ================================================= */}
-            <Grid2 container spacing={2} display={"grid"} gridTemplateColumns={{ xs: "1fr", sm: "1fr", md: "1fr 1fr" }}>
-                <Grid2>
-                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
-                        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
-                            <Typography variant="subtitle1" fontWeight={600}>Recent FAAS Records</Typography>
-                            <Button size="small" startIcon={<Search size={16} />}>See all</Button>
-                        </Stack>
-                        <DataGrid
-                            density="compact"
-                            disableRowSelectionOnClick
-                            rows={recentRows}
-                            columns={recentColumns}
-                            hideFooter
-                            sx={{
-                            }}
-                        />
+            <Grid2 Grid2 container spacing={2} >
+                <Grid2 size={{ xs: 12, sm: 12, md: 4 }}>
+                    <Paper>
+                        here
                     </Paper>
                 </Grid2>
-                <Grid2>
-                    <Paper elevation={0} sx={{ p: 2, borderRadius: 2, border: theme => `1px solid ${theme.palette.divider}` }}>
-                        <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 1.5 }}>Quick Actions</Typography>
-                        <Stack spacing={1}>
-                            <Button fullWidth variant="outlined" startIcon={<Search size={18} />}>Search TD</Button>
-                            <Button fullWidth variant="outlined" startIcon={<FileText size={18} />}>Generate Report</Button>
-                            <Button fullWidth variant="outlined" startIcon={<PlusCircle size={18} />}>Import Data</Button>
-                        </Stack>
+                <Grid2 size={{ xs: 12, sm: 12, md: 3 }}>
+                    <Paper>
+                        here
                     </Paper>
+
                 </Grid2>
-            </Grid2>
+                <Grid2 size={{ xs: 12, sm: 12, md: 5 }}>
+                    <Paper>
+                        here
+                    </Paper>
+
+                </Grid2>
+            </Grid2 >
         </Box >
     )
 }

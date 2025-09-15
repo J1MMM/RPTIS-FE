@@ -29,12 +29,12 @@ function StructuralMaterialFields({ control, readOnly }) {
     name: FIELDS.NO_OF_STOREYS
   })
 
-  const floorAreas = useWatch({
+  const floors = useWatch({
     control,
-    name: "floorAreas"
+    name: "floors"
   })
 
-  console.log("fields", floorAreas);
+  console.log("fields", floors);
 
   useEffect(() => {
     let numStoreys = parseInt(numberOfStoreys, 10);
@@ -49,19 +49,19 @@ function StructuralMaterialFields({ control, readOnly }) {
       walls: []
     }));
 
-    setValue("floorAreas", floorAreasArr);
+    setValue("floors", floorAreasArr);
   }, [numberOfStoreys]);
 
   useEffect(() => {
-    const totalArea = Array.isArray(floorAreas)
-      ? floorAreas.reduce((acc, curr) => {
+    const totalArea = Array.isArray(floors)
+      ? floors.reduce((acc, curr) => {
         const area = parseFloat(curr.area);
         return acc + (isNaN(area) ? 0 : area);
       }, 0)
       : 0;
 
     setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
-  }, [floorAreas])
+  }, [floors])
 
   const [personName, setPersonName] = useState([]);
 
@@ -91,27 +91,13 @@ function StructuralMaterialFields({ control, readOnly }) {
             }
           }}
         />
-        <FormControl fullWidth margin="dense">
-          <InputLabel>Roof</InputLabel>
-          <Select
-            multiple
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput label="Roof" />}
-            renderValue={(selected) =>
-              selected
-                .map((val) => ROOF_MATERIALS.find((opt) => opt.value === val)?.label)
-                .join(', ')
-            }
-          >
-            {ROOF_MATERIALS.map((opt) => (
-              <MenuItem key={opt.label} value={opt.value}>
-                <Checkbox checked={personName.includes(opt.value)} />
-                <ListItemText primary={opt.label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectFieldMulti
+          control={control}
+          label="Roof"
+          name={`roofMaterials`}
+          options={ROOF_MATERIALS}
+        />
+
         <TextInput
           readOnly={true}
           control={control}
@@ -125,14 +111,14 @@ function StructuralMaterialFields({ control, readOnly }) {
       <Divider sx={{ my: 1, borderColor: "primary.main" }} />
       <Box display="grid" gridTemplateColumns={"repeat(1, 1fr)"} gap={1} >
         {
-          floorAreas && floorAreas?.map((floor, index) => (
+          floors && floors?.map((floor, index) => (
             <Box key={floor?.label} display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
               <Typography variant="body1" color={grey[900]} whiteSpace={"nowrap"} textAlign={"end"} alignSelf={"center"} width={80} >{floor?.label}:</Typography>
               <SelectFieldMulti
                 size="small"
                 control={control}
                 label="Flooring"
-                name={`floorAreas.${index}.flooring`}
+                name={`floors.${index}.flooring`}
                 options={FLOORING_MATERIALS}
               />
 
@@ -140,7 +126,7 @@ function StructuralMaterialFields({ control, readOnly }) {
                 size="small"
                 control={control}
                 label="Walls & Partition"
-                name={`floorAreas.${index}.walls`}
+                name={`floors.${index}.walls`}
                 options={WALLS_MATERIALS}
               />
 
@@ -150,7 +136,7 @@ function StructuralMaterialFields({ control, readOnly }) {
                 size="small"
                 maxLength={10}
                 control={control}
-                name={`floorAreas.${index}.area`}
+                name={`floors.${index}.area`}
                 adornment={ADORNMENTS.SQM}
               />
             </Box>

@@ -115,27 +115,22 @@ function PropertyAppraisalFields({ control, readOnly }) {
         <Row>
 
           <NumberInput
+            required={false}
             maxLength={3}
             readOnly={readOnly}
             control={control}
             label="Depreciation Rate"
             name={FIELDS.DEPRECIATION_RATE}
             adornment={ADORNMENTS.PERCENT}
-          // onChange={() => {
-          //   const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
-          //   setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
-          // }}
+
           />
           <NumberInput
+            required={false}
             maxLength={2}
             readOnly={readOnly}
             control={control}
             label="Years of Depreciation"
             name={FIELDS.DEPRECIATION_YEARS}
-          // onChange={() => {
-          //   const [rate, years] = getValues([FIELDS.DEPRECIATION_RATE, FIELDS.DEPRECIATION_YEARS])
-          //   setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, rate * years)
-          // }}
           />
         </Row>
         <NumberInput

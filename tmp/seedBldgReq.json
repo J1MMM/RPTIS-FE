@@ -1,0 +1,130 @@
+{
+  "transaction_code": "DC",
+  "arp_no": "06-077-123",
+  "pin_no": "130-06-123",
+  "bldg_ownership": [
+    {
+      "type": "person",
+      "role": "owner",
+      "lastname": "Gregorio",
+      "firstname": "Gabriel",
+      "middlename": "Isidro",
+      "suffix": "",
+      "contact_no": "09123412332",
+      "email": "gregorio.gabriel@example.com",
+      "remarks": "",
+      "tin": "000-123-456-001",
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "Soledad",
+      "street": "322",
+      "postal": "4000",
+      "id": "d8c943f8-4d6d-4f77-9970-19ee99e80d17"
+    },
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "Soledad",
+      "street": "322",
+      "postal": "4000",
+      "type": "person",
+      "role": "administrator",
+      "contact_no": "09123412332",
+      "email": "gregorio.gabriel.jr@example.com",
+      "name": "",
+      "lastname": "Gregorio",
+      "firstname": "Gabriel",
+      "middlename": "Isidro",
+      "tin": "000-123-456-001",
+      "id": "9fb99009-3bbe-4888-9835-4878769e5b9a"
+    }
+  ],
+  "land_reference": {
+    "city": "San Pablo",
+    "province": "Laguna",
+    "street": "322",
+    "brgy": "SOLEDAD",
+    "td": "06-0077-1234",
+    "area": 267.25,
+    "owner": "John Kramer",
+    "oct_tct-cloa_no": "T-308034",
+    "survey_no": "26611-P12",
+    "lot_no": "27234-G",
+    "blk_no": "PSD-04-2345"
+  },
+  "structuralType": {
+    "type": "type5A",
+    "category": "marketShoppingCenter"
+  },
+  "roofMaterials": ["asbestos", "aluminum"],
+  "floors": [
+    {
+      "id": "92416140-d4bd-4ccd-9fda-12db4635046d",
+      "label": "1st floor",
+      "area": "167.25",
+      "flooring": [],
+      "walls": []
+    }
+  ],
+  "property_appraisal": {
+    "ucc": 10000,
+    "bcst": 1672500,
+    "coai": [
+      {
+        "affectedArea": 0,
+        "area": 167.25,
+        "cost": 0,
+        "height": 0,
+        "noFloors": 1,
+        "material": "",
+        "storey": 0,
+        "type": "type5",
+        "category": "foundation",
+        "sub_total": 73590,
+        "id": "7c927e2d-12b4-4932-8a3e-2a6fbff73015"
+      }
+    ],
+    "totalConstructionCost": "",
+    "depreciationRate": 0,
+    "yearsToDepreciate": 0,
+    "depreciationCost": 0,
+    "marketValue": 1746090,
+    "total_percent_depreciation": 0
+  },
+  "property_assessment": {
+    "actualUse": "commercial",
+    "assessmentLevel": 60,
+    "assessedValue": 1047654,
+    "marketValue": 1746090
+  },
+  "kindBldg": "commercial",
+  "bldgPermit": "Permit No.",
+  "date_issued": "2025-09-14T16:00:00.000Z",
+  "cct": "cct",
+  "cocIssue": "coc issue on",
+  "dateConstructed": "2025-09-14T16:00:00.000Z",
+  "dateOccupied": "2025-09-14T16:00:00.000Z",
+  "marketValue": 1746090,
+  "noOfStorey": "1",
+  "taxable": "true",
+  "effectivity_year": "2025-09-14T16:00:00.000Z",
+  "effectivity_quarter": "4th Quarter",
+  "appraisers": {},
+  "approvedBy": "",
+  "dateApproved": "2025-09-08",
+  "encoderName": "",
+  "dateEncoded": "2025-09-08",
+  "memoranda": "memoranda",
+  "arpInput": "123",
+  "pinInput": "123",
+  "buildingAge": "NEW",
+  "cetificateOfOccupancyIssuedOn": "coo issue on",
+  "total_floor_areas": 167.25,
+  "total_percent_depreciation": 0,
+  "previous_records": {},
+  "totalFloorArea": 167.25,
+  "arpAdornment": "06-077-",
+  "pinAdornment": "130-06-"
+}

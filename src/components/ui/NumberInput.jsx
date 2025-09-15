@@ -73,7 +73,7 @@ function NumberInput({
             input: {
               ...adornment,
               readOnly,
-              inputProps: { min: 0 },
+              inputProps: { min: 0, step: "any" },
             },
           }}
         />

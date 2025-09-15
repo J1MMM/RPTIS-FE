@@ -11,6 +11,7 @@ import { BUILDING_DEFAULT, LAND_DEFAULT_FIELD } from "../../constants/defaultVal
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
+import axios from "../../../../api/axios";
 
 function BuildingFaasPage() {
 
@@ -28,15 +29,16 @@ function BuildingFaasPage() {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      await new Promise(r => setTimeout(r, 1000))
+      const response = await axios.post('/faasBldg', data)
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {
+      console.error("Error submitting form:", error);
+
       toast.error("Something went wrong while submitting.", toastConfig);
     } finally {
       setShowConfirmation(false);
-      setDisabled(false); // re-enable after request
     }
   };
 
