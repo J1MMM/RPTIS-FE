@@ -133,3 +133,36 @@ export const ADDITIONAL_ITEMS_OPTIONS = [
   { label: "Height", value: "height" },
   { label: "Other Increment", value: "otherIncrement" },
 ];
+
+export const ADDITIONAL_FOUNDATION_OPTIONS = [
+  { label: "III", value: "type3" },
+  { label: "IV", value: "type4" },
+  { label: "V", value: "type5" },
+];
+
+export const ADDITION_FLOORING_OPTIONS = [
+  { label: "Granolithe", value: "granolithe" },
+  { label: "Linotile", value: "linotile" },
+  { label: "Vinyl", value: "vinyl" },
+  { label: "Asphalt", value: "asphalt" },
+  { label: "Wood", value: "wood" },
+  { label: "Crazy-cut marble", value: "Crazy-cut marble" },
+];
+export const ADDITION_WALL_OPTIONS = [
+  { label: "Marble", value: "marble" },
+  { label: "Synthetic Marble", value: "synthetic marble" },
+  { label: "Wash-out", value: "wash-out" },
+];
+export const ADDITION_CEILING_OPTIONS = [
+  { label: "Ordinary drop Ceiling on R.C. building", value: "Ordinary drop Ceiling on R.C. building" },
+  { label: "Luminous", value: "Luminous" },
+  { label: "Narra & other special panels add 140/sq.m.", value: "Narra & other special panels add 140/sq.m." },
+];
+export const ADDITION_SPCIAL_OPTIONS = [
+  { label: "Ordinary size", value: "Ordinary size" },
+  { label: "Extra size", value: "extra size" },
+];
+export const ADDITION_HEIGHT_OPTIONS = [
+  { label: "One storey", value: "oneStorey" },
+  { label: "Two storey", value: "twoStorey" },
+];

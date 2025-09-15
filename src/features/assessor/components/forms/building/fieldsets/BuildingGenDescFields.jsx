@@ -1,37 +1,16 @@
-import { Box, Button, Checkbox, Divider, FormControl, Grid2, IconButton, InputAdornment, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Stack, TextField, Typography } from "@mui/material";
-import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
-import SelectField from "../../../../../../components/ui/SelectField";
-import { BRGY_OPTIONS, FLOORING_MATERIALS, ROOF_MATERIALS, WALLS_MATERIALS } from "../../../../../../constants/dropdown";
-import DateInput from "../../../../../../components/ui/DateInput";
-import { Controller, useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
-import { BRGY_CODE, BRGY_DISTRICTS } from "../../../../../../constants/barangayCode";
-import { Grid, UserSearch } from "lucide-react";
-import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
-import NumberInput from "@components/ui/NumberInput";
-import DividerHeading from "@components/ui/DividerHeading";
-import { ADORNMENTS } from "@constants/adornments";
-import { toOrdinal } from "@utils/formatters";
-import Row from "../../../../../../components/ui/Row";
-import { useEffect, useState } from "react";
 import { v4 } from "uuid";
-import { use } from "react";
-import { formatPeso } from "../../../../../../utils/formatters";
-import { grey } from "@mui/material/colors";
+import { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { useFormContext, useWatch } from "react-hook-form";
+import { toOrdinal } from "@utils/formatters";
+import { FIELDS } from "../../../../constants/fieldNames";
+import { TextInput, Row, DateInput, SelectField, StyledFieldset } from "@components/ui/";
+import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
 
 function BuildingGenDescFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
-
-  const numberOfStoreys = useWatch({
-    control,
-    name: FIELDS.NO_OF_STOREYS
-  })
-
-  const floorAreas = useWatch({
-    control,
-    name: "floorAreas"
-  })
+  const numberOfStoreys = useWatch({ control, name: FIELDS.NO_OF_STOREYS })
+  const floorAreas = useWatch({ control, name: "floorAreas" })
 
   console.log("fields", floorAreas);
 
@@ -62,18 +41,6 @@ function BuildingGenDescFields({ control, readOnly }) {
     setValue("totalFloorArea", totalArea || "")
   }, [floorAreas])
 
-  const [personName, setPersonName] = useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
   return (
     <StyledFieldset title="General Description">
       <Stack direction="row" gap={1}>
@@ -94,13 +61,13 @@ function BuildingGenDescFields({ control, readOnly }) {
       <Stack direction="row" gap={1}>
         <SelectField
           control={control}
-          name={FIELDS.STRUCTURAL_CLASS}
+          name={FIELDS.STRUCTURAL_TYPE}
           label="Structural Classification"
           options={STRUC_CLASS_OPTIONS}
         />
         <SelectField
           control={control}
-          name={FIELDS.BUILDING_TYPE}
+          name={FIELDS.STRUCTURAL_CATEGORY}
           label="Building/Occupancy Type"
           options={BUILDING_TYPE_OPTIONS}
         />

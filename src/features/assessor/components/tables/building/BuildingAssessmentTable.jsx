@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { PROPERTY_ASS_TABLE_COLUMN } from "../../../constants/tableColumns";
+import { BLDG_ASSESSMENT_COLUMNS } from "../../../constants/tableColumns";
 import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
 import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
 import { DATA_GRID_STYLE } from "@constants/tableStyles";
@@ -10,16 +10,15 @@ import { useWatch } from "react-hook-form";
 import { sumByField } from "@utils/math";
 
 export const BuildingAssessmentTable = (props) => {
-  const { control, handleChange, readOnly } = props;
-  const propertyAssessments = useWatch({ control, name: "propertyAssessments" })
-  const totalAssessedValue = sumByField(propertyAssessments, FIELDS.LAND_ASSESSED_VALUE)
+  const { handleChange, readOnly, rows } = props;
+  const totalAssessedValue = sumByField(rows, FIELDS.LAND_ASSESSED_VALUE)
 
   return (
     <DataGrid
-      rows={propertyAssessments}
+      rows={rows}
       columns={[
         {
-          field: FIELDS.LAND_ACTUAL_USE,
+          field: "actualUse",
           headerName: "Actual Use",
           flex: 1,
           headerClassName: "data-grid-header",
@@ -31,8 +30,8 @@ export const BuildingAssessmentTable = (props) => {
               <Select
                 required
                 disabled={readOnly}
-                value={params.row[FIELDS.LAND_ACTUAL_USE]}
-                onChange={(e) => handleChange(params.row.id, e.target.value)}
+                value={params.row?.actualUse}
+                onChange={(e) => handleChange(e.target.value)}
                 fullWidth
                 variant="standard"
               >
@@ -45,7 +44,7 @@ export const BuildingAssessmentTable = (props) => {
             );
           },
         },
-        ...PROPERTY_ASS_TABLE_COLUMN,
+        ...BLDG_ASSESSMENT_COLUMNS,
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick

@@ -20,7 +20,7 @@ import useConfirm from "../../../../hooks/useConfirm";
 import MachineryFaasTable from "../../components/tables/machinery/active-faas-page/MachineryFaasTable";
 
 function MachineryFaasPage() {
-  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD });
+  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const confirm = useConfirm()

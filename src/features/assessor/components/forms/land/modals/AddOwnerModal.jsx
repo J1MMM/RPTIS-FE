@@ -1,13 +1,11 @@
 import { Button, Stack } from "@mui/material";
 import { Building2, UserRoundPlus } from "lucide-react";
 import ContainerModal from "@components/shared/ContainerModal";
-import CancelButton from "@components/ui/CancelButton";
-import TextInput from "@components/ui/TextInput";
-import SelectField from "@components/ui/SelectField";
-import StyledFieldset from "@components/ui/StyledFieldset";
-import Row from "@components/ui/Row";
+import { Row, CancelButton, TextInput, StyledFieldset, SelectField } from "@components/ui";
 import getPhLocations from "../../../../../../utils/getPhLocations";
 import { isEmptyArray } from "../../../../../../utils/validator";
+import ContactInput from "../../../../../../components/ui/ContactInput";
+import EmailInput from "../../../../../../components/ui/EmailInput";
 
 const OWNER_TYPES = [
   { label: "Person", value: "person" },
@@ -20,8 +18,6 @@ const ROLES = [
 ];
 
 function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
-
-
   const { regionsOptions, provinceOptions, cityOptions, barangayOptions }
     = getPhLocations({
       selectedRegion: form?.regions,
@@ -90,15 +86,14 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
             }
           </Row>
           <Row>
-            <TextInput
+            <ContactInput
               control={control}
               name="contact_no"
               label="Contact Number"
             />
-            <TextInput
+            <EmailInput
               required={false}
               control={control}
-              type="email"
               name="email"
               label="Email Address"
             />

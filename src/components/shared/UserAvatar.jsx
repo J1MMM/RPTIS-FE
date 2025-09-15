@@ -33,7 +33,7 @@ const UserAvatar = () => {
       {/* Typography for user name and email */}
       <Stack>
         <Typography variant="body2" fontWeight={600} color={teal[900]}>
-          Mary Elizabeth Smith
+          Chris Evans
         </Typography>
         <Typography
           display="block"
@@ -42,7 +42,7 @@ const UserAvatar = () => {
           fontSize="10px"
           mt={-0.3}
         >
-          maryelizabethsmithg@example.com {/* Replace with dynamic email */}
+          chris_evans@example.com {/* Replace with dynamic email */}
         </Typography>
       </Stack>
 

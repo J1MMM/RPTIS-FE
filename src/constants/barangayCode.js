@@ -153,7 +153,7 @@ export const BRGY_DISTRICTS = {
     "STO. NIÑO": "03",
     "SAN PEDRO": "02",
     "SAN RAFAEL": "05",
-    "SAN ROQUE": "05",
+    "SAN ROQUE": "04",
     "STMO. ROSARIO": "06",
     "SANTIAGO I (Bulaho)": "04",
     "SANTIAGO II (Bulaho)": "04",

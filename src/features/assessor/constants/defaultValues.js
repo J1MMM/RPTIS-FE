@@ -69,62 +69,59 @@ export const LAND_DEFAULT_FIELD = {
 
 export const BUILDING_DEFAULT = {
   [FIELDS.TRANSACTION_CODE]: "",
-  // building info 
   [FIELDS.ARP_NO]: "",
   [FIELDS.PIN]: "",
-  [FIELDS.NO_AND_STREET]: "",
-  [FIELDS.BARANGAY]: "",
-  [FIELDS.CITY]: "San Pablo City", // example fixed value
-  [FIELDS.PROVINCE]: "Laguna", // example fixed value
-  // land ref 
-  [FIELDS.TD_ARP_REF]: "",
-  [FIELDS.LAND_OWNER_REF]: "",
-  [FIELDS.LAND_AREA_REF]: "",
-  [FIELDS.OCT_TCT_NO]: "",
-  [FIELDS.LOT_NO]: "",
-  [FIELDS.BLOCK_NO]: "",
-  [FIELDS.SURVEY_NO]: "",
-  // gen desc 
-  [FIELDS.NO_OF_STOREYS]: "",
-  //owner info
-  land_ownership: [],
-  // taxability
-  [FIELDS.TAXABILITY]: "",
-
-  // effectivity of assessment/reassessment
-  [FIELDS.EFFECTIVITY_QTR]: "",
-  [FIELDS.EFFECTIVITY_YEAR]: null,
-
-  [FIELDS.TOTAL_MARKET_VALUE]: 0,
-  [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
-
-  [FIELDS.UNIT_CONSTRUCTION_COST]: "",
-  [FIELDS.UCC_SUB_TOTAL]: "",
-  [FIELDS.DEPRECIATION_RATE]: "",
-  [FIELDS.DEPRECIATION_COST]: "",
-  [FIELDS.DEPRECIATION_YEARS]: "",
-  [FIELDS.ADDITIONAL_ITEMS]: "",
-  [FIELDS.ADDITIONAL_ITEM_COST_SUB]: "",
-  [FIELDS.TOTAL_CONSTRUCTION_COST]: "",
-  [FIELDS.TOTAL_PERCENT_DEPRECIATION]: "",
+  bldg_ownership: [],
+  land_reference: {
+    city: "San Pablo",
+    province: "Laguna"
+  },
+  structuralType: {},
   floorAreas: [],
   property_appraisal: {
     ucc: "",
     bcst: "",
+    coai: [],
     totalConstructionCost: "",
     depreciationRate: "",
     yearsToDepreciate: "",
     depreciationCost: "",
-    marketValue: "",
-    coa: [],
+    marketValue: ""
   },
+  property_assessment: {
+    "actualUse": "",
+    "assessmentLevel": "",
+    "assessedValue": "",
+    "marketValue": ""
+  },
+
+  [FIELDS.KIND_OF_BUILDING]: "",
+  [FIELDS.BLDG_PERMIT]: "",
+  [FIELDS.BLDG_PERMIT_DATE_ISSUE]: "",
+  [FIELDS.CCT]: "",
+  [FIELDS.CO_COMPLITION]: "",
+  [FIELDS.DATE_CONSTRUCTED]: "",
+  [FIELDS.DATE_OCCUPIED]: "",
+  [FIELDS.BUILDING_MARKET_VALUE]: "",
+
+  [FIELDS.NO_OF_STOREYS]: "",
+  [FIELDS.TAXABILITY]: "",
+  [FIELDS.EFFECTIVITY_YEAR]: null,
+  [FIELDS.EFFECTIVITY_QTR]: "",
+
+  appraisers: {},
+  approvedBy: "",
+  dateApproved: "2025-09-08",
+  encoderName: "",
+  dateEncoded: "2025-09-08",
+  [FIELDS.MEMORANDA]: "",
 };
 
 export const ACTUAL_USE_EQUIVALENTS = {
-  residential: 0.15,
-  agricultural: 0.4,
-  commercial: 0.4,
-  industrial: 0.4,
+  residential: 15,
+  agricultural: 40,
+  commercial: 40,
+  industrial: 40,
 };
 
 export const STRIPPING_FIELDS_DEFAULT = [
@@ -468,4 +465,18 @@ export const DEFAULT_OWNER_FORM = {
   contact_no: "",
   email: "",
   name: ""
+}
+
+export const ADDITIONAL_ITEMS_DEFAULT = {
+  category: "",
+  type: "",
+  area: "",
+  noFloors: "",
+  material: "",
+  cost: "",
+  affectedArea: "",
+
+  height: "",
+  storey: "",
+  sub_total: ""
 }

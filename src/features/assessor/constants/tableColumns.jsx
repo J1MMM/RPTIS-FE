@@ -251,7 +251,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(value);
+      return isNaN(value) ? "-" : formatPeso(value);
     },
   },
 
@@ -265,7 +265,7 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPercent(value > 1 ? value / 100 : value);
+      return isNaN(value) ? "-" : formatPercent(value / 100);
     },
   },
   {
@@ -278,7 +278,50 @@ export const PROPERTY_ASS_TABLE_COLUMN = [
     disableColumnMenu: true,
     valueFormatter: (params) => {
       const value = Number(params);
-      return isNaN(value) ? "" : formatPeso(roundToNearestTen(value));
+      return isNaN(value) ? "-" : formatPeso(roundToNearestTen(value));
+    },
+  },
+];
+
+export const BLDG_ASSESSMENT_COLUMNS = [
+  {
+    field: "marketValue",
+    headerName: "Market Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPeso(value);
+    },
+  },
+
+  {
+    field: "assessmentLevel",
+    headerName: "Assessment Level",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPercent(value);
+    },
+  },
+  {
+    field: "assessedValue",
+    headerName: "Assessed Value",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => {
+      const value = Number(params);
+      return isNaN(value) ? "-" : formatPeso(roundToNearestTen(value));
     },
   },
 ];
@@ -292,6 +335,8 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: (params) => capitalizeFirstLetter(params)
   },
   {
@@ -302,6 +347,8 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: (params) => capitalizeFirstLetter(params),
   },
   {
@@ -312,6 +359,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
     flex: 1,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
     renderCell: (params) => {
       if (params.row?.name) {
         return params.row.name;
@@ -327,6 +375,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+    headerAlign: "center",
     renderCell: (params) => {
       return `${params.row?.barangay} ${params.row?.city} ${params.row?.province} ${params.row?.regions}`;
     },
@@ -335,10 +384,63 @@ export const OWNER_INFO_TABLE_COLUMN = [
     field: "tin",
     headerName: "TIN",
     flex: 1,
-
+    headerAlign: "center",
     headerClassName: "data-grid-header",
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
+  },
+];
+
+export const ADDITIONAL_ITEMS_TABLE_COLUMN = [
+  {
+    field: "category",
+    headerName: "Types of Items",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => formatCamelCase(params)
+  },
+  {
+    field: "area",
+    headerName: "Area",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => params ? params : "-"
+  },
+  {
+    field: "material",
+    headerName: "Material",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => params ? formatCamelCase(params) : "-"
+  },
+  {
+    field: "cost",
+    headerName: "Cost /m²",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => formatPeso(params)
+  },
+  {
+    field: "sub_total",
+    headerName: "Sub-Total",
+    flex: 1,
+    headerClassName: "data-grid-header",
+    sortable: false,
+    filterable: false,
+    disableColumnMenu: true,
+    valueFormatter: (params) => formatPeso(params)
   },
 ];

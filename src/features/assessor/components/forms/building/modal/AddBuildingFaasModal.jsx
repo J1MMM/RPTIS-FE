@@ -1,26 +1,20 @@
 import { Button, Stack } from "@mui/material";
+import { useFormContext, useWatch } from "react-hook-form";
+import { ArrowLeftRight, Building2, Edit, Printer, Split } from "lucide-react";
+import { SelectField, TextInput } from "@components/ui";
 import ContainerModal from "@components/shared/ContainerModal";
-import SelectField from "@components/ui/SelectField";
 import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
-import PropertyInfoFields from "../../land/fieldsets/PropertyInfoFields";
-import LandBounderiesFields from "../../land/fieldsets/LandBounderiesFields";
-import LandAppraisalFields from "../../land/fieldsets/LandAppraisalFields";
-import LandMarketValueFields from "../../land/fieldsets/LandMarketValueFields";
-import AssessmentFields from "../../land/fieldsets/AssessmentFields";
 import TaxabilityFields from "../../land/fieldsets/TaxabilityFields";
 import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
 import { FIELDS } from "../../../../constants/fieldNames";
-import { ArrowLeftRight, Building, Building2, Edit, Landmark, Printer, Split, SplitSquareHorizontal, } from "lucide-react";
-import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
 import BuildingLocFields from "../fieldsets/BuildingLocFields";
-import BuildingLandRefFields from "../fieldsets/BuildingLandRefFields";
 import BuildingGenDescFields from "../fieldsets/BuildingGenDescFields";
 import StructuralMaterialFields from "../fieldsets/StructuralMaterialFields";
 import PropertyAppraisalFields from "../fieldsets/PropertyAppraisalFields";
 import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
-import BuildingAssessmentFields from "../fieldsets/AssessmentFields";
+import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
 
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl } = useFormContext();
@@ -79,8 +73,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
           />
         </Stack>
         <BuildingLocFields readOnly={readOnly} control={buildingFormControl} />
-        <OwnerInfoFields readOnly={readOnly} />
-        <BuildingLandRefFields readOnly={readOnly} control={buildingFormControl} />
+        <OwnerInfoFields ownerFieldName={"bldg_ownership"} readOnly={readOnly} />
         <BuildingGenDescFields readOnly={readOnly} control={buildingFormControl} />
         <StructuralMaterialFields readOnly={readOnly} control={buildingFormControl} />
         <PropertyAppraisalFields readOnly={readOnly} control={buildingFormControl} />
@@ -88,6 +81,15 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
 
         <BuildingAssessmentFields readOnly={readOnly} />
         <TaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <TextInput
+          multiline
+          shrink={true}
+          rows={3}
+          readOnly={readOnly}
+          control={buildingFormControl}
+          label="Memoranda"
+          name={FIELDS.MEMORANDA}
+        />
         <PreviousRecFields readOnly={readOnly} control={buildingFormControl} />
 
       </ContainerModal >

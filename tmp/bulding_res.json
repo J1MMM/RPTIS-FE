@@ -19,32 +19,28 @@
       "tin": "TIN-1233456"
     }
   ],
+
   "land_reference": {
-    "td": "arp-land",
-    "owner": "sample person",
     "street": "322 Purok 4",
     "brgy": "SAN GREGORIO",
     "city": "San Pablo City",
     "province": "Laguna",
+
+    "td": "arp-land",
+    "area": 2101,
+    "owner": "sample person",
+
     "oct_tct-cloa_no": "OCT-123",
-    "lot_no": "Lot-123",
-    "blk_no": "blk-123",
     "survey_no": "sur-123",
-    "area": 2101
+    "lot_no": "Lot-123",
+    "blk_no": "blk-123"
   },
-  "kindBldg": "",
+
   "structuralType": {
     "category": "marketShoppingCenter",
     "type": "type5A"
   },
-  "bldgPermit": "",
-  "date_issued": "2025-09-08",
-  "cct": "",
-  "cocIssue": "2025-09-08",
-  "dateConstructed": "2025-09-08",
-  "dateOccupied": "2025-09-08",
-  "buildingAge": "new",
-  "noOfStorey": 1,
+
   "floors": [
     {
       "area": 167.25
@@ -70,22 +66,35 @@
     "depreciationCost": "",
     "marketValue": ""
   },
+
   "property_assessment": {
     "actualUse": "commercial",
     "assessmentLevel": "",
     "assessedValue": "",
     "marketValue": ""
   },
+
+  "kindBldg": "",
+  "buildingAge": "new",
+  "noOfStorey": 1,
+  "bldgPermit": "",
+  "date_issued": "2025-09-08",
+  "cct": "",
+  "cocIssue": "2025-09-08",
+  "dateConstructed": "2025-09-08",
+  "dateOccupied": "2025-09-08",
   "taxable": true,
   "effectivityOfAssessment": "2025-09-08",
   "quarter": "",
   "yearAssessment": "2025-09-08",
+
   "appraisers": {},
   "approvedBy": "",
   "dateApproved": "2025-09-08",
   "memoranda": "",
   "dateEncoded": "2025-09-08",
   "encoderName": "",
+
   "previous_records": {
     "pin": "",
     "arp_no": "",

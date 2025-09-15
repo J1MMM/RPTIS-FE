@@ -69,38 +69,28 @@ export const FIELDS = {
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
 
+
+
   //memoranda
   MEMORANDA: "memoranda",
+  // land reference 
+  STREET_REF: "land_reference.street",
+  BRGY_REF: "land_reference.brgy",
+  CITY_REF: "land_reference.city",
+  PROVINCE_REF: "land_reference.province",
 
-  LAND_OWNER_REF: "landOwnerRef",
-  TD_ARP_REF: "tdArpRef",
-  LAND_AREA_REF: "landAreaRef",
-  // general desc 
-  KIND_OF_BUILDING: "kindOfBuilding",
-  BUILDING_AGE: "buildingAge",
-  STRUCTURAL_CLASS: "structuralClass",
-  BUILDING_TYPE: "buidingType",
-  NO_OF_STOREYS: "noOfStories",
-  BLDG_PERMIT: "bldgPermit",
-  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDateIssue",
-  BLDG_PERMIT_DATE_ISSUE: "bldgPermitDate",
-  CCT: "condominiumCertificateOfTitle",
-  CO_COMPLITION: "certificateOfCompletionIssuedOn",
-  CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
-  DATE_CONSTRUCTED: "dateConstructed",
-  DATE_OCCUPIED: "dateOccupied",
+  TD_ARP_REF: "land_reference.arp-land",
+  LAND_AREA_REF: "land_reference.area",
+  LAND_OWNER_REF: "land_reference.owner",
 
-  PIN_NO_PREV: "pinNoPrevRec",
-  ARP_NO_PREV: "arpNoPrevRec",
-  TD_ARP_PREV: "tdArpPrevRec",
-  ASSESSED_VALUE_PREV: "assessedValuePrevRec",
-  OWNER_PREV: "ownerPrevRec",
-  EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
+  OCT_REF: "land_reference.oct_tct-cloa_no",
+  SURVEY_NO_REF: "land_reference.oct_tct-survey_no",
+  LOT_NO_REF: "land_reference.lot_no",
+  BLOCK_NO_REF: "land_reference.blk_no",
 
-  ADDITIONAL_ITEMS: "additional_items",
-  ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
-  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
-  TOTAL_FLOOR_AREA: "total_floor_areas",
+  STRUCTURAL_TYPE: "structuralType.type",
+  STRUCTURAL_CATEGORY: "structuralType.category",
+
   // property_appraisal
   UNIT_CONSTRUCTION_COST: "property_appraisal.ucc",
   UCC_SUB_TOTAL: "property_appraisal.bcst",
@@ -108,5 +98,36 @@ export const FIELDS = {
   DEPRECIATION_RATE: "property_appraisal.depreciationRate",
   DEPRECIATION_YEARS: "property_appraisal.yearsToDepreciate",
   DEPRECIATION_COST: "property_appraisal.depreciationCost",
+  TOTAL_PERCENT_DEPRECIATION: "total_percent_depreciation",
+  ADDITIONAL_ITEMS: "property_appraisal.coai",
   BUILDING_MARKET_VALUE: "marketValue",
+
+  // general desc 
+  KIND_OF_BUILDING: "kindBldg",
+  BUILDING_AGE: "buildingAge",
+  NO_OF_STOREYS: "noOfStorey",
+  BLDG_PERMIT: "bldgPermit",
+  BLDG_PERMIT_DATE_ISSUE: "date_issued",
+  CCT: "cct",
+  CO_COMPLITION: "cocIssue",
+  DATE_OCCUPIED: "dateOccupied",
+  DATE_CONSTRUCTED: "dateConstructed",
+  CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
+
+  // previous record 
+  PIN_NO_PREV: "pinNoPrevRec",
+  ARP_NO_PREV: "arpNoPrevRec",
+  TD_ARP_PREV: "tdArpPrevRec",
+  ASSESSED_VALUE_PREV: "assessedValuePrevRec",
+  OWNER_PREV: "ownerPrevRec",
+  EFFECTIVITY_YEAR_PREV: "effectivityYearPrevRec",
+
+  ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
+  TOTAL_FLOOR_AREA: "total_floor_areas",
+
+  // Property Assesment 
+  BLDG_ASSESSMENT_ACTUAL_USE: "property_assessment.actualUse",
+  BLDG_ASSESSMENT_LEVEL: "property_assessment.assessmentLevel",
+  BLDG_ASSESSED_VALUE: "property_assessment.assessedValue",
+  BLDG_ASSESSED_MARKET_VALUE: "property_assessment.marketValue",
 };

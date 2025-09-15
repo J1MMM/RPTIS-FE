@@ -19,7 +19,6 @@ import { LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
-import seed from '../../../../../junk/land_res.json'
 function PendingFaasPage() {
 
   const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD });

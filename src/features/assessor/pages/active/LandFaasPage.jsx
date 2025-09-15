@@ -14,11 +14,12 @@ import { PlusCircle, ShuffleIcon } from "lucide-react";
 import axios from "../../../../api/axios";
 import { FIELDS } from "../../constants/fieldNames";
 import { v4 } from "uuid";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
 import { LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
+
 import seed from '../../../../../junk/land_res.json'
 import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
 import PrintablesMenu from "../../components/forms/land/modals/printableModal/PrintablesMenu";
@@ -27,7 +28,7 @@ import PrintableTaxdecFormModal from "../../components/forms/land/modals/printab
 
 function LandFaasPage() {
 
-  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD });
+  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const confirm = useConfirm()
@@ -37,7 +38,6 @@ function LandFaasPage() {
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
-  const [disabled, setDisabled] = useState(false);
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
@@ -53,7 +53,6 @@ function LandFaasPage() {
       toast.error("Something went wrong while submitting.", toastConfig);
     } finally {
       setShowConfirmation(false);
-      setDisabled(false); // re-enable after request
     }
   };
   const handleAddBtnClick = () => {

@@ -1,3 +1,5 @@
+const standardHeightOneStorey = 2.4;
+const standardHeightTwoStorey = 2.7;
 
 export const additionalItemsComputations = {
     foundation: ({ type, area, noFloors }) => {
@@ -25,7 +27,8 @@ export const additionalItemsComputations = {
             return 0
         }
     },
-    wallingAndPartitioning: ({ material, affectedArea }) => {
+
+    wallingAndPartitioning: ({ material, cost, affectedArea }) => {
         switch (material) {
             case "marble":
                 return cost * affectedArea;
@@ -35,7 +38,6 @@ export const additionalItemsComputations = {
                 return cost * affectedArea;
             default:
                 return 0
-
         }
     },
     ceiling: ({ material, affectedArea }) => {
@@ -44,13 +46,14 @@ export const additionalItemsComputations = {
                 return 100 * affectedArea;
             case "Luminous":
                 return 120 * affectedArea;
-            case "Ordinary drop Ceiling on R.C. building":
+            case "Narra & other special panels add 140/sq.m.":
                 return 140 * affectedArea;
             default:
                 return 0
 
         }
     },
+
     specialAluminumGlassPanel: ({ material, cost, affectedArea }) => {
         switch (material) {
             case "Ordinary size":
@@ -59,11 +62,12 @@ export const additionalItemsComputations = {
                 return cost * affectedArea;
             default:
                 return 0
-
         }
     },
+
     height: ({ height, structuralType, area, storey }) => {
         let standardHeight;
+
         switch (storey) {
             case "oneStorey":
                 standardHeight = standardHeightOneStorey;
@@ -73,7 +77,6 @@ export const additionalItemsComputations = {
                 break;
             default:
                 return 0
-
         }
 
         let ratePerSqm = structuralType;
@@ -89,6 +92,8 @@ export const additionalItemsComputations = {
         return ratePerSqm * area;
     },
 
-    otherIncrement: ({ structuralType }) => structuralType * 0.75,
+    otherIncrement: ({ structuralType }) => {
+        return structuralType * 0.75
+    },
     //swimmingPools to be decided
 };

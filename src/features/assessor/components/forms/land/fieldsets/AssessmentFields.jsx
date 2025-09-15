@@ -3,8 +3,14 @@ import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { LandPropAssTable } from "../../../tables/land/property-assessment/LandPropAssTable";
 import { sumByField } from "../../../../../../utils/math";
-import useAssessorForm from "../../../../hooks/useFormContext";
 import { useFormContext, useWatch } from "react-hook-form";
+
+const assLevel = {
+  residential: 15,
+  agricultural: 40,
+  commercial: 40,
+  industrial: 40,
+};
 
 function AssessmentFields({ readOnly }) {
   const { control: landFormControl, setValue: setLandFormVal } = useFormContext()
@@ -16,7 +22,7 @@ function AssessmentFields({ readOnly }) {
         ? {
           ...row,
           [FIELDS.LAND_ACTUAL_USE]: actualUseVal,
-          [FIELDS.LAND_ASSESSMENT_LEVEL]: ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0,
+          [FIELDS.LAND_ASSESSMENT_LEVEL]: assLevel[actualUseVal?.toLowerCase()] ?? 0,
           [FIELDS.LAND_ASSESSED_VALUE]: (ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0) * (row[FIELDS.LAND_MARKET_VALUE] ?? 0),
         }
         : row
