@@ -33,6 +33,7 @@ export default function OrdersForm({ row }) {
     total: "",
     total_assessed_value: row?.total_assessed_value,
     quarter: [],
+    quarterPercentage: "",
     current_owner: row?.name,
     payor: "",
     clerk: "",
@@ -53,7 +54,7 @@ export default function OrdersForm({ row }) {
   };
 
   const handleAddOrder = () => {
-    const { basicTax, penalty, discount, total } = computeTotal(
+    const { basicTax, penalty, discount, total,percentage } = computeTotal(
       form.total_assessed_value,
       form.tax_due,
       form.quarter
@@ -66,6 +67,7 @@ export default function OrdersForm({ row }) {
       penalty,
       discount,
       total,
+      quarterPercentage:percentage
     };
 
     setOrders([...orders, newOrder]);
@@ -79,6 +81,7 @@ export default function OrdersForm({ row }) {
       tax_due: "",
       clerk: "",
       quarter: [],
+      quarterPercentage: "",
     });
 
     setOpen(false);
@@ -94,11 +97,16 @@ export default function OrdersForm({ row }) {
     { field: "penalty", headerName: "Penalty", flex: 1 },
     { field: "discount", headerName: "Discount", flex: 1 },
     { field: "total", headerName: "Total", flex: 1 },
+    // {
+    //   field: "quarter",
+    //   headerName: "Quarter",
+    //   flex: 1,
+    //   renderCell: (params) => params.value?.join(", "),
+    // },
     {
-      field: "quarter",
-      headerName: "Quarter",
+      field: "quarterPercentage",
+      headerName: "Quarter %",
       flex: 1,
-      renderCell: (params) => params.value?.join(", "),
     },
     { field: "payor", headerName: "Payor", flex: 1 },
     { field: "clerk", headerName: "Clerk", flex: 1 },
@@ -142,14 +150,26 @@ export default function OrdersForm({ row }) {
             <Stack spacing={2}>
               <StyledFieldset title={"Property Assessment"}>
                 <Stack direction="row" gap={1}>
-                  <TextField sx={{ flex: 1 }} label="ARP No" value={form.tax_dec} />
-                  <TextField sx={{ flex: 1 }} label="Owner" value={form.current_owner} />
+                  <TextField
+                    sx={{ flex: 1 }}
+                    label="ARP No"
+                    value={form.tax_dec}
+                  />
+                  <TextField
+                    sx={{ flex: 1 }}
+                    label="Owner"
+                    value={form.current_owner}
+                  />
                 </Stack>
               </StyledFieldset>
 
               <StyledFieldset title={"Tax Year"}>
                 <Stack direction="row" gap={1}>
-                  <TextField sx={{ flex: 1 }} label="Tax Year" value={form.tax_year} />
+                  <TextField
+                    sx={{ flex: 1 }}
+                    label="Tax Year"
+                    value={form.tax_year}
+                  />
                   <TextField
                     sx={{ flex: 1 }}
                     label="Tax Due"
@@ -161,7 +181,6 @@ export default function OrdersForm({ row }) {
 
               <StyledFieldset title={"Quarter"}>
                 <FormControl fullWidth>
-                  
                   <Select
                     labelId="quarter-label"
                     multiple
