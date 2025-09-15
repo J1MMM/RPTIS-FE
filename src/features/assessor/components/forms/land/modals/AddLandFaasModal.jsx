@@ -16,7 +16,7 @@ import { logger } from "../../../../../../utils/logger";
 import { useEffect } from "react";
 import PreviousRecFields from "../fieldsets/PreviousRecFields";
 
-export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
+export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: landFormControl } = useFormContext();
   const readOnly = formMode == "view"
   logger("data", useWatch({ control: landFormControl }))
@@ -46,7 +46,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
                 Cancel
               </Button>
               <Stack direction={"row"} alignItems={"center"} gap={1}>
-                <Button startIcon={<Printer size={18} />} size="small" variant="outlined" disabled={disabled}>
+                <Button startIcon={<Printer size={18} />} onClick={handleForm} size="small" variant="outlined" disabled={disabled}>
                   Forms
                 </Button>
                 <Button startIcon={<Split size={18} />} size="small" variant="outlined" disabled={disabled}>
