@@ -1,50 +1,39 @@
 import { Box, Button, Stack } from '@mui/material'
 import React, { useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { columns } from '../constants/rptar';
-import AddComputationModal from '../components/forms/land/modals/addComputationModal';
+import { columns, tax_dec_columns } from '../constants/rptar';
+import { rows, tax_dec_rows } from '../constants/sample';
 function LandTaxPage() {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-    const handleSave = () => {
-        // TODO: Save logic here (API call, state update, etc.)
-        console.log("Saved computation!");
-        handleClose();
-    };
+  const handleSave = () => {
+    // TODO: Save logic here (API call, state update, etc.)
+    console.log("Saved computation!");
+    handleClose();
+  };
 
 
 
-    return (
-        <Box
-            // border={"1px solid violet"}
-            boxSizing={"border-box"}
-            display={"flex"}
-            flexDirection={"column"}
-            height={"calc(100vh - 160px)"}
+  return (
+    <Box
+      // border={"1px solid violet"}
+      boxSizing={"border-box"}
+      display={"flex"}
+      flexDirection={"column"}
+      height={"calc(100vh - 160px)"}
 
-        >
-             <Stack display={'flex'} justifyContent={'start'} padding={1}>
-        <Button
-          onClick={handleOpen}
-          sx={{ width: '15%', backgroundColor: '#287f71', color: "white", padding: 1 }}
-        >
-          Add Computation
-        </Button>
+    >
+      <Stack display={'flex'} justifyContent={'start'} padding={1}>
       </Stack>
 
-      <DataGrid textAlign={"center"} columns={columns} />
+      <DataGrid textAlign={"center"} columns={tax_dec_columns} rows={tax_dec_rows} />
 
-      {/* Reusable Modal Component */}
-      <AddComputationModal 
-        open={open} 
-        handleClose={handleClose} 
-        handleSave={handleSave} 
-      />
-        </Box>
-    )
+      
+    </Box>
+  )
 }
 
 export default LandTaxPage

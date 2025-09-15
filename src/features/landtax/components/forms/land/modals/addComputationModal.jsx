@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ContainerModal from '../../../../../../components/shared/ContainerModal';
 import StyledFieldset from '../../../../../../components/ui/StyledFieldset';
 import OrdersForm from '../../rptar/ComputationModal';
-function AddComputationModal({ open, handleClose, handleSave }) {
+function AddComputationModal({ open, handleClose, handleSave,row }) {
   const [quarters, setQuarters] = useState([]);
   const quarterOptions = ["first", "second", "third", "fourth"];
 
@@ -29,7 +29,7 @@ function AddComputationModal({ open, handleClose, handleSave }) {
       onClose={handleClose}
       onSubmit={onSubmit}
     >
-      <OrdersForm></OrdersForm>
+      <OrdersForm row={row}></OrdersForm>
     </ContainerModal>
   );
 }
