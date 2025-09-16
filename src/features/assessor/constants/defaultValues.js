@@ -73,7 +73,7 @@ export const BUILDING_DEFAULT = {
   [FIELDS.PIN]: "",
   bldg_ownership: [],
   land_reference: {
-    area: "",
+    area: 0,
     city: "San Pablo",
     province: "Laguna",
     street: "",
@@ -91,15 +91,15 @@ export const BUILDING_DEFAULT = {
   floors: [],
   roofMaterials: [],
   property_appraisal: {
-    ucc: "",
-    bcst: "",
+    ucc: 0,
+    bcst: 0,
     coai: [],
     totalConstructionCost: "",
-    depreciationRate: "",
-    yearsToDepreciate: "",
-    total_percent_depreciation: "",
-    depreciationCost: "",
-    marketValue: "",
+    depreciationRate: 0,
+    yearsToDepreciate: 0,
+    total_percent_depreciation: 0,
+    depreciationCost: 0,
+    marketValue: 0,
   },
   property_assessment: {
     "actualUse": "",
@@ -488,13 +488,12 @@ export const DEFAULT_OWNER_FORM = {
 export const ADDITIONAL_ITEMS_DEFAULT = {
   category: "",
   type: "",
-  area: "",
-  noFloors: "",
+  area: 0,
+  noFloors: 0,
   material: "",
-  cost: "",
-  affectedArea: "",
-
-  height: "",
-  storey: "",
-  sub_total: ""
+  cost: 0,
+  affectedArea: 0,
+  height: 0,
+  storey: 0,
+  sub_total: 0
 }

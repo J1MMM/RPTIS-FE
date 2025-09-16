@@ -1,0 +1,142 @@
+/**
+ * Format data from seedBldgReq.json structure to building_req.json structure
+ * @param {Object} data - Source data in seedBldgReq.json format
+ * @returns {Object} Formatted data matching building_req.json structure
+ */
+export const bldgReqFormatter = (data) => {
+    // Format building ownership - combine firstname, middlename, lastname into name
+    const formatOwnership = (ownership) => {
+        return ownership.map(owner => ({
+            regions: owner.regions || "",
+            province: owner.province || "",
+            city: owner.city || "",
+            barangay: owner.barangay || "",
+            street: owner.street || "",
+            postal: owner.postal || "",
+            type: owner.type || "",
+            role: owner.role || "",
+            contact_no: owner.contact_no || "",
+            email: owner.email || "",
+            firstname: owner.firstname || "",
+            lastname: owner.lastname || "",
+            middlename: owner.middlename || "",
+            name: owner.name || "",
+            remarks: owner.remarks || "",
+            tin: owner.tin || ""
+        }));
+    };
+
+    // Format land reference - handle field name differences
+    const formatLandReference = (landRef) => {
+        return {
+            td: landRef.td || landRef["arp-land"] || "",
+            owner: landRef.owner || "",
+            street: landRef.street || "",
+            brgy: landRef.brgy || "",
+            city: landRef.city || "",
+            province: landRef.province || "",
+            oct_tct_cloa_no: landRef["oct_tct-cloa_no"] || "",
+            lot_no: landRef.lot_no || "",
+            blk_no: landRef.blk_no || "",
+            survey_no: landRef.survey_no || landRef["oct_tct-survey_no"] || "",
+            area: parseFloat(landRef.area) || 0
+        };
+    };
+
+    // Format floors data
+    const formatFloors = (floors) => {
+        return Array.isArray(floors) ? floors.map(floor => ({
+            id: floor.id || "",
+            label: floor.label || "",
+            area: parseFloat(floor.area) || 0,
+            flooring: Array.isArray(floor.flooring) ? floor.flooring : [],
+            walls: Array.isArray(floor.walls) ? floor.walls : []
+        })) : [];
+    };
+
+    // Format property appraisal coai array
+    const formatCoai = (coai) => {
+        return Array.isArray(coai) ? coai.map(item => ({
+            category: item.category || "",
+            type: item.type || "",
+            area: parseFloat(item.area) || 0,
+            noFloors: parseInt(item.noFloors) || 0,
+            material: item.material || "",
+            cost: parseFloat(item.cost) || 0,
+            affectedArea: parseFloat(item.affectedArea) || 0,
+            height: item.height || "",
+            storey: item.storey || "",
+            sub_total: parseFloat(item.sub_total) || 0,
+            id: item.id || ""
+        })) : [];
+    };
+
+    // Main transformation
+    const formattedData = {
+        // Basic fields
+        transaction_code: data.transaction_code || "",
+        arp_no: data.arp_no || "",
+        pin_no: data.pin_no || "",
+
+        // Building ownership
+        bldg_ownership: formatOwnership(data.bldg_ownership || []),
+
+        // Land reference
+        land_reference: formatLandReference(data.land_reference || {}),
+
+        // Building details
+        kindBldg: data.kindBldg || "",
+        structural_type: {
+            category: data.structuralType?.category || "",
+            type: data.structuralType?.type || ""
+        },
+        bldgPermit: data.bldgPermit || "",
+        date_issued: data.date_issued || "",
+        cct: data.cct || "",
+        coc_issued_on: data.coc_issued_on || "",
+        dateConstructed: data.dateConstructed || "",
+        dateOccupied: data.dateOccupied || "",
+        buildingAge: data.buildingAge || "",
+        noOfStorey: parseInt(data.noOfStorey) || 1,
+        floors: formatFloors(data.floors || []),
+
+        // Property appraisal
+        property_appraisal: {
+            ucc: data.property_appraisal?.ucc || "",
+            bcst: data.property_appraisal?.bcst || "",
+            coai: formatCoai(data.property_appraisal?.coai || []),
+            totalConstructionCost: data.property_appraisal?.totalConstructionCost || "",
+            depreciationRate: data.property_appraisal?.depreciationRate || "",
+            yearsToDepreciate: data.property_appraisal?.yearsToDepreciate || "",
+            depreciationCost: data.property_appraisal?.depreciationCost || "",
+            marketValue: data.property_appraisal?.marketValue || ""
+        },
+
+        // Property assessment
+        property_assessment: {
+            actualUse: data.property_assessment?.actualUse || "",
+            assessmentLevel: data.property_assessment?.assessmentLevel || "",
+            assessedValue: data.property_assessment?.assessedValue || "",
+            marketValue: data.property_assessment?.marketValue || ""
+        },
+
+        // Tax and assessment info
+        taxable: data.taxable || "",
+        effectivityOfAssessment: data.effectivity_year || data.effectivityOfAssessment || "",
+        quarter: data.effectivity_quarter || data.quarter || "",
+        yearAssessment: data.yearAssessment || "",
+
+        // Approval and encoding
+        appraisers: data.appraisers || {},
+        approvedBy: data.approvedBy || "",
+        dateApproved: data.dateApproved || "",
+        memoranda: data.memoranda || "",
+        dateEncoded: data.dateEncoded || "",
+        encoderName: data.encoderName || "",
+
+        // Previous records
+        previous_records: data.previous_records || {}
+    };
+
+    return formattedData;
+};

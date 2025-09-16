@@ -14,6 +14,8 @@ export const AssessorProvider = ({ children }) => {
       try {
         // const data = await getLandFaasRecords();
         const res = await axios('/faasLandFetch')
+        console.log("res.data.data");
+        console.log(res);
 
         setLandFaasRecords(res.data.data);
 

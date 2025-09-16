@@ -12,6 +12,7 @@ import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
 import axios from "../../../../api/axios";
+import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
 
 function BuildingFaasPage() {
 
@@ -28,8 +29,12 @@ function BuildingFaasPage() {
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
+
     try {
-      const response = await axios.post('/faasBldg', data)
+      // const formattedData = bldgReqFormatter(data)
+
+
+      // const response = await axios.post('/faasBldg', data)
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);

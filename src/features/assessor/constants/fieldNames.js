@@ -88,8 +88,8 @@ export const FIELDS = {
   LOT_NO_REF: "land_reference.lot_no",
   BLOCK_NO_REF: "land_reference.blk_no",
 
-  STRUCTURAL_TYPE: "structuralType.type",
-  STRUCTURAL_CATEGORY: "structuralType.category",
+  STRUCTURAL_TYPE: "structural_type.type",
+  STRUCTURAL_CATEGORY: "structural_type.category",
 
   // property_appraisal
   UNIT_CONSTRUCTION_COST: "property_appraisal.ucc",
@@ -109,7 +109,7 @@ export const FIELDS = {
   BLDG_PERMIT: "bldgPermit",
   BLDG_PERMIT_DATE_ISSUE: "date_issued",
   CCT: "cct",
-  CO_COMPLITION: "cocIssue",
+  CO_COMPLITION: "coc_issued_on",
   DATE_OCCUPIED: "dateOccupied",
   DATE_CONSTRUCTED: "dateConstructed",
   CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",

@@ -1,109 +1,156 @@
 {
+  "id": 6,
   "transaction_code": "DC",
-  "arp_no": "123",
-  "pin_no": "123",
-  "bldg_ownership": [
-    {
-      "regions": "Region IV-A (CALABARZON)",
-      "province": "Laguna",
-      "city": "San Pablo City",
-      "barangay": "Santiago I",
-      "street": "322 Purok 4",
-      "postal": "4001",
-      "type": "company",
-      "role": "owner",
-      "contact_no": "8700",
-      "email": "email@example.com",
-      "name": "Jollibee",
-      "remarks": "Tapat ng MCDO",
-      "tin": "TIN-1233456"
-    }
-  ],
-
-  "land_reference": {
-    "street": "322 Purok 4",
-    "brgy": "SAN GREGORIO",
-    "city": "San Pablo City",
-    "province": "Laguna",
-
-    "td": "arp-land",
-    "area": 2101,
-    "owner": "sample person",
-
-    "oct_tct-cloa_no": "OCT-123",
-    "survey_no": "sur-123",
-    "lot_no": "Lot-123",
-    "blk_no": "blk-123"
+  "arp_no": "06-077-123",
+  "kindBldg": "commercial",
+  "kindBldg_remarks": null,
+  "structural_type": {
+    "type": "type5A",
+    "category": "marketShoppingCenter"
   },
-
-  "structuralType": {
-    "category": "marketShoppingCenter",
-    "type": "type5A"
-  },
-
+  "bldg_permit": null,
+  "bldg_permit_date_issued": null,
+  "cct": "cct",
+  "coc_issued_on": "2025-09-14T16:00:00.000Z",
+  "dateConstructed": "2025-09-14T16:00:00.000Z",
+  "dateOccupied": "2025-09-14T16:00:00.000Z",
+  "buildingAge": "NEW",
+  "noOfStorey": 1,
   "floors": [
     {
-      "area": 167.25
+      "id": "58e85682-dfd7-4612-b90d-bd8352728ec0",
+      "label": "1st floor",
+      "area": "",
+      "flooring": [],
+      "walls": []
     }
   ],
-  "property_appraisal": {
-    "ucc": "",
-    "bcst": "",
-    "coai": [
+  "taxable": true,
+  "effectivity_assessment": null,
+  "quarter": null,
+  "yearAssessment": null,
+  "approvedBy": "",
+  "dateApproved": "2025-09-14T16:00:00.000Z",
+  "memoranda": "memoranda",
+  "dateEncoded": "2025-09-14T16:00:00.000Z",
+  "encoderName": "",
+  "faasBldgChain_id": null,
+  "createdAt": "2025-09-16T05:37:28.824Z",
+  "updatedAt": "2025-09-16T05:37:28.856Z",
+  "bldgowners": [
+    {
+      "regions": null,
+      "province": null,
+      "city": null,
+      "barangay": null,
+      "street": null,
+      "postal": "4001",
+      "type": null,
+      "role": "owner",
+      "contact_no": null,
+      "email": null,
+      "name": "",
+      "lastname": null,
+      "firstname": null,
+      "middlename": null,
+      "suffix": null,
+      "remarks": null,
+      "tin": null,
+      "id": 7
+    },
+    {
+      "regions": null,
+      "province": null,
+      "city": null,
+      "barangay": null,
+      "street": null,
+      "postal": "4001",
+      "type": null,
+      "role": "administrator",
+      "contact_no": null,
+      "email": null,
+      "name": "",
+      "lastname": null,
+      "firstname": null,
+      "middlename": null,
+      "suffix": null,
+      "remarks": null,
+      "tin": null,
+      "id": 8
+    }
+  ],
+  "propertyAppraisals": {
+    "id": 4,
+    "ucc": "10000.00",
+    "bcst": "1672500.00",
+    "totalConstructionCost": "1746090.00",
+    "depreciationRate": "0.00",
+    "yearsToDepreciate": 0,
+    "depreciationCost": "0.00",
+    "marketValue": "1746090.00",
+    "createdAt": "2025-09-16T05:37:28.847Z",
+    "updatedAt": "2025-09-16T05:37:28.847Z",
+    "bldgFaas_id": 6,
+    "additionalItems": [
       {
+        "id": 4,
         "category": "foundation",
         "type": "type5",
-        "area": 167.25,
+        "area": "167.25",
         "noFloors": 1,
-        "material": "vinyl",
-        "cost": 300,
-        "affectedArea": 80
+        "material": "",
+        "cost": "0.00",
+        "affectedArea": "0.00",
+        "createdAt": "2025-09-16T05:37:28.850Z",
+        "updatedAt": "2025-09-16T05:37:28.850Z",
+        "property_appraisal_id": 4
       }
-    ],
-    "totalConstructionCost": "",
-    "depreciationRate": 0,
-    "yearsToDepreciate": 0,
-    "depreciationCost": "",
-    "marketValue": ""
+    ]
   },
-
-  "property_assessment": {
-    "actualUse": "commercial",
-    "assessmentLevel": "",
-    "assessedValue": "",
-    "marketValue": ""
-  },
-
-  "kindBldg": "",
-  "buildingAge": "new",
-  "noOfStorey": 1,
-  "bldgPermit": "",
-  "date_issued": "2025-09-08",
-  "cct": "",
-  "cocIssue": "2025-09-08",
-  "dateConstructed": "2025-09-08",
-  "dateOccupied": "2025-09-08",
-  "taxable": true,
-  "effectivityOfAssessment": "2025-09-08",
-  "quarter": "",
-  "yearAssessment": "2025-09-08",
-
-  "appraisers": {},
-  "approvedBy": "",
-  "dateApproved": "2025-09-08",
-  "memoranda": "",
-  "dateEncoded": "2025-09-08",
-  "encoderName": "",
-
-  "previous_records": {
-    "pin": "",
-    "arp_no": "",
-    "td": "",
-    "ownerName": "",
-    "effectivity_assessment": "2024",
-    "ar_page_no": "",
-    "recording_person": "",
+  "previousRecords": {
+    "id": 4,
+    "pin_no": null,
+    "arp_no": null,
+    "total_assessed_value": null,
+    "owner_name": null,
+    "effectivity_assessment": null,
+    "ar_page_no": null,
+    "date": null,
     "from_faas_id": null,
-    "to_faas_id": null
+    "to_faas_id": null,
+    "createdAt": "2025-09-16T05:37:28.861Z",
+    "updatedAt": "2025-09-16T05:37:28.861Z",
+    "bldgFaas_id": 6
+  },
+  "propertyAssessments": {
+    "id": 4,
+    "actualUse": "commercial",
+    "assessmentLevel": "0.60",
+    "assessedValue": "1047654.00",
+    "marketValue": "1746090.00",
+    "createdAt": "2025-09-16T05:37:28.852Z",
+    "updatedAt": "2025-09-16T05:37:28.852Z",
+    "bldgFaas_id": 6
+  },
+  "appraisers": [],
+  "land_reference": {
+    "brgy": ""
+  },
+  "roofMaterials": [],
+  "total_floor_areas": "",
+  "property_appraisal": {
+    "ucc": 10000,
+    "bcst": 0,
+    "total_percent_depreciation": null,
+    "depreciationCost": 0,
+    "marketValue": 0,
+    "coai": []
+  },
+  "effectivity_quarter": "",
+  "previous_records": {},
+  "bldg_ownership": [],
+  "totalFloorArea": "",
+  "property_assessment": {
+    "marketValue": 0
   }
 }

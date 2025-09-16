@@ -98,7 +98,7 @@ function BuildingGenDescFields({ control, readOnly }) {
       </Stack>
 
       <Stack direction="row" gap={1}>
-        <TextInput
+        <DateInput
           readOnly={readOnly}
           control={control}
           label="Certificate of Completion Issue On"

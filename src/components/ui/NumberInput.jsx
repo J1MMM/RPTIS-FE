@@ -62,8 +62,7 @@ function NumberInput({
             }
 
             // Convert to number unless empty string
-            // const numValue = val === "" ? "" : Number(val);
-            const numValue = val === "" ? "" : val;
+            const numValue = val === "" ? "" : Number(val);
 
             field.onChange(numValue); // ✅ ensure RHF stores number
             if (onChange) onChange(numValue);

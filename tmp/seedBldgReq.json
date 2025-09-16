@@ -54,7 +54,7 @@
     "lot_no": "27234-G",
     "blk_no": "PSD-04-2345"
   },
-  "structuralType": {
+  "structural_type": {
     "type": "type5A",
     "category": "marketShoppingCenter"
   },
@@ -103,7 +103,7 @@
   "bldgPermit": "Permit No.",
   "date_issued": "2025-09-14T16:00:00.000Z",
   "cct": "cct",
-  "cocIssue": "coc issue on",
+  "coc_issued_on": "2025-09-14T16:00:00.000Z",
   "dateConstructed": "2025-09-14T16:00:00.000Z",
   "dateOccupied": "2025-09-14T16:00:00.000Z",
   "marketValue": 1746090,
@@ -113,9 +113,9 @@
   "effectivity_quarter": "4th Quarter",
   "appraisers": {},
   "approvedBy": "",
-  "dateApproved": "2025-09-08",
+  "dateApproved": "2025-09-14T16:00:00.000Z",
   "encoderName": "",
-  "dateEncoded": "2025-09-08",
+  "dateEncoded": "2025-09-14T16:00:00.000Z",
   "memoranda": "memoranda",
   "arpInput": "123",
   "pinInput": "123",

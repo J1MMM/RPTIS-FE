@@ -1,5 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { Divider, IconButton, Paper, Stack, Typography } from "@mui/material";
+import {
+  Divider,
+  IconButton,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  Drawer,
+  Box
+} from "@mui/material";
 import {
   HEADER_HEIGHT,
   PANEL_WIDTH_CLSOE,
@@ -14,12 +24,24 @@ import {
 } from "../../features/assessor/constants/routes";
 
 export default function NavSidePanel({ open, setOpen }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
+
   const toggleSideBar = () => setOpen((v) => !v);
 
-  return (
+  // Responsive width calculations
+  const getSidebarWidth = () => {
+    if (isMobile) return PANEL_WIDTH_OPEN; // Full width on mobile
+    if (isTablet) return open ? PANEL_WIDTH_OPEN : PANEL_WIDTH_CLSOE;
+    return open ? PANEL_WIDTH_OPEN : PANEL_WIDTH_CLSOE;
+  };
+
+  // Sidebar content component
+  const SidebarContent = () => (
     <Paper
       sx={{
-        width: open ? PANEL_WIDTH_OPEN : PANEL_WIDTH_CLSOE,
+        width: getSidebarWidth(),
         height: "100%",
         boxSizing: "border-box",
         userSelect: "none",
@@ -27,6 +49,8 @@ export default function NavSidePanel({ open, setOpen }) {
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
         position: "relative",
+        // display: "flex",
+        flexDirection: "column",
       }}
     >
       {/* Header with logo + toggle */}
@@ -42,7 +66,7 @@ export default function NavSidePanel({ open, setOpen }) {
           direction="row"
           alignItems="center"
           gap={1}
-          display={open ? "" : "none"}
+          display={open || isMobile ? "" : "none"}
         >
           <img src={logoImg} width={48} alt="logo" />
           <Stack>
@@ -79,16 +103,16 @@ export default function NavSidePanel({ open, setOpen }) {
       </Stack>
 
       {/* Main menu */}
-      <Stack p={2} gap={1}>
+      <Stack p={2} gap={1} sx={{ flex: 1 }}>
         <Typography variant="button" color="textDisabled" marginLeft={1}>
-          {open ? "MAIN" : ""} MENU
+          {open || isMobile ? "MAIN" : ""} MENU
         </Typography>
 
         {MAIN_LINKS.map(({ to, icon, label }) => (
           <CustomNavLink key={to} to={to} className="nav-link">
             <Stack direction="row" alignItems="center" gap={1}>
               {icon}
-              <Typography display={open ? "" : "none"}>{label}</Typography>
+              <Typography display={open || isMobile ? "" : "none"} noWrap>{label}</Typography>
             </Stack>
           </CustomNavLink>
         ))}
@@ -107,7 +131,7 @@ export default function NavSidePanel({ open, setOpen }) {
           >
             <Stack direction="row" alignItems="center" gap={1}>
               {icon}
-              <Typography display={open ? "" : "none"}>{label}</Typography>
+              <Typography display={open || isMobile ? "" : "none"} noWrap>{label}</Typography>
             </Stack>
           </NavLink>
         ))}
@@ -116,7 +140,7 @@ export default function NavSidePanel({ open, setOpen }) {
       {/* Footer note */}
       <Typography
         fontSize={10}
-        display={open ? "" : "none"}
+        display={open || isMobile ? "" : "none"}
         position="absolute"
         bottom={8}
         width="100%"
@@ -128,4 +152,32 @@ export default function NavSidePanel({ open, setOpen }) {
       </Typography>
     </Paper>
   );
+
+  // Mobile drawer behavior
+  if (isMobile) {
+    return (
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: PANEL_WIDTH_OPEN,
+            boxSizing: 'border-box',
+            border: 'none',
+            boxShadow: '2px 0 8px rgba(0,0,0,0.15)',
+          },
+        }}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile
+        }}
+      >
+        <SidebarContent />
+      </Drawer>
+    );
+  }
+
+  // Desktop/tablet behavior
+  return <SidebarContent />;
 }
