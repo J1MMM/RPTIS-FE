@@ -25,7 +25,7 @@ export default function OrdersForm({ row }) {
 
   const [form, setForm] = useState({
     tax_dec: row?.tax_dec,
-    tax_year: currentTaxYear,
+    tax_year: "2024",
     tax_due: "",
     basic_tax: "",
     discount: "",
@@ -54,7 +54,7 @@ export default function OrdersForm({ row }) {
   };
 
   const handleAddOrder = () => {
-    const { basicTax, penalty, discount, total,percentage } = computeTotal(
+    const { basicTax, penalty, discount, total, percentage } = computeTotal(
       form.total_assessed_value,
       form.tax_due,
       form.quarter
@@ -67,7 +67,7 @@ export default function OrdersForm({ row }) {
       penalty,
       discount,
       total,
-      quarterPercentage:percentage
+      quarterPercentage: percentage
     };
 
     setOrders([...orders, newOrder]);
@@ -119,8 +119,32 @@ export default function OrdersForm({ row }) {
       </Button>
 
       <Box mt={2} style={{ height: 300, width: "100%" }}>
-        <DataGrid rows={orders} columns={columns} />
+        <DataGrid
+          rows={orders}
+          columns={columns}
+          slots={{
+            footer: () => (
+              <Box
+                sx={{
+                  p: 2,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  borderTop: "1px solid #e0e0e0",
+                  bgcolor: "#fafafa",
+                }}
+              >
+                <Typography variant="h6">
+                  Total:{" "}
+                  {orders
+                    .reduce((sum, order) => sum + Number(order.total || 0), 0)
+                    .toFixed(2)}
+                </Typography>
+              </Box>
+            ),
+          }}
+        />
       </Box>
+
 
       <Box mt={2}>
         <Button
