@@ -9,7 +9,7 @@ import { getBldgAssLvl } from "../../../../utils/getBldgAssLvl";
 
 function BuildingAssessmentFields({ readOnly }) {
   const { control, setValue } = useFormContext()
-  const propertyAssessment = useWatch({ control, name: "property_assessment" }) || {};
+  const propertyAssessment = useWatch({ control, name: FIELDS.BLDG_ASSESSMENT_FIELDS }) || {};
   const { actualUse, marketValue, assessmentLevel, assessedValue } = propertyAssessment
   // set assessLevel and actualUse
   const handleChange = (newActualUse) => {

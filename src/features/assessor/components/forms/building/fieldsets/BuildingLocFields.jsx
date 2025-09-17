@@ -93,7 +93,7 @@ function BuildingLocFields({ control, readOnly }) {
           onChange={(e) => {
             const { value } = e.target;
             const arp = `${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`;
-            const pin = `130-${BRGY_DISTRICTS[value]}-`;
+            const pin = `130-${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`;
             setValue("arpAdornment", arp);
             setValue("pinAdornment", pin);
           }}

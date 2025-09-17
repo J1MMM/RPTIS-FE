@@ -71,7 +71,7 @@ export const BUILDING_DEFAULT = {
   [FIELDS.TRANSACTION_CODE]: "",
   [FIELDS.ARP_NO]: "",
   [FIELDS.PIN]: "",
-  bldg_ownership: [],
+  bldgowners: [],
   land_reference: {
     area: 0,
     city: "San Pablo",
@@ -87,10 +87,9 @@ export const BUILDING_DEFAULT = {
     blk_no: ""
 
   },
-  structuralType: {},
+  structural_type: {},
   floors: [],
-  roofMaterials: [],
-  property_appraisal: {
+  propertyAppraisals: {
     ucc: 0,
     bcst: 0,
     coai: [],
@@ -101,7 +100,7 @@ export const BUILDING_DEFAULT = {
     depreciationCost: 0,
     marketValue: 0,
   },
-  property_assessment: {
+  propertyAssessments: {
     "actualUse": "",
     "assessmentLevel": "",
     "assessedValue": "",

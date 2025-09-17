@@ -31,8 +31,9 @@ function BuildingFaasPage() {
     if (isSubmitting) return;
 
     try {
-      // const formattedData = bldgReqFormatter(data)
+      const formattedData = bldgReqFormatter(data)
 
+      console.log(formattedData);
 
       // const response = await axios.post('/faasBldg', data)
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])

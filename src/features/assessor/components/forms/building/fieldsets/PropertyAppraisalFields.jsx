@@ -78,6 +78,7 @@ function PropertyAppraisalFields({ control, readOnly }) {
     setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
   }, [uccSubTotal, depreciationCost, additionalItems]);
 
+
   return (
     <StyledFieldset title="Property Appraisals">
       <Row>

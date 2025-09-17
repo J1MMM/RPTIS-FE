@@ -1,10 +1,10 @@
 /**
  * Format data from seedBldgReq.json structure to building_req.json structure
- * @param {Object} data - Source data in seedBldgReq.json format
- * @returns {Object} Formatted data matching building_req.json structure
+ * @param {Object} data  
+ * @returns {Object} 
  */
+
 export const bldgReqFormatter = (data) => {
-    // Format building ownership - combine firstname, middlename, lastname into name
     const formatOwnership = (ownership) => {
         return ownership.map(owner => ({
             regions: owner.regions || "",
@@ -26,10 +26,9 @@ export const bldgReqFormatter = (data) => {
         }));
     };
 
-    // Format land reference - handle field name differences
     const formatLandReference = (landRef) => {
         return {
-            td: landRef.td || landRef["arp-land"] || "",
+            td: landRef.td || "",
             owner: landRef.owner || "",
             street: landRef.street || "",
             brgy: landRef.brgy || "",

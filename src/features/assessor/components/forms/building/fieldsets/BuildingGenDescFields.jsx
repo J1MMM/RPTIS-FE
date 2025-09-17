@@ -37,7 +37,12 @@ function BuildingGenDescFields({ control, readOnly }) {
       }, 0)
       : 0;
 
-    setValue("totalFloorArea", totalArea || "")
+    console.log("totalArea");
+    console.log(floors);
+    console.log(totalArea);
+
+
+    setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
   }, [floors])
 
   return (

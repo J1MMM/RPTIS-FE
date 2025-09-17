@@ -94,7 +94,7 @@ function StructuralMaterialFields({ control, readOnly }) {
         <SelectFieldMulti
           control={control}
           label="Roof"
-          name={`roofMaterials`}
+          name={`floors.0.roofMaterials`}
           options={ROOF_MATERIALS}
         />
 
