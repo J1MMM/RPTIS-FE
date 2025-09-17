@@ -1,49 +1,9 @@
-import { v4 } from "uuid";
-import { useEffect } from "react";
 import { Stack } from "@mui/material";
-import { useFormContext, useWatch } from "react-hook-form";
-import { toOrdinal } from "@utils/formatters";
 import { FIELDS } from "../../../../constants/fieldNames";
 import { TextInput, Row, DateInput, SelectField, StyledFieldset } from "@components/ui/";
 import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
 
 function BuildingGenDescFields({ control, readOnly }) {
-  const { setValue, getValues } = useFormContext()
-  const numberOfStoreys = useWatch({ control, name: FIELDS.NO_OF_STOREYS })
-  const floors = useWatch({ control, name: "floors" })
-
-
-  useEffect(() => {
-    let numStoreys = parseInt(numberOfStoreys, 10);
-    if (isNaN(numStoreys) || numStoreys < 1) numStoreys = 0;
-    if (numStoreys > 20) numStoreys = 20;
-
-    const floorAreasArr = [...Array(numStoreys)].map((_, index) => ({
-      id: v4(),
-      label: `${toOrdinal(index + 1)} floor`,
-      area: "",
-      flooring: [],
-      walls: []
-    }));
-
-    setValue("floors", floorAreasArr);
-  }, [numberOfStoreys]);
-
-  useEffect(() => {
-    const totalArea = Array.isArray(floors)
-      ? floors.reduce((acc, curr) => {
-        const area = parseFloat(curr.area);
-        return acc + (isNaN(area) ? 0 : area);
-      }, 0)
-      : 0;
-
-    console.log("totalArea");
-    console.log(floors);
-    console.log(totalArea);
-
-
-    setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
-  }, [floors])
 
   return (
     <StyledFieldset title="General Description">

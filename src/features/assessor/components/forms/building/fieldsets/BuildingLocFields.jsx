@@ -12,67 +12,88 @@ function BuildingLocFields({ control, readOnly }) {
   const { setValue } = useFormContext();
 
   // Watch needed fields
+  const arp = useWatch({ control, name: FIELDS.ARP_NO });
+  const pin = useWatch({ control, name: FIELDS.PIN });
+
   const barangay = useWatch({ control, name: FIELDS.BRGY_REF });
   const arpInput = useWatch({ control, name: "arpInput" });
   const pinInput = useWatch({ control, name: "pinInput" });
   const arpAdornment = useWatch({ control, name: "arpAdornment" });
   const pinAdornment = useWatch({ control, name: "pinAdornment" });
 
-  //  Auto-update derived values
-  useEffect(() => {
-    if (arpAdornment !== undefined && arpInput !== undefined) {
-      setValue(FIELDS.ARP_NO, `${arpAdornment}${arpInput}`);
-    }
-  }, [arpAdornment, arpInput, setValue]);
 
-  useEffect(() => {
-    if (pinAdornment !== undefined && pinInput !== undefined) {
-      setValue(FIELDS.PIN, `${pinAdornment}${pinInput}`);
-    }
-  }, [pinAdornment, pinInput, setValue]);
+  // useEffect(() => {
+  //   if (!barangay) return
+  //   const arp = `${BRGY_DISTRICTS[barangay]}-${BRGY_CODE[barangay]}-`;
+  //   const pin = `130-${BRGY_DISTRICTS[barangay]}-${BRGY_CODE[barangay]}-`;
+
+  //   if (arp) {
+  //     setValue("arpInput", arp)
+  //   }
+
+  //   setValue("arpAdornment", arp);
+  //   setValue("pinAdornment", pin);
+
+  // }, [barangay]);
+
+  // //  Auto-update derived values
+  // useEffect(() => {
+  //   if (arpAdornment !== undefined && arpInput !== undefined) {
+  //     setValue(FIELDS.ARP_NO, `${arpAdornment}${arpInput}`);
+  //   }
+  // }, [arpAdornment, arpInput, setValue]);
+
+  // useEffect(() => {
+  //   if (pinAdornment !== undefined && pinInput !== undefined) {
+  //     setValue(FIELDS.PIN, `${pinAdornment}${pinInput}`);
+  //   }
+  // }, [pinAdornment, pinInput, setValue]);
 
   return (
     <StyledFieldset title="Building Location">
       <Stack direction="row" gap={1}>
         <TextInput
-          placeholder={barangay ? undefined : "Select a barangay first"}
-          readOnly={readOnly || !arpAdornment}
+          // placeholder={barangay ? undefined : "Select a barangay first"}
+          // readOnly={readOnly || !arpAdornment}
+          readOnly={readOnly}
           control={control}
           label="ARP NO."
-          name="arpInput"
-          adornment={{
-            startAdornment: (
-              <InputAdornment position="start" sx={{ marginRight: "1px" }}>
-                {arpAdornment}
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  title="Find latest ARP"
-                  color="primary"
-                  disabled={!barangay}
-                >
-                  <FolderSearch />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          // name="arpInput"
+          name={FIELDS.ARP_NO}
+        // adornment={{
+        //   startAdornment: (
+        //     <InputAdornment position="start" sx={{ marginRight: "1px" }}>
+        //       {arpAdornment}
+        //     </InputAdornment>
+        //   ),
+        //   endAdornment: (
+        //     <InputAdornment position="end">
+        //       <IconButton
+        //         title="Find latest ARP"
+        //         color="primary"
+        //         disabled={!barangay}
+        //       >
+        //         <FolderSearch />
+        //       </IconButton>
+        //     </InputAdornment>
+        //   ),
+        // }}
         />
 
         <TextInput
-          placeholder={barangay ? undefined : "Select a barangay first"}
-          readOnly={readOnly || !barangay}
+          // placeholder={barangay ? undefined : "Select a barangay first"}
+          // readOnly={readOnly || !barangay}
+          readOnly={readOnly}
           control={control}
           label="PIN NO."
-          name="pinInput"
-          adornment={{
-            startAdornment: (
-              <InputAdornment position="start" sx={{ marginRight: "1px" }}>
-                {pinAdornment}
-              </InputAdornment>
-            ),
-          }}
+          name={FIELDS.PIN}
+        // adornment={{
+        //   startAdornment: (
+        //     <InputAdornment position="start" sx={{ marginRight: "1px" }}>
+        //       {pinAdornment}
+        //     </InputAdornment>
+        //   ),
+        // }}
         />
       </Stack>
 
@@ -90,13 +111,6 @@ function BuildingLocFields({ control, readOnly }) {
           label="Barangay"
           name={FIELDS.BRGY_REF}
           options={BRGY_OPTIONS}
-          onChange={(e) => {
-            const { value } = e.target;
-            const arp = `${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`;
-            const pin = `130-${BRGY_DISTRICTS[value]}-${BRGY_CODE[value]}-`;
-            setValue("arpAdornment", arp);
-            setValue("pinAdornment", pin);
-          }}
         />
 
         <TextInput control={control} label="City" name={FIELDS.CITY_REF} readOnly />

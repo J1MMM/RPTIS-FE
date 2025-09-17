@@ -24,15 +24,9 @@ import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
 function StructuralMaterialFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
 
-  const numberOfStoreys = useWatch({
-    control,
-    name: FIELDS.NO_OF_STOREYS
-  })
+  const numberOfStoreys = useWatch({ control, name: FIELDS.NO_OF_STOREYS })
+  const floors = useWatch({ control, name: "floors" })
 
-  const floors = useWatch({
-    control,
-    name: "floors"
-  })
 
   console.log("fields", floors);
 
@@ -41,13 +35,16 @@ function StructuralMaterialFields({ control, readOnly }) {
     if (isNaN(numStoreys) || numStoreys < 1) numStoreys = 0;
     if (numStoreys > 20) numStoreys = 20;
 
-    const floorAreasArr = [...Array(numStoreys)].map((_, index) => ({
-      id: v4(),
-      label: `${toOrdinal(index + 1)} floor`,
-      area: "",
-      flooring: [],
-      walls: []
-    }));
+    const floorAreasArr = [...Array(numStoreys)].map((_, index) => {
+      const existing = floors?.[index];
+      return {
+        id: existing?.id || v4(),
+        label: `${toOrdinal(index + 1)} floor`,
+        area: existing?.area || "",
+        flooring: existing?.flooring || [],
+        walls: existing?.walls || [],
+      };
+    });
 
     setValue("floors", floorAreasArr);
   }, [numberOfStoreys]);
@@ -62,18 +59,6 @@ function StructuralMaterialFields({ control, readOnly }) {
 
     setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
   }, [floors])
-
-  const [personName, setPersonName] = useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
 
   return (
     <StyledFieldset title="Structural Materials">

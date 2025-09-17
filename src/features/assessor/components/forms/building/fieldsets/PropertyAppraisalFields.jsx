@@ -113,6 +113,37 @@ function PropertyAppraisalFields({ control, readOnly }) {
 
       </Row>
       <Row>
+        <TextInput
+          isNumeric
+          readOnly={true}
+          control={control}
+          label="Unit Construction Cost"
+          name={FIELDS.UNIT_CONSTRUCTION_COST}
+          adornment={{
+            startAdornment: (
+              <InputAdornment position="start">Php</InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">/ {SYMBOLS.SQUARE_METER}</InputAdornment>
+            ),
+          }}
+        />
+
+        <TextInput
+          isNumeric
+          readOnly={true}
+          control={control}
+          label="Sub-Total"
+          name={FIELDS.UCC_SUB_TOTAL}
+          adornment={{
+            startAdornment: (
+              <InputAdornment position="start">Php</InputAdornment>
+            ),
+          }}
+        />
+
+      </Row>
+      <Row>
         <Row>
 
           <NumberInput

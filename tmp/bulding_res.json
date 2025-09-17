@@ -38,8 +38,8 @@
       "id": "92416140-d4bd-4ccd-9fda-12db4635046d",
       "area": "167.25",
       "label": "1st floor",
-      "walls": [],
-      "flooring": []
+      "walls": ["wood", "plain_cement"],
+      "flooring": ["plain_cement", "marble"]
     }
   ],
   "taxable": true,

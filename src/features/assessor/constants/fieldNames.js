@@ -89,10 +89,12 @@ export const FIELDS = {
   LOT_NO_REF: "landReferences.lot_no",
   BLOCK_NO_REF: "landReferences.blk_no",
 
+  STRUCTURAL_FIELDS: "structural_type",
   STRUCTURAL_TYPE: "structural_type.type",
   STRUCTURAL_CATEGORY: "structural_type.category",
 
   // propertyAppraisals
+  PROPERTY_APPRAISAL_FIELD: "propertyAppraisals",
   UNIT_CONSTRUCTION_COST: "propertyAppraisals.ucc",
   UCC_SUB_TOTAL: "propertyAppraisals.bcst",
   TOTAL_CONSTRUCTION_COST: "propertyAppraisals.totalConstructionCost",
