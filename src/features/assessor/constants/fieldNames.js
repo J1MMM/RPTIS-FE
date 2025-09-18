@@ -104,6 +104,8 @@ export const FIELDS = {
   TOTAL_PERCENT_DEPRECIATION: "propertyAppraisals.total_percent_depreciation",
   ADDITIONAL_ITEMS: "propertyAppraisals.additionalItems",
   BUILDING_MARKET_VALUE: "propertyAppraisals.marketValue",
+  TOTAL_CONSTRUCTION_COST: "propertyAppraisals.totalConstructionCost",
+  TOTAL_COST_ADD_ITEMS: "propertyAppraisals.totalCostAddItems",
 
   // general desc 
   KIND_OF_BUILDING: "kindBldg",
@@ -118,6 +120,7 @@ export const FIELDS = {
   CO_OCCUPANCY: "cetificateOfOccupancyIssuedOn",
 
   // previous record 
+  PREV_RECORDS_FIELDS: "previousRecords",
   PIN_NO_PREV: "previousRecords.pinNoPrevRec",
   ARP_NO_PREV: "previousRecords.arpNoPrevRec",
   TD_ARP_PREV: "previousRecords.tdArpPrevRec",

@@ -33,6 +33,7 @@ function BuildingFaasPage() {
     try {
       const formattedData = bldgReqFormatter(data)
 
+      console.log("formattedData");
       console.log(formattedData);
 
       // const response = await axios.post('/faasBldg', data)

@@ -22,7 +22,7 @@ function PropertyAppraisalFields({ control, readOnly }) {
     depreciationCost,
     additionalItems,
     depRate,
-    depYears
+    depYears,
   ] = useWatch({
     control,
     name: [
@@ -75,6 +75,20 @@ function PropertyAppraisalFields({ control, readOnly }) {
 
     const marketVal = (subTotal + totalAdditionalCost) - depCost
     setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
+
+    setValue(FIELDS.TOTAL_COST_ADD_ITEMS, totalAdditionalCost)
+    setValue(FIELDS.TOTAL_CONSTRUCTION_COST, subTotal + totalAdditionalCost)
+
+    setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
+  }, [uccSubTotal, depreciationCost, additionalItems]);
+
+  useEffect(() => {
+    const subTotal = Number(uccSubTotal) || 0;
+    const totalAdditionalCost = sumByField(additionalItems, "sub_total");
+    const depCost = Number(depreciationCost) || 0;
+
+    const marketVal = (subTotal + totalAdditionalCost) - depCost
+    setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
     setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
   }, [uccSubTotal, depreciationCost, additionalItems]);
 
@@ -117,28 +131,25 @@ function PropertyAppraisalFields({ control, readOnly }) {
           isNumeric
           readOnly={true}
           control={control}
-          label="Unit Construction Cost"
-          name={FIELDS.UNIT_CONSTRUCTION_COST}
+          label="Total Cost Additional Items"
+          name={FIELDS.TOTAL_COST_ADD_ITEMS}
           adornment={{
             startAdornment: (
               <InputAdornment position="start">Php</InputAdornment>
             ),
-            endAdornment: (
-              <InputAdornment position="end">/ {SYMBOLS.SQUARE_METER}</InputAdornment>
-            ),
           }}
         />
-
         <TextInput
           isNumeric
           readOnly={true}
           control={control}
-          label="Sub-Total"
-          name={FIELDS.UCC_SUB_TOTAL}
+          label="Total Construction Cost"
+          name={FIELDS.TOTAL_CONSTRUCTION_COST}
           adornment={{
             startAdornment: (
               <InputAdornment position="start">Php</InputAdornment>
             ),
+
           }}
         />
 

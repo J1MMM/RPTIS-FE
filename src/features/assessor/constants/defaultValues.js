@@ -99,6 +99,8 @@ export const BUILDING_DEFAULT = {
     total_percent_depreciation: 0,
     depreciationCost: 0,
     marketValue: 0,
+    totalConstructionCost: 0,
+    totalCostAddItems: 0,
   },
   [FIELDS.BLDG_ASSESSMENT_FIELDS]: {
     "actualUse": "",
@@ -127,7 +129,7 @@ export const BUILDING_DEFAULT = {
   // dateApproved: "2025-09-08",
   // encoderName: "",
   // dateEncoded: "2025-09-08",
-
+  [FIELDS.PREV_RECORDS_FIELDS]: {},
   arpInput: "",
   pinInput: "",
   arpAdornment: "",
