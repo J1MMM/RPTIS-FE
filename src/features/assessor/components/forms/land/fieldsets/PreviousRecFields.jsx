@@ -12,14 +12,14 @@ function PreviousRecFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Previous Owner"
-          name={`previous_records.${FIELDS.OWNER_PREV}`}
+          name={FIELDS.OWNER_PREV}
         />
         <TextInput
           required={false}
           readOnly={readOnly}
           control={control}
           label="PIN No."
-          name={`previous_records.${FIELDS.PIN_NO_PREV}`}
+          name={FIELDS.PIN_NO_PREV}
         />
       </Row>
       <Row>
@@ -28,14 +28,14 @@ function PreviousRecFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="ARP No."
-          name={`previous_records.${FIELDS.ARP_NO_PREV}`}
+          name={FIELDS.ARP_NO_PREV}
         />
         <TextInput
           required={false}
           readOnly={readOnly}
           control={control}
           label="T.D. No."
-          name={`previous_records.${FIELDS.TD_ARP_PREV}`}
+          name={FIELDS.TD_ARP_PREV}
         />
       </Row>
       <Row>
@@ -43,7 +43,7 @@ function PreviousRecFields({ control, readOnly }) {
           required={false}
           control={control}
           label="Total Assessed Value"
-          name={`previous_records.${FIELDS.ASSESSED_VALUE_PREV}`}
+          name={FIELDS.ASSESSED_VALUE_PREV}
         />
 
         <DateInput
@@ -51,7 +51,7 @@ function PreviousRecFields({ control, readOnly }) {
           yearOnly
           control={control}
           label="Effectivity"
-          name={`previous_records.${FIELDS.EFFECTIVITY_YEAR_PREV}`}
+          name={FIELDS.EFFECTIVITY_YEAR_PREV}
         />
       </Row>
     </StyledFieldset>

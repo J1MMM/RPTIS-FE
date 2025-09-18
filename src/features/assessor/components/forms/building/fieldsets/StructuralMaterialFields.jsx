@@ -43,6 +43,7 @@ function StructuralMaterialFields({ control, readOnly }) {
         area: existing?.area || "",
         flooring: existing?.flooring || [],
         walls: existing?.walls || [],
+        roofMaterials: existing?.roofMaterials || []
       };
     });
 

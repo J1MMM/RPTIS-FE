@@ -4,71 +4,73 @@
  * @returns {Object} 
  */
 
-export const bldgReqFormatter = (data) => {
-    const formatOwnership = (ownership) => {
-        return ownership.map(owner => ({
-            regions: owner.regions || "",
-            province: owner.province || "",
-            city: owner.city || "",
-            barangay: owner.barangay || "",
-            street: owner.street || "",
-            postal: owner.postal || "",
-            type: owner.type || "",
-            role: owner.role || "",
-            contact_no: owner.contact_no || "",
-            email: owner.email || "",
-            firstname: owner.firstname || "",
-            lastname: owner.lastname || "",
-            middlename: owner.middlename || "",
-            name: owner.name || "",
-            remarks: owner.remarks || "",
-            tin: owner.tin || ""
-        }));
-    };
+import { FIELDS } from "../constants/fieldNames";
 
-    const formatLandReference = (landRef) => {
-        return {
-            td: landRef.td || "",
-            owner: landRef.owner || "",
-            street: landRef.street || "",
-            brgy: landRef.brgy || "",
-            city: landRef.city || "",
-            province: landRef.province || "",
-            oct_tct_cloa_no: landRef["oct_tct-cloa_no"] || "",
-            lot_no: landRef.lot_no || "",
-            blk_no: landRef.blk_no || "",
-            survey_no: landRef.survey_no || landRef["oct_tct-survey_no"] || "",
-            area: parseFloat(landRef.area) || 0
-        };
-    };
+export const bldgReqFormatter = (data) => {
+    // const formatOwnership = (ownership) => {
+    //     return ownership.map(owner => ({
+    //         regions: owner.regions || "",
+    //         province: owner.province || "",
+    //         city: owner.city || "",
+    //         barangay: owner.barangay || "",
+    //         street: owner.street || "",
+    //         postal: owner.postal || "",
+    //         type: owner.type || "",
+    //         role: owner.role || "",
+    //         contact_no: owner.contact_no || "",
+    //         email: owner.email || "",
+    //         firstname: owner.firstname || "",
+    //         lastname: owner.lastname || "",
+    //         middlename: owner.middlename || "",
+    //         name: owner.name || "",
+    //         remarks: owner.remarks || "",
+    //         tin: owner.tin || ""
+    //     }));
+    // };
+
+    // const formatLandReference = (landRef) => {
+    //     return {
+    //         td: landRef.td || "",
+    //         owner: landRef.owner || "",
+    //         street: landRef.street || "",
+    //         brgy: landRef.brgy || "",
+    //         city: landRef.city || "",
+    //         province: landRef.province || "",
+    //         oct_tct_cloa_no: landRef["oct_tct-cloa_no"] || "",
+    //         lot_no: landRef.lot_no || "",
+    //         blk_no: landRef.blk_no || "",
+    //         survey_no: landRef.survey_no || landRef["oct_tct-survey_no"] || "",
+    //         area: parseFloat(landRef.area) || 0
+    //     };
+    // };
 
     // Format floors data
-    const formatFloors = (floors) => {
-        return Array.isArray(floors) ? floors.map(floor => ({
-            id: floor.id || "",
-            label: floor.label || "",
-            area: parseFloat(floor.area) || 0,
-            flooring: Array.isArray(floor.flooring) ? floor.flooring : [],
-            walls: Array.isArray(floor.walls) ? floor.walls : []
-        })) : [];
-    };
+    // const formatFloors = (floors) => {
+    //     return Array.isArray(floors) ? floors.map(floor => ({
+    //         id: floor.id || "",
+    //         label: floor.label || "",
+    //         area: parseFloat(floor.area) || 0,
+    //         flooring: Array.isArray(floor.flooring) ? floor.flooring : [],
+    //         walls: Array.isArray(floor.walls) ? floor.walls : []
+    //     })) : [];
+    // };
 
     // Format property appraisal coai array
-    const formatCoai = (coai) => {
-        return Array.isArray(coai) ? coai.map(item => ({
-            category: item.category || "",
-            type: item.type || "",
-            area: parseFloat(item.area) || 0,
-            noFloors: parseInt(item.noFloors) || 0,
-            material: item.material || "",
-            cost: parseFloat(item.cost) || 0,
-            affectedArea: parseFloat(item.affectedArea) || 0,
-            height: item.height || "",
-            storey: item.storey || "",
-            sub_total: parseFloat(item.sub_total) || 0,
-            id: item.id || ""
-        })) : [];
-    };
+    // const formatCoai = (coai) => {
+    //     return Array.isArray(coai) ? coai.map(item => ({
+    //         category: item.category || "",
+    //         type: item.type || "",
+    //         area: parseFloat(item.area) || 0,
+    //         noFloors: parseInt(item.noFloors) || 0,
+    //         material: item.material || "",
+    //         cost: parseFloat(item.cost) || 0,
+    //         affectedArea: parseFloat(item.affectedArea) || 0,
+    //         height: item.height || "",
+    //         storey: item.storey || "",
+    //         sub_total: parseFloat(item.sub_total) || 0,
+    //         id: item.id || ""
+    //     })) : [];
+    // };
 
     // Main transformation
     const formattedData = {
@@ -78,16 +80,16 @@ export const bldgReqFormatter = (data) => {
         pin_no: data.pin_no || "",
 
         // Building ownership
-        bldg_ownership: formatOwnership(data.bldg_ownership || []),
+        bldg_ownership: data[FIELDS.BLDG_OWNERSHIP_FIELD] || [],
 
         // Land reference
-        land_reference: formatLandReference(data.land_reference || {}),
+        land_reference: data[FIELDS.BLDG_LAND_REF_FIELD] || {},
 
         // Building details
         kindBldg: data.kindBldg || "",
         structural_type: {
-            category: data.structuralType?.category || "",
-            type: data.structuralType?.type || ""
+            category: data[FIELDS.STRUCTURAL_FIELDS]?.category || "",
+            type: data[FIELDS.STRUCTURAL_FIELDS]?.type || ""
         },
         bldgPermit: data.bldgPermit || "",
         date_issued: data.date_issued || "",
@@ -97,26 +99,26 @@ export const bldgReqFormatter = (data) => {
         dateOccupied: data.dateOccupied || "",
         buildingAge: data.buildingAge || "",
         noOfStorey: parseInt(data.noOfStorey) || 1,
-        floors: formatFloors(data.floors || []),
+        floors: data.floors || [],
 
         // Property appraisal
         property_appraisal: {
-            ucc: data.property_appraisal?.ucc || "",
-            bcst: data.property_appraisal?.bcst || "",
-            coai: formatCoai(data.property_appraisal?.coai || []),
-            totalConstructionCost: data.property_appraisal?.totalConstructionCost || "",
-            depreciationRate: data.property_appraisal?.depreciationRate || "",
-            yearsToDepreciate: data.property_appraisal?.yearsToDepreciate || "",
-            depreciationCost: data.property_appraisal?.depreciationCost || "",
-            marketValue: data.property_appraisal?.marketValue || ""
+            ucc: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.ucc || "",
+            bcst: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.bcst || "",
+            coai: data[FIELDS.ADDITIONAL_ITEMS] || [],
+            totalConstructionCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.totalConstructionCost || "",
+            depreciationRate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationRate || "",
+            yearsToDepreciate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.yearsToDepreciate || "",
+            depreciationCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationCost || "",
+            marketValue: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.marketValue || ""
         },
 
         // Property assessment
         property_assessment: {
-            actualUse: data.property_assessment?.actualUse || "",
-            assessmentLevel: data.property_assessment?.assessmentLevel || "",
-            assessedValue: data.property_assessment?.assessedValue || "",
-            marketValue: data.property_assessment?.marketValue || ""
+            actualUse: data[FIELDS.BLDG_ASSESSMENT_FIELDS]?.actualUse || "",
+            assessmentLevel: data[FIELDS.BLDG_ASSESSMENT_FIELDS]?.assessmentLevel || "",
+            assessedValue: data[FIELDS.BLDG_ASSESSMENT_FIELDS]?.assessedValue || "",
+            marketValue: data[FIELDS.BLDG_ASSESSMENT_FIELDS]?.marketValue || ""
         },
 
         // Tax and assessment info
