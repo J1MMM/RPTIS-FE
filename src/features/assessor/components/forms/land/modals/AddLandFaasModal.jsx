@@ -15,6 +15,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
 import { useEffect } from "react";
 import PreviousRecFields from "../fieldsets/PreviousRecFields";
+import TextInput from "../../../../../../components/ui/TextInput";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: landFormControl } = useFormContext();
@@ -79,6 +80,15 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         <LandMarketValueFields readOnly={readOnly} />
         <AssessmentFields readOnly={readOnly} />
         <TaxabilityFields readOnly={readOnly} control={landFormControl} />
+        <TextInput
+          multiline
+          shrink={true}
+          rows={3}
+          readOnly={readOnly}
+          control={landFormControl}
+          label="Memoranda"
+          name={FIELDS.MEMORANDA}
+        />
         <PreviousRecFields readOnly={readOnly} control={landFormControl} />
       </ContainerModal >
     </>

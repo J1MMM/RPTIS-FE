@@ -36,14 +36,14 @@ function BuildingFaasPage() {
       console.log("formattedData");
       console.log(formattedData);
 
-      // const response = await axios.post('/faasBldg', data)
+      const response = await axios.post('/faasBldg', formattedData)
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
 
-      toast.error("Something went wrong while submitting.", toastConfig);
+      toast.error(`${error.response.data?.message}`, toastConfig);
     } finally {
       setShowConfirmation(false);
     }
@@ -96,6 +96,7 @@ function BuildingFaasPage() {
   return (
     <>
       <FormProvider {...methods}>
+
         <BuildingFaasTable
           handleShowDetails={handleShowDetails}
           rows={buildingFaasRecords}

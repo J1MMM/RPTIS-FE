@@ -124,6 +124,121 @@ export const LAND_TABLE_COLUMN = [
   },
 ];
 
+export const BLDG_TABLE_COLUMN = [
+  {
+    field: FIELDS.ARP_NO,
+    headerName: "ARP NO.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    headerAlign: 'center',
+    align: "center"
+  },
+  {
+    field: FIELDS.PIN,
+    headerName: "PROPERTY INDEX NO.",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+  },
+
+  {
+    field: "owner",
+    headerName: "PROPERTY OWNER",
+    editable: false,
+    headerClassName: "data-grid-header",
+    flex: 1,
+    renderCell: (params) => {
+      const owners = params.row?.land_ownership?.filter((o) => o.role === "owner") || [];
+
+      if (owners.length === 0) return null;
+
+      const ownerNames = owners.map((owner) => {
+        if (owner.type === "company") {
+          return owner.name;
+        }
+        if (owner.type === "person") {
+          const { firstname, middlename, lastname, suffix } = owner;
+          return [
+            firstname,
+            middlename ? middlename[0] + "." : "",
+            lastname,
+            suffix || "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+        }
+        return "";
+      });
+
+      return <span>{ownerNames.join(", ")}</span>;
+    },
+  },
+  {
+    field: "class",
+    headerName: "CLASSIFICATION",
+    editable: false,
+    flex: 1,
+    headerClassName: "data-grid-header",
+    renderCell: (params) => {
+      const { landappraisals } = params.row;
+
+      if (!Array.isArray(landappraisals)) return null;
+
+      const classificationMap = {
+        residential: { label: "RESIDENTIAL", color: "primary.main" },
+        commercial: { label: "COMMERCIAL", color: "bg.blue" },
+        industrial: { label: "INDUSTRIAL", color: "secondary.main" },
+        agricultural: { label: "AGRICULTURAL", color: "bg.green" },
+      };
+
+      return (
+        <>
+          {landappraisals.map((item, idx) => {
+            const chipProps = classificationMap[item.classification];
+            return chipProps ? (
+              <Chip
+                key={idx}
+                size="small"
+                label={chipProps.label}
+                sx={{ mr: 0.5, fontSize: 9, bgcolor: chipProps.color, color: "#FFF", }}
+
+              />
+            ) : null;
+          })}
+        </>
+      );
+    },
+  },
+  {
+    field: "location",
+    headerName: "LOCATION OF PROPERTY",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    renderCell: (params) => {
+      const { street, brgy, city } = params.row;
+      return `Brgy. ${brgy} ${city}`
+    },
+  },
+  {
+    field: FIELDS.TOTAL_ASSESSED_VALUE,
+    headerName: "ASSESSED VALUE",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    valueFormatter: (params) => formatPeso(params)
+  },
+  {
+    field: FIELDS.TAXABILITY,
+    headerName: "TAXABILITY",
+    flex: 1,
+    editable: false,
+    headerClassName: "data-grid-header",
+    valueFormatter: (params) => toUpperCase(params)
+  },
+];
+
 export const APPRAISAL_COLUMN = [
   {
     field: FIELDS.LAND_CLASSIFICATION,
@@ -422,7 +537,7 @@ export const ADDITIONAL_ITEMS_TABLE_COLUMN = [
     valueFormatter: (params) => formatPeso(params)
   },
   {
-    field: "sub_total",
+    field: "total",
     headerName: "Sub-Total",
     flex: 1,
     headerClassName: "data-grid-header",

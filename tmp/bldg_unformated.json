@@ -1,16 +1,18 @@
 {
   "transaction_code": "DC",
-  "arp_no": "06-0077-0001",
-  "pin_no": "130-06-0077-0001",
-  "bldgowners": [
+  "arp_no": "06-0077-0021",
+  "pin_no": "130-06-0077-0021",
+  "bldg_ownership": [
     {
       "type": "person",
       "role": "owner",
       "lastname": "Gregorio",
       "firstname": "Gabriel",
       "middlename": "Isidro",
+      "suffix": "",
       "contact_no": "09123412332",
       "email": "gregorio.gabriel@example.com",
+      "remarks": "",
       "tin": "000-123-456-001",
       "regions": "Region IV-A (CALABARZON)",
       "province": "Laguna",
@@ -18,7 +20,7 @@
       "barangay": "Soledad",
       "street": "322",
       "postal": "4000",
-      "id": "f3291a19-47ad-4833-ad60-633561a25738"
+      "id": "d8c943f8-4d6d-4f77-9970-19ee99e80d17"
     },
     {
       "regions": "Region IV-A (CALABARZON)",
@@ -30,29 +32,27 @@
       "type": "person",
       "role": "administrator",
       "contact_no": "09123412332",
-      "email": "gregorio.gabriel@example.com",
+      "email": "gregorio.gabriel.jr@example.com",
       "name": "",
       "lastname": "Gregorio",
       "firstname": "Gabriel",
       "middlename": "Isidro",
       "tin": "000-123-456-001",
-      "id": "797519d3-34f4-4959-b3bc-f399a683e65a"
+      "id": "9fb99009-3bbe-4888-9835-4878769e5b9a"
     }
   ],
   "land_reference": {
-    "area": 267.25,
     "city": "San Pablo",
     "province": "Laguna",
     "street": "322",
     "brgy": "SOLEDAD",
-    "arp-land": "",
-    "owner": "John Kramer",
-    "oct_tct-cloa_no": "T-308034",
-    "oct_tct-survey_no": "",
-    "lot_no": "27234-G",
-    "blk_no": "PSD-04-2345",
     "td": "06-0077-1234",
-    "survey_no": "26611-P12"
+    "area": 267.25,
+    "owner": "John Kramer",
+    "oct_tct_cloa_no": "T-308034",
+    "survey_no": "26611-P12",
+    "lot_no": "27234-G",
+    "blk_no": "PSD-04-2345"
   },
   "structural_type": {
     "type": "type5A",
@@ -60,79 +60,166 @@
   },
   "floors": [
     {
-      "id": "cdee6e34-30bb-4b6b-9111-039dc9fd7064",
+      "id": "92416140-d4bd-4ccd-9fda-12db4635046d",
       "label": "1st floor",
-      "area": "",
-      "flooring": [],
-      "walls": []
+      "area": "167.25",
+      "walls": ["wood", "plain_cement"],
+      "flooring": ["plain_cement", "marble"],
+      "roofMaterials": ["reinforced_concrete", "g.i."]
     }
   ],
-  "propertyAppraisals": {
+  "property_appraisal": {
     "ucc": 10000,
-    "bcst": 0,
-    "coai": [],
+    "bcst": 1672500,
+    "coai": [
+      {
+        "id": 3,
+        "category": "foundation",
+        "type": "type5",
+        "area": 167.25,
+        "noFloors": 1,
+        "material": "",
+        "cost": 0,
+        "affectedArea": 0,
+        "total": 73590,
+        "createdAt": "2025-09-18T05:25:41.233Z",
+        "updatedAt": "2025-09-18T05:25:41.233Z",
+        "property_appraisal_id": 3
+      },
+      {
+        "affectedArea": 167.25,
+        "area": 0,
+        "cost": 300,
+        "height": 0,
+        "noFloors": 0,
+        "material": "granolithe",
+        "storey": 0,
+        "type": 0,
+        "category": "flooring",
+        "total": 50175,
+        "id": "baa0f500-380a-4b57-9ba2-91d135a0a23e"
+      },
+      {
+        "category": "wallingAndPartitioning",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "marble",
+        "cost": 300,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 50175,
+        "id": "01d4df6a-e835-4831-a36e-8cd90f8d14cb"
+      },
+
+      {
+        "category": "ceiling",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "Ordinary drop Ceiling on R.C. building",
+        "cost": 0,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 16725,
+        "id": "c997e324-3fe6-4895-99c8-d7b62d04e552"
+      },
+
+      {
+        "category": "specialAluminumGlassPanel",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "Ordinary size",
+        "cost": 300,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 50175,
+        "id": "27a00500-f9df-449c-9a60-e4fa383615ea"
+      },
+
+      {
+        "category": "height",
+        "type": "",
+        "structuralType": 10000,
+        "area": 167.25,
+        "noFloors": 0,
+        "material": 0,
+        "cost": 0,
+        "affectedArea": 0,
+        "height": 100,
+        "storey": "oneStorey",
+        "total": 17895750,
+        "id": "9d94bc2a-d661-40cd-9135-f36e275e85c3"
+      },
+
+      {
+        "category": "otherIncrement",
+        "type": "",
+        "structuralType": 10000,
+        "area": 0,
+        "noFloors": 0,
+        "material": 0,
+        "cost": 0,
+        "affectedArea": 0,
+        "height": 0,
+        "storey": 0,
+        "total": 7500,
+        "id": "8ec68d33-b995-42b4-b27b-e656055870f0"
+      }
+    ],
+
     "totalConstructionCost": "",
     "depreciationRate": 0,
     "yearsToDepreciate": 0,
-    "total_percent_depreciation": 0,
     "depreciationCost": 0,
-    "marketValue": 73590,
-    "additionalItems": [
-      {
-        "affectedArea": "",
-        "area": 167.25,
-        "cost": "",
-        "height": "",
-        "noFloors": 1,
-        "material": "",
-        "storey": "",
-        "type": "type5",
-        "category": "foundation",
-        "sub_total": 73590,
-        "id": "e7e2e4e6-18f8-4ae2-8a9e-6efd23434336"
-      }
-    ]
+    "marketValue": 1746090,
+    "total_percent_depreciation": 0
   },
-  "propertyAssessments": {
+
+  "property_assessment": {
     "actualUse": "commercial",
-    "assessmentLevel": 0.3,
-    "assessedValue": 22077,
-    "marketValue": 73590
+    "assessmentLevel": 60,
+    "assessedValue": 1047654,
+    "marketValue": 1746090
   },
+
   "kindBldg": "commercial",
   "bldg_permit": "Permit No.",
-  "bldg_permit_date_issued": "2025-09-16T16:00:00.000Z",
+  "bldg_permit_date_issued_on": "2025-09-14T16:00:00.000Z",
   "cct": "cct",
-  "coc_issued_on": "2025-09-16T16:00:00.000Z",
-  "dateConstructed": "2025-09-16T16:00:00.000Z",
-  "dateOccupied": "2025-09-16T16:00:00.000Z",
-  "propertyAppraisals.marketValue": "",
-  "noOfStorey": 1,
+  "coc_issued_on": "2025-09-14T16:00:00.000Z",
+  "dateConstructed": "2025-09-14T16:00:00.000Z",
+  "dateOccupied": "2025-09-14T16:00:00.000Z",
+  "marketValue": 1746090,
+  "noOfStorey": "1",
   "taxable": "true",
-  "yearAssessment": "2025-09-16T16:00:00.000Z",
-  "quarter": "1st Quarter",
+  "quarter": "4th Quarter",
+  "effectivity_assessment": "2025-09-14T16:00:00.000Z",
   "appraisers": {},
   "approvedBy": "",
-  "dateApproved": "2025-09-08",
+  "dateApproved": "2025-09-14T16:00:00.000Z",
   "encoderName": "",
-  "dateEncoded": "2025-09-08",
+  "dateEncoded": "2025-09-14T16:00:00.000Z",
   "memoranda": "memoranda",
-  "arpInput": "0001",
-  "pinInput": "0001",
-  "arpAdornment": "06-0077-",
-  "pinAdornment": "130-06-0077-",
+  "arpInput": "123",
+  "pinInput": "123",
   "buildingAge": "NEW",
   "cetificateOfOccupancyIssuedOn": "coo issue on",
-  "total_floor_areas": "",
+  "total_floor_areas": 167.25,
+  "total_percent_depreciation": 0,
+
   "previous_records": {
-    "previousRecords": {
-      "ownerPrevRec": "John Cena",
-      "pinNoPrevRec": "130-06-0077-0001",
-      "arpNoPrevRec": "06-0077-0001",
-      "tdArpPrevRec": "06-0077-0001",
-      "assessedValuePrevRec": 1047650,
-      "effectivityYearPrevRec": "2025-09-16T16:00:00.000Z"
-    }
+    "owner_name": "Lorem Impus",
+    "pin_no": "130-06-0077-0011",
+    "arp_no": "130-06-0077-0011",
+    "td_arp": "130-06-0077-0011",
+    "total_assessed_value": 30000,
+    "effectivity_assessment": "2025-09-17T16:00:00.000Z"
   },
-  "totalFloorArea": ""
+
+  "totalFloorArea": 167.25
 }

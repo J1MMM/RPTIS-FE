@@ -38,44 +38,33 @@ function BuildingGenDescFields({ control, readOnly }) {
       </Stack>
 
       <Stack direction="row" gap={1}>
-        <Stack direction="row" gap={1} width={"100%"}>
-          <TextInput
-            readOnly={readOnly}
-            control={control}
-            label="Bldg. Permit No."
-            name={FIELDS.BLDG_PERMIT}
-          />
+        <TextInput
+          readOnly={readOnly}
+          control={control}
+          label="Bldg. Permit No."
+          name={FIELDS.BLDG_PERMIT}
+        />
+        <DateInput
+          readOnly={readOnly}
+          control={control}
+          label="Date Issued"
+          name={FIELDS.BLDG_PERMIT_DATE_ISSUE}
+        />
+      </Stack>
 
-          <DateInput
-            readOnly={readOnly}
-            control={control}
-            label="Date Issued"
-            name={FIELDS.BLDG_PERMIT_DATE_ISSUE}
-          />
-        </Stack>
-
+      <Stack direction="row" gap={1}>
         <TextInput
           readOnly={readOnly}
           control={control}
           label="Condominium Certificate of Title (CCT)"
           name={FIELDS.CCT}
         />
-      </Stack>
-
-      <Stack direction="row" gap={1}>
         <DateInput
           readOnly={readOnly}
           control={control}
           label="Certificate of Completion Issue On"
           name={FIELDS.CO_COMPLITION}
         />
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="Certificate of Occupancy Issue On"
-          name={FIELDS.CO_OCCUPANCY}
-        />
-
       </Stack>
 
       <Row>

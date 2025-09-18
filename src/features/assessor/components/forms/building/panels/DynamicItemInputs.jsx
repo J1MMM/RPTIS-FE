@@ -85,7 +85,7 @@ function DynamicItemInputs({ control, itemType }) {
                         name="storey"
                         options={ADDITION_HEIGHT_OPTIONS}
                     />
-                    <TextInput isNumeric readOnly={true} control={bldgControl} label="Structural Type" name={FIELDS.UNIT_CONSTRUCTION_COST} />
+                    <TextInput isNumeric readOnly={true} control={control} label="Structural Type" name="structuralType" />
                 </Row>
                 <Row>
                     <NumberInput control={control} label="Height" name="height" />

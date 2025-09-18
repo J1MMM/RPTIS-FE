@@ -64,7 +64,7 @@ export const LAND_DEFAULT_FIELD = {
   [FIELDS.TOTAL_MARKET_VALUE]: 0,
   [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
   propertyAssessments: [],
-  previous_records: undefined
+  [FIELDS.PREV_RECORDS_FIELDS]: undefined
 };
 
 export const BUILDING_DEFAULT = {
@@ -129,7 +129,13 @@ export const BUILDING_DEFAULT = {
   // dateApproved: "2025-09-08",
   // encoderName: "",
   // dateEncoded: "2025-09-08",
-  [FIELDS.PREV_RECORDS_FIELDS]: {},
+  [FIELDS.PREV_RECORDS_FIELDS]: {
+    pin_no: "",
+    arp_no: "",
+    total_assessed_value: "",
+    owner_name: "",
+    effectivity_assessment: "",
+  },
   arpInput: "",
   pinInput: "",
   arpAdornment: "",
@@ -496,5 +502,6 @@ export const ADDITIONAL_ITEMS_DEFAULT = {
   affectedArea: 0,
   height: 0,
   storey: 0,
-  sub_total: 0
+  total: 0,
+  structuralType: 0
 }

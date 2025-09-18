@@ -56,21 +56,22 @@ export const bldgReqFormatter = (data) => {
     // };
 
     // Format property appraisal coai array
-    // const formatCoai = (coai) => {
-    //     return Array.isArray(coai) ? coai.map(item => ({
-    //         category: item.category || "",
-    //         type: item.type || "",
-    //         area: parseFloat(item.area) || 0,
-    //         noFloors: parseInt(item.noFloors) || 0,
-    //         material: item.material || "",
-    //         cost: parseFloat(item.cost) || 0,
-    //         affectedArea: parseFloat(item.affectedArea) || 0,
-    //         height: item.height || "",
-    //         storey: item.storey || "",
-    //         sub_total: parseFloat(item.sub_total) || 0,
-    //         id: item.id || ""
-    //     })) : [];
-    // };
+    const formatCoai = (coai) => {
+        return Array.isArray(coai) ? coai.map(item => ({
+            category: item.category || "",
+            structuralType: item.structuralType || "",
+            type: item.type || "",
+            area: parseFloat(item.area) || 0,
+            noFloors: parseInt(item.noFloors) || 0,
+            material: item.material || "",
+            cost: parseFloat(item.cost) || 0,
+            affectedArea: parseFloat(item.affectedArea) || 0,
+            height: item.height || "",
+            storey: item.storey || "",
+            sub_total: parseFloat(item.sub_total) || 0,
+            id: item.id || ""
+        })) : [];
+    };
 
     // Main transformation
     const formattedData = {
@@ -91,8 +92,8 @@ export const bldgReqFormatter = (data) => {
             category: data[FIELDS.STRUCTURAL_FIELDS]?.category || "",
             type: data[FIELDS.STRUCTURAL_FIELDS]?.type || ""
         },
-        bldgPermit: data.bldgPermit || "",
-        date_issued: data.date_issued || "",
+        bldg_permit: data[FIELDS.BLDG_PERMIT] || "",
+        bldg_permit_date_issued_on: data[FIELDS.BLDG_PERMIT_DATE_ISSUE] || "",
         cct: data.cct || "",
         coc_issued_on: data.coc_issued_on || "",
         dateConstructed: data.dateConstructed || "",
@@ -105,12 +106,12 @@ export const bldgReqFormatter = (data) => {
         property_appraisal: {
             ucc: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.ucc || "",
             bcst: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.bcst || "",
-            coai: data[FIELDS.ADDITIONAL_ITEMS] || [],
-            totalConstructionCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.totalConstructionCost || "",
-            depreciationRate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationRate || "",
-            yearsToDepreciate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.yearsToDepreciate || "",
-            depreciationCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationCost || "",
-            marketValue: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.marketValue || ""
+            coai: formatCoai(data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.additionalItems || []),
+            totalConstructionCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.totalConstructionCost || 0,
+            depreciationRate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationRate || 0,
+            yearsToDepreciate: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.yearsToDepreciate || 0,
+            depreciationCost: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.depreciationCost || 0,
+            marketValue: data[FIELDS.PROPERTY_APPRAISAL_FIELD]?.marketValue || 0
         },
 
         // Property assessment
@@ -123,9 +124,8 @@ export const bldgReqFormatter = (data) => {
 
         // Tax and assessment info
         taxable: data.taxable || "",
-        effectivityOfAssessment: data.effectivity_year || data.effectivityOfAssessment || "",
         quarter: data.effectivity_quarter || data.quarter || "",
-        yearAssessment: data.yearAssessment || "",
+        effectivity_assessment: data.effectivity_assessment || "",
 
         // Approval and encoding
         appraisers: data.appraisers || {},

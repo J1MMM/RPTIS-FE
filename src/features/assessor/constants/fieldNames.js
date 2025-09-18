@@ -67,6 +67,7 @@ export const FIELDS = {
   // Effectivity of Assessment/Reassessment
   EFFECTIVITY_QTR: "quarter",
   EFFECTIVITY_YEAR: "yearAssessment",
+  BLDG_EFFECTIVITY_YEAR: "effectivity_assessment",
 
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
@@ -74,20 +75,20 @@ export const FIELDS = {
   //memoranda
   MEMORANDA: "memoranda",
   // land reference 
-  BLDG_LAND_REF_FIELD: "landReferences",
-  STREET_REF: "landReferences.street",
-  BRGY_REF: "landReferences.brgy",
-  CITY_REF: "landReferences.city",
-  PROVINCE_REF: "landReferences.province",
+  BLDG_LAND_REF_FIELD: "land_reference",
+  STREET_REF: "land_reference.street",
+  BRGY_REF: "land_reference.brgy",
+  CITY_REF: "land_reference.city",
+  PROVINCE_REF: "land_reference.province",
 
-  TD_ARP_REF: "landReferences.td",
-  LAND_AREA_REF: "landReferences.area",
-  LAND_OWNER_REF: "landReferences.owner",
+  TD_ARP_REF: "land_reference.td",
+  LAND_AREA_REF: "land_reference.area",
+  LAND_OWNER_REF: "land_reference.owner",
 
-  OCT_REF: "landReferences.oct_tct-cloa_no",
-  SURVEY_NO_REF: "landReferences.survey_no",
-  LOT_NO_REF: "landReferences.lot_no",
-  BLOCK_NO_REF: "landReferences.blk_no",
+  OCT_REF: "land_reference.oct_tct_cloa_no",
+  SURVEY_NO_REF: "land_reference.survey_no",
+  LOT_NO_REF: "land_reference.lot_no",
+  BLOCK_NO_REF: "land_reference.blk_no",
 
   STRUCTURAL_FIELDS: "structural_type",
   STRUCTURAL_TYPE: "structural_type.type",
@@ -112,7 +113,7 @@ export const FIELDS = {
   BUILDING_AGE: "buildingAge",
   NO_OF_STOREYS: "noOfStorey",
   BLDG_PERMIT: "bldg_permit",
-  BLDG_PERMIT_DATE_ISSUE: "bldg_permit_date_issued",
+  BLDG_PERMIT_DATE_ISSUE: "bldg_permit_date_issued_on",
   CCT: "cct",
   CO_COMPLITION: "coc_issued_on",
   DATE_CONSTRUCTED: "dateConstructed",
@@ -121,14 +122,13 @@ export const FIELDS = {
 
   // previous record 
   PREV_RECORDS_FIELDS: "previousRecords",
-  PIN_NO_PREV: "previousRecords.pinNoPrevRec",
-  ARP_NO_PREV: "previousRecords.arpNoPrevRec",
-  TD_ARP_PREV: "previousRecords.tdArpPrevRec",
-  ASSESSED_VALUE_PREV: "previousRecords.assessedValuePrevRec",
-  OWNER_PREV: "previousRecords.ownerPrevRec",
-  EFFECTIVITY_YEAR_PREV: "previousRecords.effectivityYearPrevRec",
+  PIN_NO_PREV: "previousRecords.pin_no",
+  ARP_NO_PREV: "previousRecords.arp_no",
+  TD_ARP_PREV: "previousRecords.td_no",
+  ASSESSED_VALUE_PREV: "previousRecords.total_assessed_value",
+  OWNER_PREV: "previousRecords.owner_name",
+  EFFECTIVITY_YEAR_PREV: "previousRecords.effectivity_assessment",
 
-  ADDITIONAL_ITEM_COST_SUB: "cost_of_additional_cost_sub_total",
   TOTAL_FLOOR_AREA: "total_floor_areas",
 
   // Property Assesment 
