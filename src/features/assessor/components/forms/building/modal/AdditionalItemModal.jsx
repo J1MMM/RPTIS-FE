@@ -45,7 +45,7 @@ export const AdditionalItemModal = ({ open, onClose, handleSubmit, control, disa
             readOnly={true}
             control={control}
             label="Sub-Total"
-            name={"sub_total"}
+            name={"total"}
           />
         </Row>
 

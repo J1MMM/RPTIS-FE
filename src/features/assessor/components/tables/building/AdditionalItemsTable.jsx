@@ -22,7 +22,7 @@ const columnProps = {
 }
 
 export const AdditionalItemsTable = ({ fields, handleDelete, readOnly }) => {
-  const total = sumByField(fields, "sub_total");
+  const total = sumByField(fields, "total");
 
   return (
     <DataGrid

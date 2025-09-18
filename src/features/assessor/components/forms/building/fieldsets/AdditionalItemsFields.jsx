@@ -20,7 +20,7 @@ function AdditionalItemsFields({ readOnly }) {
   const { control: buildingControl, getValues: getBldgValue, setValue: setBldgVal } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
   const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm();
-  const { affectedArea, area, category, cost, height, material, noFloors, storey, sub_total, type } = useWatch({ control })
+  const { affectedArea, area, category, cost, height, material, noFloors, storey, total, type } = useWatch({ control })
 
   //compute subtotal
   useEffect(() => {
@@ -31,11 +31,12 @@ function AdditionalItemsFields({ readOnly }) {
       console.warn("No compute function for category:", category);
       return;
     }
+
     const structuralType = getBldgValue(FIELDS.UNIT_CONSTRUCTION_COST) || 0
+    const subTotal = computeFn({ type, area, noFloors, cost, height, material, storey, total: total, affectedArea, structuralType }) || 0;
 
-    const subTotal = computeFn({ type, area, noFloors, cost, height, material, storey, sub_total, affectedArea, structuralType }) || 0;
-
-    setValue("sub_total", subTotal);
+    setValue("structuralType", structuralType);
+    setValue("total", subTotal);
 
   }, [category, noFloors, area, type, material, cost, affectedArea, height, storey]);
 

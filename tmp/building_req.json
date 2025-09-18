@@ -1,86 +1,141 @@
 {
-    "transaction_code": "DC",
-    "arp_no": "123",
-    "pin_no": "123",
-    "bldg_ownership": [
-        {
-            "regions": "Region IV-A (CALABARZON)",
-            "province": "Laguna",
-            "city": "San Pablo City",
-            "barangay": "Santiago I",
-            "street": "322 Purok 4",
-            "postal": "4001",
-            "type": "company",
-            "role": "owner",
-            "contact_no": "8700",
-            "email": "email@example.com",
-            "name": "Jollibee",
-            "remarks": "Tapat ng MCDO",
-            "tin": "TIN-1233456"
-        }
+  "transaction_code": "DC",
+  "arp_no": "06-0077-0021",
+  "pin_no": "130-06-0077-0021",
+  "bldg_ownership": [
+    {
+      "type": "person",
+      "role": "owner",
+      "lastname": "Gregorio",
+      "firstname": "Gabriel",
+      "middlename": "Isidro",
+      "suffix": "",
+      "contact_no": "09123412332",
+      "email": "gregorio.gabriel@example.com",
+      "remarks": "",
+      "tin": "000-123-456-001",
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "Soledad",
+      "street": "322",
+      "postal": "4000",
+      "id": "d8c943f8-4d6d-4f77-9970-19ee99e80d17"
+    },
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "Soledad",
+      "street": "322",
+      "postal": "4000",
+      "type": "person",
+      "role": "administrator",
+      "contact_no": "09123412332",
+      "email": "gregorio.gabriel.jr@example.com",
+      "name": "",
+      "lastname": "Gregorio",
+      "firstname": "Gabriel",
+      "middlename": "Isidro",
+      "tin": "000-123-456-001",
+      "id": "9fb99009-3bbe-4888-9835-4878769e5b9a"
+    }
+  ],
+  "land_reference": {
+    "city": "San Pablo",
+    "province": "Laguna",
+    "street": "322",
+    "brgy": "SOLEDAD",
+    "td": "06-0077-1234",
+    "area": 267.25,
+    "owner": "John Kramer",
+    "oct_tct_cloa_no": "T-308034",
+    "survey_no": "26611-P12",
+    "lot_no": "27234-G",
+    "blk_no": "PSD-04-2345"
+  },
+  "structural_type": {
+    "type": "type5A",
+    "category": "marketShoppingCenter"
+  },
+  "floors": [
+    {
+      "id": "92416140-d4bd-4ccd-9fda-12db4635046d",
+      "label": "1st floor",
+      "area": "167.25",
+      "walls": ["wood", "plain_cement"],
+      "flooring": ["plain_cement", "marble"],
+      "roofMaterials": ["reinforced_concrete", "g.i."]
+    }
+  ],
+  "property_appraisal": {
+    "ucc": 10000,
+    "bcst": 1672500,
+    "coai": [
+      {
+        "id": 3,
+        "category": "foundation",
+        "type": "type5",
+        "area": 167.25,
+        "noFloors": 1,
+        "material": "",
+        "cost": 0,
+        "affectedArea": 0,
+        "total": 73590,
+        "createdAt": "2025-09-18T05:25:41.233Z",
+        "updatedAt": "2025-09-18T05:25:41.233Z",
+        "property_appraisal_id": 3
+      }
     ],
-    "land_reference": {
-        "td": "arp-land",
-        "owner": "sample person",
-        "street": "322 Purok 4",
-        "brgy": "SAN GREGORIO",
-        "city": "San Pablo City",
-        "province": "Laguna",
-        "oct_tct-cloa_no": "OCT-123",
-        "lot_no": "Lot-123",
-        "blk_no": "blk-123",
-        "survey_no": "sur-123",
-        "area": 2101
-    },
-    "kindBldg": "",
-    "structuralType": {
-        "category": "marketShoppingCenter",
-        "type": "type5A"
-    },
-    "bldgPermit": "",
-    "date_issued": "",
-    "cct": "",
-    "cocIssue": "",
-    "dateConstructed": "",
-    "dateOccupied": "",
-    "buildingAge": "",
-    "noOfStorey": 1,
-    "floors": [],
-    "property_appraisal": {
-        "ucc": "",
-        "bcst": "",
-        "coai": [
-            {
-                "category": "foundation",
-                "type": "type5",
-                "area": 167.25,
-                "noFloors": 1,
-                "material": "vinyl",
-                "cost": 300,
-                "affectedArea": 80
-            }
-        ],
-        "totalConstructionCost": "",
-        "depreciationRate": "",
-        "yearsToDepreciate": "",
-        "depreciationCost": "",
-        "marketValue": ""
-    },
-    "property_assessment": {
-        "actualUse": "commercial",
-        "assessmentLevel": "",
-        "assessedValue": "",
-        "marketValue": ""
-    },
-    "taxable": "",
-    "effectivityOfAssessment": "",
-    "quarter": "",
-    "yearAssessment": "",
-    "appraisers": {},
-    "approvedBy": "",
-    "dateApproved": "",
-    "memoranda": "",
-    "dateEncoded": "",
-    "encoderName": "",
-    "previous_records":{}
+
+    "totalConstructionCost": "",
+    "depreciationRate": 0,
+    "yearsToDepreciate": 0,
+    "depreciationCost": 0,
+    "marketValue": 1746090,
+    "total_percent_depreciation": 0
+  },
+
+  "property_assessment": {
+    "actualUse": "commercial",
+    "assessmentLevel": 60,
+    "assessedValue": 1047654,
+    "marketValue": 1746090
+  },
+
+  "kindBldg": "commercial",
+  "bldg_permit": "Permit No.",
+  "bldg_permit_date_issued_on": "2025-09-14T16:00:00.000Z",
+  "cct": "cct",
+  "coc_issued_on": "2025-09-14T16:00:00.000Z",
+  "dateConstructed": "2025-09-14T16:00:00.000Z",
+  "dateOccupied": "2025-09-14T16:00:00.000Z",
+  "marketValue": 1746090,
+  "noOfStorey": "1",
+  "taxable": "true",
+  "quarter": "4th Quarter",
+  "effectivity_assessment": "2025-09-14T16:00:00.000Z",
+  "appraisers": {},
+  "approvedBy": "",
+  "dateApproved": "2025-09-14T16:00:00.000Z",
+  "encoderName": "",
+  "dateEncoded": "2025-09-14T16:00:00.000Z",
+  "memoranda": "memoranda",
+  "arpInput": "123",
+  "pinInput": "123",
+  "buildingAge": "NEW",
+  "cetificateOfOccupancyIssuedOn": "coo issue on",
+  "total_floor_areas": 167.25,
+  "total_percent_depreciation": 0,
+
+  "previous_records": {
+    "owner_name": "Lorem Impus",
+    "pin_no": "130-06-0077-0011",
+    "arp_no": "130-06-0077-0011",
+    "td_arp": "130-06-0077-0011",
+    "total_assessed_value": 30000,
+    "effectivity_assessment": "2025-09-17T16:00:00.000Z"
+  },
+
+  "totalFloorArea": 167.25
 }

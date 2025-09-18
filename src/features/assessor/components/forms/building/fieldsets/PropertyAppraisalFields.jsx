@@ -70,7 +70,7 @@ function PropertyAppraisalFields({ control, readOnly }) {
   useEffect(() => {
     // if (!uccSubTotal && !depreciationCost) return;
     const subTotal = Number(uccSubTotal) || 0;
-    const totalAdditionalCost = sumByField(additionalItems, "sub_total");
+    const totalAdditionalCost = sumByField(additionalItems, "total");
     const depCost = Number(depreciationCost) || 0;
 
     const marketVal = (subTotal + totalAdditionalCost) - depCost
@@ -84,7 +84,7 @@ function PropertyAppraisalFields({ control, readOnly }) {
 
   useEffect(() => {
     const subTotal = Number(uccSubTotal) || 0;
-    const totalAdditionalCost = sumByField(additionalItems, "sub_total");
+    const totalAdditionalCost = sumByField(additionalItems, "total");
     const depCost = Number(depreciationCost) || 0;
 
     const marketVal = (subTotal + totalAdditionalCost) - depCost

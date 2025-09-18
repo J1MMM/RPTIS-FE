@@ -17,6 +17,7 @@ import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
 import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
 
 import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
+import BldgTaxabilityFields from "../fieldsets/BldgTaxabilityFields";
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
@@ -89,7 +90,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
         <AdditionalItemsFields readOnly={readOnly} control={buildingFormControl} />
 
         <BuildingAssessmentFields readOnly={readOnly} />
-        <TaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <BldgTaxabilityFields readOnly={readOnly} control={buildingFormControl} />
         <TextInput
           multiline
           shrink={true}
