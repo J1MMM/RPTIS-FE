@@ -18,6 +18,8 @@ import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
 import BldgTaxabilityFields from "../fieldsets/BldgTaxabilityFields";
 import DateInput from "../../../../../../components/ui/DateInput";
 import Row from "../../../../../../components/ui/Row";
+import StyledFieldset from "../../../../../../components/ui/StyledFieldset";
+import RecommendingFields from "../fieldsets/RecommendingFields";
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
@@ -90,22 +92,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
 
         <BuildingAssessmentFields readOnly={readOnly} />
         <BldgTaxabilityFields readOnly={readOnly} control={buildingFormControl} />
-        {/* <StyledFieldset title="Approved by"> */}
-        <Row>
-          <TextInput
-            readOnly={readOnly}
-            control={buildingFormControl}
-            label="City Assessor"
-            name={FIELDS.APPROVED_BY}
-          />
-          <DateInput
-            readOnly={readOnly}
-            control={buildingFormControl}
-            label="Date"
-            name={FIELDS.DATE_APPROVED}
-          />
-        </Row>
-        {/* </StyledFieldset> */}
+        <RecommendingFields control={buildingFormControl} readOnly={readOnly} />
 
         <TextInput
           multiline

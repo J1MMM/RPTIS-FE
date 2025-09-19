@@ -2,6 +2,7 @@ import { Stack } from "@mui/material";
 import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import { StyledFieldset, DateInput, SelectField, TextInput } from "@components/ui";
+import Row from "../../../../../../components/ui/Row";
 
 function PropertyInfoFields({ control, readOnly }) {
   return (
@@ -52,19 +53,20 @@ function PropertyInfoFields({ control, readOnly }) {
         />
       </Stack>
       <Stack direction="row" gap={1}>
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          label="OCT/TCT/No."
-          name={FIELDS.OCT_TCT_NO}
-        />
-        <DateInput readOnly={readOnly} control={control} label="Date" name={FIELDS.DATE} />
-      </Stack>
-      <Stack direction="row" gap={1}>
+        <Row>
+
+          <TextInput
+            readOnly={readOnly}
+            control={control}
+            label="OCT/TCT/No."
+            name={FIELDS.OCT_TCT_NO}
+          />
+          <DateInput readOnly={readOnly} control={control} label="Date" name={FIELDS.DATE} />
+        </Row>
         <TextInput readOnly={readOnly} control={control} label="Lot No" name={FIELDS.LOT_NO} />
-        <TextInput readOnly={readOnly} control={control} label="Block No." name={FIELDS.BLOCK_NO} />
       </Stack>
       <Stack direction="row" gap={1}>
+        <TextInput readOnly={readOnly} control={control} label="Block No." name={FIELDS.BLOCK_NO} />
         <TextInput
           readOnly={readOnly}
           control={control}

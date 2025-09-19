@@ -33,7 +33,7 @@ function AddLandMarketValModal({
 }) {
 
   const FILTERED_LAND_APPRAISAL = landappraisals?.filter((row) => row?.adjustments?.length == 0 || !row?.adjustments) || [];
-  const selectedRowEmpty = JSON.stringify(seletedRowData) === JSON.stringify(APPRAISAL_FORM_DEFAULTs);
+  const selectedRowEmpty = JSON.stringify(seletedRowData) === JSON.stringify(APPRAISAL_FORM_DEFAULT);
   const [inputArea, unitValue] = useWatch({ control: selControl, name: [FIELDS.INPUT_AREA, FIELDS.LAND_UNIT_VALUE] });
 
   const handleSelectRow = (row, value) => {
