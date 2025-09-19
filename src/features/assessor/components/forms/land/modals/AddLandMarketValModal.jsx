@@ -7,13 +7,14 @@ import SubmitButton from "@components/ui/SubmitButton";
 import ContainerModal from "@components/shared/ContainerModal";
 import CancelButton from "@components/ui/CancelButton";
 // Feature-specific constants & utils
-import { FIELDS } from "../../../../constants/fieldNames";
-import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/land/default";
 import { computeStrippingFields } from "../../../../utils/computeStrippingFields";
 import SelectAppraisalTable from "../../../tables/land/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
 import { ArrowUpDown } from "lucide-react";
+import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/land/default";
 
 function AddLandMarketValModal({
   open,
@@ -32,7 +33,7 @@ function AddLandMarketValModal({
 }) {
 
   const FILTERED_LAND_APPRAISAL = landappraisals?.filter((row) => row?.adjustments?.length == 0 || !row?.adjustments) || [];
-  const selectedRowEmpty = JSON.stringify(seletedRowData) === JSON.stringify(APPRAISAL_FORM_DEFAULT);
+  const selectedRowEmpty = JSON.stringify(seletedRowData) === JSON.stringify(APPRAISAL_FORM_DEFAULTs);
   const [inputArea, unitValue] = useWatch({ control: selControl, name: [FIELDS.INPUT_AREA, FIELDS.LAND_UNIT_VALUE] });
 
   const handleSelectRow = (row, value) => {

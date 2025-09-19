@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { SAMPLE_DATA } from "../constants/defaultValues";
 import axios from "../../../api/axios";
+import { SAMPLE_DATA } from "../../../../tmp/sampleBldgRes";
 
 const AssessorContext = createContext({});
 

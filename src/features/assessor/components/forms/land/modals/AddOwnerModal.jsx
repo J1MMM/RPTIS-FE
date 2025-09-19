@@ -123,7 +123,7 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
               onChange={() => {
                 setValue("province", "");
                 setValue("city", "");
-                setValue("barangay", "");
+                setValue("brgy", "");
               }}
               options={regionsOptions}
 
@@ -136,7 +136,7 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
               options={provinceOptions}
               onChange={() => {
                 setValue("city", "");
-                setValue("barangay", "");
+                setValue("brgy", "");
               }}
             />
           </Row>
@@ -148,14 +148,14 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
               label="City / Municipality"
               options={cityOptions}
               onChange={() => {
-                setValue("barangay", "");
+                setValue("brgy", "");
               }}
             />
 
             <SelectField
               disabled={isEmptyArray(barangayOptions)}
               control={control}
-              name="barangay"
+              name="brgy"
               label="Barangay"
               options={barangayOptions}
             />

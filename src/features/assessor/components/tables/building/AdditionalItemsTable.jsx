@@ -2,12 +2,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { DATA_GRID_STYLE } from "@constants/tableStyles";
 import { IconButton, Stack, Typography } from "@mui/material";
 import { X } from "lucide-react";
-import { FIELDS } from "../../../constants/fieldNames";
-import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
-import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
-import { sumByField } from "../../../../../utils/math";
-import { ADDITIONAL_ITEMS_TABLE_COLUMN } from "../../../constants/tableColumns";
-import { formatPeso } from "../../../../../utils/formatters";
+import { sumByField } from "@utils/math";
+import { ADDITIONAL_ITEMS_TABLE_COLUMN } from "../../../constants/building/table-columns";
+import { formatPeso } from "@utils/formatters";
+import { DATA_GRID_INITIAL_STATE, LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
 
 const columnProps = {
   field: "actions",

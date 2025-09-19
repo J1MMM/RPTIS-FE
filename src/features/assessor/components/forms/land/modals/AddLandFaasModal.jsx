@@ -1,6 +1,6 @@
 import { Button, Stack } from "@mui/material";
 import ContainerModal from "@components/shared/ContainerModal";
-import SelectField from "@components/ui/SelectField";
+import { TextInput, SelectField } from "@components/ui";
 import OwnerInfoFields from "../fieldsets/OwnerInfoFields";
 import PropertyInfoFields from "../fieldsets/PropertyInfoFields";
 import LandBounderiesFields from "../fieldsets/LandBounderiesFields";
@@ -8,14 +8,12 @@ import LandAppraisalFields from "../fieldsets/LandAppraisalFields";
 import LandMarketValueFields from "../fieldsets/LandMarketValueFields";
 import AssessmentFields from "../fieldsets/AssessmentFields";
 import TaxabilityFields from "../fieldsets/TaxabilityFields";
-import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { ArrowLeftRight, Edit, Landmark, Printer, Split, SplitSquareHorizontal, } from "lucide-react";
+import PreviousRecFields from "../fieldsets/PreviousRecFields";
+import { TRANSACTION_CODE } from "../../../../constants/shared/dropdown";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { ArrowLeftRight, Edit, Landmark, Printer, Split, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
-import { useEffect } from "react";
-import PreviousRecFields from "../fieldsets/PreviousRecFields";
-import TextInput from "../../../../../../components/ui/TextInput";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: landFormControl } = useFormContext();

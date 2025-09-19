@@ -1,3 +1,4 @@
+import { FileText, } from "lucide-react";
 import { Stack } from "@mui/material";
 import ContainerModal from "@components/shared/ContainerModal";
 import SelectField from "@components/ui/SelectField";
@@ -5,10 +6,10 @@ import SubmitButton from "@components/ui/SubmitButton";
 import CancelButton from "@components/ui/CancelButton";
 import NumberInput from "@components/ui/NumberInput";
 import { ADORNMENTS } from "@constants/adornments";
-import { CLASSIFICATION_OPTIONS, SUBCLASS_OPTIONS } from "../../../../constants/dropdownOptions";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
-import { FileText, } from "lucide-react";
+import { SUBCLASS_OPTIONS } from "../../../../constants/land/dropdown";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import TextInput from "@components/ui/TextInput";
+import { CLASSIFICATION_OPTIONS } from "../../../../constants/shared/dropdown";
 
 export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled }) => {
   const classification = watch(FIELDS.LAND_CLASSIFICATION);

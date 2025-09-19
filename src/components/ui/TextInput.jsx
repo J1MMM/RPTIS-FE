@@ -24,12 +24,14 @@ function TextInput({
   isNumeric = false,
   isPercent = false,
   rules = {},
+  defaultValue,
 }) {
   return (
     <Controller
       key={name}
       name={name}
       control={control}
+      defaultValue={defaultValue}
       rules={{
         ...rules,
         ...(required && { required: `${label || name} is required` }),

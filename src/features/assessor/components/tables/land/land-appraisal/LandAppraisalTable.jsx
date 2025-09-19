@@ -1,13 +1,11 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { LAND_INNER_TABLE_WIDTH } from "../../../../constants/styles";
-import { DATA_GRID_STYLE } from "@constants/tableStyles";
+import { LAND_INNER_TABLE_WIDTH, DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
 import { IconButton } from "@mui/material";
 import LandAppraisalTableFooter from "./LandAppraisalTableFooter";
 import { X } from "lucide-react";
-import { APPRAISAL_COLUMN } from "../../../../constants/tableColumns";
-import { sumByField } from "../../../../../../utils/math";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { DATA_GRID_INITIAL_STATE } from "../../../../constants/defaultValues";
+import { APPRAISAL_COLUMN } from "../../../../constants/land/table-columns";
+import { sumByField } from "@utils/math";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 
 const columnProps = {
   field: "actions",

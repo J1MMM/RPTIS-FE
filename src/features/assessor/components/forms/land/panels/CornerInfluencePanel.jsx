@@ -1,6 +1,6 @@
 import { Collapse, Stack } from "@mui/material";
 import DividerHeading from "@components/ui/DividerHeading";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
 import TextInput from "@components/ui/TextInput";
 import { formatCamelCase } from "../../../../../../utils/formatters";

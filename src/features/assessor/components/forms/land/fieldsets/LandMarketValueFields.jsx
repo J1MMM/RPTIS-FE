@@ -5,12 +5,13 @@ import { toast } from "react-toastify";
 import { ArrowUpDown } from "lucide-react";
 import { LandMarketValueTable } from "../../../tables/land/market-value-adjustment/LandMarketValueTable";
 import { useEffect, useState } from "react";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/land/default";
 import { sumByField } from "../../../../../../utils/math";
 import { normalizeNonStripping, normalizeStripping, updateAppraisals } from "../../../../utils/submitAdjustmentComputations";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddLandMarketValModal from "../modals/AddLandMarketValModal";
+import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/land/default";
 
 function LandMarketValueFields({ readOnly }) {
   const [adjustmentRows, setAdjustmentRows] = useState([])

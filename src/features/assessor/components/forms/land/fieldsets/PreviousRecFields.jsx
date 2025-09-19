@@ -1,7 +1,5 @@
-import { FIELDS } from "../../../../constants/fieldNames";
-import { DateInput, NumberInput, StyledFieldset } from "@components/ui";
-import TextInput from "../../../../../../components/ui/TextInput";
-import Row from "../../../../../../components/ui/Row";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { Row, TextInput, DateInput, NumberInput, StyledFieldset } from "@components/ui";
 
 function PreviousRecFields({ control, readOnly }) {
   return (

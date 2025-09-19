@@ -1,14 +1,14 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { Divider, InputAdornment } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
 import NumberInput from "@components/ui/NumberInput";
 import { ADORNMENTS } from "@constants/adornments";
 import Row from "../../../../../../components/ui/Row";
 import { useEffect, useState } from "react";
 import { SYMBOLS } from "../../../../../../constants/symbols";
-import { structuralType } from "../../../../constants/structuralType";
+import { structuralType } from "../../../../constants/building/lookup";
 import { sumByField } from "../../../../../../utils/math";
 
 function PropertyAppraisalFields({ control, readOnly }) {

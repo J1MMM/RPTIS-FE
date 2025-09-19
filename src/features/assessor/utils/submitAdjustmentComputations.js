@@ -1,4 +1,4 @@
-import { FIELDS } from "../constants/fieldNames";
+import { FIELDS } from "../constants/shared/fieldNames";
 import { sumByField } from "../../../utils/math";
 
 export const normalizeStripping = (strippingFields) => {

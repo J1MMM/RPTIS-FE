@@ -1,11 +1,7 @@
 import { Stack } from "@mui/material";
-import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
-import SelectField from "../../../../../../components/ui/SelectField";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
-import DateInput from "../../../../../../components/ui/DateInput";
-
+import { StyledFieldset, DateInput, SelectField, TextInput } from "@components/ui";
 
 function PropertyInfoFields({ control, readOnly }) {
   return (

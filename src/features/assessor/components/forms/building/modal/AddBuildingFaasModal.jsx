@@ -1,13 +1,11 @@
 import { Button, Stack } from "@mui/material";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, } from "react-hook-form";
 import { ArrowLeftRight, Building2, Edit, Printer, Split } from "lucide-react";
 import { SelectField, TextInput } from "@components/ui";
 import ContainerModal from "@components/shared/ContainerModal";
 import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
-import TaxabilityFields from "../../land/fieldsets/TaxabilityFields";
-import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { logger } from "../../../../../../utils/logger";
+import { TRANSACTION_CODE } from "../../../../constants/shared/dropdown";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import BuildingLocFields from "../fieldsets/BuildingLocFields";
 import BuildingGenDescFields from "../fieldsets/BuildingGenDescFields";
 import StructuralMaterialFields from "../fieldsets/StructuralMaterialFields";
@@ -18,10 +16,11 @@ import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
 
 import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
 import BldgTaxabilityFields from "../fieldsets/BldgTaxabilityFields";
+import DateInput from "../../../../../../components/ui/DateInput";
+import Row from "../../../../../../components/ui/Row";
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
-  logger("data", useWatch({ control: buildingFormControl }))
 
   const handleAutoFill = () => {
     reset(seedBldgReq)
@@ -91,6 +90,23 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
 
         <BuildingAssessmentFields readOnly={readOnly} />
         <BldgTaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        {/* <StyledFieldset title="Approved by"> */}
+        <Row>
+          <TextInput
+            readOnly={readOnly}
+            control={buildingFormControl}
+            label="City Assessor"
+            name={FIELDS.APPROVED_BY}
+          />
+          <DateInput
+            readOnly={readOnly}
+            control={buildingFormControl}
+            label="Date"
+            name={FIELDS.DATE_APPROVED}
+          />
+        </Row>
+        {/* </StyledFieldset> */}
+
         <TextInput
           multiline
           shrink={true}

@@ -1,8 +1,6 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { OWNER_INFO_TABLE_COLUMN } from "../../../../constants/tableColumns";
-import { DATA_GRID_INITIAL_STATE } from "../../../../constants/defaultValues";
-import { LAND_INNER_TABLE_WIDTH } from "../../../../constants/styles";
-import { DATA_GRID_STYLE } from "@constants/tableStyles";
+import { OWNER_INFO_TABLE_COLUMN } from "../../../../constants/shared/table-columns";
+import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE, LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
 import { IconButton } from "@mui/material";
 import { X } from "lucide-react";
 

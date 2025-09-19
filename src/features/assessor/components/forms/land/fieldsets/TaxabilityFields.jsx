@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { RadioInput, DateInput, SelectField, StyledFieldset } from "@components/ui";
-import { QUATER_OPTIONS, TAXABLE_OPTIONS } from "../../../../constants/dropdownOptions";
+import { QUATER_OPTIONS, TAXABLE_OPTIONS } from "../../../../constants/shared/dropdown";
 
 function TaxabilityFields({ control, readOnly }) {
   return (

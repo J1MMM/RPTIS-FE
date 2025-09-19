@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import { LAND_DEFAULT_FIELD } from "../constants/defaultValues";
 import { useForm } from "react-hook-form";
+import { LAND_DEFAULT_FIELD } from "../constants/land/default";
 
 const FormContext = createContext({});
 

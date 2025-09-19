@@ -1,11 +1,9 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { BLDG_ASSESSMENT_COLUMNS } from "../../../constants/tableColumns";
-import { DATA_GRID_INITIAL_STATE } from "../../../constants/defaultValues";
-import { LAND_INNER_TABLE_WIDTH } from "../../../constants/styles";
-import { DATA_GRID_STYLE } from "@constants/tableStyles";
+import { BLDG_ASSESSMENT_COLUMNS } from "../../../constants/building/table-columns";
+import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE, LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
 import { MenuItem, Select } from "@mui/material";
-import { FIELDS } from "../../../constants/fieldNames";
-import { CLASSIFICATION_OPTIONS } from "../../../constants/dropdownOptions";
+import { FIELDS } from "../../../constants/shared/fieldNames";
+import { CLASSIFICATION_OPTIONS } from "../../../constants/shared/dropdown";
 import { useWatch } from "react-hook-form";
 import { sumByField } from "@utils/math";
 

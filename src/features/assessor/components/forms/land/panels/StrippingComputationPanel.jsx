@@ -3,7 +3,7 @@ import DividerHeading from "@components/ui/DividerHeading";
 import TextInput from "@components/ui/TextInput";
 import NumberInput from "@components/ui/NumberInput";
 import StrippingAdjustmentList from "../fieldsets/StrippingAdjustmentList";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { ADORNMENTS } from "@constants/adornments";
 
 function StrippingComputationPanel({ open, selectedRowEmpty, strippingFields, selControl }) {

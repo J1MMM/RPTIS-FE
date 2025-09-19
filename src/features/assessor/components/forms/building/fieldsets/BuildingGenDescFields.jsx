@@ -1,7 +1,8 @@
 import { Stack } from "@mui/material";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { TextInput, Row, DateInput, SelectField, StyledFieldset } from "@components/ui/";
-import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
+import { BUILDING_TYPE_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/building/dropdown";
+import { CLASSIFICATION_OPTIONS } from "../../../../constants/shared/dropdown";
 
 function BuildingGenDescFields({ control, readOnly }) {
 
