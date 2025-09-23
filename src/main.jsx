@@ -4,24 +4,20 @@ import App from "./App.jsx";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./styles/theme.jsx";
 import { AuthProvider } from "./context/AuthProvider.jsx";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { DataProvider } from "./context/DataProvider.jsx";
 import { ConfirmProvider } from "./context/ConfirmProvider.jsx";
 
-const queryClient = new QueryClient({});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <DataProvider>
-          <ThemeProvider theme={theme}>
-            <ConfirmProvider>
-              <App />
-            </ConfirmProvider>
-          </ThemeProvider>
-        </DataProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <DataProvider>
+        <ThemeProvider theme={theme}>
+          <ConfirmProvider>
+            <App />
+          </ConfirmProvider>
+        </ThemeProvider>
+      </DataProvider>
+    </AuthProvider>
   </StrictMode>
 );
