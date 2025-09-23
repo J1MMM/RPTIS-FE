@@ -119,6 +119,7 @@ function BuildingLocFields({ control, readOnly }) {
 
       <Stack direction="row" gap={1}>
         <TextInput
+          readOnly={readOnly}
           control={control}
           label="TD / ARP NO."
           name={FIELDS.TD_ARP_REF}

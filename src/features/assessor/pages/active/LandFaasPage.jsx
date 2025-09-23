@@ -14,6 +14,8 @@ import useConfirm from "../../../../hooks/useConfirm";
 import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
 import PrintablesMenu from "../../components/forms/land/modals/printableModal/PrintablesMenu";
 import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
+import { capitalizeFirstLetter } from "../../../../utils/formatters";
+import axios from "../../../../api/axios";
 // import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 
 function LandFaasPage() {
@@ -33,25 +35,23 @@ function LandFaasPage() {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      // const response = await axios.post('/faasLand', data)
+      const response = await axios.post('/faasLand', data)
       setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!", toastConfig);
+      toast.success("Land FAAS added successfully!")
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      toast.error("Something went wrong while submitting.", toastConfig);
+      toast.error(`${capitalizeFirstLetter(error.response.data?.message)}` || "Something went wrong while submitting.");
     } finally {
       setShowConfirmation(false);
     }
   };
+
   const handleAddBtnClick = () => {
     setFormMode("add");
     setAddModalActive(true);
 
   };
-
-
 
   const handleShowDetails = (params) => {
     setFormMode("view")
@@ -114,7 +114,6 @@ function LandFaasPage() {
     };
   }, [open, isDirty]);
 
-
   return (
     <>
       <FormProvider {...methods}>
@@ -155,16 +154,8 @@ function LandFaasPage() {
           handleForm={handleClick}
         />
 
-        <PrintableLandFaasFormModal
-          open={printFaasModalActive}
-          onClose={handleClosePrintModal}
-        />
-
-        <PrintableTaxdecFormModal
-          open={printTacdecModalActive}
-          onClose={handleClosePrintModal}
-        />
-
+        <PrintableLandFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal} />
+        <PrintableTaxdecFormModal open={printTacdecModalActive} onClose={handleClosePrintModal} />
         <PrintablesMenu
           open={open}
           handleClose={handleClose}

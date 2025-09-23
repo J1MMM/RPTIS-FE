@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
-import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
@@ -41,8 +40,9 @@ function BuildingFaasPage() {
       console.log(formattedData);
 
       const response = await axios.post('/faasBldg', formattedData)
+      console.log(response.data);
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!");
+      toast.success("Building FAAS added successfully!");
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -125,6 +125,8 @@ function BuildingFaasPage() {
         />
 
         <AddBuildingFaasModal
+          formMode={formMode}
+          setFormMode={setFormMode}
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}

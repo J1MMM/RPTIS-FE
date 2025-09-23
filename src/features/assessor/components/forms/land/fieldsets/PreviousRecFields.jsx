@@ -38,6 +38,7 @@ function PreviousRecFields({ control, readOnly }) {
       </Row>
       <Row>
         <NumberInput
+          readOnly={readOnly}
           required={false}
           control={control}
           label="Total Assessed Value"
@@ -45,6 +46,7 @@ function PreviousRecFields({ control, readOnly }) {
         />
 
         <DateInput
+          readOnly={readOnly}
           required={false}
           yearOnly
           control={control}

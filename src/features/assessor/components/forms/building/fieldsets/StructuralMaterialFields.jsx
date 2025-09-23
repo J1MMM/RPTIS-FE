@@ -67,6 +67,7 @@ function StructuralMaterialFields({ control, readOnly }) {
           }}
         />
         <SelectFieldMulti
+          readOnly={readOnly}
           control={control}
           label="Roof"
           name={`floors.0.roofMaterials`}
@@ -90,6 +91,7 @@ function StructuralMaterialFields({ control, readOnly }) {
             <Box key={floor?.label} display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
               <Typography variant="body1" color={grey[900]} whiteSpace={"nowrap"} textAlign={"end"} alignSelf={"center"} width={80} >{floor?.label}:</Typography>
               <SelectFieldMulti
+                readOnly={readOnly}
                 size="small"
                 control={control}
                 label="Flooring"
@@ -98,6 +100,7 @@ function StructuralMaterialFields({ control, readOnly }) {
               />
 
               <SelectFieldMulti
+                readOnly={readOnly}
                 size="small"
                 control={control}
                 label="Walls & Partition"

@@ -10,6 +10,7 @@ function BuildingGenDescFields({ control, readOnly }) {
     <StyledFieldset title="General Description">
       <Stack direction="row" gap={1}>
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.KIND_OF_BUILDING}
           label="Kind of Building"
@@ -25,12 +26,14 @@ function BuildingGenDescFields({ control, readOnly }) {
       </Stack>
       <Stack direction="row" gap={1}>
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.STRUCTURAL_TYPE}
           label="Structural Classification"
           options={STRUC_CLASS_OPTIONS}
         />
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.STRUCTURAL_CATEGORY}
           label="Building/Occupancy Type"

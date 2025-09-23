@@ -14,12 +14,15 @@ import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { ArrowLeftRight, Edit, Landmark, Printer, Split, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
+import seedLandReq from "../../../../../../../tmp/land_req.json";
 
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
-  const { control: landFormControl } = useFormContext();
+  const { control: landFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
-  logger("data", useWatch({ control: landFormControl }))
-
+  // logger("data", useWatch({ control: landFormControl }))
+  const handleAutoFill = () => {
+    reset(seedLandReq)
+  }
   return (
     <>
       <ContainerModal
@@ -62,6 +65,8 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
 
         }
       >
+        <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button>
+
         <Stack width={230} direction="row" justifyContent="space-between">
           <SelectField
             readOnly={readOnly}
@@ -79,6 +84,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
         <AssessmentFields readOnly={readOnly} />
         <TaxabilityFields readOnly={readOnly} control={landFormControl} />
         <TextInput
+          required={false}
           multiline
           shrink={true}
           rows={3}
