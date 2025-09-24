@@ -1,7 +1,7 @@
 import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { Row, TextInput, DateInput, NumberInput, StyledFieldset } from "@components/ui";
 
-function PreviousRecFields({ control, readOnly }) {
+function BldgPreviousRecFields({ control, readOnly }) {
   return (
     <StyledFieldset title="Record of Superseded Assessments">
       <Row>
@@ -10,14 +10,14 @@ function PreviousRecFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Previous Owner"
-          name={FIELDS.LAND_OWNER_PREV}
+          name={FIELDS.OWNER_PREV}
         />
         <TextInput
           required={false}
           readOnly={readOnly}
           control={control}
           label="PIN No."
-          name={FIELDS.LAND_PIN_NO_PREV}
+          name={FIELDS.PIN_NO_PREV}
         />
       </Row>
       <Row>
@@ -26,14 +26,14 @@ function PreviousRecFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="ARP No."
-          name={FIELDS.LAND_ARP_NO_PREV}
+          name={FIELDS.ARP_NO_PREV}
         />
         <TextInput
           required={false}
           readOnly={readOnly}
           control={control}
           label="T.D. No."
-          name={FIELDS.LAND_ARP_NO_PREV}
+          name={FIELDS.TD_ARP_PREV}
         />
       </Row>
       <Row>
@@ -42,7 +42,7 @@ function PreviousRecFields({ control, readOnly }) {
           required={false}
           control={control}
           label="Total Assessed Value"
-          name={FIELDS.LAND_ASSESSED_VALUE_PREV}
+          name={FIELDS.ASSESSED_VALUE_PREV}
         />
 
         <DateInput
@@ -51,11 +51,11 @@ function PreviousRecFields({ control, readOnly }) {
           yearOnly
           control={control}
           label="Effectivity"
-          name={FIELDS.LAND_EFFECTIVITY_YEAR_PREV}
+          name={FIELDS.EFFECTIVITY_YEAR_PREV}
         />
       </Row>
     </StyledFieldset>
   );
 };
 
-export default PreviousRecFields
+export default BldgPreviousRecFields

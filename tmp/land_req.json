@@ -1,13 +1,13 @@
 {
   "transaction_code": "DC",
-  "arp_no": "06-0077-0007",
+  "arp_no": "06-0077-10023",
   "pin_no": "06-0077-0007",
   "street": "322",
   "brgy": "SOLEDAD",
   "city": "SAN PABLO CITY",
   "province": "LAGUNA",
   "oct_tct": "T-30817",
-  "DATE": "2025-09-18T16:00:00.000Z",
+  "date": "2025-09-18T16:00:00.000Z",
   "lot_no": "28543-G",
   "blk_no": "PSD-04-917156",
   "survey_no": "PSD-04-917156",
@@ -102,12 +102,12 @@
   "east": "e-123",
   "west": "w-123",
   "northeast": "ne-123",
-  "southwest": "sw-123",
-  "southeast": "se-123",
-  "northwest": "nw-123",
+  "southWest": "sw-123",
+  "southEast": "se-123",
+  "northWest": "nw-123",
   "taxable": "true",
-  "quarter": "1st Quarter",
-  "yearAssessment": "2025-09-18T16:00:00.000Z",
+  "effectivity_quarter": "1st Quarter",
+  "effectivity_year": "2025-09-18T16:00:00.000Z",
   "totalMarketValue": 300800,
   "totalAssessedValue": 11890250,
   "propertyAssessments": [
@@ -158,7 +158,7 @@
       "assessed_value": 10520000
     }
   ],
-  "previousRecords": {
+  "previous_records": {
     "owner_name": "Lorem Impus",
     "pin_no": "130-06-0077-0011",
     "arp_no": "130-06-0077-0011",

@@ -6,7 +6,7 @@ import { toast, } from "react-toastify";
 import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
-import { FormProvider, useForm, } from "react-hook-form";
+import { FormProvider, useForm, useWatch, } from "react-hook-form";
 import { LAND_DEFAULT_FIELD } from "../../constants/land/default";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
 import useConfirm from "../../../../hooks/useConfirm";
@@ -30,6 +30,7 @@ function LandFaasPage() {
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
+  console.log(useWatch({ control: methods.control }));
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);

@@ -20,6 +20,7 @@ import DateInput from "../../../../../../components/ui/DateInput";
 import Row from "../../../../../../components/ui/Row";
 import StyledFieldset from "../../../../../../components/ui/StyledFieldset";
 import RecommendingFields from "../fieldsets/RecommendingFields";
+import BldgPreviousRecFields from "../fieldsets/BldgPreviousRecFields";
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
   const { control: buildingFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
@@ -101,7 +102,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
           label="Memoranda"
           name={FIELDS.MEMORANDA}
         />
-        <PreviousRecFields readOnly={readOnly} control={buildingFormControl} />
+        <BldgPreviousRecFields readOnly={readOnly} control={buildingFormControl} />
 
       </ContainerModal >
     </>

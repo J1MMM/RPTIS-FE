@@ -19,7 +19,7 @@ function TaxabilityFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Quarter"
-          name={FIELDS.EFFECTIVITY_QTR}
+          name={FIELDS.LAND_EFFECTIVITY_QTR}
           options={QUATER_OPTIONS}
         />
 
@@ -27,7 +27,7 @@ function TaxabilityFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Year"
-          name={FIELDS.EFFECTIVITY_YEAR}
+          name={FIELDS.LAND_EFFECTIVITY_YEAR}
           yearOnly
         />
 

@@ -8,7 +8,7 @@ export const FIELDS = {
   CITY: "city", // Fixed value
   PROVINCE: "province", // Fixed value
   OCT_TCT_NO: "oct_tct",
-  DATE: "DATE",
+  DATE: "date",
   LOT_NO: "lot_no",
   BLOCK_NO: "blk_no",
   SURVEY_NO: "survey_no",
@@ -21,9 +21,9 @@ export const FIELDS = {
   EAST_BOUNDARY: "east",
   WEST_BOUNDARY: "west",
   NE_BOUNDARY: "northeast",
-  SW_BOUNDARY: "southwest",
-  SE_BOUNDARY: "southeast",
-  NW_BOUNDARY: "northwest",
+  SW_BOUNDARY: "southWest",
+  SE_BOUNDARY: "southEast",
+  NW_BOUNDARY: "northWest",
   // Land Appraisal
   LAND_APPRAISAL: "landappraisals",
   LAND_CLASSIFICATION: "classification",
@@ -48,12 +48,21 @@ export const FIELDS = {
   // TAXABILITY
   TAXABILITY: "taxable",
   // Effectivity of Assessment/Reassessment
+  LAND_EFFECTIVITY_QTR: "effectivity_quarter",
+  LAND_EFFECTIVITY_YEAR: "effectivity_year",
   EFFECTIVITY_QTR: "quarter",
   EFFECTIVITY_YEAR: "yearAssessment",
   BLDG_EFFECTIVITY_YEAR: "effectivity_assessment",
 
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
+  // previous record 
+  LAND_PIN_NO_PREV: "previous_records.pin_no",
+  LAND_ARP_NO_PREV: "previous_records.arp_no",
+  LAND_TD_ARP_PREV: "previous_records.td_no",
+  LAND_ASSESSED_VALUE_PREV: "previous_records.total_assessed_value",
+  LAND_OWNER_PREV: "previous_records.owner_name",
+  LAND_EFFECTIVITY_YEAR_PREV: "previous_records.effectivity_assessment",
 
   //memoranda
   MEMORANDA: "memoranda",
