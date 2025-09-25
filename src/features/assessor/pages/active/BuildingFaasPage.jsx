@@ -11,6 +11,14 @@ import { BUILDING_DEFAULT, LAND_DEFAULT_FIELD } from "../../constants/defaultVal
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
+import PrintableBuildingFaasFormModal from "../../components/forms/building/modal/printableModal/PrintableBuildingFaasFormModal";
+import PrintableBuildingTaxdecFormModal from "../../components/forms/building/modal/printableModal/PrintableBuildingTaxdecFormModal";
+import PrintablesMenu from "../../components/forms/PrintablesMenu";
+// import axios from "../../../../api/axios";
+// import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
+// import { logger } from "../../../../utils/logger";
+// import { capitalizeFirstLetter } from "../../../../utils/formatters";
+// import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
 
 function BuildingFaasPage() {
 
@@ -21,6 +29,8 @@ function BuildingFaasPage() {
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
+  const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
+  const [printTaxdecModalActive, setPrintTaxdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
   const [disabled, setDisabled] = useState(false);
 
@@ -68,6 +78,30 @@ function BuildingFaasPage() {
     setAddModalActive(false);
   };
 
+  const handleFaasForm = () => {
+    setPrintFaasModalActive(true);
+  };
+  const handleClosePrintModal = () => {
+    setPrintFaasModalActive(false);
+    setPrintTaxdecModalActive(false);
+  };
+
+  const handleTaxdecForm = () => {
+    setPrintTaxdecModalActive(true);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   useEffect(() => {
     if (!open || !isDirty) return;
 
@@ -111,6 +145,7 @@ function BuildingFaasPage() {
         />
 
         <AddBuildingFaasModal
+        formMode={formMode}
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}
@@ -119,6 +154,17 @@ function BuildingFaasPage() {
             message: "Are you sure you want to add this land FAAS data? It will be saved once confirmed.",
             onConfirm: handleSubmit(onSubmit)
           }))}
+          handleForm={handleClick}
+        />
+
+        <PrintableBuildingFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal}/>
+        <PrintableBuildingTaxdecFormModal open={printTaxdecModalActive} onClose={handleClosePrintModal} />
+        <PrintablesMenu
+          open={open}
+          handleClose={handleClose}
+          anchorEl={anchorEl}
+          handleFaas={handleFaasForm}
+          handleTaxdec={handleTaxdecForm}
         />
       </FormProvider>
     </>
