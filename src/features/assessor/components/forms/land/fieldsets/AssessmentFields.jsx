@@ -4,6 +4,7 @@ import { LandPropAssTable } from "../../../tables/land/property-assessment/LandP
 import { sumByField } from "@utils/math";
 import { useFormContext, useWatch } from "react-hook-form";
 import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/land/lookup";
+import { logger } from "../../../../../../utils/logger";
 
 const assLevel = {
   residential: 15,
@@ -17,8 +18,10 @@ function AssessmentFields({ readOnly }) {
   const formData = useWatch({ control: landFormControl })
 
   const handleActualUseChange = (id, actualUseVal) => {
-    const updatedAppraisals = formData["propertyAssessments"].map((row) =>
-      row.id === id
+    const updatedAppraisals = formData["propertyAssessments"].map((row) => {
+      logger("ROWWWWWWWWWWWWWWW", row)
+
+      return row.id === id
         ? {
           ...row,
           [FIELDS.LAND_ACTUAL_USE]: actualUseVal,
@@ -26,10 +29,14 @@ function AssessmentFields({ readOnly }) {
           [FIELDS.LAND_ASSESSED_VALUE]: (ACTUAL_USE_EQUIVALENTS[actualUseVal?.toLowerCase()] ?? 0) * (row[FIELDS.LAND_MARKET_VALUE] ?? 0),
         }
         : row
+    }
+
     );
 
+    logger("UPDATED APPRAISAL", updatedAppraisals)
+
     setLandFormVal("propertyAssessments", updatedAppraisals);
-    setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
+    // setLandFormVal(FIELDS.LAND_APPRAISAL, updatedAppraisals);
     setLandFormVal(FIELDS.TOTAL_ASSESSED_VALUE, sumByField(updatedAppraisals, FIELDS.LAND_ASSESSED_VALUE));
   };
 
