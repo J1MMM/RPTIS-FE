@@ -12,7 +12,7 @@ import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaa
 import useConfirm from "../../../../hooks/useConfirm";
 
 import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
-import PrintablesMenu from "../../components/forms/land/modals/printableModal/PrintablesMenu";
+import PrintablesMenu from "../../components/forms/PrintablesMenu";
 import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import axios from "../../../../api/axios";

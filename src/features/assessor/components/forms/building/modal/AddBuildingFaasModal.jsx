@@ -13,7 +13,6 @@ import PropertyAppraisalFields from "../fieldsets/PropertyAppraisalFields";
 import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
 import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
-
 import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
 import BldgTaxabilityFields from "../fieldsets/BldgTaxabilityFields";
 import DateInput from "../../../../../../components/ui/DateInput";
@@ -21,8 +20,10 @@ import Row from "../../../../../../components/ui/Row";
 import StyledFieldset from "../../../../../../components/ui/StyledFieldset";
 import RecommendingFields from "../fieldsets/RecommendingFields";
 import BldgPreviousRecFields from "../fieldsets/BldgPreviousRecFields";
-export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode }) {
+
+export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: buildingFormControl, reset } = useFormContext();
+
   const readOnly = formMode == "view"
 
   const handleAutoFill = () => {
@@ -54,7 +55,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
                 Cancel
               </Button>
               <Stack direction={"row"} alignItems={"center"} gap={1}>
-                <Button startIcon={<Printer size={18} />} size="small" variant="outlined" disabled={disabled}>
+                <Button startIcon={<Printer size={18} />} onClick={handleForm} size="small" variant="outlined" disabled={disabled}>
                   Forms
                 </Button>
                 <Button startIcon={<Split size={18} />} size="small" variant="outlined" disabled={disabled}>

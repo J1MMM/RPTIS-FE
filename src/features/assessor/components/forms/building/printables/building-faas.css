@@ -1,0 +1,24 @@
+.tableContainer {
+    display: grid;
+    grid-template-columns: 4.5fr 1fr 5fr  1fr 1fr 1fr 1fr 5fr 1fr 1fr 1fr 1fr;
+    border: 1px solid black;
+    font-size: smaller;
+
+}
+
+.colSpan {
+    grid-column: span 2;
+}
+
+.tableTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    border: 1px solid black;
+}
+.tableBody {
+    display: flex;
+    align-items: center; 
+    border: 1px solid black;
+}
