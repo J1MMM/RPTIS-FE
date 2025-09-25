@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { LAND_TABLE_COLUMN } from '../../../../constants/tableColumns';
+import { BLDG_TABLE_COLUMN } from '../../../../constants/building/table-columns';
 import { Button } from '@mui/material';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { TableToolbar } from '../../../../../../components/shared';
@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 
 
 function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
-    const columns = useMemo(() => [...LAND_TABLE_COLUMN,
+    const columns = useMemo(() => [...BLDG_TABLE_COLUMN,
     {
         field: "actions",
         headerName: "ACTIONS",
@@ -43,7 +43,7 @@ function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
                 toolbar: () => (
                     <TableToolbar
                         titleText="Building FAAS Records"
-                        // subText="Appraisal and Assessment Data"
+                        totalRows={rows?.length}
                         actionBtn={toolbarButtons}
                     />
                 ),

@@ -6,15 +6,13 @@ import RequireAuth from "./components/auth/RequireAuth.jsx";
 import Layout from "./components/layout/Layout.jsx";
 import LoginPage from "./pages/login/index.jsx";
 import { Missing } from "./pages/404.jsx";
-import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage } from "./features/assessor";
-import "./styles/global.scss";
+import { AssessorPageLayout, ActiveRecordsLayout, LandFaasPage, BuildingFaasPage, MachineryFaasPage } from "./features/assessor";
 import ArchivedRecordsLayout from "./features/assessor/components/layout/ArchivedRecordsLayout.jsx";
-import BuildingFaasPage from "./features/assessor/pages/active/BuildingFaasPage.jsx";
 import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
 import LandTaxPage from "./features/landtax/pages/LandTaxPage.jsx";
 import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.jsx";
 import PendingFaasPage from "./features/assessor/pages/pending/PendingFaasPage.jsx";
-import MachineryFaasPage from "./features/assessor/pages/active/MachineryFaasPage.jsx";
+import "./styles/global.scss";
 
 function App() {
   return (
@@ -59,9 +57,9 @@ function App() {
             <Route path="payment-records" element={<LandTaxPage />} />
           </Route>
 
-          <Route path="cash-division">
-            <Route path="" />
-            <Route path="paidlist" element={<LandFaasPage />} />
+          <Route path="cash-division" element={<AssessorPageLayout />}>
+            <Route index element={<LandFaasPage />} />
+            <Route path="paid" element={<LandFaasPage />} />
           </Route>
         </Route>
         {/* </Route> */}

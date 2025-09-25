@@ -26,7 +26,7 @@ function SelectFieldMulti({
       <InputLabel id={labelId}>{label}</InputLabel>
       <Controller
         name={name}
-        defaultValue=""
+        defaultValue={[]}
         control={control}
         rules={{
           required: `${label || name} is required`,

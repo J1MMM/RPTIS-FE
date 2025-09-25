@@ -7,13 +7,14 @@ import SubmitButton from "@components/ui/SubmitButton";
 import ContainerModal from "@components/shared/ContainerModal";
 import CancelButton from "@components/ui/CancelButton";
 // Feature-specific constants & utils
-import { FIELDS } from "../../../../constants/fieldNames";
-import { APPRAISAL_FORM_DEFAULT, FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/defaultValues";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { FACTOR_TYPES, STRIPPING_FIELDS_DEFAULT } from "../../../../constants/land/default";
 import { computeStrippingFields } from "../../../../utils/computeStrippingFields";
 import SelectAppraisalTable from "../../../tables/land/select-appraisal/SelectAppraisalTable";
 import StrippingComputationPanel from "../panels/StrippingComputationPanel";
 import CornerInfluencePanel from "../panels/CornerInfluencePanel";
 import { ArrowUpDown } from "lucide-react";
+import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/land/default";
 
 function AddLandMarketValModal({
   open,

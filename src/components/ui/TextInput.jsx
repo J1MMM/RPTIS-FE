@@ -24,12 +24,14 @@ function TextInput({
   isNumeric = false,
   isPercent = false,
   rules = {},
+  defaultValue,
 }) {
   return (
     <Controller
       key={name}
       name={name}
       control={control}
+      defaultValue={defaultValue}
       rules={{
         ...rules,
         ...(required && { required: `${label || name} is required` }),
@@ -45,7 +47,7 @@ function TextInput({
           fullWidth
           variant="outlined"
           multiline={multiline}
-          rows={multiline && rows}
+          rows={multiline ? rows : "auto"}
           label={label}
           placeholder={placeholder}
           onChange={(e) => {

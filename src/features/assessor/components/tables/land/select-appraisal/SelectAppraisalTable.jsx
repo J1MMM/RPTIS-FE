@@ -3,8 +3,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Close } from "@mui/icons-material";
 import DividerHeading from "@components/ui/DividerHeading";
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE } from "@constants/tableStyles";
-import { ADJUSTMENT_FACTOR_OPTIONS } from "../../../../constants/dropdownOptions";
-import { APPRAISAL_COLUMN } from "../../../../constants/tableColumns";
+import { ADJUSTMENT_FACTOR_OPTIONS } from "../../../../constants/land/dropdown";
+import { APPRAISAL_COLUMN } from "../../../../constants/land/table-columns";
 
 function SelectAppraisalTable({
   rows,

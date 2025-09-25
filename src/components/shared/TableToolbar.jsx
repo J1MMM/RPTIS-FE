@@ -3,7 +3,7 @@ import { useGridApiContext } from "@mui/x-data-grid";
 import { splitLastWord } from "../../utils/formatters";
 import { Download, Filter, ListFilter } from "lucide-react";
 
-const TableToolbar = ({ titleText, subText, actionBtn }) => {
+const TableToolbar = ({ titleText, subText, actionBtn, totalRows }) => {
   const apiRef = useGridApiContext();
   const { first, last } = splitLastWord(titleText);
 
@@ -45,15 +45,18 @@ const TableToolbar = ({ titleText, subText, actionBtn }) => {
         <Typography variant="h5" fontWeight={600}>
           {first} <span style={{ color: "#9CA3AF" }}>{last}</span>
         </Typography>
-        <Chip
-          sx={{
-            fontWeight: 600,
-            color: "primary.main",
-            bgcolor: "background.default",
-          }}
-          size="small"
-          label="10,932"
-        />
+        {
+          totalRows &&
+          <Chip
+            sx={{
+              fontWeight: 600,
+              color: "primary.main",
+              bgcolor: "background.default",
+            }}
+            size="small"
+            label={`${totalRows} total records`}
+          />
+        }
       </Stack>
       <Stack
         gap={1}

@@ -1,79 +1,54 @@
-import { Box, Button, Checkbox, Divider, FormControl, Grid2, IconButton, InputAdornment, InputLabel, ListItemText, MenuItem, OutlinedInput, Select, Stack, TextField, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
-import SelectField from "../../../../../../components/ui/SelectField";
-import { BRGY_OPTIONS, FLOORING_MATERIALS, ROOF_MATERIALS, WALLS_MATERIALS } from "../../../../../../constants/dropdown";
-import DateInput from "../../../../../../components/ui/DateInput";
-import { Controller, useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
-import { BRGY_CODE, BRGY_DISTRICTS } from "../../../../../../constants/barangayCode";
-import { Grid, UserSearch } from "lucide-react";
-import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import TextInput from "@components/ui/TextInput";
+import { FLOORING_MATERIALS, ROOF_MATERIALS, WALLS_MATERIALS } from "@constants/dropdown";
+import { useFormContext, useWatch } from "react-hook-form";
 import NumberInput from "@components/ui/NumberInput";
-import DividerHeading from "@components/ui/DividerHeading";
 import { ADORNMENTS } from "@constants/adornments";
 import { toOrdinal } from "@utils/formatters";
-import Row from "../../../../../../components/ui/Row";
-import { useEffect, useState } from "react";
+import Row from "@components/ui/Row";
+import { useEffect } from "react";
 import { v4 } from "uuid";
-import { use } from "react";
-import { formatPeso } from "../../../../../../utils/formatters";
 import { grey } from "@mui/material/colors";
-import SelectFieldMulti from "../../../../../../components/ui/SelectFieldMulti";
+import SelectFieldMulti from "@components/ui/SelectFieldMulti";
 
 function StructuralMaterialFields({ control, readOnly }) {
   const { setValue, getValues } = useFormContext()
 
-  const numberOfStoreys = useWatch({
-    control,
-    name: FIELDS.NO_OF_STOREYS
-  })
-
-  const floorAreas = useWatch({
-    control,
-    name: "floorAreas"
-  })
-
-  console.log("fields", floorAreas);
+  const numberOfStoreys = useWatch({ control, name: FIELDS.NO_OF_STOREYS })
+  const floors = useWatch({ control, name: "floors" })
 
   useEffect(() => {
     let numStoreys = parseInt(numberOfStoreys, 10);
     if (isNaN(numStoreys) || numStoreys < 1) numStoreys = 0;
     if (numStoreys > 20) numStoreys = 20;
 
-    const floorAreasArr = [...Array(numStoreys)].map((_, index) => ({
-      id: v4(),
-      label: `${toOrdinal(index + 1)} floor`,
-      area: "",
-      flooring: [],
-      walls: []
-    }));
+    const floorAreasArr = [...Array(numStoreys)].map((_, index) => {
+      const existing = floors?.[index];
+      return {
+        id: existing?.id || v4(),
+        label: `${toOrdinal(index + 1)} floor`,
+        area: existing?.area || "",
+        flooring: existing?.flooring || [],
+        walls: existing?.walls || [],
+        roofMaterials: existing?.roofMaterials || []
+      };
+    });
 
-    setValue("floorAreas", floorAreasArr);
+    setValue("floors", floorAreasArr);
   }, [numberOfStoreys]);
 
   useEffect(() => {
-    const totalArea = Array.isArray(floorAreas)
-      ? floorAreas.reduce((acc, curr) => {
+    const totalArea = Array.isArray(floors)
+      ? floors.reduce((acc, curr) => {
         const area = parseFloat(curr.area);
         return acc + (isNaN(area) ? 0 : area);
       }, 0)
       : 0;
 
     setValue(FIELDS.TOTAL_FLOOR_AREA, totalArea || "")
-  }, [floorAreas])
-
-  const [personName, setPersonName] = useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
+  }, [floors])
 
   return (
     <StyledFieldset title="Structural Materials">
@@ -91,27 +66,14 @@ function StructuralMaterialFields({ control, readOnly }) {
             }
           }}
         />
-        <FormControl fullWidth margin="dense">
-          <InputLabel>Roof</InputLabel>
-          <Select
-            multiple
-            value={personName}
-            onChange={handleChange}
-            input={<OutlinedInput label="Roof" />}
-            renderValue={(selected) =>
-              selected
-                .map((val) => ROOF_MATERIALS.find((opt) => opt.value === val)?.label)
-                .join(', ')
-            }
-          >
-            {ROOF_MATERIALS.map((opt) => (
-              <MenuItem key={opt.label} value={opt.value}>
-                <Checkbox checked={personName.includes(opt.value)} />
-                <ListItemText primary={opt.label} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <SelectFieldMulti
+          readOnly={readOnly}
+          control={control}
+          label="Roof"
+          name={`floors.0.roofMaterials`}
+          options={ROOF_MATERIALS}
+        />
+
         <TextInput
           readOnly={true}
           control={control}
@@ -125,22 +87,24 @@ function StructuralMaterialFields({ control, readOnly }) {
       <Divider sx={{ my: 1, borderColor: "primary.main" }} />
       <Box display="grid" gridTemplateColumns={"repeat(1, 1fr)"} gap={1} >
         {
-          floorAreas && floorAreas?.map((floor, index) => (
+          floors && floors?.map((floor, index) => (
             <Box key={floor?.label} display="grid" gridTemplateColumns="auto 1fr 1fr 1fr" gap={1} borderBottom="1px solid" borderColor="primary.main" pb={1}>
               <Typography variant="body1" color={grey[900]} whiteSpace={"nowrap"} textAlign={"end"} alignSelf={"center"} width={80} >{floor?.label}:</Typography>
               <SelectFieldMulti
+                readOnly={readOnly}
                 size="small"
                 control={control}
                 label="Flooring"
-                name={`floorAreas.${index}.flooring`}
+                name={`floors.${index}.flooring`}
                 options={FLOORING_MATERIALS}
               />
 
               <SelectFieldMulti
+                readOnly={readOnly}
                 size="small"
                 control={control}
                 label="Walls & Partition"
-                name={`floorAreas.${index}.walls`}
+                name={`floors.${index}.walls`}
                 options={WALLS_MATERIALS}
               />
 
@@ -150,7 +114,7 @@ function StructuralMaterialFields({ control, readOnly }) {
                 size="small"
                 maxLength={10}
                 control={control}
-                name={`floorAreas.${index}.area`}
+                name={`floors.${index}.area`}
                 adornment={ADORNMENTS.SQM}
               />
             </Box>

@@ -1,7 +1,6 @@
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { sumByField } from "../../../../../../utils/math";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { sumByField } from "@utils/math";
 import { useFormContext, useWatch } from "react-hook-form";
 import { BuildingAssessmentTable } from "../../../tables/building/BuildingAssessmentTable";
 import { useEffect } from "react";
@@ -9,7 +8,7 @@ import { getBldgAssLvl } from "../../../../utils/getBldgAssLvl";
 
 function BuildingAssessmentFields({ readOnly }) {
   const { control, setValue } = useFormContext()
-  const propertyAssessment = useWatch({ control, name: "property_assessment" }) || {};
+  const propertyAssessment = useWatch({ control, name: FIELDS.BLDG_ASSESSMENT_FIELDS }) || {};
   const { actualUse, marketValue, assessmentLevel, assessedValue } = propertyAssessment
   // set assessLevel and actualUse
   const handleChange = (newActualUse) => {

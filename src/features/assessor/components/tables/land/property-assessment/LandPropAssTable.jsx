@@ -1,14 +1,12 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { PROPERTY_ASS_TABLE_COLUMN } from "../../../../constants/tableColumns";
-import { DATA_GRID_INITIAL_STATE } from "../../../../constants/defaultValues";
-import { LAND_INNER_TABLE_WIDTH } from "../../../../constants/styles";
-import { DATA_GRID_STYLE } from "@constants/tableStyles";
+import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE, LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
 import { MenuItem, Select } from "@mui/material";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import PropAssessmentTableFooter from "./PropAssessmentTableFooter";
-import { CLASSIFICATION_OPTIONS } from "../../../../constants/dropdownOptions";
+import { CLASSIFICATION_OPTIONS } from "../../../../constants/shared/dropdown";
 import { useWatch } from "react-hook-form";
 import { sumByField } from "@utils/math";
+import { PROPERTY_ASS_TABLE_COLUMN } from "../../../../constants/land/table-columns";
 
 export const LandPropAssTable = (props) => {
   const { control, handleChange, readOnly } = props;

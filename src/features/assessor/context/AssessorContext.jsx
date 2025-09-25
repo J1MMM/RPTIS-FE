@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { SAMPLE_DATA } from "../constants/defaultValues";
 import axios from "../../../api/axios";
+import { SAMPLE_DATA } from "../../../../tmp/sampleBldgRes";
 
 const AssessorContext = createContext({});
 
@@ -14,6 +14,9 @@ export const AssessorProvider = ({ children }) => {
       try {
         // const data = await getLandFaasRecords();
         const res = await axios('/faasLandFetch')
+        console.log("res.data.data===========================");
+        console.log(res.data.data);
+
         setLandFaasRecords(res.data.data);
 
       } catch (err) {
@@ -26,6 +29,24 @@ export const AssessorProvider = ({ children }) => {
     };
 
     fetchLandFaas();
+  }, []);
+
+  useEffect(() => {
+    const fetchBldgFaas = async () => {
+      try {
+        const res = await axios('/faasBdlgFetch')
+        console.log(res.data.data);
+        setBuildingFaasRecords(res.data.data);
+
+      } catch (err) {
+        setBuildingFaasRecords([]);
+        console.error("Failed to fetch building FAAS records:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBldgFaas();
   }, []);
 
   return (

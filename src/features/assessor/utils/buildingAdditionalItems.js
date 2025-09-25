@@ -95,5 +95,4 @@ export const additionalItemsComputations = {
     otherIncrement: ({ structuralType }) => {
         return structuralType * 0.75
     },
-    //swimmingPools to be decided
 };

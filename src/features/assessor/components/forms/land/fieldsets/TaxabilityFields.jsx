@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { RadioInput, DateInput, SelectField, StyledFieldset } from "@components/ui";
-import { QUATER_OPTIONS, TAXABLE_OPTIONS } from "../../../../constants/dropdownOptions";
+import { QUATER_OPTIONS, TAXABLE_OPTIONS } from "../../../../constants/shared/dropdown";
 
 function TaxabilityFields({ control, readOnly }) {
   return (
@@ -19,7 +19,7 @@ function TaxabilityFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Quarter"
-          name={FIELDS.EFFECTIVITY_QTR}
+          name={FIELDS.LAND_EFFECTIVITY_QTR}
           options={QUATER_OPTIONS}
         />
 
@@ -27,7 +27,7 @@ function TaxabilityFields({ control, readOnly }) {
           readOnly={readOnly}
           control={control}
           label="Year"
-          name={FIELDS.EFFECTIVITY_YEAR}
+          name={FIELDS.LAND_EFFECTIVITY_YEAR}
           yearOnly
         />
 

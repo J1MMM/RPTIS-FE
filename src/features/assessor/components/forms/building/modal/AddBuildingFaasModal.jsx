@@ -1,13 +1,11 @@
 import { Button, Stack } from "@mui/material";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext, } from "react-hook-form";
 import { ArrowLeftRight, Building2, Edit, Printer, Split } from "lucide-react";
 import { SelectField, TextInput } from "@components/ui";
 import ContainerModal from "@components/shared/ContainerModal";
 import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
-import TaxabilityFields from "../../land/fieldsets/TaxabilityFields";
-import { TRANSACTION_CODE } from "../../../../constants/dropdownOptions";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { logger } from "../../../../../../utils/logger";
+import { TRANSACTION_CODE } from "../../../../constants/shared/dropdown";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import BuildingLocFields from "../fieldsets/BuildingLocFields";
 import BuildingGenDescFields from "../fieldsets/BuildingGenDescFields";
 import StructuralMaterialFields from "../fieldsets/StructuralMaterialFields";
@@ -15,12 +13,22 @@ import PropertyAppraisalFields from "../fieldsets/PropertyAppraisalFields";
 import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import AdditionalItemsFields from "../fieldsets/AdditionalItemsFields";
 import BuildingAssessmentFields from "../fieldsets/BuildingAssessmentFields";
+import seedBldgReq from '../../../../../../../tmp/seedBldgReq.json'
+import BldgTaxabilityFields from "../fieldsets/BldgTaxabilityFields";
+import DateInput from "../../../../../../components/ui/DateInput";
+import Row from "../../../../../../components/ui/Row";
+import StyledFieldset from "../../../../../../components/ui/StyledFieldset";
+import RecommendingFields from "../fieldsets/RecommendingFields";
+import BldgPreviousRecFields from "../fieldsets/BldgPreviousRecFields";
 
 export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
-  const { control: buildingFormControl } = useFormContext();
-  const readOnly = formMode == "view"
-  logger("data", useWatch({ control: buildingFormControl }))
+  const { control: buildingFormControl, reset } = useFormContext();
 
+  const readOnly = formMode == "view"
+
+  const handleAutoFill = () => {
+    reset(seedBldgReq)
+  }
   return (
     <>
       <ContainerModal
@@ -32,6 +40,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
         actionButton={
           formMode !== "view" ?
             <>
+
               <Button size="small" onClick={onClose} variant="outlined">
                 Cancel
               </Button>
@@ -60,10 +69,12 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
                 </Button>
               </Stack>
             </Stack>
-
         }
       >
+        {/* <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button> */}
+
         <Stack width={230} direction="row" justifyContent="space-between">
+
           <SelectField
             readOnly={readOnly}
             control={buildingFormControl}
@@ -73,14 +84,16 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
           />
         </Stack>
         <BuildingLocFields readOnly={readOnly} control={buildingFormControl} />
-        <OwnerInfoFields ownerFieldName={"bldg_ownership"} readOnly={readOnly} />
+        <OwnerInfoFields ownerFieldName={FIELDS.BLDG_OWNERSHIP_FIELD} readOnly={readOnly} />
         <BuildingGenDescFields readOnly={readOnly} control={buildingFormControl} />
         <StructuralMaterialFields readOnly={readOnly} control={buildingFormControl} />
         <PropertyAppraisalFields readOnly={readOnly} control={buildingFormControl} />
         <AdditionalItemsFields readOnly={readOnly} control={buildingFormControl} />
 
         <BuildingAssessmentFields readOnly={readOnly} />
-        <TaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <BldgTaxabilityFields readOnly={readOnly} control={buildingFormControl} />
+        <RecommendingFields control={buildingFormControl} readOnly={readOnly} />
+
         <TextInput
           multiline
           shrink={true}
@@ -90,7 +103,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
           label="Memoranda"
           name={FIELDS.MEMORANDA}
         />
-        <PreviousRecFields readOnly={readOnly} control={buildingFormControl} />
+        <BldgPreviousRecFields readOnly={readOnly} control={buildingFormControl} />
 
       </ContainerModal >
     </>

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { Row, SelectField, NumberInput, TextInput } from "@components/ui"
-import { ADDITION_CEILING_OPTIONS, ADDITION_FLOORING_OPTIONS, ADDITION_HEIGHT_OPTIONS, ADDITION_SPCIAL_OPTIONS, ADDITION_WALL_OPTIONS, ADDITIONAL_FOUNDATION_OPTIONS } from '../../../../constants/dropdownOptions'
+import { ADDITION_CEILING_OPTIONS, ADDITION_FLOORING_OPTIONS, ADDITION_HEIGHT_OPTIONS, ADDITION_SPCIAL_OPTIONS, ADDITION_WALL_OPTIONS, ADDITIONAL_FOUNDATION_OPTIONS } from '../../../../constants/building/dropdown'
 import { Stack } from '@mui/material'
-import { FIELDS } from '../../../../constants/fieldNames';
 import { useFormContext } from 'react-hook-form';
 
 function DynamicItemInputs({ control, itemType }) {
@@ -85,7 +84,7 @@ function DynamicItemInputs({ control, itemType }) {
                         name="storey"
                         options={ADDITION_HEIGHT_OPTIONS}
                     />
-                    <TextInput isNumeric readOnly={true} control={bldgControl} label="Structural Type" name={FIELDS.UNIT_CONSTRUCTION_COST} />
+                    <TextInput isNumeric readOnly={true} control={control} label="Structural Type" name="structuralType" />
                 </Row>
                 <Row>
                     <NumberInput control={control} label="Height" name="height" />

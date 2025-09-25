@@ -1,28 +1,22 @@
 import { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import Button from "@mui/material/Button";
-import { Stack } from "@mui/material";
-import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import useFaasData from "../../hooks/useFaasData";
-import { LAND_TABLE_COLUMN } from "../../constants/tableColumns";
-import useAssessorForm from "../../hooks/useFormContext";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
-import ConfirmationDialog from "../../../../components/shared/ConfirmationDialog";
 import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
-import axios from "../../../../api/axios";
-import { FIELDS } from "../../constants/fieldNames";
 import { v4 } from "uuid";
-import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
-import { LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
+import { FormProvider, useForm, useWatch, } from "react-hook-form";
+import { LAND_DEFAULT_FIELD } from "../../constants/land/default";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
-import { logger } from "../../../../utils/logger";
 import useConfirm from "../../../../hooks/useConfirm";
 
 import PrintableLandFaasFormModal from "../../components/forms/land/modals/printableModal/PrintableLandFaasFormModal";
 import PrintablesMenu from "../../components/forms/PrintablesMenu";
 import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
+import { capitalizeFirstLetter } from "../../../../utils/formatters";
+import axios from "../../../../api/axios";
+import { logger } from "../../../../utils/logger";
 // import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 
 function LandFaasPage() {
@@ -37,30 +31,29 @@ function LandFaasPage() {
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
+  logger("LAND FORM DATA", useWatch({ control: methods.control }))
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      // const response = await axios.post('/faasLand', data)
+      const response = await axios.post('/faasLand', data)
       setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!", toastConfig);
+      toast.success("Land FAAS added successfully!")
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      toast.error("Something went wrong while submitting.", toastConfig);
+      toast.error(`${capitalizeFirstLetter(error.response.data?.message)}` || "Something went wrong while submitting.");
     } finally {
       setShowConfirmation(false);
     }
   };
+
   const handleAddBtnClick = () => {
     setFormMode("add");
     setAddModalActive(true);
 
   };
-
-
 
   const handleShowDetails = (params) => {
     setFormMode("view")
@@ -123,7 +116,6 @@ function LandFaasPage() {
     };
   }, [open, isDirty]);
 
-
   return (
     <>
       <FormProvider {...methods}>
@@ -164,16 +156,8 @@ function LandFaasPage() {
           handleForm={handleClick}
         />
 
-        <PrintableLandFaasFormModal
-          open={printFaasModalActive}
-          onClose={handleClosePrintModal}
-        />
-
-        <PrintableTaxdecFormModal
-          open={printTacdecModalActive}
-          onClose={handleClosePrintModal}
-        />
-
+        <PrintableLandFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal} />
+        <PrintableTaxdecFormModal open={printTacdecModalActive} onClose={handleClosePrintModal} />
         <PrintablesMenu
           open={open}
           handleClose={handleClose}

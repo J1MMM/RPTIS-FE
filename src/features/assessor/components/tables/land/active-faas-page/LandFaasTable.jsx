@@ -1,9 +1,9 @@
+import { useMemo } from 'react';
 import { DataGrid } from '@mui/x-data-grid'
-import { LAND_TABLE_COLUMN } from '../../../../constants/tableColumns';
 import { Button } from '@mui/material';
+import { LAND_TABLE_COLUMN } from '../../../../constants/land/table-columns';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { TableToolbar } from '../../../../../../components/shared';
-import { useMemo } from 'react';
 
 
 function LandFaasTable({ rows, toolbarButtons, handleShowDetails }) {
