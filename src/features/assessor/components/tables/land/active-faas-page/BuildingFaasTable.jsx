@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { BLDG_TABLE_COLUMN } from '../../../../constants/tableColumns';
+import { BLDG_TABLE_COLUMN } from '../../../../constants/building/table-columns';
 import { Button } from '@mui/material';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { TableToolbar } from '../../../../../../components/shared';
@@ -43,7 +43,7 @@ function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
                 toolbar: () => (
                     <TableToolbar
                         titleText="Building FAAS Records"
-                        // subText="Appraisal and Assessment Data"
+                        totalRows={rows?.length}
                         actionBtn={toolbarButtons}
                     />
                 ),

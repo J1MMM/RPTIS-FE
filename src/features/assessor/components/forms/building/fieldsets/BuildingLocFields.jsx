@@ -5,7 +5,7 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { StyledFieldset, TextInput, SelectField, NumberInput } from "@components/ui";
 import { BRGY_OPTIONS } from "../../../../../../constants/dropdown";
 import { BRGY_CODE, BRGY_DISTRICTS } from "../../../../../../constants/barangayCode";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { ADORNMENTS } from "../../../../../../constants/adornments";
 
 function BuildingLocFields({ control, readOnly }) {
@@ -119,6 +119,7 @@ function BuildingLocFields({ control, readOnly }) {
 
       <Stack direction="row" gap={1}>
         <TextInput
+          readOnly={readOnly}
           control={control}
           label="TD / ARP NO."
           name={FIELDS.TD_ARP_REF}

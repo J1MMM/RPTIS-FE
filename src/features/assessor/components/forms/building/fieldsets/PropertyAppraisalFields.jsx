@@ -1,14 +1,14 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import { Divider, InputAdornment } from "@mui/material";
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import TextInput from "../../../../../../components/ui/TextInput";
 import NumberInput from "@components/ui/NumberInput";
 import { ADORNMENTS } from "@constants/adornments";
 import Row from "../../../../../../components/ui/Row";
 import { useEffect, useState } from "react";
 import { SYMBOLS } from "../../../../../../constants/symbols";
-import { structuralType } from "../../../../constants/structuralType";
+import { structuralType } from "../../../../constants/building/lookup";
 import { sumByField } from "../../../../../../utils/math";
 
 function PropertyAppraisalFields({ control, readOnly }) {
@@ -42,19 +42,23 @@ function PropertyAppraisalFields({ control, readOnly }) {
   useEffect(() => {
     if (!strucClass || !buildingType) return;
 
-    const unitConstructionCost = structuralType?.[buildingType]?.[strucClass] || 0;
+    const unitConstructionCost =
+      structuralType?.[buildingType]?.[strucClass] || 0;
 
     const area = Number(totalFloorArea) || 0;
     const subTotal = unitConstructionCost * area;
 
     setValue(FIELDS.UNIT_CONSTRUCTION_COST, unitConstructionCost);
     setValue(FIELDS.UCC_SUB_TOTAL, subTotal);
-  }, [strucClass, buildingType, totalFloorArea, structuralType]);
+  }, [strucClass, buildingType, totalFloorArea, setValue]);
 
   // Calculate total depreciation rate
   useEffect(() => {
-    setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, depRate * depYears);
-  }, [depRate, depYears]);
+    if (!depRate || !depYears) return;
+
+    const percent = depRate * depYears;
+    setValue(FIELDS.TOTAL_PERCENT_DEPRECIATION, percent);
+  }, [depRate, depYears, setValue]);
 
   // Calculate depreciation cost
   useEffect(() => {
@@ -64,33 +68,21 @@ function PropertyAppraisalFields({ control, readOnly }) {
     const depCost = subTotal * (totalDepPercent / 100);
 
     setValue(FIELDS.DEPRECIATION_COST, depCost);
-  }, [uccSubTotal, totalPercentDep]);
+  }, [uccSubTotal, totalPercentDep, setValue]);
 
-  // Calculate market value
-  useEffect(() => {
-    // if (!uccSubTotal && !depreciationCost) return;
-    const subTotal = Number(uccSubTotal) || 0;
-    const totalAdditionalCost = sumByField(additionalItems, "total");
-    const depCost = Number(depreciationCost) || 0;
-
-    const marketVal = (subTotal + totalAdditionalCost) - depCost
-    setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
-
-    setValue(FIELDS.TOTAL_COST_ADD_ITEMS, totalAdditionalCost)
-    setValue(FIELDS.TOTAL_CONSTRUCTION_COST, subTotal + totalAdditionalCost)
-
-    setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
-  }, [uccSubTotal, depreciationCost, additionalItems]);
-
+  // Calculate market value (merged)
   useEffect(() => {
     const subTotal = Number(uccSubTotal) || 0;
     const totalAdditionalCost = sumByField(additionalItems, "total");
     const depCost = Number(depreciationCost) || 0;
 
-    const marketVal = (subTotal + totalAdditionalCost) - depCost
+    const marketVal = subTotal + totalAdditionalCost - depCost;
+
     setValue(FIELDS.BUILDING_MARKET_VALUE, marketVal);
+    setValue(FIELDS.TOTAL_COST_ADD_ITEMS, totalAdditionalCost);
+    setValue(FIELDS.TOTAL_CONSTRUCTION_COST, subTotal + totalAdditionalCost);
     setValue(FIELDS.BLDG_ASSESSED_MARKET_VALUE, marketVal);
-  }, [uccSubTotal, depreciationCost, additionalItems]);
+  }, [uccSubTotal, depreciationCost, additionalItems, setValue]);
 
 
   return (
@@ -156,7 +148,6 @@ function PropertyAppraisalFields({ control, readOnly }) {
       </Row>
       <Row>
         <Row>
-
           <NumberInput
             required={false}
             maxLength={3}
@@ -176,16 +167,13 @@ function PropertyAppraisalFields({ control, readOnly }) {
             name={FIELDS.DEPRECIATION_YEARS}
           />
         </Row>
-        <NumberInput
+        <TextInput
           readOnly={true}
           control={control}
           label="Total % Depreciation"
           name={FIELDS.TOTAL_PERCENT_DEPRECIATION}
           adornment={ADORNMENTS.PERCENT}
-
         />
-
-
       </Row>
       <Row>
         <TextInput

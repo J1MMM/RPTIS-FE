@@ -1,7 +1,6 @@
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { sumByField } from "../../../../../../utils/math";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { sumByField } from "@utils/math";
 import { useFormContext, useWatch } from "react-hook-form";
 import { BuildingAssessmentTable } from "../../../tables/building/BuildingAssessmentTable";
 import { useEffect } from "react";

@@ -8,37 +8,22 @@ export const FIELDS = {
   CITY: "city", // Fixed value
   PROVINCE: "province", // Fixed value
   OCT_TCT_NO: "oct_tct",
-  DATE: "DATE",
+  DATE: "date",
   LOT_NO: "lot_no",
   BLOCK_NO: "blk_no",
   SURVEY_NO: "survey_no",
   // owner info
-
   BLDG_OWNERSHIP_FIELD: "bldg_ownership",
-  OWNERSHIP: "land_ownership",
-  OWNER_FULLNAME: "ownerFullname",
-  OWNER_TIN: "TIN",
-  OWNER_STREET: "Street",
-  OWNER_BARANGAY: "ownerBrgy",
-  OWNER_CITY: "City",
-  OWNER_PROVINCE: "Province",
-  // admin info
-  ADMINISTRATOR_FULLNAME: "administratorFullname",
-  ADMINISTRATOR_STREET: "administratorStreet",
-  ADMINISTRATOR_BRGY: "administratorBrgy",
-  ADMINISTRATOR_CITY: "administratorCity",
-  ADMINISTRATOR_PROVINCE: "administratorProvince",
-  ADMIN_TEL: "AdminTel",
-  ADMINISTRATOR_TIN: "administratorTIN",
+  LAND_OWNERSHIP: "land_ownership",
   // Boundaries
   NORTH_BOUNDARY: "north",
   SOUTH_BOUNDARY: "south",
   EAST_BOUNDARY: "east",
   WEST_BOUNDARY: "west",
   NE_BOUNDARY: "northeast",
-  SW_BOUNDARY: "southwest",
-  SE_BOUNDARY: "southeast",
-  NW_BOUNDARY: "northwest",
+  SW_BOUNDARY: "southWest",
+  SE_BOUNDARY: "southEast",
+  NW_BOUNDARY: "northWest",
   // Land Appraisal
   LAND_APPRAISAL: "landappraisals",
   LAND_CLASSIFICATION: "classification",
@@ -51,7 +36,6 @@ export const FIELDS = {
   LAND_ACTUAL_USE: "actual_use",
   LAND_ASSESSMENT_LEVEL: "assessment_level",
   LAND_ASSESSED_VALUE: "assessed_value",
-
   // market adjustment
   MARKET_ADJUSTMENT: "marketAdjustment",
   MARKET_ADJUSTMENT_FACTORS: "adjustment_factor",
@@ -61,16 +45,24 @@ export const FIELDS = {
   TOTAL_MARKET_VALUE_ADJUSTMENT: "totalValueAdjustment",
   ADJUSTED_MARKETVALUE: "adjustment_value",
   INPUT_AREA: "marketValueAdjustmentInputArea",
-
   // TAXABILITY
   TAXABILITY: "taxable",
   // Effectivity of Assessment/Reassessment
+  LAND_EFFECTIVITY_QTR: "effectivity_quarter",
+  LAND_EFFECTIVITY_YEAR: "effectivity_year",
   EFFECTIVITY_QTR: "quarter",
   EFFECTIVITY_YEAR: "yearAssessment",
   BLDG_EFFECTIVITY_YEAR: "effectivity_assessment",
 
   TOTAL_MARKET_VALUE: "totalMarketValue",
   TOTAL_ASSESSED_VALUE: "totalAssessedValue",
+  // previous record 
+  LAND_PIN_NO_PREV: "previous_records.pin_no",
+  LAND_ARP_NO_PREV: "previous_records.arp_no",
+  LAND_TD_ARP_PREV: "previous_records.td_no",
+  LAND_ASSESSED_VALUE_PREV: "previous_records.total_assessed_value",
+  LAND_OWNER_PREV: "previous_records.owner_name",
+  LAND_EFFECTIVITY_YEAR_PREV: "previous_records.effectivity_assessment",
 
   //memoranda
   MEMORANDA: "memoranda",
@@ -137,4 +129,7 @@ export const FIELDS = {
   BLDG_ASSESSMENT_LEVEL: "propertyAssessments.assessmentLevel",
   BLDG_ASSESSED_VALUE: "propertyAssessments.assessedValue",
   BLDG_ASSESSED_MARKET_VALUE: "propertyAssessments.marketValue",
+
+  APPROVED_BY: "approvedBy",
+  DATE_APPROVED: "dateApproved",
 };

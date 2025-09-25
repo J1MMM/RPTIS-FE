@@ -1,7 +1,8 @@
 import { Stack } from "@mui/material";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { TextInput, Row, DateInput, SelectField, StyledFieldset } from "@components/ui/";
-import { BUILDING_TYPE_OPTIONS, CLASSIFICATION_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/dropdownOptions";
+import { BUILDING_TYPE_OPTIONS, STRUC_CLASS_OPTIONS } from "../../../../constants/building/dropdown";
+import { CLASSIFICATION_OPTIONS } from "../../../../constants/shared/dropdown";
 
 function BuildingGenDescFields({ control, readOnly }) {
 
@@ -9,6 +10,7 @@ function BuildingGenDescFields({ control, readOnly }) {
     <StyledFieldset title="General Description">
       <Stack direction="row" gap={1}>
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.KIND_OF_BUILDING}
           label="Kind of Building"
@@ -24,12 +26,14 @@ function BuildingGenDescFields({ control, readOnly }) {
       </Stack>
       <Stack direction="row" gap={1}>
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.STRUCTURAL_TYPE}
           label="Structural Classification"
           options={STRUC_CLASS_OPTIONS}
         />
         <SelectField
+          readOnly={readOnly}
           control={control}
           name={FIELDS.STRUCTURAL_CATEGORY}
           label="Building/Occupancy Type"

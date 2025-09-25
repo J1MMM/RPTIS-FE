@@ -21,7 +21,7 @@ import logoImg from "../../assets/images/seal.png";
 import {
   FOOTER_LINKS,
   MAIN_LINKS,
-} from "../../features/assessor/constants/routes";
+} from "../../constants/routes";
 
 export default function NavSidePanel({ open, setOpen }) {
   const theme = useTheme();

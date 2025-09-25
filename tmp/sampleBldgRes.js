@@ -1,173 +1,3 @@
-import { FIELDS } from "./fieldNames";
-
-export const APPRAISAL_FORM_DEFAULT = {
-  id: "",
-  // appraisalID: "",
-  adjusted: false,
-  [FIELDS.LAND_CLASSIFICATION]: "",
-  [FIELDS.SUBCLASS]: "",
-  [FIELDS.LAND_AREA]: "",
-  [FIELDS.LAND_UNIT_VALUE]: "",
-  [FIELDS.LAND_BASE_MARKET_VALUE]: "",
-  [FIELDS.LAND_MARKET_VALUE]: "",
-  [FIELDS.LAND_ACTUAL_USE]: "",
-  [FIELDS.LAND_ASSESSMENT_LEVEL]: "",
-  [FIELDS.LAND_ASSESSED_VALUE]: "",
-  // [FIELDS.MARKET_ADJUSTMENT_PERCENT]: "",
-  // totalValueAdjustment: "",
-  // marketAdjustmentFactors: "",
-  // marketValueAdjustmentInputArea: "",
-};
-
-export const DATA_GRID_INITIAL_STATE = {
-  pagination: {
-    paginationModel: {
-      pageSize: 100,
-      page: 0,
-    },
-  },
-};
-
-export const LAND_DEFAULT_FIELD = {
-  // property info
-  [FIELDS.TRANSACTION_CODE]: "",
-  [FIELDS.ARP_NO]: "",
-  [FIELDS.PIN]: "",
-  [FIELDS.NO_AND_STREET]: "",
-  [FIELDS.BARANGAY]: "",
-  [FIELDS.CITY]: "San Pablo City", // example fixed value
-  [FIELDS.PROVINCE]: "Laguna", // example fixed value
-  [FIELDS.OCT_TCT_NO]: "",
-  [FIELDS.DATE]: null,
-  [FIELDS.LOT_NO]: "",
-  [FIELDS.BLOCK_NO]: "",
-  [FIELDS.SURVEY_NO]: "",
-  //owner info
-  land_ownership: [],
-  landappraisals: [],
-  // boundaries
-  [FIELDS.NORTH_BOUNDARY]: "",
-  [FIELDS.SOUTH_BOUNDARY]: "",
-  [FIELDS.EAST_BOUNDARY]: "",
-  [FIELDS.WEST_BOUNDARY]: "",
-  [FIELDS.NE_BOUNDARY]: "",
-  [FIELDS.SW_BOUNDARY]: "",
-  [FIELDS.SE_BOUNDARY]: "",
-  [FIELDS.NW_BOUNDARY]: "",
-  // taxability
-  [FIELDS.TAXABILITY]: "",
-
-  // effectivity of assessment/reassessment
-  [FIELDS.EFFECTIVITY_QTR]: "",
-  [FIELDS.EFFECTIVITY_YEAR]: null,
-
-  [FIELDS.TOTAL_MARKET_VALUE]: 0,
-  [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
-  propertyAssessments: [],
-  [FIELDS.PREV_RECORDS_FIELDS]: undefined
-};
-
-export const BUILDING_DEFAULT = {
-  [FIELDS.TRANSACTION_CODE]: "",
-  [FIELDS.ARP_NO]: "",
-  [FIELDS.PIN]: "",
-  [FIELDS.BLDG_OWNERSHIP_FIELD]: [],
-  [FIELDS.BLDG_LAND_REF_FIELD]: {
-    area: 0,
-    city: "San Pablo",
-    province: "Laguna",
-    street: "",
-    brgy: "",
-    "arp-land": "",
-    area: "",
-    owner: "",
-    "oct_tct-cloa_no": "",
-    "oct_tct-survey_no": "",
-    lot_no: "",
-    blk_no: ""
-
-  },
-  [FIELDS.STRUCTURAL_FIELDS]: {},
-  floors: [],
-  [FIELDS.PROPERTY_APPRAISAL_FIELD]: {
-    ucc: 0,
-    bcst: 0,
-    coai: [],
-    totalConstructionCost: "",
-    depreciationRate: 0,
-    yearsToDepreciate: 0,
-    total_percent_depreciation: 0,
-    depreciationCost: 0,
-    marketValue: 0,
-    totalConstructionCost: 0,
-    totalCostAddItems: 0,
-  },
-  [FIELDS.BLDG_ASSESSMENT_FIELDS]: {
-    "actualUse": "",
-    "assessmentLevel": "",
-    "assessedValue": "",
-    "marketValue": ""
-  },
-
-  [FIELDS.KIND_OF_BUILDING]: "",
-  [FIELDS.BLDG_PERMIT]: "",
-  [FIELDS.BLDG_PERMIT_DATE_ISSUE]: "",
-  [FIELDS.CCT]: "",
-  [FIELDS.CO_COMPLITION]: "",
-  [FIELDS.DATE_CONSTRUCTED]: "",
-  [FIELDS.DATE_OCCUPIED]: "",
-  [FIELDS.BUILDING_MARKET_VALUE]: "",
-
-  [FIELDS.NO_OF_STOREYS]: "",
-  [FIELDS.TAXABILITY]: "",
-  [FIELDS.EFFECTIVITY_YEAR]: null,
-  [FIELDS.EFFECTIVITY_QTR]: "",
-
-  [FIELDS.MEMORANDA]: "",
-  // appraisers: {},
-  // approvedBy: "",
-  // dateApproved: "2025-09-08",
-  // encoderName: "",
-  // dateEncoded: "2025-09-08",
-  [FIELDS.PREV_RECORDS_FIELDS]: {
-    pin_no: "",
-    arp_no: "",
-    total_assessed_value: "",
-    owner_name: "",
-    effectivity_assessment: "",
-  },
-  arpInput: "",
-  pinInput: "",
-  arpAdornment: "",
-  pinAdornment: "",
-};
-
-export const ACTUAL_USE_EQUIVALENTS = {
-  residential: 15,
-  agricultural: 40,
-  commercial: 40,
-  industrial: 40,
-};
-
-export const STRIPPING_FIELDS_DEFAULT = [
-  {
-    id: "",
-    name: "stripping1st",
-    label: "1st Stripping",
-    unitVal: 0,
-    percentOfAdj: 0,
-    area: 0,
-    valueAdjustment: 0,
-  },
-];
-
-export const FACTOR_TYPES = {
-  STRIPPING: "Stripping",
-  CORNER_INFLUENCE: "cornerInfluence",
-  RIGHT_OF_WAY: "rightOfWay",
-  OPEN_SPACES: "openSpaces",
-};
-
 export const SAMPLE_DATA = [
   {
     id: 1,
@@ -176,7 +6,7 @@ export const SAMPLE_DATA = [
     pin_no: 'PIN-123',
     street: '322 Purok 4',
     brgy: 'SAN GREGORIO',
-    city: 'San Pablo City',
+    city: 'SAN PABLO CITY',
     province: 'Laguna',
     oct_tct: 'OCT-123',
     DATE: '2025-08-25T16:00:00.000Z',
@@ -203,7 +33,7 @@ export const SAMPLE_DATA = [
       {
         regions: 'Region IV-A (CALABARZON)',
         province: 'Laguna',
-        city: 'San Pablo City',
+        city: 'SAN PABLO CITY',
         barangay: 'Santo Cristo',
         street: '322 Purok 3',
         postal: '4001',
@@ -476,32 +306,3 @@ export const SAMPLE_DATA = [
     totalAssessedValue: 2843.7,
   }
 ];
-
-
-export const DEFAULT_OWNER_FORM = {
-  regions: "",
-  province: "",
-  city: "",
-  barangay: "",
-  street: "",
-  postal: "",
-  type: "",
-  role: "",
-  contact_no: "",
-  email: "",
-  name: ""
-}
-
-export const ADDITIONAL_ITEMS_DEFAULT = {
-  category: "",
-  type: "",
-  area: 0,
-  noFloors: 0,
-  material: "",
-  cost: 0,
-  affectedArea: 0,
-  height: 0,
-  storey: 0,
-  total: 0,
-  structuralType: 0
-}

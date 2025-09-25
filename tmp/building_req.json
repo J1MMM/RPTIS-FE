@@ -85,6 +85,90 @@
         "createdAt": "2025-09-18T05:25:41.233Z",
         "updatedAt": "2025-09-18T05:25:41.233Z",
         "property_appraisal_id": 3
+      },
+      {
+        "affectedArea": 167.25,
+        "area": 0,
+        "cost": 300,
+        "height": 0,
+        "noFloors": 0,
+        "material": "granolithe",
+        "storey": 0,
+        "type": 0,
+        "category": "flooring",
+        "total": 50175,
+        "id": "baa0f500-380a-4b57-9ba2-91d135a0a23e"
+      },
+      {
+        "category": "wallingAndPartitioning",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "marble",
+        "cost": 300,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 50175,
+        "id": "01d4df6a-e835-4831-a36e-8cd90f8d14cb"
+      },
+
+      {
+        "category": "ceiling",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "Ordinary drop Ceiling on R.C. building",
+        "cost": 0,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 16725,
+        "id": "c997e324-3fe6-4895-99c8-d7b62d04e552"
+      },
+
+      {
+        "category": "specialAluminumGlassPanel",
+        "type": "",
+        "area": 0,
+        "noFloors": 0,
+        "material": "Ordinary size",
+        "cost": 300,
+        "affectedArea": 167.25,
+        "height": 0,
+        "storey": 0,
+        "total": 50175,
+        "id": "27a00500-f9df-449c-9a60-e4fa383615ea"
+      },
+
+      {
+        "category": "height",
+        "type": "",
+        "structuralType": 10000,
+        "area": 167.25,
+        "noFloors": 0,
+        "material": 0,
+        "cost": 0,
+        "affectedArea": 0,
+        "height": 100,
+        "storey": "oneStorey",
+        "total": 17895750,
+        "id": "9d94bc2a-d661-40cd-9135-f36e275e85c3"
+      },
+
+      {
+        "category": "otherIncrement",
+        "type": "",
+        "structuralType": 10000,
+        "area": 0,
+        "noFloors": 0,
+        "material": 0,
+        "cost": 0,
+        "affectedArea": 0,
+        "height": 0,
+        "storey": 0,
+        "total": 7500,
+        "id": "8ec68d33-b995-42b4-b27b-e656055870f0"
       }
     ],
 

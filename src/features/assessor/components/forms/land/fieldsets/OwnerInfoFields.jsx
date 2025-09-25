@@ -4,10 +4,10 @@ import { toast } from "react-toastify";
 import { Button, Input, Stack } from "@mui/material";
 import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
 import { LandOwnerTable } from "../../../tables/land/owners-table/LandOwnerTable";
-import { DEFAULT_OWNER_FORM } from "../../../../constants/defaultValues";
+import { DEFAULT_OWNER_FORM } from "../../../../constants/land/default";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import AddOwnerModal from "../modals/AddOwnerModal";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { PlusCircle } from "lucide-react";
 
 function OwnerInfoFields({ readOnly, ownerFieldName }) {

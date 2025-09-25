@@ -5,16 +5,16 @@ import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { toastConfig } from "@constants/toastConfig";
 import { LandAppraisalTable } from "../../../tables/land/land-appraisal/LandAppraisalTable";
-import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { UNITVAL_TABLE } from "../../../../constants/unitValues";
-import { sumByField } from "../../../../../../utils/math";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { UNITVAL_TABLE } from "../../../../constants/land/lookup";
+import { sumByField } from "@utils/math";
 import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
 import useAssessorForm from "../../../../hooks/useFormContext";
 import { AddLandAppraisalModal } from "../modals/AddLandAppraisalModal";
 import { toast } from "react-toastify";
-import { logger } from "../../../../../../utils/logger";
+import { logger } from "@utils/logger";
 import { PlusCircle } from "lucide-react";
+import { APPRAISAL_FORM_DEFAULT } from "../../../../constants/land/default";
 
 function LandAppraisalFields({ readOnly }) {
   const { control: landFormControl, setValue: setLandFormVal, reset, resetField: resetFaasFormField, getValues } = useFormContext();

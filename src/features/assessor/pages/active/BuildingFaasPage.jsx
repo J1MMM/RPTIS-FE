@@ -3,28 +3,31 @@ import Button from "@mui/material/Button";
 import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
-import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { BUILDING_DEFAULT, LAND_DEFAULT_FIELD } from "../../constants/defaultValues";
+import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
+import { LAND_DEFAULT_FIELD } from "../../constants/land/default";
 import useConfirm from "../../../../hooks/useConfirm";
 import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
 import axios from "../../../../api/axios";
 import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
+import { logger } from "../../../../utils/logger";
+import { capitalizeFirstLetter } from "../../../../utils/formatters";
+import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
 
 function BuildingFaasPage() {
 
-  const methods = useForm({ defaultValues: BUILDING_DEFAULT, mode: "onSubmit" });
+  const methods = useForm({ defaultValues: BLDG_FORM_DEFAULT, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const { buildingFaasRecords, setBuildingFaasRecords } = useFaasData();
   const confirm = useConfirm()
-
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
   const [disabled, setDisabled] = useState(false);
+
+  logger("BUILDING FORM DATA", useWatch({ control: methods.control }))
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
@@ -37,13 +40,14 @@ function BuildingFaasPage() {
       console.log(formattedData);
 
       const response = await axios.post('/faasBldg', formattedData)
+      console.log(response.data);
       setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!", toastConfig);
+      toast.success("Building FAAS added successfully!");
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
 
-      toast.error(`${error.response.data?.message}`, toastConfig);
+      toast.error(`${capitalizeFirstLetter(error.response.data?.message)}`);
     } finally {
       setShowConfirmation(false);
     }
@@ -121,6 +125,8 @@ function BuildingFaasPage() {
         />
 
         <AddBuildingFaasModal
+          formMode={formMode}
+          setFormMode={setFormMode}
           disabled={isSubmitting}
           open={addModalActive}
           onClose={handleCloseModal}

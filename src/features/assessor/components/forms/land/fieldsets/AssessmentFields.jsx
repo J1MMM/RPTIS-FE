@@ -1,9 +1,9 @@
 import StyledFieldset from "@components/ui/StyledFieldset";
-import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/defaultValues";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { LandPropAssTable } from "../../../tables/land/property-assessment/LandPropAssTable";
-import { sumByField } from "../../../../../../utils/math";
+import { sumByField } from "@utils/math";
 import { useFormContext, useWatch } from "react-hook-form";
+import { ACTUAL_USE_EQUIVALENTS } from "../../../../constants/land/lookup";
 
 const assLevel = {
   residential: 15,

@@ -1,14 +1,12 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { MARKET_VALUE_TABLE_COLUMN } from "../../../../constants/tableColumns";
-import { DATA_GRID_INITIAL_STATE } from "../../../../constants/defaultValues";
-import { DATA_GRID_STYLE } from "@constants/tableStyles";
-import { LAND_INNER_TABLE_WIDTH } from "../../../../constants/styles";
+import { MARKET_VALUE_TABLE_COLUMN } from "../../../../constants/land/table-columns";
+import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
 import { IconButton } from "@mui/material";
-import { Close } from "@mui/icons-material";
 import MarketAdjustmentTableFooter from "./MarketAdjustmentTableFooter";
 import { X } from "lucide-react";
-import { sumByField } from "../../../../../../utils/math";
-import { FIELDS } from "../../../../constants/fieldNames";
+import { sumByField } from "@utils/math";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
+import { LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
 
 export const LandMarketValueTable = (props) => {
   const { handleDelete, rows, readOnly } = props;

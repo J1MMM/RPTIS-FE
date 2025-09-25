@@ -10,10 +10,10 @@ function DateInput({
   name,
   label,
   readOnly,
-  popperClass,
   rules,
   yearOnly = false,
   required = true,
+  defaultValue,
 }) {
   return (
     <FormControl margin="dense" fullWidth>
@@ -21,6 +21,7 @@ function DateInput({
         <Controller
           name={name}
           control={control}
+          defaultValue={defaultValue}
           rules={{
             ...rules,
             ...(required && { required: `${label || name} is required` }),

@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Stack, Typography } from "@mui/material";
-import { Add } from "@mui/icons-material";
 import { v4 } from "uuid";
 import StyledFieldset from "@components/ui/StyledFieldset";
 import { toastConfig } from "@constants/toastConfig";
-import { ADDITIONAL_ITEMS_DEFAULT, APPRAISAL_FORM_DEFAULT } from "../../../../constants/defaultValues";
-import { FIELDS } from "../../../../constants/fieldNames";
-import { UNITVAL_TABLE } from "../../../../constants/unitValues";
-import { sumByField } from "../../../../../../utils/math";
+import { ADDITIONAL_ITEMS_DEFAULT, } from "../../../../constants/building/defaults";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { useFieldArray, useForm, useFormContext, useWatch } from "react-hook-form";
 import { toast } from "react-toastify";
 import { AdditionalItemsTable } from "../../../tables/building/AdditionalItemsTable";

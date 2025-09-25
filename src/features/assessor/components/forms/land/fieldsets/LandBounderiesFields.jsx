@@ -1,7 +1,6 @@
 import { Stack } from "@mui/material";
-import StyledFieldset from "@components/ui/StyledFieldset";
-import { FIELDS } from "../../../../constants/fieldNames";
-import TextInput from "../../../../../../components/ui/TextInput";
+import { StyledFieldset, TextInput } from "@components/ui";
+import { FIELDS } from "../../../../constants/shared/fieldNames";
 
 function LandBounderiesFields({ control, readOnly }) {
   return (

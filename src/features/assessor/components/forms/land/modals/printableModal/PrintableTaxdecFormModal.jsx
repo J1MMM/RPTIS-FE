@@ -7,14 +7,10 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { TaxDeclaration } from "../../printables/TaxDeclaration";
 
 
-export default function PrintableTaxdecFormModal({ open, onClose, handleSubmit, disabled,}) {
+export default function PrintableTaxdecFormModal({ open, onClose, handleSubmit, disabled, }) {
   // const { control: landFormControl } = useFormContext();
-    const contentRef = useRef(null);
-    const handlePrint = useReactToPrint({contentRef});
-    const {control} = useFormContext()
-    const selectedRow = useWatch({control})
-
-    console.log (selectedRow)
+  const contentRef = useRef(null);
+  const handlePrint = useReactToPrint({ contentRef });
 
   return (
     <>
@@ -25,18 +21,18 @@ export default function PrintableTaxdecFormModal({ open, onClose, handleSubmit, 
         onSubmit={handleSubmit}
         headerIcon={<Printer />}
         actionButton={
-            <>
-              <Button size="small" onClick={onClose} variant="outlined">
-                Cancel
-              </Button>
-              <Button size="small" onClick={handlePrint} variant="contained" disabled={disabled}>
-                Print
-              </Button>
-            </>
+          <>
+            <Button size="small" onClick={onClose} variant="outlined">
+              Cancel
+            </Button>
+            <Button size="small" onClick={handlePrint} variant="contained" disabled={disabled}>
+              Print
+            </Button>
+          </>
         }
       >
         <div ref={contentRef}>
-            <TaxDeclaration />
+          <TaxDeclaration />
         </div>
       </ContainerModal >
     </>

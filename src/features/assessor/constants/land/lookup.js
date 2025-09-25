@@ -41,3 +41,10 @@ export const ACTUALUSE_EQUI_LEVEL = {
   commercial: 0.4,
   industrial: 0.4,
 };
+
+export const ACTUAL_USE_EQUIVALENTS = {
+  residential: 15,
+  agricultural: 40,
+  commercial: 40,
+  industrial: 40,
+};
