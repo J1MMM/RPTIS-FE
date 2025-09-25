@@ -16,6 +16,7 @@ import PrintablesMenu from "../../components/forms/land/modals/printableModal/Pr
 import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import axios from "../../../../api/axios";
+import { logger } from "../../../../utils/logger";
 // import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 
 function LandFaasPage() {
@@ -30,7 +31,7 @@ function LandFaasPage() {
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
-  console.log(useWatch({ control: methods.control }));
+  logger("LAND FORM DATA", useWatch({ control: methods.control }))
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);

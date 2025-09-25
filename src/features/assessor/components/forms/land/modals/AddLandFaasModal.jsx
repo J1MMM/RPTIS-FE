@@ -19,7 +19,7 @@ import seedLandReq from "../../../../../../../tmp/land_req.json";
 export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: landFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
-  // logger("data", useWatch({ control: landFormControl }))
+  logger("FORM DATA", useWatch({ control: landFormControl }))
   const handleAutoFill = () => {
     reset(seedLandReq)
   }

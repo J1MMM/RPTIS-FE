@@ -124,6 +124,7 @@ export const FIELDS = {
   TOTAL_FLOOR_AREA: "total_floor_areas",
 
   // Property Assesment 
+  ASSESSMENT_FIELDS: "propertyAssessments",
   BLDG_ASSESSMENT_FIELDS: "propertyAssessments",
   BLDG_ASSESSMENT_ACTUAL_USE: "propertyAssessments.actualUse",
   BLDG_ASSESSMENT_LEVEL: "propertyAssessments.assessmentLevel",
