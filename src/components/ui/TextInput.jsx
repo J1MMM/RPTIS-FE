@@ -64,7 +64,7 @@ function TextInput({
                 : field.value ?? ""
           }
           error={!!error}
-          // helperText={error ? error.message : ""}
+          helperText={error ? error.message : ""}
           slotProps={{
             input: {
               ...adornment,

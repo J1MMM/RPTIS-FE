@@ -23,6 +23,7 @@ export const OWNER_INFO_TABLE_COLUMN = [
         filterable: false,
         disableColumnMenu: true,
         headerAlign: "center",
+        align: "center",
         renderCell: (params) => {
             if (params.row?.name) {
                 return params.row.name;
@@ -48,7 +49,19 @@ export const OWNER_INFO_TABLE_COLUMN = [
         headerName: "TIN",
         flex: 1,
         headerAlign: "center",
+        align: "center",
         headerClassName: "data-grid-header",
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+    },
+    {
+        field: "remarks",
+        headerName: "REMARKS",
+        flex: 1,
+        headerAlign: "center",
+        headerClassName: "data-grid-header",
+        align: "center",
         sortable: false,
         filterable: false,
         disableColumnMenu: true,
