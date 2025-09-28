@@ -43,12 +43,14 @@ function PropertyInfoFields({ control, readOnly }) {
           label="City"
           name={FIELDS.CITY}
           readOnly={true}
+          value="SAN PABLO CITY"
         />
         <TextInput
           control={control}
           label="Province"
           name={FIELDS.PROVINCE}
           readOnly={true}
+          value="LAGUNA"
 
         />
       </Stack>

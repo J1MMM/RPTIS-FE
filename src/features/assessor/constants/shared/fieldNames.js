@@ -144,5 +144,6 @@ export const FIELDS = {
   M_BRAND_CAPACITY: "machine_brand_capacity",
   M_PROPERTY_APPRAISAL: "property_appraisal_machine",
   M_PROPERTY_ASSESSMENT: "property_assessment_machine",
+  M_REF_N_POSTING: "reference_posting_summary",
 
 };

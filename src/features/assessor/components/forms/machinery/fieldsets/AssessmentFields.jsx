@@ -41,9 +41,21 @@ function AssessmentFields({ readOnly }) {
 
   useEffect(() => {
     if (!Array.isArray(appraisal)) return;
-    const total = sumByField(appraisal, "depreciation_value") || 0;
 
-    // Get current value to avoid redundant setValue calls
+    const total = appraisal.reduce((total, row) => {
+      const dep = Number(row?.["depreciation_value"]);
+      const mv = Number(row?.["market_value"]);
+
+      let value;
+      if (!isNaN(dep) && dep !== 0) {
+        value = dep;
+      } else {
+        value = mv;
+      }
+
+      return isNaN(value) ? total : total + value;
+    }, 0);
+
     const current = propertyAssessment?.market_value || 0;
 
     if (current !== total) {
@@ -69,8 +81,22 @@ function AssessmentFields({ readOnly }) {
               sortable: false,
               filterable: false,
               disableColumnMenu: true,
-              headerAlign: "center",
-              align: "center",
+              renderCell: (params) => {
+                return (
+                  <Select
+                    disabled={readOnly}
+                    value={""}
+                    fullWidth
+                    variant="standard"
+                  >
+                    {CLASSIFICATION_OPTIONS.map((option, index) => (
+                      <MenuItem key={index} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                );
+              },
             },
             {
               field: "actual_use",

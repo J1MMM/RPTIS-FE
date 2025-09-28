@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { IconButton, Stack, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { BrandNCapacity_COLUMNS, MachineAppraisal_COLUMNS } from "../../../constants/machinery/table-columns";
+import { MachineAppraisal_COLUMNS } from "../../../constants/machinery/table-columns";
 import { LAND_INNER_TABLE_WIDTH, DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
 import { formatPeso } from "../../../../../utils/formatters";
 import { sumByField } from "../../../../../utils/math";
@@ -20,7 +20,20 @@ const columnProps = {
 
 export const MachineAppraisalTable = ({ rows, handleDelete, readOnly }) => {
 
-  const totalMarketVal = sumByField(rows, "depreciation_value")
+  const totalMarketVal = rows.reduce((total, row) => {
+    const dep = Number(row?.["depreciation_value"]);
+    const mv = Number(row?.["market_value"]);
+
+    let value;
+    if (!isNaN(dep) && dep !== 0) {
+      value = dep;
+    } else {
+      value = mv;
+    }
+
+    return isNaN(value) ? total : total + value;
+  }, 0);
+
 
   return (
     <DataGrid

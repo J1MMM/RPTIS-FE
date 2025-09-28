@@ -99,7 +99,7 @@ export const BLDG_TABLE_COLUMN = [
         flex: 1,
         editable: false,
         headerClassName: "data-grid-header",
-        valueFormatter: (params) => toUpperCase(params)
+        valueFormatter: (params) => params ? "TAXABLE" : "EXEMPT"
     },
 ];
 

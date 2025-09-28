@@ -4,29 +4,31 @@ import { Button } from '@mui/material';
 import { LAND_TABLE_COLUMN } from '../../../constants/land/table-columns';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
 import { TableToolbar } from "@components/shared";
+import { M_TABLE_COLUMN } from '../../../constants/machinery/table-columns';
 
 
 function MachineryFaasTable({ rows, toolbarButtons, handleShowDetails }) {
-    const columns = useMemo(() => [...LAND_TABLE_COLUMN,
-    {
-        field: "actions",
-        headerName: "ACTIONS",
-        flex: 1,
-        sortable: false,
-        filterable: false,
-        align: "center",
-        headerAlign: "center",
-        headerClassName: "data-grid-header",
-        renderCell: (params) => (
-            <Button
-                variant="outlined"
-                size="small"
-                onClick={() => handleShowDetails(params)}
-            >
-                View
-            </Button>
-        ),
-    }], [])
+    const columns = useMemo(() => [
+        ...M_TABLE_COLUMN,
+        {
+            field: "actions",
+            headerName: "ACTIONS",
+            flex: 1,
+            sortable: false,
+            filterable: false,
+            align: "center",
+            headerAlign: "center",
+            headerClassName: "data-grid-header",
+            renderCell: (params) => (
+                <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handleShowDetails(params)}
+                >
+                    View
+                </Button>
+            ),
+        }], [])
 
     return (
         <DataGrid
@@ -44,7 +46,7 @@ function MachineryFaasTable({ rows, toolbarButtons, handleShowDetails }) {
                 toolbar: () => (
                     <TableToolbar
                         titleText="Machinery FAAS Records"
-                        // subText="Appraisal and Assessment Data"
+                        totalRows={rows?.length}
                         actionBtn={toolbarButtons}
                     />
                 ),

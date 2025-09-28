@@ -81,9 +81,9 @@ export const FACTOR_TYPES = {
 
 
 export const DEFAULT_OWNER_FORM = {
-    regions: "",
-    province: "",
-    city: "",
+    regions: "Region IV-A (CALABARZON)",
+    province: "Laguna",
+    city: "San Pablo City",
     barangay: "",
     street: "",
     postal: "",

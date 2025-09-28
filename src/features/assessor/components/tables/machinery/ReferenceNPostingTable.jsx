@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 import { IconButton } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { LAND_INNER_TABLE_WIDTH, DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
-import { BrandNCapacity_COLUMNS } from "../../../constants/machinery/table-columns";
+import { REF_N_POSTING_COLUMNS } from "../../../constants/machinery/table-columns";
 
 const columnProps = {
   field: "actions",
@@ -16,7 +16,7 @@ const columnProps = {
   align: "center",
 }
 
-export const BrandNCapacityTable = ({ rows, handleDelete, readOnly }) => {
+export const ReferenceNPostingTable = ({ rows, handleDelete, readOnly }) => {
 
   return (
     <DataGrid
@@ -34,7 +34,7 @@ export const BrandNCapacityTable = ({ rows, handleDelete, readOnly }) => {
             )
           },
         },
-        ...BrandNCapacity_COLUMNS,
+        ...REF_N_POSTING_COLUMNS,
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick

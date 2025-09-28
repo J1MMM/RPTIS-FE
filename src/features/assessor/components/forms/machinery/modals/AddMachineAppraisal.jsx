@@ -46,6 +46,7 @@ export const AddMachineAppraisal = ({
 
         <Row>
           <NumberInput
+            required={false}
             control={control}
             label="Acquisition Cost"
             name="acquisition_cost"

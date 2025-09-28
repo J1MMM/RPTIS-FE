@@ -7,7 +7,6 @@ import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
 import useConfirm from "../../../../hooks/useConfirm";
-import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
 
 import PrintableBuildingFaasFormModal from "../../components/forms/building/modal/printableModal/PrintableBuildingFaasFormModal";
@@ -18,6 +17,7 @@ import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
 import { logger } from "../../../../utils/logger";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
+import BuildingFaasTable from "../../components/tables/building/BuildingFaasTable";
 
 function BuildingFaasPage() {
 

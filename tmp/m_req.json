@@ -1,0 +1,109 @@
+{
+  "arp_no": "arp-test",
+  "pin_no": "pin-test",
+  "street": "street-test",
+  "brgy": "brgy-test",
+  "city": "city-test",
+  "province": "province-test",
+  "faasMachineChainId": "",
+  "machine_ownership": [
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "brgy": "Santiago I",
+      "street": "322 Purok 4",
+      "postal": "4001",
+      "type": "company",
+      "role": "owner",
+      "contact_no": "8700",
+      "email": "email@example.com",
+      "name": "Jollibee",
+      "remarks": "Tapat ng MCDO",
+      "tin": "TIN-1233456"
+    }
+  ],
+  "appraised_by": {
+    "name": "",
+    "date": "2025"
+  },
+  "assessed_by": {
+    "name": "",
+    "date": "2025"
+  },
+  "recommending_approval": {
+    "municipality": "",
+    "date": "2025"
+  },
+  "approval": {
+    "name": "",
+    "date": "2025"
+  },
+  "memoranda": "",
+  "taxable": "true",
+  "effectivity_year": "2024",
+  "previous_data": {
+    "owner": "",
+    "value": ""
+  },
+  "bldg_reference": {
+    "owner": "",
+    "pin_no": ""
+  },
+  "land_reference": {
+    "owner": "",
+    "pin_no": ""
+  },
+  "machine_brand_capacity": [
+    {
+      "description": "",
+      "model": "",
+      "hp": "",
+      "date_acquired": "2025",
+      "condition_when_acquired": "",
+      "economic_life": {
+        "estimated": "",
+        "remaining": ""
+      },
+      "date_installed": "2025",
+      "dare_of_operation": "2025",
+      "remarks": ""
+    }
+  ],
+  "property_appraisal_machine": [
+    {
+      "machinery_description": "",
+      "no_of_units": 1,
+      "acquisition_cost": 0,
+      "additional_cost": {
+        "freight": "",
+        "installation": "",
+        "insurance": "",
+        "others": ""
+      },
+      "market_value": 2000,
+      "depreciation": "",
+      "depreciation_value": ""
+    }
+  ],
+  "property_assessment_machine": [
+    {
+      "kind": "kind",
+      "actual_use": "residential",
+      "market_value": "",
+      "assessment_level": "",
+      "assessed_value": ""
+    }
+  ],
+  "reference_posting_summary": [
+    {
+      "pin": "",
+      "previous_posting": "",
+      "present_posting": "",
+      "posting": {
+        "initial": "",
+        "date": "2025"
+      }
+    }
+  ]
+}

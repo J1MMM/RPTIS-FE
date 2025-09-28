@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import useFaasData from "../../hooks/useFaasData";
-import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
 import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
@@ -11,24 +10,24 @@ import useConfirm from "../../../../hooks/useConfirm";
 import MachineryFaasTable from "../../components/tables/machinery/MachineryFaasTable";
 import MachineyFaasModal from "../../components/forms/machinery/modals/MachineyFaasModal";
 import { MACHINERY_FORM_DEFAULTS } from "../../constants/machinery/default";
+import axios from "../../../../api/axios";
 
 function MachineryFaasPage() {
   const methods = useForm({ defaultValues: MACHINERY_FORM_DEFAULTS, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { landFaasRecords, setLandFaasRecords } = useFaasData();
+  const { machineFaasRecords, setMachineFaasRecords } = useFaasData();
   const confirm = useConfirm()
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
-  const [disabled, setDisabled] = useState(false);
 
   const onSubmit = async (data) => {
     console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      // const response = await axios.post('/faasLand', data)
-      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
+      const response = await axios.post('/machine/create', data)
+      setMachineFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
     } catch (error) {
@@ -37,7 +36,6 @@ function MachineryFaasPage() {
       toast.error("Something went wrong while submitting.", toastConfig);
     } finally {
       setShowConfirmation(false);
-      setDisabled(false);
     }
   };
   const handleAddBtnClick = () => {
@@ -89,7 +87,7 @@ function MachineryFaasPage() {
       <FormProvider {...methods}>
         <MachineryFaasTable
           handleShowDetails={handleShowDetails}
-          rows={landFaasRecords}
+          rows={machineFaasRecords}
           toolbarButtons={(<>
             <Button
               // disabled={Boolean(selectedArpNos.length < 2)}

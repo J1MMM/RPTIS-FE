@@ -12,17 +12,17 @@ import { sumByField } from "../../../../../../utils/math";
 
 const FORM_DEFAULT = {
   machinery_description: "",
-  no_of_units: "",
-  acquisition_cost: "",
+  no_of_units: 0,
+  acquisition_cost: 0,
   additional_cost: {
-    freight: "",
-    installation: "",
-    insurance: "",
-    others: ""
+    freight: 0,
+    installation: 0,
+    insurance: 0,
+    others: 0
   },
-  market_value: "",
-  depreciation: "",
-  depreciation_value: ""
+  market_value: 0,
+  depreciation: 0,
+  depreciation_value: 0
 }
 
 function MachineAppraisal({ readOnly }) {
@@ -33,39 +33,38 @@ function MachineAppraisal({ readOnly }) {
 
   const watchValues = watch();
 
-  useEffect(() => {
-    const {
-      acquisition_cost,
-      additional_cost = {},
-      depreciation,
-    } = watchValues;
+  // useEffect(() => {
+  //   const {
+  //     market_value,
+  //     additional_cost = {},
+  //     depreciation,
+  //   } = watchValues;
 
-    // safely parse numbers (fallback to 0 if empty/NaN)
-    const freight = Number(additional_cost.freight) || 0;
-    const installation = Number(additional_cost.installation) || 0;
-    const insurance = Number(additional_cost.insurance) || 0;
-    const others = Number(additional_cost.others) || 0;
+  //   // safely parse numbers (fallback to 0 if empty/NaN)
+  //   const freight = Number(additional_cost.freight) || 0;
+  //   const installation = Number(additional_cost.installation) || 0;
+  //   const insurance = Number(additional_cost.insurance) || 0;
+  //   const others = Number(additional_cost.others) || 0;
 
-    // compute totals
-    const totalAdditional = freight + installation + insurance + others;
-    const totalMarketValue = (Number(acquisition_cost) || 0) + totalAdditional;
+  //   // compute totals
+  //   const totalAdditional = freight + installation + insurance + others;
+  //   const totalMarketValue = (Number(market_value) || 0) + totalAdditional;
 
-    // compute depreciation
-    const depreciationRate = (Number(depreciation) || 0);
-    const depreciationValue = totalMarketValue - depreciationRate;
+  //   // compute depreciation
+  //   const depreciationRate = (Number(depreciation) || 0);
+  //   const depreciationValue = totalMarketValue - depreciationRate;
 
-    // update form values
-    setValue("market_value", totalMarketValue, { shouldValidate: true, shouldDirty: true });
-    setValue("depreciation_value", depreciationValue, { shouldValidate: true, shouldDirty: true });
-  }, [
-    watchValues.acquisition_cost,
-    watchValues.additional_cost?.freight,
-    watchValues.additional_cost?.installation,
-    watchValues.additional_cost?.insurance,
-    watchValues.additional_cost?.others,
-    watchValues.depreciation,
-    setValue,
-  ]);
+  //   // update form values
+  //   setValue("market_value", totalMarketValue, { shouldValidate: true, shouldDirty: true });
+  //   setValue("depreciation_value", depreciationValue, { shouldValidate: true, shouldDirty: true });
+  // }, [
+  //   watchValues.additional_cost?.freight,
+  //   watchValues.additional_cost?.installation,
+  //   watchValues.additional_cost?.insurance,
+  //   watchValues.additional_cost?.others,
+  //   watchValues.depreciation,
+  //   setValue,
+  // ]);
 
   const onSubmit = (data) => {
     try {

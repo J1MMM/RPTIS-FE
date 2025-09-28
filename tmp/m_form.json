@@ -1,0 +1,105 @@
+{
+  "arp_no": "06-0077-0025",
+  "pin_no": "130-06-0077-0025",
+  "street": "322",
+  "brgy": "SOLEDAD",
+  "city": "SAN PABLO CITY",
+  "province": "LAGUNA",
+  "faasMachineChainId": "",
+  "machine_ownership": [
+    {
+      "type": "person",
+      "role": "owner",
+      "lastname": "Dela Rosa",
+      "firstname": "Carlita",
+      "middlename": "Nuevo",
+      "contact_no": "09231123131",
+      "email": "ctmo2@gmail.com",
+      "tin": "T-3476287",
+      "remarks": "REMARKS",
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "brgy": "Barangay I-A (Pob.)",
+      "street": "322",
+      "postal": "4000",
+      "id": "5234d051-8c90-4a41-9a46-aff6d64909c3"
+    }
+  ],
+  "appraised_by": {
+    "name": "",
+    "date": ""
+  },
+  "assessed_by": {
+    "name": "",
+    "date": ""
+  },
+  "memoranda": "memo",
+  "taxable": "true",
+  "effectivity_year": "2025-09-27T16:00:00.000Z",
+  "previous_data": {
+    "owner": "john",
+    "value": "123"
+  },
+  "bldg_reference": {
+    "owner": "John Michael",
+    "pin_no": "06-0077-0001"
+  },
+  "land_reference": {
+    "owner": "John Michael",
+    "pin_no": "06-0077-0001"
+  },
+  "machine_brand_capacity": [
+    {
+      "description": "des",
+      "model": "model",
+      "hp": "hp",
+      "date_acquired": "2025-09-27T16:00:00.000Z",
+      "condition_when_acquired": "cwa",
+      "economic_life": {
+        "estimated": "e",
+        "remaining": "r"
+      },
+      "date_installed": "2025-09-27T16:00:00.000Z",
+      "dare_of_operation": "",
+      "remarks": "r",
+      "date_of_operation": "2025-09-27T16:00:00.000Z",
+      "id": "14f6f7c2-edfc-4e08-be56-db9404ec19d2"
+    }
+  ],
+  "property_appraisal_machine": [
+    {
+      "machinery_description": "Machine Description",
+      "no_of_units": 1,
+      "acquisition_cost": "",
+      "additional_cost": {
+        "freight": "",
+        "installation": "",
+        "insurance": "",
+        "others": ""
+      },
+      "market_value": 10000,
+      "depreciation": "",
+      "depreciation_value": "",
+      "id": "3b03e3eb-99f6-498f-9f45-a924301a4cf1"
+    }
+  ],
+  "property_assessment_machine": {
+    "kind": "kind",
+    "actual_use": "residential",
+    "market_value": 10000,
+    "assessment_level": 0.5,
+    "assessed_value": 5000
+  },
+  "reference_posting_summary": [],
+  "recommending_approval": {
+    "municipality": "spc",
+    "date": "2025"
+  },
+  "approval": {
+    "name": "approved by",
+    "date": "2025-09-27T16:00:00.000Z"
+  },
+  "transaction_code": "DC",
+  "effectivity_quarter": "4th Quarter"
+}
