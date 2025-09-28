@@ -7,7 +7,7 @@ import Row from "../../../../../../components/ui/Row";
 function PropertyInfoFields({ control, readOnly }) {
   return (
     <StyledFieldset title="Property Information">
-      <Stack direction="row" gap={1}>
+      <Row>
         <TextInput
           readOnly={readOnly}
           control={control}
@@ -21,8 +21,38 @@ function PropertyInfoFields({ control, readOnly }) {
           label="PIN NO."
           name={FIELDS.PIN}
         />
-      </Stack>
-      <Stack direction="row" gap={1}>
+      </Row>
+      <Row>
+        <TextInput
+          readOnly={readOnly}
+          control={control}
+          label="Bldg. Owner (where mach. is located)"
+          name={FIELDS.M_BLDG_REF_OWNER}
+        />
+
+        <TextInput
+          readOnly={readOnly}
+          control={control}
+          label="Bldg. PIN"
+          name={FIELDS.M_BLDG_REF_PIN}
+        />
+      </Row>
+      <Row>
+        <TextInput
+          readOnly={readOnly}
+          control={control}
+          label="Land Owner (where mach. is located)"
+          name={FIELDS.M_LAND_REF_OWNER}
+        />
+
+        <TextInput
+          readOnly={readOnly}
+          control={control}
+          label="Land PIN"
+          name={FIELDS.M_LAND_REF_PIN}
+        />
+      </Row>
+      <Row>
         <TextInput
           readOnly={readOnly}
           control={control}
@@ -51,32 +81,8 @@ function PropertyInfoFields({ control, readOnly }) {
           name={FIELDS.PROVINCE}
           readOnly={true}
           value="LAGUNA"
-
         />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <Row>
-
-          <TextInput
-            readOnly={readOnly}
-            control={control}
-            label="OCT/TCT/No."
-            name={FIELDS.OCT_TCT_NO}
-          />
-          <DateInput readOnly={readOnly} control={control} label="Date" name={FIELDS.DATE} />
-        </Row>
-        <TextInput readOnly={readOnly} control={control} label="Lot No" name={FIELDS.LOT_NO} />
-      </Stack>
-      <Stack direction="row" gap={1}>
-        <TextInput readOnly={readOnly} control={control} label="Block No." name={FIELDS.BLOCK_NO} />
-        <TextInput
-          readOnly={readOnly}
-          control={control}
-          multiline={true}
-          label="Survey No."
-          name={FIELDS.SURVEY_NO}
-        />
-      </Stack>
+      </Row>
     </StyledFieldset>
   );
 }

@@ -113,8 +113,8 @@ function BuildingLocFields({ control, readOnly }) {
           options={BRGY_OPTIONS}
         />
 
-        <TextInput control={control} label="City" name={FIELDS.CITY_REF} readOnly />
-        <TextInput control={control} label="Province" name={FIELDS.PROVINCE_REF} readOnly />
+        <TextInput control={control} label="City" name={FIELDS.CITY_REF} value="SAN PABLO CITY" />
+        <TextInput control={control} label="Province" name={FIELDS.PROVINCE_REF} value="LAGUNA" />
       </Stack>
 
       <Stack direction="row" gap={1}>

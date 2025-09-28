@@ -1,7 +1,7 @@
 {
   "transaction_code": "DC",
-  "arp_no": "06-0077-0003",
-  "pin_no": "130-06-0077-0003",
+  "arp_no": "06-0077-0024",
+  "pin_no": "130-06-0077-0024",
   "street": "322",
   "brgy": "SOLEDAD",
   "city": "SAN PABLO CITY",
@@ -31,17 +31,46 @@
   ],
   "landappraisals": [
     {
-      "id": "704486e9-e2c0-4207-9504-33770ec583d6",
-      "adjusted": false,
-      "classification": "agricultural",
-      "subclassification": "a1",
+      "id": "546eebcc-25d6-4d52-803e-020a4da9e23e",
+      "adjusted": true,
+      "classification": "residential",
+      "subclassification": "r2",
       "area": 100,
-      "unitValue": 17.33,
-      "base_market_value": 1732.9999999999998,
-      "market_value": 1732.9999999999998,
-      "actual_use": "",
-      "assessment_level": "",
-      "assessed_value": ""
+      "unitValue": 1260,
+      "base_market_value": 126000,
+      "market_value": 163800,
+      "actual_use": "residential",
+      "assessment_level": 15,
+      "assessed_value": 2457000,
+      "adjustments": [
+        {
+          "adjustment_factor": "cornerInfluence",
+          "marketAdjustmentPercent": 0.3,
+          "adjustment_value": 163800,
+          "area": 100
+        }
+      ]
+    },
+    {
+      "id": "f8129244-0d47-48f1-a482-eadde387e7ea",
+      "adjusted": true,
+      "classification": "commercial",
+      "subclassification": "c2",
+      "area": 30,
+      "unitValue": 5260,
+      "base_market_value": 157800,
+      "market_value": 15780,
+      "actual_use": "commercial",
+      "assessment_level": 40,
+      "assessed_value": 631200,
+      "adjustments": [
+        {
+          "adjustment_factor": "rightOfWay",
+          "marketAdjustmentPercent": 0.1,
+          "adjustment_value": 15780,
+          "area": 30
+        }
+      ]
     }
   ],
   "north": "N",
@@ -55,21 +84,50 @@
   "taxable": "true",
   "quarter": "",
   "yearAssessment": null,
-  "totalMarketValue": 1732.9999999999998,
-  "totalAssessedValue": 69319.99999999999,
+  "totalMarketValue": 283800,
+  "totalAssessedValue": 3088200,
   "propertyAssessments": [
     {
-      "id": "704486e9-e2c0-4207-9504-33770ec583d6",
-      "adjusted": false,
-      "classification": "agricultural",
-      "subclassification": "a1",
+      "id": "546eebcc-25d6-4d52-803e-020a4da9e23e",
+      "adjusted": true,
+      "classification": "residential",
+      "subclassification": "r2",
       "area": 100,
-      "unitValue": 17.33,
-      "base_market_value": 1732.9999999999998,
-      "market_value": 1732.9999999999998,
-      "actual_use": "agricultural",
+      "unitValue": 1260,
+      "base_market_value": 126000,
+      "market_value": 163800,
+      "actual_use": "residential",
+      "assessment_level": 15,
+      "assessed_value": 2457000,
+      "adjustments": [
+        {
+          "adjustment_factor": "cornerInfluence",
+          "marketAdjustmentPercent": 0.3,
+          "adjustment_value": 163800,
+          "area": 100
+        }
+      ]
+    },
+    {
+      "id": "f8129244-0d47-48f1-a482-eadde387e7ea",
+      "adjusted": true,
+      "classification": "commercial",
+      "subclassification": "c2",
+      "area": 30,
+      "unitValue": 5260,
+      "base_market_value": 157800,
+      "market_value": 15780,
+      "actual_use": "commercial",
       "assessment_level": 40,
-      "assessed_value": 69319.99999999999
+      "assessed_value": 6312,
+      "adjustments": [
+        {
+          "adjustment_factor": "rightOfWay",
+          "marketAdjustmentPercent": 0.1,
+          "adjustment_value": 15780,
+          "area": 30
+        }
+      ]
     }
   ],
   "effectivity_quarter": "4th Quarter",
@@ -81,5 +139,11 @@
     "arp_no": "06-0077-0001",
     "total_assessed_value": 10000,
     "effectivity_assessment": "2025-09-24T16:00:00.000Z"
-  }
+  },
+  "appraisedBy": "",
+  "dateAppraised": "",
+  "approvedBy": "EVA F. PUNTO",
+  "dateApproved": 1758868744072,
+  "total_property_assessment": 2463312,
+  "id": "6801b290-bfd6-4bde-8979-4cdef181ff5b"
 }

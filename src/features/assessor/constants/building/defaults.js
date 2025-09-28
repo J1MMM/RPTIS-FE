@@ -1,90 +1,75 @@
 import { FIELDS } from "../shared/fieldNames";
 
 export const BLDG_FORM_DEFAULT = {
-    [FIELDS.TRANSACTION_CODE]: "",
-    [FIELDS.ARP_NO]: "",
-    [FIELDS.PIN]: "",
-    [FIELDS.BLDG_OWNERSHIP_FIELD]: [], // array of owners
-
-    [FIELDS.BLDG_LAND_REF_FIELD]: {
-        id: null,
-        td: "",
-        owner: "",
-        street: "",
-        brgy: "",
-        city: "SAN PABLO CITY",
-        province: "LAGUNA",
-        oct_tct_cloa_no: "",
-        lot_no: "",
-        blk_no: "",
-        survey_no: "",
-        area: 0,
+    "transaction_code": "",
+    "arp_no": "",
+    "pin_no": "",
+    "land_reference": {
+        "street": "",
+        "brgy": "",
+        "city": "SAN PABLO CITY",
+        "province": "LAGUNA",
+        "td": "",
+        "area": 0,
+        "owner": "",
+        "oct_tct_cloa_no": "",
+        "survey_no": "",
+        "lot_no": "",
+        "blk_no": ""
     },
-
-    [FIELDS.STRUCTURAL_FIELDS]: {
-        type: "",
-        category: "",
+    "kindBldg": "",
+    "buildingAge": "",
+    "structural_type": {
+        "type": "",
+        "category": ""
     },
+    "bldg_permit": "",
+    "bldg_permit_date_issued_on": "",
+    "cct": "",
+    "coc_issued_on": "",
+    "dateConstructed": "",
+    "dateOccupied": "",
+    "noOfStorey": 0,
+    "floors": [
 
-    floors: [],
-
-    [FIELDS.PROPERTY_APPRAISAL_FIELD]: {
-        id: null,
-        ucc: 0,
-        bcst: 0,
-        totalConstructionCost: 0,
-        depreciationRate: 0,
-        yearsToDepreciate: 0,
-        depreciationCost: 0,
-        marketValue: 0,
-        totalCostAddItems: 0,
-        total_percent_depreciation: 0,
-        additionalItems: [],
+    ],
+    "total_floor_areas": 167.25,
+    "propertyAppraisals": {
+        "ucc": 0,
+        "bcst": 0,
+        "totalCostAddItems": 0,
+        "totalConstructionCost": 0,
+        "depreciationRate": 0,
+        "yearsToDepreciate": 0,
+        "total_percent_depreciation": 0,
+        "depreciationCost": 0,
+        "marketValue": 0,
+        "additionalItems": []
     },
-
-    [FIELDS.BLDG_ASSESSMENT_FIELDS]: {
-        id: null,
-        actualUse: "",
-        assessmentLevel: 0,
-        assessedValue: 0,
-        marketValue: 0,
+    "taxable": "",
+    "quarter": "",
+    "effectivity_assessment": "",
+    "appraisedBy": "AKO",
+    "dateAppraised": "",
+    "approvedBy": "EVA F. PUNTO",
+    "dateApproved": Date.now(),
+    "memoranda": "MEMO",
+    "previousRecords": {
+        "owner_name": "",
+        "pin_no": "",
+        "arp_no": "",
+        "td_no": "",
+        "total_assessed_value": 0,
+        "effectivity_assessment": ""
     },
-
-    [FIELDS.KIND_OF_BUILDING]: "",
-    [FIELDS.KIND_BLDG_REMARKS]: "",
-
-    [FIELDS.BLDG_PERMIT]: "",
-    [FIELDS.BLDG_PERMIT_DATE_ISSUE]: null,
-
-    [FIELDS.CCT]: "",
-    [FIELDS.CO_COMPLITION]: null,
-
-    [FIELDS.DATE_CONSTRUCTED]: null,
-    [FIELDS.DATE_OCCUPIED]: null,
-
-    [FIELDS.BUILDING_MARKET_VALUE]: 0,
-    [FIELDS.NO_OF_STOREYS]: 0,
-
-    [FIELDS.TAXABILITY]: true,
-
-    [FIELDS.EFFECTIVITY_YEAR]: null,
-    [FIELDS.EFFECTIVITY_QTR]: "",
-
-    [FIELDS.MEMORANDA]: "",
-
-    [FIELDS.PREV_RECORDS_FIELDS]: {
-        id: null,
-        pin_no: "",
-        arp_no: "",
-        total_assessed_value: 0,
-        owner_name: "",
-        effectivity_assessment: null,
-    },
-
-    [FIELDS.APPROVED_BY]: "EVA F. PUNTO",
-    [FIELDS.DATE_APPROVED]: Date.now(),
-};
-
+    "bldg_ownership": [],
+    "propertyAssessments": {
+        "marketValue": 1,
+        "actualUse": "",
+        "assessmentLevel": 0,
+        "assessedValue": 0
+    }
+}
 
 export const ADDITIONAL_ITEMS_DEFAULT = {
     category: "",

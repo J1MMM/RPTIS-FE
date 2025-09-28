@@ -103,14 +103,14 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
             <TextInput
               required={false}
               control={control}
-              name="remarks"
-              label="Remarks"
+              name="tin"
+              label="TIN"
             />
             <TextInput
               required={false}
               control={control}
-              name="tin"
-              label="TIN"
+              name="remarks"
+              label="Remarks"
             />
           </Row>
         </StyledFieldset>

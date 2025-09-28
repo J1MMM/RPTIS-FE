@@ -10,7 +10,7 @@ import { PROPERTY_ASS_TABLE_COLUMN } from "../../../../constants/land/table-colu
 
 export const LandPropAssTable = (props) => {
   const { control, handleChange, readOnly } = props;
-  const propertyAssessments = useWatch({ control, name: "propertyAssessments" })
+  const propertyAssessments = useWatch({ control, name: FIELDS.ASSESSMENT_FIELDS }) ?? [];
   const totalAssessedValue = sumByField(propertyAssessments, FIELDS.LAND_ASSESSED_VALUE)
 
   return (
@@ -30,13 +30,13 @@ export const LandPropAssTable = (props) => {
               <Select
                 required
                 disabled={readOnly}
-                value={params.row[FIELDS.LAND_ACTUAL_USE]}
+                value={params.row[FIELDS.LAND_ACTUAL_USE] ?? ""}
                 onChange={(e) => handleChange(params.row.id, e.target.value)}
                 fullWidth
                 variant="standard"
               >
                 {CLASSIFICATION_OPTIONS.map((option, index) => (
-                  <MenuItem key={index} value={option.value}>
+                  <MenuItem key={option.value} value={option.value}>
                     {option.label}
                   </MenuItem>
                 ))}

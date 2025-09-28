@@ -9,7 +9,6 @@ import { sumByField } from "@utils/math";
 
 export const BuildingAssessmentTable = (props) => {
   const { handleChange, readOnly, rows } = props;
-  const totalAssessedValue = sumByField(rows, FIELDS.LAND_ASSESSED_VALUE)
 
   return (
     <DataGrid

@@ -15,43 +15,50 @@ export const APPRAISAL_FORM_DEFAULT = {
 };
 
 export const LAND_DEFAULT_FIELD = {
-    // property info
-    [FIELDS.TRANSACTION_CODE]: "",
-    [FIELDS.ARP_NO]: "",
-    [FIELDS.PIN]: "",
-    [FIELDS.NO_AND_STREET]: "",
-    [FIELDS.BARANGAY]: "",
-    [FIELDS.CITY]: "SAN PABLO CITY", // example fixed value
-    [FIELDS.PROVINCE]: "LAGUNA", // example fixed value
-    [FIELDS.OCT_TCT_NO]: "",
-    [FIELDS.DATE]: null,
-    [FIELDS.LOT_NO]: "",
-    [FIELDS.BLOCK_NO]: "",
-    [FIELDS.SURVEY_NO]: "",
-    //owner info
-    land_ownership: [],
-    landappraisals: [],
-    // boundaries
-    [FIELDS.NORTH_BOUNDARY]: "",
-    [FIELDS.SOUTH_BOUNDARY]: "",
-    [FIELDS.EAST_BOUNDARY]: "",
-    [FIELDS.WEST_BOUNDARY]: "",
-    [FIELDS.NE_BOUNDARY]: "",
-    [FIELDS.SW_BOUNDARY]: "",
-    [FIELDS.SE_BOUNDARY]: "",
-    [FIELDS.NW_BOUNDARY]: "",
-    // taxability
-    [FIELDS.TAXABILITY]: "",
+    "transaction_code": "",
+    "arp_no": "",
+    "pin_no": "",
+    "street": "",
+    "brgy": "",
+    "city": "SAN PABLO CITY",
+    "province": "LAGUNA",
+    "oct_tct": "",
+    "date": "",
+    "lot_no": "",
+    "blk_no": "",
+    "survey_no": "",
+    "land_ownership": [],
+    "landappraisals": [],
+    "north": "",
+    "south": "",
+    "east": "",
+    "west": "",
+    "northeast": "",
+    "southWest": "",
+    "southEast": "",
+    "northWest": "",
+    "taxable": "",
+    "quarter": "",
+    "yearAssessment": null,
+    "totalMarketValue": "",
+    "totalAssessedValue": "",
+    "propertyAssessments": [],
+    "effectivity_quarter": "",
+    "effectivity_year": "",
+    "memoranda": "",
+    "previous_records": {
+        "owner_name": "",
+        "pin_no": "",
+        "arp_no": "",
+        "total_assessed_value": "",
+        "effectivity_assessment": ""
+    },
+    appraisedBy: "",
+    dateAppraised: "",
+    approvedBy: "EVA F. PUNTO",
+    dateApproved: Date.now(),
+}
 
-    // effectivity of assessment/reassessment
-    [FIELDS.EFFECTIVITY_QTR]: "",
-    [FIELDS.EFFECTIVITY_YEAR]: null,
-
-    [FIELDS.TOTAL_MARKET_VALUE]: 0,
-    [FIELDS.TOTAL_ASSESSED_VALUE]: 0,
-    propertyAssessments: [],
-    [FIELDS.PREV_RECORDS_FIELDS]: undefined
-};
 
 export const STRIPPING_FIELDS_DEFAULT = [
     {
@@ -74,9 +81,9 @@ export const FACTOR_TYPES = {
 
 
 export const DEFAULT_OWNER_FORM = {
-    regions: "",
-    province: "",
-    city: "",
+    regions: "Region IV-A (CALABARZON)",
+    province: "Laguna",
+    city: "San Pablo City",
     barangay: "",
     street: "",
     postal: "",

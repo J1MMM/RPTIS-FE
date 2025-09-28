@@ -7,26 +7,27 @@ import { TableToolbar } from '../../../../../../components/shared';
 
 
 function LandFaasTable({ rows, toolbarButtons, handleShowDetails }) {
-    const columns = useMemo(() => [...LAND_TABLE_COLUMN,
-    {
-        field: "actions",
-        headerName: "ACTIONS",
-        flex: 1,
-        sortable: false,
-        filterable: false,
-        align: "center",
-        headerAlign: "center",
-        headerClassName: "data-grid-header",
-        renderCell: (params) => (
-            <Button
-                variant="outlined"
-                size="small"
-                onClick={() => handleShowDetails(params)}
-            >
-                View
-            </Button>
-        ),
-    }], [])
+    const columns = useMemo(() => [
+        ...LAND_TABLE_COLUMN,
+        {
+            field: "actions",
+            headerName: "ACTIONS",
+            flex: 1,
+            sortable: false,
+            filterable: false,
+            align: "center",
+            headerAlign: "center",
+            headerClassName: "data-grid-header",
+            renderCell: (params) => (
+                <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => handleShowDetails(params)}
+                >
+                    View
+                </Button>
+            ),
+        }], [])
 
     return (
         <DataGrid
@@ -44,7 +45,7 @@ function LandFaasTable({ rows, toolbarButtons, handleShowDetails }) {
                 toolbar: () => (
                     <TableToolbar
                         titleText="Land FAAS Records"
-                        // subText="Appraisal and Assessment Data"
+                        totalRows={rows?.length}
                         actionBtn={toolbarButtons}
                     />
                 ),

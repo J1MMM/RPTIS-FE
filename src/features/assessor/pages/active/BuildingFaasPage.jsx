@@ -6,25 +6,18 @@ import { toast, } from "react-toastify";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
 import { v4 } from "uuid";
 import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
-import { LAND_DEFAULT_FIELD } from "../../constants/land/default";
 import useConfirm from "../../../../hooks/useConfirm";
-import BuildingFaasTable from "../../components/tables/land/active-faas-page/BuildingFaasTable";
 import AddBuildingFaasModal from "../../components/forms/building/modal/AddBuildingFaasModal";
 
 import PrintableBuildingFaasFormModal from "../../components/forms/building/modal/printableModal/PrintableBuildingFaasFormModal";
 import PrintableBuildingTaxdecFormModal from "../../components/forms/building/modal/printableModal/PrintableBuildingTaxdecFormModal";
 import PrintablesMenu from "../../components/forms/PrintablesMenu";
-// import axios from "../../../../api/axios";
-// import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
-// import { logger } from "../../../../utils/logger";
-// import { capitalizeFirstLetter } from "../../../../utils/formatters";
-// import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
-
 import axios from "../../../../api/axios";
 import { bldgReqFormatter } from "../../utils/bldgReqFormatter";
 import { logger } from "../../../../utils/logger";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
+import BuildingFaasTable from "../../components/tables/building/BuildingFaasTable";
 
 function BuildingFaasPage() {
 
@@ -83,13 +76,13 @@ function BuildingFaasPage() {
         title: "Unsaved Changes",
         message: "You have unsaved changes. Discard them?",
         onConfirm: () => {
-          reset(LAND_DEFAULT_FIELD);
+          reset(BLDG_FORM_DEFAULT);
           setAddModalActive(false);
         },
       });
       return;
     }
-    reset(LAND_DEFAULT_FIELD);
+    reset(BLDG_FORM_DEFAULT);
     setAddModalActive(false);
   };
 
@@ -167,14 +160,14 @@ function BuildingFaasPage() {
           open={addModalActive}
           onClose={handleCloseModal}
           handleSubmit={handleSubmit(() => confirm({
-            title: "Add Land FAAS Confirmation",
-            message: "Are you sure you want to add this land FAAS data? It will be saved once confirmed.",
+            title: "Add Building FAAS Confirmation",
+            message: "Are you sure you want to add this building FAAS data? It will be saved once confirmed.",
             onConfirm: handleSubmit(onSubmit)
           }))}
           handleForm={handleClick}
         />
 
-        <PrintableBuildingFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal}/>
+        <PrintableBuildingFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal} />
         <PrintableBuildingTaxdecFormModal open={printTaxdecModalActive} onClose={handleClosePrintModal} />
         <PrintablesMenu
           open={open}

@@ -13,7 +13,7 @@ import { PlusCircle } from "lucide-react";
 function OwnerInfoFields({ readOnly, ownerFieldName }) {
   const [activeModal, setActiveModal] = useState(false)
   const { control: bldgControl } = useFormContext()
-  const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: ownerFieldName })
+  const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
   const ownersForm = useWatch({ control: ownerFieldControl })
   const { fields, append, remove } = useFieldArray({ control: bldgControl, name: ownerFieldName });
 

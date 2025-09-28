@@ -58,3 +58,25 @@ export function toOrdinal(n) {
   const v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
+
+export const formatFullDate = (date) => {
+  if (!date) return "";
+  return new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",  // full month name
+    day: "numeric",
+  });
+};
+
+export const formatShortDate = (date) => {
+  if (!date) return "";
+
+  const parsedDate = new Date(date);
+  if (isNaN(parsedDate)) return ""; // invalid string
+
+  return parsedDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};

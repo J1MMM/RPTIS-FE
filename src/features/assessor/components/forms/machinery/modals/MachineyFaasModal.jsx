@@ -1,23 +1,24 @@
 import { Button, Stack } from "@mui/material";
 import ContainerModal from "@components/shared/ContainerModal";
 import { TextInput, SelectField } from "@components/ui";
-import OwnerInfoFields from "../fieldsets/OwnerInfoFields";
-import PropertyInfoFields from "../fieldsets/PropertyInfoFields";
-import LandBounderiesFields from "../fieldsets/LandBounderiesFields";
-import LandAppraisalFields from "../fieldsets/LandAppraisalFields";
-import LandMarketValueFields from "../fieldsets/LandMarketValueFields";
-import AssessmentFields from "../fieldsets/AssessmentFields";
-import TaxabilityFields from "../fieldsets/TaxabilityFields";
-import PreviousRecFields from "../fieldsets/PreviousRecFields";
 import { TRANSACTION_CODE } from "../../../../constants/shared/dropdown";
 import { FIELDS } from "../../../../constants/shared/fieldNames";
-import { ArrowLeftRight, Edit, Landmark, Printer, Split, } from "lucide-react";
+import { ArrowLeftRight, Edit, Factory, Landmark, Printer, Split, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
 import seedLandReq from "../../../../../../../tmp/land_req.json";
+import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
+import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
+import PropertyInfoFields from "../fieldsets/PropertyInfoFields";
+import MachineBrandCapacity from "../fieldsets/MachineBrandCapacity";
+import MachineAppraisal from "../fieldsets/MachineAppraisal";
+import AssessmentFields from "../fieldsets/AssessmentFields";
+import TaxabilityFields from "../fieldsets/TaxabilityFields";
 import RecommendingFields from "../fieldsets/RecommendingFields";
+import ReferenceNPostingFields from "../fieldsets/ReferenceNPostingFields";
 
-export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
+
+export default function MachineyFaasModal({ open, onClose, handleSubmit, disabled, formMode, setFormMode, handleForm }) {
   const { control: landFormControl, reset } = useFormContext();
   const readOnly = formMode == "view"
   logger("FORM DATA", useWatch({ control: landFormControl }))
@@ -28,11 +29,11 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
     <>
       <ContainerModal
         maxWidth="lg"
-        title="FIELD APPRAISAL & ASSESSMENT SHEET - LAND"
+        title="REAL PROPERTY APPRAISAL & ASSESSMENT SHEET - MACHINERY"
         open={open}
         onClose={onClose}
         onSubmit={handleSubmit}
-        headerIcon={<Landmark />}
+        headerIcon={<Factory />}
         actionButton={
           formMode !== "view" ?
             <>
@@ -67,36 +68,19 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
 
         }
       >
-        <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button>
-
+        {/* <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button> */}
         <Stack width={230} direction="row" justifyContent="space-between">
-          <SelectField
-            readOnly={readOnly}
-            control={landFormControl}
-            label="Transaction Code"
-            name={FIELDS.TRANSACTION_CODE}
-            options={TRANSACTION_CODE}
-          />
+          <SelectField readOnly={readOnly} control={landFormControl} label="Transaction Code" name={FIELDS.TRANSACTION_CODE} options={TRANSACTION_CODE} />
         </Stack>
         <PropertyInfoFields readOnly={readOnly} control={landFormControl} />
-        <OwnerInfoFields readOnly={readOnly} ownerFieldName={"land_ownership"} />
-        <LandBounderiesFields readOnly={readOnly} control={landFormControl} />
-        <LandAppraisalFields readOnly={readOnly} />
-        <LandMarketValueFields readOnly={readOnly} />
-        <AssessmentFields readOnly={readOnly} />
+        <OwnerInfoFields readOnly={readOnly} ownerFieldName={"machine_ownership"} />
+        <MachineBrandCapacity readOnly={readOnly} control={landFormControl} />
+        <MachineAppraisal readOnly={readOnly} control={landFormControl} />
+        <AssessmentFields readOnly={readOnly} control={landFormControl} />
         <TaxabilityFields readOnly={readOnly} control={landFormControl} />
         <RecommendingFields control={landFormControl} readOnly={readOnly} />
-        <TextInput
-          required={false}
-          multiline
-          shrink={true}
-          rows={3}
-          readOnly={readOnly}
-          control={landFormControl}
-          label="Memoranda"
-          name={FIELDS.MEMORANDA}
-        />
-        <PreviousRecFields readOnly={readOnly} control={landFormControl} />
+        <TextInput required={false} multiline shrink={true} rows={3} readOnly={readOnly} control={landFormControl} label="Memoranda" name={FIELDS.MEMORANDA} />
+        <ReferenceNPostingFields readOnly={readOnly} control={landFormControl} />
       </ContainerModal >
     </>
   );

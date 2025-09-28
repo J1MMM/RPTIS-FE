@@ -1,9 +1,9 @@
+import { useMemo } from 'react';
 import { DataGrid } from '@mui/x-data-grid'
-import { BLDG_TABLE_COLUMN } from '../../../../constants/building/table-columns';
 import { Button } from '@mui/material';
 import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@constants/tableStyles";
-import { TableToolbar } from '../../../../../../components/shared';
-import { useMemo } from 'react';
+import { BLDG_TABLE_COLUMN } from '../../../constants/building/table-columns';
+import { TableToolbar } from '../../../../../components/shared';
 
 
 function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {

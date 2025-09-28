@@ -32,6 +32,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
   return (
     <>
       <ContainerModal
+        maxWidth="lg"
         title="FIELD APPRAISAL & ASSESSMENT SHEET - BUILDING & OTHER STRUCTURES"
         open={open}
         onClose={onClose}
