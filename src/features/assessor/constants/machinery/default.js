@@ -34,7 +34,7 @@ export const MACHINERY_FORM_DEFAULTS = {
     "machine_brand_capacity": [],
     "property_appraisal_machine": [],
     "property_assessment_machine": {
-        "kind": "kind",
+        "kind": "MACHINERY",
         "actual_use": "",
         "market_value": "",
         "assessment_level": "",

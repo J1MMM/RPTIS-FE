@@ -72,7 +72,7 @@ export default function AddBuildingFaasModal({ open, onClose, handleSubmit, disa
             </Stack>
         }
       >
-        <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button>
+        <Button size="small" onClick={handleAutoFill} variant="outlined">Auto Fill</Button>
 
         <Stack width={230} direction="row" justifyContent="space-between">
 

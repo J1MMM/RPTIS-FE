@@ -3,7 +3,7 @@ import { MARKET_VALUE_TABLE_COLUMN } from "../../../../constants/land/table-colu
 import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
 import { IconButton } from "@mui/material";
 import MarketAdjustmentTableFooter from "./MarketAdjustmentTableFooter";
-import { X } from "lucide-react";
+import { Trash2, X } from "lucide-react";
 import { sumByField } from "@utils/math";
 import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
@@ -16,6 +16,7 @@ export const LandMarketValueTable = (props) => {
     <DataGrid
       rows={rows}
       columns={[
+        ...MARKET_VALUE_TABLE_COLUMN,
         {
           field: "actions",
           headerName: "Actions",
@@ -30,15 +31,15 @@ export const LandMarketValueTable = (props) => {
             return (
               <IconButton
                 disabled={readOnly}
-                color="mono.main"
+                color="error"
+                size="small"
                 onClick={() => handleDelete(params.row.land_appraisal_id)}
               >
-                <X />
+                <Trash2 size={18} />
               </IconButton>
             )
           },
         },
-        ...MARKET_VALUE_TABLE_COLUMN,
       ]}
       initialState={DATA_GRID_INITIAL_STATE}
       sx={{

@@ -6,7 +6,7 @@ import { FIELDS } from "../../../../constants/shared/fieldNames";
 import { ArrowLeftRight, Edit, Factory, Landmark, Printer, Split, } from "lucide-react";
 import { useFormContext, useWatch } from "react-hook-form";
 import { logger } from "../../../../../../utils/logger";
-import seedLandReq from "../../../../../../../tmp/land_req.json";
+import seedLandReq from "../../../../../../../tmp/m_form.json";
 import OwnerInfoFields from "../../land/fieldsets/OwnerInfoFields";
 import PreviousRecFields from "../../land/fieldsets/PreviousRecFields";
 import PropertyInfoFields from "../fieldsets/PropertyInfoFields";
@@ -68,7 +68,7 @@ export default function MachineyFaasModal({ open, onClose, handleSubmit, disable
 
         }
       >
-        {/* <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button> */}
+        <Button size="small" onClick={handleAutoFill} variant="outlined">Auto Fill</Button>
         <Stack width={230} direction="row" justifyContent="space-between">
           <SelectField readOnly={readOnly} control={landFormControl} label="Transaction Code" name={FIELDS.TRANSACTION_CODE} options={TRANSACTION_CODE} />
         </Stack>

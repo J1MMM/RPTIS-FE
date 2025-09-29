@@ -28,32 +28,63 @@ function MachineBrandCapacity({ readOnly }) {
   const { control: machineFormControl, reset, getValues } = useFormContext();
   const { control: formControl, watch, setValue, handleSubmit, reset: resetForm, formState: { isSubmitting } } = useForm({ defaultValues: FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
-  const { fields, append, remove } = useFieldArray({ control: machineFormControl, name: FIELDS.M_BRAND_CAPACITY });
+  const [formMode, setFormMode] = useState("add");
+  const [editingId, setEditingId] = useState(null);
+  const { fields, append, remove, update } = useFieldArray({ control: machineFormControl, name: FIELDS.M_BRAND_CAPACITY });
 
+  const handleEdit = (idx) => {
+    setFormMode("edit");
+    setEditingId(idx);
+    setModalActive(true);
+    resetForm(fields[idx]);
+  }
 
-  const onSubmit = (data) => {
+  const onAddSubmit = (data) => {
     try {
       const newItem = { ...data, id: v4() }
-
-      append(newItem)
+      append(newItem);
       resetForm(FORM_DEFAULT);
       toast.success("Machinery added successfully!");
       setModalActive(false);
-
     } catch (error) {
       toast.error("Failed to Add Machinery. Please try again.");
-      console.error("Error in onSubmit:", error);
+      console.error("Error in onAddSubmit:", error);
+    }
+  };
+
+  const onEditSubmit = (data) => {
+    try {
+      update(editingId, { ...data, id: fields[editingId].id });
+      setModalActive(false);
+      setEditingId(null);
+      resetForm(FORM_DEFAULT);
+      toast.success("Machinery updated successfully!");
+    } catch (error) {
+      console.error("Error updating machinery:", error);
+      toast.error("Failed to update machinery. Please try again.");
     }
   };
 
   const handleDelete = (idx) => {
     try {
-      remove(idx)
+      remove(idx);
       toast.success("Machinery deleted successfully!");
     } catch (error) {
       toast.error("Failed to delete machinery. Please try again.");
       console.error(error);
     }
+  };
+
+  const handleClose = () => {
+    setModalActive(false);
+    setEditingId(null);
+    setFormMode("add");
+    resetForm(FORM_DEFAULT);
+  };
+
+  const handleAddBtnClick = () => {
+    setFormMode("add");
+    setModalActive(true);
   };
 
   return (
@@ -65,7 +96,7 @@ function MachineBrandCapacity({ readOnly }) {
             disableFocusRipple
             variant="contained"
             startIcon={<PlusCircle size="18" />}
-            onClick={() => setModalActive(true)}
+            onClick={handleAddBtnClick}
             sx={{
               alignSelf: "flex-start",
             }}
@@ -78,6 +109,7 @@ function MachineBrandCapacity({ readOnly }) {
           readOnly={readOnly}
           rows={fields}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
 
       </StyledFieldset>
@@ -85,9 +117,10 @@ function MachineBrandCapacity({ readOnly }) {
       <AddBrandNCapacityModal
         disabled={isSubmitting}
         open={modalActive}
-        onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(onSubmit)}
+        onClose={handleClose}
+        handleSubmit={formMode === "add" ? handleSubmit(onAddSubmit) : handleSubmit(onEditSubmit)}
         control={formControl}
+        formMode={formMode}
       />
     </>
   );

@@ -11,7 +11,7 @@ import { FIELDS } from "../../../../constants/shared/fieldNames";
 import TextInput from "@components/ui/TextInput";
 import { CLASSIFICATION_OPTIONS } from "../../../../constants/shared/dropdown";
 
-export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled }) => {
+export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, watch, setValue, disabled, formMode }) => {
   const classification = watch(FIELDS.LAND_CLASSIFICATION);
   const subclass = watch(FIELDS.SUBCLASS);
   const area = watch(FIELDS.LAND_AREA);
@@ -20,7 +20,7 @@ export const AddLandAppraisalModal = ({ open, onClose, handleSubmit, control, wa
     <ContainerModal
       disabled={disabled}
       maxWidth="sm"
-      title="Land Appraisal"
+      title={formMode === "edit" ? "Edit Land Appraisal" : "Land Appraisal"}
       open={open}
       onClose={onClose}
       headerIcon={<FileText />}

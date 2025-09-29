@@ -1,41 +1,44 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { OWNER_INFO_TABLE_COLUMN } from "../../../../constants/shared/table-columns";
 import { DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE, LAND_INNER_TABLE_WIDTH } from "@constants/tableStyles";
-import { IconButton } from "@mui/material";
-import { X } from "lucide-react";
+import { IconButton, Stack } from "@mui/material";
+import { Edit, Trash2, X } from "lucide-react";
 
-const columnProps = {
-  field: "actions",
-  headerName: "Actions",
-  width: 80,
-  headerClassName: "data-grid-header",
-  sortable: false,
-  filterable: false,
-  disableColumnMenu: true,
-  headerAlign: "center",
-  align: "center",
-}
+export const LandOwnerTable = ({ rows, handleDelete, readOnly, handleEdit }) => {
+  const COLUMNS = [
+    ...OWNER_INFO_TABLE_COLUMN,
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      headerClassName: "data-grid-header",
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        const index = rows.findIndex((f) => f.id === params.row.id);
 
-export const LandOwnerTable = ({ rows, handleDelete, readOnly }) => {
+        return (
+          <Stack direction={"row"} gap={1} display={"flex"} justifyContent={"center"} height={"100%"} alignItems={"center"}>
+            <IconButton size="small" color="error" disabled={readOnly} onClick={() => handleDelete(index)}>
+              <Trash2 size={18} />
+            </IconButton>
+
+            <IconButton size="small" color="primary" disabled={readOnly} onClick={() => handleEdit(index)}>
+              <Edit size={18} />
+            </IconButton>
+          </Stack>
+        )
+      },
+    }
+  ]
 
   return (
     <DataGrid
       rows={rows}
-      columns={[
-        {
-          ...columnProps,
-          renderCell: (params) => {
-            const index = rows.findIndex((f) => f.id === params.row.id);
-
-            return (
-              <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(index)}>
-                <X />
-              </IconButton>
-            )
-          },
-        },
-        ...OWNER_INFO_TABLE_COLUMN,
-      ]}
+      columns={COLUMNS}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
       sx={{

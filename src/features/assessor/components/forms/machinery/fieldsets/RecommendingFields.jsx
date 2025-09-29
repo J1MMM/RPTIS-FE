@@ -28,6 +28,7 @@ function RecommendingFields({ control, readOnly }) {
                     control={control}
                     label="Approved by"
                     name={"approval.name"}
+                    value="EVA F. PUNTO, REA"
                 />
                 <DateInput
                     readOnly={readOnly}

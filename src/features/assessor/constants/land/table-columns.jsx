@@ -188,6 +188,16 @@ export const MARKET_VALUE_TABLE_COLUMN = [
         },
     },
     {
+        field: "area",
+        headerName: "Area",
+        flex: 1,
+        headerClassName: "data-grid-header",
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+
+    },
+    {
         field: FIELDS.MARKET_ADJUSTMENT_FACTORS,
         headerName: "Adjustment Factors",
         flex: 1,

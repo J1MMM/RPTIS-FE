@@ -30,23 +30,15 @@ function TaxabilityFields({ control, readOnly }) {
           rules={{ required: "Taxability is required" }}
           options={TAXABLE_OPTIONS}
         />
-        <Row>
-          <SelectField
-            readOnly={readOnly}
-            control={control}
-            label="Quarter"
-            name={FIELDS.LAND_EFFECTIVITY_QTR}
-            options={QUATER_OPTIONS}
-          />
 
-          <DateInput
-            readOnly={readOnly}
-            control={control}
-            label="Year"
-            name={FIELDS.LAND_EFFECTIVITY_YEAR}
-            yearOnly
-          />
-        </Row>
+
+        <DateInput
+          readOnly={readOnly}
+          control={control}
+          label="Year"
+          name={FIELDS.LAND_EFFECTIVITY_YEAR}
+          yearOnly
+        />
       </Row>
     </StyledFieldset>
   );

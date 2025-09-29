@@ -67,7 +67,7 @@ export default function AddLandFaasModal({ open, onClose, handleSubmit, disabled
 
         }
       >
-        <Button size="small" onClick={handleAutoFill} variant="outlined">seeder</Button>
+        <Button size="small" onClick={handleAutoFill} variant="outlined">Auto Fill</Button>
 
         <Stack width={230} direction="row" justifyContent="space-between">
           <SelectField

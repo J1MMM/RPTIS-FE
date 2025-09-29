@@ -14,8 +14,10 @@ import { additionalItemsComputations } from "../../../../utils/buildingAdditiona
 
 function AdditionalItemsFields({ readOnly }) {
   const [modalActive, setModalActive] = useState(false);
+  const [formMode, setFormMode] = useState("add");
+  const [editingId, setEditingId] = useState(null);
   const { control: buildingControl, getValues: getBldgValue, setValue: setBldgVal } = useFormContext();
-  const { fields, append, remove } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
+  const { fields, append, remove, update } = useFieldArray({ control: buildingControl, name: FIELDS.ADDITIONAL_ITEMS });
   const { control, watch, reset, setValue, handleSubmit, formState: { isSubmitting } } = useForm();
   const { affectedArea, area, category, cost, height, material, noFloors, storey, total, type } = useWatch({ control })
 
@@ -50,27 +52,59 @@ function AdditionalItemsFields({ readOnly }) {
 
   }, [category]);
 
-  const onSubmit = (data) => {
+  const onAddSubmit = (data) => {
     try {
       const newAdditionItem = { ...data, id: v4() };
       append(newAdditionItem);
       toast.success("Item added successfully!", toastConfig);
       setModalActive(false);
-      reset(ADDITIONAL_ITEMS_DEFAULT)
+      reset(ADDITIONAL_ITEMS_DEFAULT);
     } catch (error) {
       toast.error("Failed to Add Items. Please try again.", toastConfig);
-      console.error("Error in onAppraisalSubmit:", error);
+      console.error("Error in onAddSubmit:", error);
+    }
+  };
+
+  const onEditSubmit = (data) => {
+    try {
+      update(editingId, { ...data, id: fields[editingId].id });
+      setModalActive(false);
+      setEditingId(null);
+      reset(ADDITIONAL_ITEMS_DEFAULT);
+      toast.success("Item updated successfully!", toastConfig);
+    } catch (error) {
+      console.error("Error updating item:", error);
+      toast.error("Failed to update item. Please try again.", toastConfig);
     }
   };
 
   const handleDelete = (index) => {
     try {
-      remove(index)
+      remove(index);
       toast.success("Item deleted successfully!", toastConfig);
     } catch (error) {
       toast.error("Failed to delete Item. Please try again.", toastConfig);
       console.error(error);
     }
+  };
+
+  const handleEdit = (id) => {
+    setFormMode("edit");
+    setEditingId(id);
+    setModalActive(true);
+    reset(fields[id]);
+  };
+
+  const handleClose = () => {
+    setModalActive(false);
+    setEditingId(null);
+    setFormMode("add");
+    reset(ADDITIONAL_ITEMS_DEFAULT);
+  };
+
+  const handleAddBtnClick = () => {
+    setFormMode("add");
+    setModalActive(true);
   };
 
   return (
@@ -82,7 +116,7 @@ function AdditionalItemsFields({ readOnly }) {
             disableFocusRipple
             variant="contained"
             startIcon={<PlusCircle size="18" />}
-            onClick={() => setModalActive(true)}
+            onClick={handleAddBtnClick}
             sx={{
               alignSelf: "flex-start",
             }}
@@ -95,6 +129,7 @@ function AdditionalItemsFields({ readOnly }) {
           readOnly={readOnly}
           fields={fields}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
 
       </StyledFieldset>
@@ -103,9 +138,9 @@ function AdditionalItemsFields({ readOnly }) {
         control={control}
         disabled={isSubmitting}
         open={modalActive}
-        onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(onSubmit)}
-
+        onClose={handleClose}
+        handleSubmit={formMode === "add" ? handleSubmit(onAddSubmit) : handleSubmit(onEditSubmit)}
+        formMode={formMode}
       />
     </>
   );

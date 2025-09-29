@@ -12,12 +12,14 @@ import { PlusCircle } from "lucide-react";
 
 function OwnerInfoFields({ readOnly, ownerFieldName }) {
   const [activeModal, setActiveModal] = useState(false)
+  const [formMode, setFormMode] = useState("add")
+  const [editingId, setEditingId] = useState(null)
   const { control: bldgControl } = useFormContext()
   const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
   const ownersForm = useWatch({ control: ownerFieldControl })
-  const { fields, append, remove } = useFieldArray({ control: bldgControl, name: ownerFieldName });
+  const { fields, append, remove, update } = useFieldArray({ control: bldgControl, name: ownerFieldName });
 
-  const onFormSubmit = (e) => {
+  const onAddSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation()
 
@@ -43,6 +45,41 @@ function OwnerInfoFields({ readOnly, ownerFieldName }) {
       toast.error("Failed to delete owner. Please try again.");
     }
   };
+  const handleAddBtnClick = () => {
+    setFormMode("add")
+    setActiveModal(true)
+  }
+
+  const handleEdit = (id) => {
+    setFormMode("edit")
+    setEditingId(id)
+    setActiveModal(true)
+    reset(fields[id])
+  }
+
+  const handleClose = () => {
+    setActiveModal(false)
+    setEditingId(null)
+    reset(DEFAULT_OWNER_FORM)
+  }
+
+  const onEditSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation()
+
+    handleSubmit((data) => {
+      try {
+        update(editingId, { ...data, id: fields[editingId].id })
+        setActiveModal(false);
+        setEditingId(null);
+        reset(DEFAULT_OWNER_FORM);
+        toast.success("Owner updated successfully!");
+      } catch (error) {
+        console.error("Error updating owner:", error);
+        toast.error("Failed to update owner. Please try again.");
+      }
+    })()
+  }
 
   return (
     <StyledFieldset title="Owner's / Administrator">
@@ -53,21 +90,23 @@ function OwnerInfoFields({ readOnly, ownerFieldName }) {
           variant="contained"
           startIcon={<PlusCircle size="18" />}
           sx={{ alignSelf: "flex-start" }}
-          onClick={() => setActiveModal(true)}
+          onClick={handleAddBtnClick}
         >
           Add Owner
         </Button>
       </Stack>
 
-      <LandOwnerTable readOnly={readOnly} rows={fields} handleDelete={deleteOwner} />
+      <LandOwnerTable readOnly={readOnly} rows={fields} handleDelete={deleteOwner} handleEdit={handleEdit} />
 
       <AddOwnerModal
         open={activeModal}
-        onClose={() => setActiveModal(false)}
+        onClose={handleClose}
         control={ownerFieldControl}
         form={ownersForm}
         setValue={setValue}
-        onSubmit={onFormSubmit}
+        onAddSubmit={onAddSubmit}
+        onEditSubmit={onEditSubmit}
+        formMode={formMode}
       />
     </StyledFieldset >
   );

@@ -1,24 +1,11 @@
-import { X } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import { IconButton, Stack, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { MachineAppraisal_COLUMNS } from "../../../constants/machinery/table-columns";
 import { LAND_INNER_TABLE_WIDTH, DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
 import { formatPeso } from "../../../../../utils/formatters";
-import { sumByField } from "../../../../../utils/math";
 
-const columnProps = {
-  field: "actions",
-  headerName: "Actions",
-  width: 80,
-  headerClassName: "data-grid-header",
-  sortable: false,
-  filterable: false,
-  disableColumnMenu: true,
-  headerAlign: "center",
-  align: "center",
-}
-
-export const MachineAppraisalTable = ({ rows, handleDelete, readOnly }) => {
+export const MachineAppraisalTable = ({ rows, handleDelete, readOnly, handleEdit }) => {
 
   const totalMarketVal = rows.reduce((total, row) => {
     const dep = Number(row?.["depreciation_value"]);
@@ -35,24 +22,40 @@ export const MachineAppraisalTable = ({ rows, handleDelete, readOnly }) => {
   }, 0);
 
 
+  const COLUMNS = [
+    ...MachineAppraisal_COLUMNS,
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      headerClassName: "data-grid-header",
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        const index = rows.findIndex((f) => f.id === params.row.id);
+
+        return (
+          <Stack direction={"row"} gap={1} display={"flex"} justifyContent={"center"} height={"100%"} alignItems={"center"}>
+            <IconButton size="small" color="error" disabled={readOnly} onClick={() => handleDelete(index)}>
+              <Trash2 size={18} />
+            </IconButton>
+
+            <IconButton size="small" color="primary" disabled={readOnly} onClick={() => handleEdit(index)}>
+              <Edit size={18} />
+            </IconButton>
+          </Stack>
+        )
+      },
+    }
+  ]
+
   return (
     <DataGrid
       rows={rows}
-      columns={[
-        {
-          ...columnProps,
-          renderCell: (params) => {
-            const index = rows.findIndex((f) => f.id === params.row.id);
-
-            return (
-              <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(index)}>
-                <X />
-              </IconButton>
-            )
-          },
-        },
-        ...MachineAppraisal_COLUMNS,
-      ]}
+      columns={COLUMNS}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
       sx={{
@@ -66,21 +69,21 @@ export const MachineAppraisalTable = ({ rows, handleDelete, readOnly }) => {
       slots={{
         footer: () => (
           <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
-            <Typography sx={{ ...styledText, maxWidth: 70 }} />
             <Typography sx={styledText} />
             <Typography sx={{ ...styledText, flex: .5 }} />
+            <Typography sx={styledText} />
             <Typography sx={styledText} />
             <Typography sx={styledText} />
             <Typography sx={{ ...styledText, fontWeight: "600" }} variant="body2">
               Total:
             </Typography>
             <Typography
-              sx={{ ...styledText, borderRight: "none", fontWeight: "600" }}
+              sx={{ ...styledText, fontWeight: "600" }}
               variant="body2"
             >
               {formatPeso(totalMarketVal)}
             </Typography>
-          </Stack>
+          </Stack >
         ),
       }}
 
@@ -90,6 +93,5 @@ export const MachineAppraisalTable = ({ rows, handleDelete, readOnly }) => {
 
 const styledText = {
   flex: 1,
-  borderRight: "1px solid #E0E0E0",
   padding: "8px",
 };

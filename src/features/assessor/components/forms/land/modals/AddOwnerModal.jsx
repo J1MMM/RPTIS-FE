@@ -17,7 +17,7 @@ const ROLES = [
   { label: "Administrator", value: "administrator" },
 ];
 
-function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
+function AddOwnerModal({ open, onClose, control, form, onAddSubmit, setValue, onEditSubmit, formMode }) {
   const { regionsOptions, provinceOptions, cityOptions, barangayOptions }
     = getPhLocations({
       selectedRegion: form?.regions,
@@ -30,12 +30,12 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
       title="Owner's Information"
       open={open}
       onClose={onClose}
-      onSubmit={onSubmit}
+      onSubmit={formMode == "edit" ? onEditSubmit : onAddSubmit}
       headerIcon={form?.type == "company" ? <Building2 /> : <UserRoundPlus />}
       actionButton={
         <>
           <CancelButton onClick={onClose} />
-          <Button type="submit" size="small" variant="contained" >Submit</Button>
+          <Button type="submit" size="small" variant="contained" >{formMode == "edit" ? "Save Changes" : "Submit"}</Button>
         </>
       }
     >
@@ -46,6 +46,9 @@ function AddOwnerModal({ open, onClose, control, form, onSubmit, setValue }) {
             name="type"
             label="Owner Type"
             options={OWNER_TYPES}
+            onChange={() => {
+              setValue("name", "")
+            }}
           />
           <SelectField
             control={control}

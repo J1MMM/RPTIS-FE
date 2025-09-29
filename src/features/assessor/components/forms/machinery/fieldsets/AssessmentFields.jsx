@@ -81,22 +81,6 @@ function AssessmentFields({ readOnly }) {
               sortable: false,
               filterable: false,
               disableColumnMenu: true,
-              renderCell: (params) => {
-                return (
-                  <Select
-                    disabled={readOnly}
-                    value={""}
-                    fullWidth
-                    variant="standard"
-                  >
-                    {CLASSIFICATION_OPTIONS.map((option, index) => (
-                      <MenuItem key={index} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                );
-              },
             },
             {
               field: "actual_use",

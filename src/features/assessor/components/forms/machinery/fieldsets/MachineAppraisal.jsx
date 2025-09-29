@@ -12,24 +12,26 @@ import { sumByField } from "../../../../../../utils/math";
 
 const FORM_DEFAULT = {
   machinery_description: "",
-  no_of_units: 0,
-  acquisition_cost: 0,
+  no_of_units: "",
+  acquisition_cost: "",
   additional_cost: {
-    freight: 0,
-    installation: 0,
-    insurance: 0,
-    others: 0
+    freight: "",
+    installation: "",
+    insurance: "",
+    others: ""
   },
-  market_value: 0,
-  depreciation: 0,
-  depreciation_value: 0
+  market_value: "",
+  depreciation: "",
+  depreciation_value: ""
 }
 
 function MachineAppraisal({ readOnly }) {
   const { control: machineFormControl, setValue: setMachineValue } = useFormContext();
   const { control: formControl, watch, setValue, handleSubmit, reset: resetForm, formState: { isSubmitting } } = useForm({ defaultValues: FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
-  const { fields, append, remove } = useFieldArray({ control: machineFormControl, name: FIELDS.M_PROPERTY_APPRAISAL });
+  const [formMode, setFormMode] = useState("add");
+  const [editingId, setEditingId] = useState(null);
+  const { fields, append, remove, update } = useFieldArray({ control: machineFormControl, name: FIELDS.M_PROPERTY_APPRAISAL });
 
   const watchValues = watch();
 
@@ -66,28 +68,59 @@ function MachineAppraisal({ readOnly }) {
   //   setValue,
   // ]);
 
-  const onSubmit = (data) => {
+  const onAddSubmit = (data) => {
     try {
-      const newItem = { ...data, id: v4() }
-      append(newItem)
+      const newItem = { ...data, id: v4() };
+      append(newItem);
       resetForm(FORM_DEFAULT);
       toast.success("Property appraisal added successfully!");
       setModalActive(false);
-
     } catch (error) {
       toast.error("Failed to add property appraisal. Please try again.");
-      console.error("Error in onSubmit:", error);
+      console.error("Error in onAddSubmit:", error);
     }
+  };
+
+  const onEditSubmit = (data) => {
+    try {
+      update(editingId, { ...data, id: fields[editingId].id });
+      setModalActive(false);
+      setEditingId(null);
+      resetForm(FORM_DEFAULT);
+      toast.success("Property appraisal updated successfully!");
+    } catch (error) {
+      console.error("Error updating property appraisal:", error);
+      toast.error("Failed to update property appraisal. Please try again.");
+    }
+  };
+
+  const handleEdit = (idx) => {
+    setFormMode("edit");
+    setEditingId(idx);
+    setModalActive(true);
+    resetForm(fields[idx]);
   };
 
   const handleDelete = (idx) => {
     try {
-      remove(idx)
+      remove(idx);
       toast.success("Property appraisal deleted successfully!");
     } catch (error) {
       toast.error("Failed to delete property appraisal. Please try again.");
       console.error(error);
     }
+  };
+
+  const handleClose = () => {
+    setModalActive(false);
+    setEditingId(null);
+    setFormMode("add");
+    resetForm(FORM_DEFAULT);
+  };
+
+  const handleAddBtnClick = () => {
+    setFormMode("add");
+    setModalActive(true);
   };
 
   return (
@@ -99,7 +132,7 @@ function MachineAppraisal({ readOnly }) {
             disableFocusRipple
             variant="contained"
             startIcon={<PlusCircle size="18" />}
-            onClick={() => setModalActive(true)}
+            onClick={handleAddBtnClick}
             sx={{
               alignSelf: "flex-start",
             }}
@@ -112,6 +145,7 @@ function MachineAppraisal({ readOnly }) {
           readOnly={readOnly}
           rows={fields}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
 
       </StyledFieldset>
@@ -119,9 +153,10 @@ function MachineAppraisal({ readOnly }) {
       <AddMachineAppraisal
         disabled={isSubmitting}
         open={modalActive}
-        onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(onSubmit)}
+        onClose={handleClose}
+        handleSubmit={formMode === "add" ? handleSubmit(onAddSubmit) : handleSubmit(onEditSubmit)}
         control={formControl}
+        formMode={formMode}
       />
     </>
   );

@@ -91,5 +91,7 @@ export const DEFAULT_OWNER_FORM = {
     role: "",
     contact_no: "",
     email: "",
-    name: ""
+    name: "",
+    tin: "",
+    remarks: "",
 }

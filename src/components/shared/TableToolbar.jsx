@@ -46,7 +46,7 @@ const TableToolbar = ({ titleText, subText, actionBtn, totalRows }) => {
           {first} <span style={{ color: "#9CA3AF" }}>{last}</span>
         </Typography>
         {
-          totalRows &&
+          totalRows > 0 &&
           <Chip
             sx={{
               fontWeight: 600,

@@ -1,29 +1,43 @@
 {
-  "arp_no": "06-0077-0025",
-  "pin_no": "130-06-0077-0025",
-  "street": "322",
+  "arp_no": "06-0077-0001",
+  "pin_no": "130-06-0077-002-16-2001",
+  "street": "BLK 8, 888 Ind'l Megacity, Highway 2000",
   "brgy": "SOLEDAD",
   "city": "SAN PABLO CITY",
   "province": "LAGUNA",
   "faasMachineChainId": "",
   "machine_ownership": [
     {
-      "type": "person",
-      "role": "owner",
-      "lastname": "Dela Rosa",
-      "firstname": "Carlita",
-      "middlename": "Nuevo",
-      "contact_no": "09231123131",
-      "email": "ctmo2@gmail.com",
-      "tin": "T-3476287",
-      "remarks": "REMARKS",
       "regions": "Region IV-A (CALABARZON)",
       "province": "Laguna",
       "city": "San Pablo City",
-      "brgy": "Barangay I-A (Pob.)",
-      "street": "322",
+      "barangay": "",
+      "street": "BLK 8, 888 Ind'l Megacity, Highway 2000",
       "postal": "4000",
-      "id": "5234d051-8c90-4a41-9a46-aff6d64909c3"
+      "type": "company",
+      "role": "owner",
+      "contact_no": "09123123123",
+      "email": "",
+      "name": "OSAVE TRADING PHILIPPINES CORPORATION",
+      "brgy": "Barangay VI-B (Pob.)",
+      "id": "66dbf260-966b-4cf9-9f74-a6d75511f6a3"
+    },
+    {
+      "regions": "Region IV-A (CALABARZON)",
+      "province": "Laguna",
+      "city": "San Pablo City",
+      "barangay": "",
+      "street": "BLK 8, 888 Ind'l Megacity, Highway 2000",
+      "postal": "4000",
+      "type": "company",
+      "role": "administrator",
+      "contact_no": "09123412332",
+      "email": "",
+      "name": "OSAVE TRADING PHILIPPINES CORPORATION",
+      "tin": "T-767471649824",
+      "remarks": "REMARKS",
+      "brgy": "Barangay VI-B (Pob.)",
+      "id": "1f55cc51-94af-47de-846f-6767a2230521"
     }
   ],
   "appraised_by": {
@@ -34,43 +48,43 @@
     "name": "",
     "date": ""
   },
-  "memoranda": "memo",
-  "taxable": "true",
-  "effectivity_year": "2025-09-27T16:00:00.000Z",
+  "memoranda": "NEW DISCOVERY MARKET VALUE AS PER SWORN STATEMENT.. DOC NO. 233 NO. 87; BOOK NO. DXLIV; SERIES OF 2025 NOTARY PUBLIC ATTY. EDFARDI R. MARILIM",
+  "taxable": true,
+  "effectivity_year": "2026-09-28T16:00:00.000Z",
   "previous_data": {
-    "owner": "john",
-    "value": "123"
+    "owner": "PO",
+    "value": "PV"
   },
   "bldg_reference": {
-    "owner": "John Michael",
-    "pin_no": "06-0077-0001"
+    "owner": "OSAVE TRADING PHILIPPINES CORPORATION",
+    "pin_no": "130-06-0077-002-16-2001"
   },
   "land_reference": {
-    "owner": "John Michael",
-    "pin_no": "06-0077-0001"
+    "owner": "OSAVE TRADING PHILIPPINES CORPORATION",
+    "pin_no": "130-06-0077-002-16-2001"
   },
   "machine_brand_capacity": [
     {
-      "description": "des",
-      "model": "model",
-      "hp": "hp",
-      "date_acquired": "2025-09-27T16:00:00.000Z",
-      "condition_when_acquired": "cwa",
+      "description": "DES",
+      "model": "MODEL",
+      "hp": "HP",
+      "date_acquired": "2025-09-28T16:00:00.000Z",
+      "condition_when_acquired": "CWA",
       "economic_life": {
-        "estimated": "e",
-        "remaining": "r"
+        "estimated": "E",
+        "remaining": "R"
       },
-      "date_installed": "2025-09-27T16:00:00.000Z",
+      "date_installed": "2025-09-28T16:00:00.000Z",
       "dare_of_operation": "",
-      "remarks": "r",
-      "date_of_operation": "2025-09-27T16:00:00.000Z",
-      "id": "14f6f7c2-edfc-4e08-be56-db9404ec19d2"
+      "remarks": "REMARKS",
+      "date_of_operation": "2025-09-28T16:00:00.000Z",
+      "id": "b3473a2e-b6b7-482d-b671-f867da44d7e1"
     }
   ],
   "property_appraisal_machine": [
     {
-      "machinery_description": "Machine Description",
-      "no_of_units": 1,
+      "machinery_description": "Daikin 2.5 HP Lite Series",
+      "no_of_units": 5,
       "acquisition_cost": "",
       "additional_cost": {
         "freight": "",
@@ -78,27 +92,83 @@
         "insurance": "",
         "others": ""
       },
-      "market_value": 10000,
+      "market_value": 145500,
       "depreciation": "",
       "depreciation_value": "",
-      "id": "3b03e3eb-99f6-498f-9f45-a924301a4cf1"
+      "id": "d2ee94c5-0bbd-48f3-a12e-8536c677220c"
+    },
+    {
+      "machinery_description": "Chest Freezer 210Vsad",
+      "no_of_units": 4,
+      "acquisition_cost": "",
+      "additional_cost": {
+        "freight": "",
+        "installation": "",
+        "insurance": "",
+        "others": ""
+      },
+      "market_value": 215000,
+      "depreciation": "",
+      "depreciation_value": "",
+      "id": "c662eabf-c8c6-4ead-9fbb-daf594f1f36c"
+    },
+    {
+      "machinery_description": "Chest freezer 185 Vsad",
+      "no_of_units": 2,
+      "acquisition_cost": "",
+      "additional_cost": {
+        "freight": "",
+        "installation": "",
+        "insurance": "",
+        "others": ""
+      },
+      "market_value": 98142,
+      "depreciation": "",
+      "depreciation_value": "",
+      "id": "b936900e-e629-4f7b-991a-da1f0cb00fbf"
+    },
+    {
+      "machinery_description": "POS",
+      "no_of_units": 2,
+      "acquisition_cost": "",
+      "additional_cost": {
+        "freight": "",
+        "installation": "",
+        "insurance": "",
+        "others": ""
+      },
+      "market_value": 120000,
+      "depreciation": "",
+      "depreciation_value": "",
+      "id": "b0e40f43-5f1a-4ed8-8af2-76e8e838655d"
     }
   ],
   "property_assessment_machine": {
-    "kind": "kind",
-    "actual_use": "residential",
-    "market_value": 10000,
-    "assessment_level": 0.5,
-    "assessed_value": 5000
+    "kind": "MACHINERY",
+    "actual_use": "commercial",
+    "market_value": 578642,
+    "assessment_level": 0.8,
+    "assessed_value": 462913.60000000003
   },
-  "reference_posting_summary": [],
+  "reference_posting_summary": [
+    {
+      "pin": "130-06-0077-002-16-2001",
+      "previous_posting": "PREV",
+      "present_posting": "PRES",
+      "posting": {
+        "initial": "PI",
+        "date": "2025-09-28T16:00:00.000Z"
+      },
+      "id": "61bbe532-6635-46a7-ab6a-7e615b1ae8ee"
+    }
+  ],
   "recommending_approval": {
-    "municipality": "spc",
+    "municipality": "MNCPLTY",
     "date": "2025"
   },
   "approval": {
-    "name": "approved by",
-    "date": "2025-09-27T16:00:00.000Z"
+    "name": "EVA F. PUNTO, REA",
+    "date": "2025-09-28T16:00:00.000Z"
   },
   "transaction_code": "DC",
   "effectivity_quarter": "4th Quarter"

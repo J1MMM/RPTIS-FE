@@ -24,6 +24,15 @@ export const BrandNCapacity_COLUMNS = [
         disableColumnMenu: true,
     },
     {
+        field: "hp",
+        headerName: "H.P.",
+        flex: 1,
+        headerClassName: "data-grid-header",
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+    },
+    {
         field: "date_acquired",
         headerName: "Date Acquired",
         flex: 1,

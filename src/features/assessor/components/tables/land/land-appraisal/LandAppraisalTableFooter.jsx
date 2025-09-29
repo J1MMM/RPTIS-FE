@@ -4,7 +4,6 @@ import { formatPeso } from "../../../../../../utils/formatters";
 const LandAppraisalTableFooter = ({ totalBaseMarketVal }) => {
   return (
     <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
-      <Typography sx={{ ...styledText, maxWidth: 70 }} />
       <Typography sx={styledText} />
       <Typography sx={styledText} />
 
@@ -13,11 +12,12 @@ const LandAppraisalTableFooter = ({ totalBaseMarketVal }) => {
         Total:
       </Typography>
       <Typography
-        sx={{ ...styledText, borderRight: "none", fontWeight: "600" }}
+        sx={{ ...styledText, fontWeight: "600" }}
         variant="body2"
       >
         {formatPeso(totalBaseMarketVal)}
       </Typography>
+      <Typography sx={{ ...styledText, borderRight: "none" }} />
     </Stack>
   );
 };

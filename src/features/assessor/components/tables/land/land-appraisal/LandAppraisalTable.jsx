@@ -1,45 +1,49 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { LAND_INNER_TABLE_WIDTH, DATA_GRID_STYLE, DATA_GRID_INITIAL_STATE } from "@constants/tableStyles";
-import { IconButton } from "@mui/material";
+import { IconButton, Stack } from "@mui/material";
 import LandAppraisalTableFooter from "./LandAppraisalTableFooter";
-import { X } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import { APPRAISAL_COLUMN } from "../../../../constants/land/table-columns";
 import { sumByField } from "@utils/math";
 import { FIELDS } from "../../../../constants/shared/fieldNames";
 
-const columnProps = {
-  field: "actions",
-  headerName: "Actions",
-  width: 80,
-  headerClassName: "data-grid-header",
-  sortable: false,
-  filterable: false,
-  disableColumnMenu: true,
-  headerAlign: "center",
-  align: "center",
-}
-
-export const LandAppraisalTable = ({ currentAppraisals, handleDelete, readOnly }) => {
+export const LandAppraisalTable = ({ currentAppraisals, handleDelete, readOnly, handleEdit }) => {
   const totalBaseMarketVal = sumByField(currentAppraisals, FIELDS.LAND_BASE_MARKET_VALUE);
+
+  const COLUMNS = [
+    ...APPRAISAL_COLUMN,
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      headerClassName: "data-grid-header",
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        const index = currentAppraisals.findIndex((f) => f.id === params.row.id);
+
+        return (
+          <Stack direction={"row"} gap={1} display={"flex"} justifyContent={"center"} height={"100%"} alignItems={"center"}>
+            <IconButton size="small" color="error" disabled={readOnly} onClick={() => handleDelete(index)}>
+              <Trash2 size={18} />
+            </IconButton>
+
+            <IconButton size="small" color="primary" disabled={readOnly} onClick={() => handleEdit(index)}>
+              <Edit size={18} />
+            </IconButton>
+          </Stack>
+        )
+      },
+    }
+  ]
 
   return (
     <DataGrid
       rows={currentAppraisals}
-      columns={[
-        {
-          ...columnProps,
-          renderCell: (params) => {
-            const index = currentAppraisals.findIndex((f) => f.id === params.row.id);
-
-            return (
-              <IconButton disabled={readOnly} color="mono.main" onClick={() => handleDelete(index)}>
-                <X />
-              </IconButton>
-            )
-          },
-        },
-        ...APPRAISAL_COLUMN,
-      ]}
+      columns={COLUMNS}
       initialState={DATA_GRID_INITIAL_STATE}
       disableRowSelectionOnClick
       sx={{

@@ -13,14 +13,14 @@ import Row from "@components/ui/Row";
 import DynamicItemInputs from "../panels/DynamicItemInputs";
 import { useWatch } from "react-hook-form";
 
-export const AdditionalItemModal = ({ open, onClose, handleSubmit, control, disabled, }) => {
+export const AdditionalItemModal = ({ open, onClose, handleSubmit, control, disabled, formMode }) => {
   const [itemType] = useWatch({ control: control, name: ["category"] })
 
   return (
     <ContainerModal
       maxWidth="sm"
       disabled={disabled}
-      title="Additional Items"
+      title={formMode === "edit" ? "Edit Additional Item" : "Additional Items"}
       open={open}
       onClose={onClose}
       headerIcon={<ListPlus />}
