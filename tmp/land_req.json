@@ -81,7 +81,7 @@
   "southWest": "SW",
   "southEast": "SE",
   "northWest": "NW",
-  "taxable": "true",
+  "taxable": true,
   "quarter": "",
   "yearAssessment": null,
   "totalMarketValue": 283800,

@@ -283,31 +283,25 @@ export const M_TABLE_COLUMN = [
         },
     },
     {
-        field: "kindBldg",
-        headerName: "KIND OF BUILDING",
-        editable: false,
-        flex: 1,
-        headerClassName: "data-grid-header",
-        renderCell: (params) => {
-            const kind = params.row.kindBldg
-            const chipProps = classificationMap[kind]
-            return (
-                <Chip
-                    size="small"
-                    label={chipProps?.label}
-                    sx={{ fontSize: 9, bgcolor: chipProps?.color, color: "#FFF", }}
-                />
-            );
-        },
-    },
-    {
-        field: "land_reference",
-        headerName: "LAND REFERENCE",
+        field: "land_reference.owner",
+        headerName: "LAND OWNER",
         flex: 1,
         editable: false,
         headerClassName: "data-grid-header",
         renderCell: (params) => {
             const { owner } = params.row?.land_reference
+            if (!owner) return "-"
+            return owner
+        },
+    },
+    {
+        field: "bldg_reference.owner",
+        headerName: "BUILDING OWNER",
+        editable: false,
+        flex: 1,
+        headerClassName: "data-grid-header",
+        renderCell: (params) => {
+            const { owner } = params.row?.bldg_reference
             if (!owner) return "-"
             return owner
         },

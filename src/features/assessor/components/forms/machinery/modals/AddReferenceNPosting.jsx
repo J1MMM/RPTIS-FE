@@ -14,13 +14,13 @@ import Row from "@components/ui/Row";
 import DateInput from "../../../../../../components/ui/DateInput";
 import StyledFieldset from "../../../../../../components/ui/StyledFieldset";
 
-export const AddReferenceNPosting = ({ open, onClose, handleSubmit, control, disabled }) => {
+export const AddReferenceNPosting = ({ open, onClose, handleSubmit, control, disabled, formMode }) => {
 
   return (
     <ContainerModal
       disabled={disabled}
       maxWidth="xs"
-      title="Add Reference and posting"
+      title={formMode === "edit" ? "Edit Reference and posting" : "Add Reference and posting"}
       open={open}
       onClose={onClose}
       headerIcon={<FileText />}

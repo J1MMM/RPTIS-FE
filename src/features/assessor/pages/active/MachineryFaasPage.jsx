@@ -11,6 +11,7 @@ import MachineryFaasTable from "../../components/tables/machinery/MachineryFaasT
 import MachineyFaasModal from "../../components/forms/machinery/modals/MachineyFaasModal";
 import { MACHINERY_FORM_DEFAULTS } from "../../constants/machinery/default";
 import axios from "../../../../api/axios";
+import { machineryReqFormatter } from "../../utils/machineryReqFormatter";
 
 function MachineryFaasPage() {
   const methods = useForm({ defaultValues: MACHINERY_FORM_DEFAULTS, mode: "onSubmit" });
@@ -23,17 +24,17 @@ function MachineryFaasPage() {
   const [formMode, setFormMode] = useState("add");
 
   const onSubmit = async (data) => {
-    console.log("Submitting data:", data);
     if (isSubmitting) return;
     try {
-      const response = await axios.post('/machine/create', data)
+      const formattedData = machineryReqFormatter(data)
+      const response = await axios.post('/machine/create', formattedData)
       setMachineFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!", toastConfig);
+      toast.success("Form submitted successfully!");
       setAddModalActive(false);
     } catch (error) {
       console.error("Error submitting form:", error);
 
-      toast.error("Something went wrong while submitting.", toastConfig);
+      toast.error(error.response.data?.message);
     } finally {
       setShowConfirmation(false);
     }

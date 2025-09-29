@@ -25,10 +25,12 @@ function ReferenceNPostingFields({ readOnly }) {
   const { control: machineFormControl, reset, getValues } = useFormContext();
   const { control: formControl, watch, setValue, handleSubmit, reset: resetForm, formState: { isSubmitting } } = useForm({ defaultValues: FORM_DEFAULT });
   const [modalActive, setModalActive] = useState(false);
-  const { fields, append, remove } = useFieldArray({ control: machineFormControl, name: FIELDS.M_REF_N_POSTING });
+  const [formMode, setFormMode] = useState("add");
+  const [editingId, setEditingId] = useState(null);
+  const { fields, append, remove, update } = useFieldArray({ control: machineFormControl, name: FIELDS.M_REF_N_POSTING });
 
 
-  const onSubmit = (data) => {
+  const onAddSubmit = (data) => {
     try {
       const newItem = { ...data, id: v4() }
 
@@ -39,7 +41,20 @@ function ReferenceNPostingFields({ readOnly }) {
 
     } catch (error) {
       toast.error("Failed to Add reference and posting. Please try again.");
-      console.error("Error in onSubmit:", error);
+      console.error("Error in onAddSubmit:", error);
+    }
+  };
+
+  const onEditSubmit = (data) => {
+    try {
+      update(editingId, { ...data, id: fields[editingId].id });
+      setModalActive(false);
+      setEditingId(null);
+      resetForm(FORM_DEFAULT);
+      toast.success("Reference and posting updated successfully!");
+    } catch (error) {
+      toast.error("Failed to update reference and posting. Please try again.");
+      console.error("Error in onEditSubmit:", error);
     }
   };
 
@@ -53,6 +68,25 @@ function ReferenceNPostingFields({ readOnly }) {
     }
   };
 
+  const handleEdit = (idx) => {
+    setFormMode("edit");
+    setEditingId(idx);
+    setModalActive(true);
+    resetForm(fields[idx]);
+  };
+
+  const handleClose = () => {
+    setModalActive(false);
+    setEditingId(null);
+    setFormMode("add");
+    resetForm(FORM_DEFAULT);
+  };
+
+  const handleAddBtnClick = () => {
+    setFormMode("add");
+    setModalActive(true);
+  };
+
   return (
     <>
       <StyledFieldset title="Reference & Posting Summary">
@@ -62,7 +96,7 @@ function ReferenceNPostingFields({ readOnly }) {
             disableFocusRipple
             variant="contained"
             startIcon={<PlusCircle size="18" />}
-            onClick={() => setModalActive(true)}
+            onClick={handleAddBtnClick}
             sx={{
               alignSelf: "flex-start",
             }}
@@ -75,6 +109,7 @@ function ReferenceNPostingFields({ readOnly }) {
           readOnly={readOnly}
           rows={fields}
           handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
 
       </StyledFieldset>
@@ -82,9 +117,10 @@ function ReferenceNPostingFields({ readOnly }) {
       <AddReferenceNPosting
         disabled={isSubmitting}
         open={modalActive}
-        onClose={() => setModalActive(false)}
-        handleSubmit={handleSubmit(onSubmit)}
+        onClose={handleClose}
+        handleSubmit={formMode === "add" ? handleSubmit(onAddSubmit) : handleSubmit(onEditSubmit)}
         control={formControl}
+        formMode={formMode}
       />
     </>
   );
