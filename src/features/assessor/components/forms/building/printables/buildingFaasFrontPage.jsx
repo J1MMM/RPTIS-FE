@@ -2,10 +2,14 @@ import {forwardRef} from 'react'
 import './building-faas.css'
 import { Box, Paper, Stack, Typography } from '@mui/material'
 import { useFormContext, useWatch } from 'react-hook-form';
+import dayjs from 'dayjs';
 
 const BuildingFaasFrontPage = forwardRef((props, ref) => {
     const {control} = useFormContext()
     const selectedRow =  useWatch({control})
+    //role call
+    const owner = selectedRow.bldg_ownership.find(entry => entry.role?.toLowerCase() === "owner");
+    const admin = selectedRow.bldg_ownership.find(entry => entry.role?.toLowerCase() === "administrator");
   return (
     <Paper elevation={10} ref={ref} sx={{px: 2, py: 10}}>
         <Typography variant="body1" sx={{display: 'flex', justifyContent: 'center', width: '100%', fontWeight: 600, py: 2}}>
@@ -15,7 +19,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
             <Typography variant="caption" sx={{display: 'grid', placeItems: 'end'}}>
                 TRANSACTION CODE:
             </Typography>
-            <input type="text" disabled value={selectedRow?.transaction_code} style={{display: 'grid', placeItems: 'center', width: '20%', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
+            <input type="text" disabled value={selectedRow?.transaction_code || ""} style={{display: 'grid', placeItems: 'center', width: '20%', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
         </Stack>
             <Box sx={{
                 display: 'grid',
@@ -31,7 +35,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>ARP No.:</Typography>
-                    <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow?.arp_no || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack gap={1} direction='row' sx={{
                 width: '100%',
@@ -40,7 +44,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>PIN:</Typography>
-                    <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow?.pin_no || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='column' sx={{
                     border: '.5px solid black',
@@ -52,7 +56,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>OWNER:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={`${owner?.firstname || ""} ${owner?.middlename || ""} ${owner?.lastname || ""}`} style={inputValStyle}/>
                     </Stack>
                     <Stack direction='row' gap={1} sx={{
                     display: 'flex',
@@ -61,7 +65,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Address:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={`${owner?.brgy || ""}, ${owner?.city || ""}, ${owner?.province || ""}, ${owner?.regions || ""}`} style={inputValStyle}/>
                     </Stack>
                     <Stack direction='row' gap={1} sx={{
                     display: 'flex',
@@ -70,7 +74,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Tel. No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={owner?.contact_no || ""} style={inputValStyle}/>
                     </Stack>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
@@ -82,7 +86,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>TIN NO:</Typography>
-                    <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                    <input type="text" disabled value={owner?.tin || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='column' sx={{
                     border: '.5px solid black',
@@ -94,7 +98,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Administrator/Beneficial User:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={`${admin?.firstname || ""} ${admin?.middlename || ""} ${admin?.lasename || ""}`} style={inputValStyle}/>
                     </Stack>
                     <Stack direction='row' gap={1} sx={{
                     display: 'flex',
@@ -103,7 +107,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Address:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={`${admin?.brgy || ""}, ${admin?.city || ""}, ${admin?.province || ""}, ${admin?.regions || ""}`} style={inputValStyle}/>
                     </Stack>
                     <Stack direction='row' gap={1} sx={{
                     display: 'flex',
@@ -112,7 +116,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Tel. No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                        <input type="text" disabled value={admin?.contact_no || ""} style={inputValStyle}/>
                     </Stack>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
@@ -124,7 +128,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>TIN NO:</Typography>
-                    <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                    <input type="text" disabled value={admin?.tin || ""} style={inputValStyle}/>
                 </Stack>
             </Box>
             <Box sx={{
@@ -166,7 +170,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>No./Street:</Typography>
-                        <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={inputValStyle}/>
+                        <input type="text" disabled value={selectedRow?.land_reference.street ?? ""} style={inputValStyle}/>
                     </Stack>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
@@ -190,7 +194,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     gridRow: 'span 2'
                     }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Barangay/District:</Typography>
-                    <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow?.land_reference.brgy ?? ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='column' sx={{
                     border: '.5px solid black',
@@ -202,9 +206,9 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>OCT/TCT/CLOA No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={{...inputValStyle, width: '25%'}}/>
+                        <input type="text" disabled value={selectedRow?.land_reference.oct_tct_cloa_no ?? ""} style={{...inputValStyle, width: '25%'}}/>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Survey No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
+                        <input type="text" disabled value={selectedRow?.land_reference.survey_no ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
                     </Stack>
                     <Stack direction='row' gap={1} sx={{
                     display: 'flex',
@@ -213,9 +217,9 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                     px: 1
                     }}>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Lot No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
+                        <input type="text" disabled value={selectedRow?.land_reference.lot_no ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
                         <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Block No.:</Typography>
-                        <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
+                        <input type="text" disabled value={selectedRow?.land_reference.blk_no ?? ""} style={{...inputValStyle, width: '25%', width: '25%'}}/>
                     </Stack>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
@@ -227,7 +231,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>TD/ARP No.</Typography>
-                    <input type="text" disabled value={selectedRow?.land_reference.arp_land ?? ""} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow?.land_reference.td ?? ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -238,7 +242,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Province/City:</Typography>
-                    <input type="text" disabled value={selectedRow?.land_reference.owner ?? ""} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow?.land_reference.city ?? ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -271,7 +275,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Kind of Building:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.kindBldg} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -282,7 +286,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Building Age:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.buildingAge} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -293,7 +297,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Structural Type:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.structural_type.type} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -304,7 +308,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Number of Storeys:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.noOfStorey} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -315,9 +319,9 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Bldg. Permit No.:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.bldg_permit} style={inputValStyle}/>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Date Issued:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={dayjs(selectedRow.bldg_permit_date_issued_on).format('MM DD YYYY')} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -328,7 +332,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Area of 1st Floor:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.floors?.[0]?.area ?? ''} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -339,7 +343,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Condominium Certificate of Title (CCT):</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.cct} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -350,7 +354,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Area of 2nd Floor:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.floors?.[1]?.area ?? ''} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -361,7 +365,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Certificate of Completion Issued On:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={dayjs(selectedRow.coc_issued_on).format('MM DD YYYY')} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -372,7 +376,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Area of 3rd Floor:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.floors?.[2]?.area ?? ''} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -394,7 +398,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Area of 4th Floor:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.floors?.[3]?.area ?? ''} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -405,7 +409,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Date Constructed/Completed:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={dayjs(selectedRow.dateConstructed).format('MM DD YYYY')} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -417,7 +421,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 gridRow: 'span 2'
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Total Floor Area:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={selectedRow?.total_floor_areas} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -428,7 +432,7 @@ const BuildingFaasFrontPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Date Occupied:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, width: '25%'}}/>
+                <input type="text" disabled value={dayjs(selectedRow.dateOccupied).format('MM DD YYYY')} style={{...inputValStyle, width: '25%'}}/>
             </Stack>
         </Box>
         <Typography variant="body2" sx={{fontWeight: 500, width: '100%', boxSizing: 'border-box', px: 1 }}>
