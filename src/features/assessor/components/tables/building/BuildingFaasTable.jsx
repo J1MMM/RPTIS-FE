@@ -31,6 +31,7 @@ function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
         <DataGrid
             className="land-faas-table"
             // checkboxSelection
+            // loading
             rows={rows}
             columns={columns}
             initialState={DATA_GRID_INITIAL_STATE}

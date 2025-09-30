@@ -17,14 +17,20 @@ import PrintableTaxdecFormModal from "../../components/forms/land/modals/printab
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import axios from "../../../../api/axios";
 import { logger } from "../../../../utils/logger";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { fetchLandFaas } from "../../api/landApi";
+import { useLandFaasQuery } from "../../hooks/useLandFaasQuery";
+import { useCreateLandFaas } from "../../hooks/useCreateLandFaas";
 // import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 
 function LandFaasPage() {
 
   const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD, mode: "onSubmit" });
   const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { landFaasRecords, setLandFaasRecords } = useFaasData();
   const confirm = useConfirm()
+
+  const { data: landFaasRecords, isLoading } = useLandFaasQuery();
+  const createLandFaas = useCreateLandFaas();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
@@ -34,11 +40,8 @@ function LandFaasPage() {
   logger("LAND FORM DATA", useWatch({ control: methods.control }))
 
   const onSubmit = async (data) => {
-    console.log("Submitting data:", data);
-    if (isSubmitting) return;
     try {
       const response = await axios.post('/faasLand', data)
-      setLandFaasRecords(prev => [...prev, { ...data, id: v4() }])
       toast.success("Land FAAS added successfully!")
       setAddModalActive(false);
     } catch (error) {
@@ -122,6 +125,7 @@ function LandFaasPage() {
         <LandFaasTable
           handleShowDetails={handleShowDetails}
           rows={landFaasRecords}
+          loading={isLoading}
           toolbarButtons={(<>
             <Button
               // disabled={Boolean(selectedArpNos.length < 2)}
@@ -145,7 +149,7 @@ function LandFaasPage() {
         <AddLandFaasModal
           formMode={formMode}
           setFormMode={setFormMode}
-          disabled={isSubmitting}
+          disabled={createLandFaas.isPending}
           open={addModalActive}
           onClose={handleCloseModal}
           handleSubmit={handleSubmit(() => confirm({

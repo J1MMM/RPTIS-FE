@@ -57,8 +57,11 @@ function LandAppraisalFields({ readOnly }) {
   };
 
   const onEditSubmit = (data) => {
+
+    const selectedItem = getValues(FIELDS.LAND_APPRAISAL) || []
+
     try {
-      const updatedAppraisal = { ...data, id: fields[editingId].id };
+      const updatedAppraisal = { ...data, id: selectedItem[editingId].id };
       update(editingId, updatedAppraisal);
 
       // Update the assessment as well
