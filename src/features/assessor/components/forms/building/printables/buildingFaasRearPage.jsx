@@ -1,6 +1,8 @@
 import {forwardRef} from 'react'
 import { Box, Divider, Paper, Stack, TableCell, TableRow, Typography } from '@mui/material'
 import { useFormContext, useWatch } from 'react-hook-form';
+import { PrintableFaasTable } from '../../../../../../components/shared';
+import dayjs from 'dayjs';
 // import FaasTable from '../../../../tables/printable-faasTable/printable-faas-table';
 
 const BuildingFaasRearPage = forwardRef((props, ref) => {
@@ -68,7 +70,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Unit Construction Cost: Php</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, borderBottom: '1px solid black'}}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.ucc || ""} style={{...inputValStyle, borderBottom: '1px solid black'}}/>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>/sq.m.</Typography>
             </Stack>
             <Stack direction='row' gap={1} sx={{
@@ -82,7 +84,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 gridRow: 'span 2'
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'start'}}>Cost of Additional Items:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.totalCostAddItems || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='column' gap={1} sx={{
                 display: 'flex',
@@ -107,7 +109,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Sub-Total: Php</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, borderBottom: '1px solid black'}}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.bcst || ""} style={{...inputValStyle, borderBottom: '1px solid black'}}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -119,7 +121,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Sub-Total: Php</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.bcst || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -131,7 +133,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Total Construction Cost: Php</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.totalConstructionCost || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -142,7 +144,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Depreciation Rate:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.depreciationRate || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -153,7 +155,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Total % Depreciation:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.total_percent_depreciation || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -164,7 +166,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Depreciation Cost:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.depreciationCost || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -175,13 +177,13 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 px: 1,
                 }}>
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Market Value: Php</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.propertyAppraisals.marketValue || ""} style={inputValStyle}/>
             </Stack>
         </Box>
         <Typography variant="body2" sx={{fontWeight: 500, width: '100%', boxSizing: 'border-box', px: 1 }}>
             PROPERTY ASSESSMENT
         </Typography>
-        {/* <FaasTable
+        <PrintableFaasTable
             TableHead={<BuildingPropertyAssessmentFaasTableHead />}
             TableBody={
                 <>
@@ -193,17 +195,17 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 </TableRow>
                 </>
             } 
-        /> */}
+        />
         <br />
         <Stack direction='row' gap={3} sx={{display: 'flex',  px: 1}}>
             <Stack direction='row' gap={4}>
                 <Stack direction='row' sx={{display: 'flex', placeItems: 'center'}}>
                 <Typography variant='body1'>Taxable</Typography>
-                <input disabled type="checkbox"/>
+                <input readOnly checked={selectedRow.taxable === true} type="checkbox"/>
                 </Stack>
                 <Stack direction='row' sx={{display: 'flex', placeItems: 'center'}}>
                 <Typography variant='body1'>Exempt</Typography>
-                <input disabled type="checkbox"/>
+                <input readOnly checked={selectedRow.taxable === false} type="checkbox"/>
                 </Stack>
             </Stack>
             <Stack direction='row' gap={1} style={{flex: 1}}>
@@ -219,7 +221,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 justifyContent: 'center',
                 alignItems: 'center'
                 }}>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, placeItems: 'center', borderBottom: '1px solid black'}}/>
+                <input type="text" disabled value={selectedRow?.quarter || ""} style={{...inputValStyle, placeItems: 'center', borderBottom: '1px solid black'}}/>
                 <Typography variant='caption'>Qtr.</Typography>
                 </Stack>
                 <Stack direction='column' 
@@ -229,7 +231,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
                 justifyContent: 'center',
                 alignItems: 'center'
                 }}>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{...inputValStyle, placeItems: 'center', borderBottom: '1px solid black'}}/>
+                <input type="text" disabled value={dayjs(selectedRow?.effectivity_assessment).format('YYYY')} style={{...inputValStyle, placeItems: 'center', borderBottom: '1px solid black'}}/>
                 <Typography variant='caption'>Yr.</Typography>
                 </Stack>
             </Stack>
@@ -249,11 +251,11 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
             py: 3
         }}>
             <Stack direction='column' alignItems='center'>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
+                <input type="text" disabled value={selectedRow?.appraisedBy || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                 <Typography variant='caption'>Name </Typography>
             </Stack>
             <Stack direction='column' alignItems='center'>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
+                <input type="text" disabled value={selectedRow?.appraisedBy || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                 <Typography variant='caption'>Date</Typography>
             </Stack>
             <Stack direction='column' alignItems='center'>
@@ -275,7 +277,7 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
             px: 10
         }}>
             <Stack direction='column' alignItems='center'>
-                <input type="text" disabled value={selectedRow?.arp_no} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
+                <input type="text" disabled value={selectedRow?.approvedBy} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                 <Typography variant='caption'>City Assessor </Typography>
             </Stack>
             <Stack direction='column' alignItems='center'>
@@ -306,25 +308,25 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
         <Stack direction='column' sx={{flex: 1, border: '1px solid black'}}>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
                 <Typography variant='caption'>PIN No.:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.pin_no || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
                 <Typography variant='caption'>ARP NO.</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.arp_no || ""} style={inputValStyle}/>
                 <Typography variant='caption'>T.D. NO.</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.td_no || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
                 <Typography variant='caption'>Total Assessed Value:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.total_assessed_value || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
                 <Typography variant='caption'>Previous Owner:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.owner_name || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
                 <Typography variant='caption'>Effectivity of Assessment:</Typography>
-                <input type="text" disabled value={selectedRow?.arp_no} style={inputValStyle}/>
+                <input type="text" disabled value={selectedRow?.previousRecords.effectivity_assessment || ""} style={inputValStyle}/>
             </Stack>
         </Stack>
         <Stack direction='row' gap={2} sx={{px: 2}}>
