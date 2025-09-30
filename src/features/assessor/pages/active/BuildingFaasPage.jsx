@@ -30,7 +30,6 @@ function BuildingFaasPage() {
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTaxdecModalActive, setPrintTaxdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
-  const [disabled, setDisabled] = useState(false);
 
   logger("BUILDING FORM DATA", useWatch({ control: methods.control }))
 
@@ -40,9 +39,6 @@ function BuildingFaasPage() {
 
     try {
       const formattedData = bldgReqFormatter(data)
-
-      console.log("formattedData");
-      console.log(formattedData);
 
       const response = await axios.post('/faasBldg', formattedData)
       console.log(response.data);

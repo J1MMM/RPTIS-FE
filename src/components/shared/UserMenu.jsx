@@ -68,6 +68,7 @@ const UserMenu = (props) => {
         </MenuItem>
         <Divider flexItem sx={{ mx: 2 }} />
         <MenuItem
+          onClick={handleLogout}
           sx={{
             width: "100%",
             gap: 2,

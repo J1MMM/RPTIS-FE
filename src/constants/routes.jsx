@@ -23,7 +23,7 @@ export const ASSESSOR_TAB_LINKS = [
     },
     {
         to: "/assessor/archived",
-        label: "Archived Records",
+        label: "Archived",
     },
     {
         to: "/assessor/pending",

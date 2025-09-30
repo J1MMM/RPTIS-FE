@@ -8,7 +8,7 @@ export const BrandNCapacity_COLUMNS = [
     {
         field: "description",
         headerName: "Description",
-        flex: 1,
+        width: 200,
         headerClassName: "data-grid-header",
         sortable: false,
         filterable: false,
@@ -69,7 +69,7 @@ export const MachineAppraisal_COLUMNS = [
     {
         field: "machinery_description",
         headerName: "Description",
-        flex: 1,
+        width: 200,
         headerClassName: "data-grid-header",
         sortable: false,
         filterable: false,

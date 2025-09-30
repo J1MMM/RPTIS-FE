@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import UseRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
+import LoadingScreen from "../ui/LoadingScreen";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,17 +26,7 @@ const PersistLogin = () => {
   return (
     <>
       {isLoading ? (
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            height: "100vh",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h1">Loading...</Typography>
-        </Box>
+        <LoadingScreen />
       ) : (
         <Outlet />
       )}

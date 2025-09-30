@@ -15,9 +15,9 @@ export const Header = ({ onMenuClick }) => {
   // Map route keywords to titles with responsive versions
   const titles = {
     assessor: {
-      full: "OFFICE OF THE PROPERTY APPRAISER",
-      short: "PROPERTY APPRAISER",
-      mobile: "APPRAISER"
+      full: "OFFICE OF THE CITY ASSESSOR",
+      short: "CITY ASSESSOR",
+      mobile: "ASSESSOR"
     },
     landtax: {
       full: "OFFICE OF THE REVENUE COMMISSIONER",

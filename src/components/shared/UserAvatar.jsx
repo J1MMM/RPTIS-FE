@@ -27,7 +27,7 @@ const UserAvatar = () => {
           height: 40,
           bgcolor: "secondary.main"
         }}
-      >JD</Avatar>
+      >CE</Avatar>
 
 
       {/* Typography for user name and email */}

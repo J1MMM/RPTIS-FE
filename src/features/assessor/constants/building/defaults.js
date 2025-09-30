@@ -33,7 +33,7 @@ export const BLDG_FORM_DEFAULT = {
     "floors": [
 
     ],
-    "total_floor_areas": 167.25,
+    "total_floor_areas": 0,
     "propertyAppraisals": {
         "ucc": 0,
         "bcst": 0,
@@ -49,7 +49,7 @@ export const BLDG_FORM_DEFAULT = {
     "taxable": "",
     "quarter": "",
     "effectivity_assessment": "",
-    "appraisedBy": "AKO",
+    "appraisedBy": "",
     "dateAppraised": "",
     "approvedBy": "EVA F. PUNTO",
     "dateApproved": Date.now(),

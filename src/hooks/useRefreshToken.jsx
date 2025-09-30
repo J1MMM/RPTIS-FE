@@ -8,20 +8,22 @@ const UseRefreshToken = () => {
   const refresh = async () => {
     const token = Cookies.get("token");
 
-    const response = await axios.get("/checkToken", {
-      headers: { Authorization: `Bearer ${token}` },
+    // const response = await axios.get("/checkToken", {
+    //   headers: { Authorization: `Bearer ${token}` },
 
-      withCredentials: false,
-    });
+    //   withCredentials: false,
+    // });
 
-    console.log(response.data);
+    // console.log(response.data);
+
     setAuth((prev) => {
       return {
         ...prev,
-        accessToken: token,
+        accessToken: token, //test
       };
     });
-    return response.data.accessToken;
+    // return response.data.accessToken;
+    return token; //test
   };
   return refresh;
 };

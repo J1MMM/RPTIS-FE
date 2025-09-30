@@ -69,7 +69,7 @@ export const MachineAppraisalTable = ({ rows, handleDelete, readOnly, handleEdit
       slots={{
         footer: () => (
           <Stack direction="row" borderTop="1px solid #E0E0E0" p={1}>
-            <Typography sx={styledText} />
+            <Typography sx={{ ...styledText, minWidth: 200 }} />
             <Typography sx={{ ...styledText, flex: .5 }} />
             <Typography sx={styledText} />
             <Typography sx={styledText} />
