@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import useFaasData from "../../hooks/useFaasData";
+import useFaasData from "../../../assessor/hooks/useFaasData";
 import { toast, } from "react-toastify";
 import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
@@ -12,11 +12,13 @@ import MachineyFaasModal from "../../components/forms/machinery/modals/MachineyF
 import { MACHINERY_FORM_DEFAULTS } from "../../constants/machinery/default";
 import axios from "../../../../api/axios";
 import { machineryReqFormatter } from "../../utils/machineryReqFormatter";
+import { useCreateMachineryFaas } from "../../hooks/useMachineryFaasMutation";
 
 function MachineryFaasPage() {
   const methods = useForm({ defaultValues: MACHINERY_FORM_DEFAULTS, mode: "onSubmit" });
-  const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { machineFaasRecords, setMachineFaasRecords } = useFaasData();
+  const { handleSubmit, formState: { isDirty }, reset } = methods;
+  const { machineFaasRecords } = useFaasData();
+  const createMachineryFaas = useCreateMachineryFaas();
   const confirm = useConfirm()
 
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -24,19 +26,16 @@ function MachineryFaasPage() {
   const [formMode, setFormMode] = useState("add");
 
   const onSubmit = async (data) => {
-    if (isSubmitting) return;
     try {
-      const formattedData = machineryReqFormatter(data)
-      const response = await axios.post('/machine/create', formattedData)
-      setMachineFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!");
+      const formattedData = machineryReqFormatter(data);
+      await createMachineryFaas.mutateAsync(formattedData);
+      toast.success("Form submitted successfully!", toastConfig);
       setAddModalActive(false);
+      reset(MACHINERY_FORM_DEFAULTS);
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      toast.error(error.response.data?.message);
-    } finally {
-      setShowConfirmation(false);
+      toast.error(error.response?.data?.message, toastConfig);
+      throw error;
     }
   };
   const handleAddBtnClick = () => {
@@ -112,14 +111,14 @@ function MachineryFaasPage() {
         <MachineyFaasModal
           formMode={formMode}
           setFormMode={setFormMode}
-          disabled={isSubmitting}
+          disabled={createMachineryFaas.isLoading}
           open={addModalActive}
           onClose={handleCloseModal}
-          handleSubmit={handleSubmit(() => confirm({
+          handleSubmit={() => confirm({
             title: "Add Machinery FAAS Confirmation",
             message: "Are you sure you want to add this machinery FAAS data? It will be saved once confirmed.",
-            onConfirm: handleSubmit(onSubmit)
-          }))}
+            onConfirm: () => handleSubmit(onSubmit)()
+          })}
         />
       </FormProvider>
     </>

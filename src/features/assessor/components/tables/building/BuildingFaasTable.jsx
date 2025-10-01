@@ -6,7 +6,7 @@ import { BLDG_TABLE_COLUMN } from '../../../constants/building/table-columns';
 import { TableToolbar } from '../../../../../components/shared';
 
 
-function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
+function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails, loading }) {
     const columns = useMemo(() => [...BLDG_TABLE_COLUMN,
     {
         field: "actions",
@@ -31,7 +31,7 @@ function BuildingFaasTable({ rows, toolbarButtons, handleShowDetails }) {
         <DataGrid
             className="land-faas-table"
             // checkboxSelection
-            // loading
+            loading={loading}
             rows={rows}
             columns={columns}
             initialState={DATA_GRID_INITIAL_STATE}

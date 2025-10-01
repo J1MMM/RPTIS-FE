@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import useFaasData from "../../hooks/useFaasData";
 import AddLandFaasModal from "../../components/forms/land/modals/AddLandFaasModal";
 import { toast, } from "react-toastify";
-import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
-import { v4 } from "uuid";
 import { FormProvider, useForm, useWatch, } from "react-hook-form";
 import { LAND_DEFAULT_FIELD } from "../../constants/land/default";
 import LandFaasTable from "../../components/tables/land/active-faas-page/LandFaasTable";
@@ -19,61 +16,33 @@ import axios from "../../../../api/axios";
 import { logger } from "../../../../utils/logger";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchLandFaas } from "../../api/landApi";
-import { useLandFaasQuery } from "../../hooks/useLandFaasQuery";
-import { useCreateLandFaas } from "../../hooks/useCreateLandFaas";
+import { useLandFaasQuery, useCreateLandFaas } from "../../hooks/useLandFaasQuery";
 // import PrintableTaxdecFormModal from "../../components/forms/land/modals/printableModal/PrintableTaxdecFormModal";
 
 function LandFaasPage() {
-
-  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD, mode: "onSubmit" });
-  const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
   const confirm = useConfirm()
-
-  const { data: landFaasRecords, isLoading } = useLandFaasQuery();
+  const methods = useForm({ defaultValues: LAND_DEFAULT_FIELD, mode: "onSubmit" });
+  const { handleSubmit, formState: { isDirty }, reset, } = methods;
+  const { data: landFaasRecords, isLoading, } = useLandFaasQuery();
   const createLandFaas = useCreateLandFaas();
 
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
   const [printTacdecModalActive, setPrintTacdecModalActive] = useState(false);
   const [formMode, setFormMode] = useState("add");
   logger("LAND FORM DATA", useWatch({ control: methods.control }))
 
-  // const onSubmit = async (data) => {
-
-  //   try {
-  //     const response = await axios.post('/faasLand', data)
-  //     toast.success("Land FAAS added successfully!")
-  //     setAddModalActive(false);
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     toast.error(`${capitalizeFirstLetter(error.response.data?.message)}` || "Something went wrong while submitting.");
-  //   } finally {
-  //     setShowConfirmation(false);
-  //   }
-  // };
-
   const onSubmit = async (data) => {
-    await createLandFaas.mutate(data, {
-      onSuccess: () => {
-        toast.success("Land FAAS added successfully!", toastConfig);
-        setAddModalActive(false);
-        reset(LAND_DEFAULT_FIELD);
-      },
-      onError: (error) => {
-        console.error("Error submitting form:", error);
-        toast.error(
-          capitalizeFirstLetter(error.response?.data?.message) ||
-          "Something went wrong while submitting.",
-          toastConfig
-        );
-      },
-      onSettled: () => {
-        setShowConfirmation(false);
-      },
-    });
+    try {
+      await createLandFaas.mutateAsync(data);
+      toast.success("Land FAAS added successfully!");
+      setAddModalActive(false);
+      reset(LAND_DEFAULT_FIELD);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(capitalizeFirstLetter(error.response?.data?.message) || "Something went wrong while submitting.");
+    }
   };
-
 
   const handleAddBtnClick = () => {
     setFormMode("add");
@@ -172,14 +141,14 @@ function LandFaasPage() {
         <AddLandFaasModal
           formMode={formMode}
           setFormMode={setFormMode}
-          disabled={createLandFaas.isPending}
+          disabled={createLandFaas.isLoading}
           open={addModalActive}
           onClose={handleCloseModal}
-          handleSubmit={handleSubmit(() => confirm({
+          handleSubmit={() => confirm({
             title: "Add Land FAAS Confirmation",
             message: "Are you sure you want to add this land FAAS data? It will be saved once confirmed.",
-            onConfirm: handleSubmit(onSubmit)
-          }))}
+            onConfirm: () => handleSubmit(onSubmit)()
+          })}
           handleForm={handleClick}
         />
 

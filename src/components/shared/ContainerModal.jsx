@@ -22,13 +22,17 @@ function ContainerModal({
   disabled,
   headerIcon
 }) {
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    onSubmit && onSubmit(event);
+  };
   return (
     <Dialog
       fullWidth
       open={open}
       component={"form"}
       maxWidth={maxWidth}
-      onSubmit={onSubmit}
+      onSubmit={handleFormSubmit}
       slotProps={{
         paper: {
           sx: {

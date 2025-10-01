@@ -29,41 +29,41 @@ export const AssessorProvider = ({ children }) => {
   //   fetchLandFaas();
   // }, []);
 
-  useEffect(() => {
-    const fetchBldgFaas = async () => {
-      try {
-        const res = await axios('/faasBdlgFetch')
-        console.log(res.data.data);
-        setBuildingFaasRecords(res.data.data);
+  // useEffect(() => {
+  //   const fetchBldgFaas = async () => {
+  //     try {
+  //       const res = await axios('/faasBdlgFetch')
+  //       console.log(res.data.data);
+  //       setBuildingFaasRecords(res.data.data);
 
-      } catch (err) {
-        console.error("Failed to fetch building FAAS records:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //     } catch (err) {
+  //       console.error("Failed to fetch building FAAS records:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchBldgFaas();
-  }, []);
+  //   fetchBldgFaas();
+  // }, []);
 
-  useEffect(() => {
-    const fetchBldgFaas = async () => {
-      try {
-        const res = await axios('/machine')
-        console.log("machine");
-        console.log(res.data.data);
-        const result = res.data.data?.map(v => ({ id: v4(), ...v }))
-        setMachineFaasRecords(result);
+  // useEffect(() => {
+  //   const fetchBldgFaas = async () => {
+  //     try {
+  //       const res = await axios('/machine')
+  //       console.log("machine");
+  //       console.log(res.data.data);
+  //       const result = res.data.data?.map(v => ({ id: v4(), ...v }))
+  //       setMachineFaasRecords(result);
 
-      } catch (err) {
-        console.error("Failed to fetch building FAAS records:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //     } catch (err) {
+  //       console.error("Failed to fetch building FAAS records:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchBldgFaas();
-  }, []);
+  //   fetchBldgFaas();
+  // }, []);
 
   return (
     <AssessorContext.Provider

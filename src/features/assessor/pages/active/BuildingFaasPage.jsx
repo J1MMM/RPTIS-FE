@@ -18,13 +18,15 @@ import { logger } from "../../../../utils/logger";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import { BLDG_FORM_DEFAULT } from "../../constants/building/defaults";
 import BuildingFaasTable from "../../components/tables/building/BuildingFaasTable";
+import { useBldgFaasQuery, useCreateBldgFaas } from "../../hooks/useBuildingFaasQuery";
 
 function BuildingFaasPage() {
-
-  const methods = useForm({ defaultValues: BLDG_FORM_DEFAULT, mode: "onSubmit" });
-  const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { buildingFaasRecords, setBuildingFaasRecords } = useFaasData();
   const confirm = useConfirm()
+  const methods = useForm({ defaultValues: BLDG_FORM_DEFAULT, mode: "onSubmit" });
+  const { data: buildingFaasRecords, isLoading } = useBldgFaasQuery();
+  const createBldgFaas = useCreateBldgFaas();
+
+  const { handleSubmit, formState: { isDirty }, reset, } = methods;
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false);
@@ -34,23 +36,16 @@ function BuildingFaasPage() {
   logger("BUILDING FORM DATA", useWatch({ control: methods.control }))
 
   const onSubmit = async (data) => {
-    console.log("Submitting data:", data);
-    if (isSubmitting) return;
-
+    const formattedData = bldgReqFormatter(data);
     try {
-      const formattedData = bldgReqFormatter(data)
-
-      const response = await axios.post('/faasBldg', formattedData)
-      console.log(response.data);
-      setBuildingFaasRecords(prev => [...prev, { ...data, id: v4() }])
+      await createBldgFaas.mutateAsync(formattedData);
       toast.success("Building FAAS added successfully!");
       setAddModalActive(false);
+      reset(BLDG_FORM_DEFAULT);
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      toast.error(`${capitalizeFirstLetter(error.response.data?.message)}`);
-    } finally {
-      setShowConfirmation(false);
+      toast.error(`${capitalizeFirstLetter(error.response?.data?.message)}`);
+      throw error;
     }
   };
 
@@ -129,6 +124,7 @@ function BuildingFaasPage() {
         <BuildingFaasTable
           handleShowDetails={handleShowDetails}
           rows={buildingFaasRecords}
+          loading={isLoading}
           toolbarButtons={(<>
             <Button
               // disabled={Boolean(selectedArpNos.length < 2)}
@@ -152,14 +148,14 @@ function BuildingFaasPage() {
         <AddBuildingFaasModal
           formMode={formMode}
           setFormMode={setFormMode}
-          disabled={isSubmitting}
+          disabled={createBldgFaas.isLoading}
           open={addModalActive}
           onClose={handleCloseModal}
-          handleSubmit={handleSubmit(() => confirm({
+          handleSubmit={() => confirm({
             title: "Add Building FAAS Confirmation",
             message: "Are you sure you want to add this building FAAS data? It will be saved once confirmed.",
-            onConfirm: handleSubmit(onSubmit)
-          }))}
+            onConfirm: () => handleSubmit(onSubmit)()
+          })}
           handleForm={handleClick}
         />
 
