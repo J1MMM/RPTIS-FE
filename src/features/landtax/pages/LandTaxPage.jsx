@@ -1,39 +1,59 @@
-import { Box, Button, Stack } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Stack } from '@mui/material'
+import React, { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { columns, tax_dec_columns } from '../constants/rptar';
-import { rows, tax_dec_rows } from '../constants/sample';
+import { tax_dec_columns } from '../constants/rptar';
+import axios from 'axios';
+
 function LandTaxPage() {
-  const [open, setOpen] = useState(false);
+  const [rows, setRows] = useState([]);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  useEffect(() => {
+    const fetchTaxDecs = async () => {
+      try {
+        const res = await axios.get("http://localhost:3000/api/landtax/");
+        if (res.data && res.data.data) {
+          // Map backend response into DataGrid format
+          const formatted = res.data.data.map((item) => ({
+            id: item.id,
+            tax_dec: item.td_no,
+            pin_no: item.pin_no,
+            name: item.individuals && item.individuals.length > 0 
+              ? item.individuals.map(i => i.name || `${i.firstname ?? ""} ${i.lastname ?? ""}`).join(", ")
+              : "N/A",
+            total_area: item.lot_no || 0, // adjust based on your schema
+            total_assessed_value: item.total_assessed_value,
+            effecitivity_of_assessment: item.effectivity_of_assessment,
+            kind: item.kind,
+            effecitivity_of_quarter: item.quarter,
+          }));
+          setRows(formatted);
+        }
+      } catch (err) {
+        console.error("Error fetching land tax data:", err);
+      }
+    };
 
-  const handleSave = () => {
-    // TODO: Save logic here (API call, state update, etc.)
-    console.log("Saved computation!");
-    handleClose();
-  };
-
-
+    fetchTaxDecs();
+  }, []);
 
   return (
     <Box
-      // border={"1px solid violet"}
       boxSizing={"border-box"}
       display={"flex"}
       flexDirection={"column"}
       height={"calc(100vh - 160px)"}
-
     >
       <Stack display={'flex'} justifyContent={'start'} padding={1}>
       </Stack>
 
-      <DataGrid textAlign={"center"} columns={tax_dec_columns} rows={tax_dec_rows} />
-
-      
+      <DataGrid 
+        textAlign={"center"} 
+        columns={tax_dec_columns} 
+        rows={rows} 
+        getRowId={(row) => row.id} // make sure DataGrid uses correct key
+      />
     </Box>
   )
 }
 
-export default LandTaxPage
+export default LandTaxPage;
