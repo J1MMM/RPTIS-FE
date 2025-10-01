@@ -39,18 +39,41 @@ function LandFaasPage() {
   const [formMode, setFormMode] = useState("add");
   logger("LAND FORM DATA", useWatch({ control: methods.control }))
 
+  // const onSubmit = async (data) => {
+
+  //   try {
+  //     const response = await axios.post('/faasLand', data)
+  //     toast.success("Land FAAS added successfully!")
+  //     setAddModalActive(false);
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     toast.error(`${capitalizeFirstLetter(error.response.data?.message)}` || "Something went wrong while submitting.");
+  //   } finally {
+  //     setShowConfirmation(false);
+  //   }
+  // };
+
   const onSubmit = async (data) => {
-    try {
-      const response = await axios.post('/faasLand', data)
-      toast.success("Land FAAS added successfully!")
-      setAddModalActive(false);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.error(`${capitalizeFirstLetter(error.response.data?.message)}` || "Something went wrong while submitting.");
-    } finally {
-      setShowConfirmation(false);
-    }
+    await createLandFaas.mutate(data, {
+      onSuccess: () => {
+        toast.success("Land FAAS added successfully!", toastConfig);
+        setAddModalActive(false);
+        reset(LAND_DEFAULT_FIELD);
+      },
+      onError: (error) => {
+        console.error("Error submitting form:", error);
+        toast.error(
+          capitalizeFirstLetter(error.response?.data?.message) ||
+          "Something went wrong while submitting.",
+          toastConfig
+        );
+      },
+      onSettled: () => {
+        setShowConfirmation(false);
+      },
+    });
   };
+
 
   const handleAddBtnClick = () => {
     setFormMode("add");
