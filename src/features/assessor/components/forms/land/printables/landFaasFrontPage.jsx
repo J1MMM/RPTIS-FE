@@ -12,6 +12,9 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
         const owner = selectedRow.land_ownership.find(entry => entry.role?.toLowerCase() === "owner");
         const admin = selectedRow.land_ownership.find(entry => entry.role?.toLowerCase() === "administrator");
 
+        const totalBaseMarketValue = selectedRow?.landappraisals
+            ?.reduce((total, item) => total + Number(item.base_market_value || 0), 0) || 0;
+
   return (
     <Paper ref={ref} 
     sx={{
@@ -34,7 +37,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 <Typography variant="caption" sx={{display: 'grid', placeItems: 'end'}}>
                     TRANSACTION CODE:
                 </Typography>
-                <input type="text" disabled value={selectedRow.transaction_code} style={{display: 'grid', placeItems: 'center', width: '20%', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
+                <input type="text" disabled value={selectedRow.transaction_code || ""} style={{display: 'grid', placeItems: 'center', width: '20%', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
             </Stack>
             <Box sx={{
                 display: 'grid',
@@ -50,7 +53,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>ARP No.</Typography>
-                    <input type="text" disabled value={selectedRow.arp_no} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.arp_no || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack gap={1} direction='row' sx={{
                 width: '100%',
@@ -59,7 +62,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>PIN:</Typography>
-                    <input type="text" disabled value={selectedRow.pin_no} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.pin_no || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -70,9 +73,17 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>OCT/TCT/No.</Typography>
-                    <input type="text" disabled value={selectedRow.oct_tct} style={{ ...inputValStyle, width: '25%'}}/>
+                    <input type="text" disabled value={selectedRow.oct_tct || ""} style={{ ...inputValStyle, width: '25%'}}/>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Date:</Typography>
-                    <input type="text" disabled value={dayjs(selectedRow.DATE).format('MM DD YYYY')} style={{ ...inputValStyle, width: '25%'}}/>
+                    <input 
+                    type="text" 
+                    disabled 
+                    value={
+                        dayjs(selectedRow.DATE).isValid()
+                        ?dayjs(selectedRow.DATE).format('MM DD YYYY')
+                        : ""
+                    } 
+                    style={{ ...inputValStyle, width: '25%'}}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -83,11 +94,11 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center',}}>Survey No.</Typography>
-                    <input type="text" disabled value={selectedRow.survey_no} style={{...inputValStyle, width: '25%'}}/>
+                    <input type="text" disabled value={selectedRow.survey_no || ""} style={{...inputValStyle, width: '25%'}}/>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Lot No.</Typography>
-                    <input type="text" disabled value={selectedRow.lot_no} style={{...inputValStyle, width: '25%'}}/>
+                    <input type="text" disabled value={selectedRow.lot_no || ""} style={{...inputValStyle, width: '25%'}}/>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Blk No.</Typography>
-                    <input type="text" disabled value={selectedRow.blk_no} style={{...inputValStyle, width: '25%'}}/>
+                    <input type="text" disabled value={selectedRow.blk_no || ""} style={{...inputValStyle, width: '25%'}}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 width: '100%',
@@ -101,9 +112,8 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                         type="text" 
                         disabled 
                         value={
-                                owner?.name ||
-                                [owner?.firstname, owner?.middlename, owner?.lastname, owner?.suffix].filter(Boolean).join(" ")
-                                }
+                            `${owner?.firstname || ""} ${owner?.middlename || ""} ${owner?.lastname || ""} ${owner?.name || ""}`
+                              }
                         style={{...inputValStyle, borderBottom: 0}}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
@@ -137,7 +147,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                         type="text" 
                         disabled 
                         value={
-                            [admin?.firstname, admin?.middlename, admin?.lastname, admin?.suffix].filter(Boolean).join(" ")
+                            `${admin?.firstname || ""} ${admin?.middlename || ""} ${admin?.lastname || ""} ${admin?.name || ""}`
                             }
                         style={inputValStyle}/>
                 </Stack>
@@ -187,7 +197,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>No./Street:</Typography>
-                    <input type="text" disabled value={selectedRow.street} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.street || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 width: '100%',
@@ -196,7 +206,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Brgy./District:</Typography>
-                    <input type="text" disabled value={selectedRow.brgy} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.brgy || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -207,7 +217,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Municipality:</Typography>
-                    <input type="text" disabled value={selectedRow.city} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.city || ""} style={inputValStyle}/>
                 </Stack>
                 <Stack direction='row' gap={1} sx={{
                 display: 'flex',
@@ -218,7 +228,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                 px: 1
                 }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>Provincial/City</Typography>
-                    <input type="text" disabled value={selectedRow.province} style={inputValStyle}/>
+                    <input type="text" disabled value={selectedRow.province || ""} style={inputValStyle}/>
                 </Stack>
             </Box>
             <Box sx={{
@@ -290,11 +300,11 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                         <>
                         {selectedRow.landappraisals.map((obj) => (
                         <TableRow >
-                            <TableCell align="center" sx={cellStyles}>{obj.classification}</TableCell>
-                            <TableCell align="center" sx={cellStyles}>{obj.subclassification}</TableCell>
-                            <TableCell align="center" sx={cellStyles}>{obj.area} m²</TableCell>
-                            <TableCell align="center" sx={cellStyles}>₱ {obj.unitValue}</TableCell>
-                            <TableCell align="center" sx={cellStyles}>₱ {obj.base_market_value}</TableCell>
+                            <TableCell align="center" sx={cellStyles}>{obj.classification || ""}</TableCell>
+                            <TableCell align="center" sx={cellStyles}>{obj.subclassification || ""}</TableCell>
+                            <TableCell align="center" sx={cellStyles}>{obj.area || ""} m²</TableCell>
+                            <TableCell align="center" sx={cellStyles}>₱ {obj.unitValue || ""}</TableCell>
+                            <TableCell align="center" sx={cellStyles}>₱ {obj.base_market_value || ""}</TableCell>
                         </TableRow>
                         ))}
                         </>
@@ -306,7 +316,7 @@ const LandFaasFrontPage = forwardRef((props, ref) => {
                             <TableCell align="center" sx={cellStyles}>Total</TableCell>
                             <TableCell align="center" sx={cellStyles}></TableCell>
                             <TableCell align="center" sx={cellStyles}>Total</TableCell>
-                            <TableCell align="center" sx={cellStyles}></TableCell>
+                            <TableCell align="center" sx={cellStyles}>₱ {totalBaseMarketValue || ""}</TableCell>
                         </TableRow>
                         </>
                     }

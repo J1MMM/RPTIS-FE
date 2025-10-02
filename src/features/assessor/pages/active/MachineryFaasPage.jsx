@@ -10,6 +10,9 @@ import { MACHINERY_FORM_DEFAULTS } from "../../constants/machinery/default";
 import { useCreateMachineFaas, useMachineFaasQuery } from "../../hooks/useMachineryQuery";
 import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import { machineryReqFormatter } from "../../utils/machineryReqFormatter";
+import PrintablesMenu from "../../components/forms/PrintablesMenu";
+import { PrintableMachineryFaasFormModal } from "../../components/forms/machinery/modals/printableModal/PrintableMachineryFaasFormModal";
+import PrintableMachineryTaxdecFormModal from "../../components/forms/machinery/modals/printableModal/PrintableMachineryTaxdecFormModal";
 
 function MachineryFaasPage() {
   const confirm = useConfirm()
@@ -19,6 +22,8 @@ function MachineryFaasPage() {
   const createMachineFaas = useCreateMachineFaas()
 
   const [addModalActive, setAddModalActive] = useState(false);
+  const [printFaasModalActive, setPrintFaasModalActive] = useState(false)
+  const [printTaxdecModalActive, setPrintTaxdecModalActive] = useState(false)
   const [formMode, setFormMode] = useState("add");
 
   const onSubmit = async (data) => {
@@ -61,6 +66,30 @@ function MachineryFaasPage() {
     reset(MACHINERY_FORM_DEFAULTS);
     setAddModalActive(false);
   };
+
+  const handleFaasForm = () => {
+  setPrintFaasModalActive(true);
+  };
+  const handleClosePrintModal = () => {
+    setPrintFaasModalActive(false);
+    setPrintTaxdecModalActive(false);
+  };
+
+  const handleTaxdecForm = () => {
+    setPrintTaxdecModalActive(true);
+  };
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     if (!open || !isDirty) return;
@@ -114,8 +143,24 @@ function MachineryFaasPage() {
           handleSubmit={() => confirm({
             title: "Add Machinery FAAS Confirmation",
             message: "Are you sure you want to add this machinery FAAS data? It will be saved once confirmed.",
+
+            onConfirm: handleSubmit(onSubmit)
+          }))}
+          handleForm={handleClick}
+        />
+
+        <PrintableMachineryFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal}/>
+        <PrintableMachineryTaxdecFormModal open={printTaxdecModalActive} onClose={handleClosePrintModal}/>
+        <PrintablesMenu
+          open={open}
+          handleClose={handleClose}
+          anchorEl={anchorEl}
+          handleFaas={handleFaasForm}
+          handleTaxdec={handleTaxdecForm}
+
             onConfirm: () => handleSubmit(onSubmit)()
           })}
+
         />
       </FormProvider>
     </>
