@@ -45,7 +45,6 @@ function BuildingFaasPage() {
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error(`${capitalizeFirstLetter(error.response?.data?.message)}`);
-      throw error;
     }
   };
 

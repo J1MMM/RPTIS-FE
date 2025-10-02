@@ -10,3 +10,9 @@ export const createLandFaas = async (newRecord) => {
     const res = await axios.post("/faasLand", newRecord);
     return res.data;
 };
+
+
+export const editLandFaas = async (newRecord) => {
+    const res = await axios.put("/faasLand", newRecord);
+    return res.data;
+};

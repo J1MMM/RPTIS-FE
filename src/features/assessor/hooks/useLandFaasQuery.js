@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchLandFaas, createLandFaas } from "../api/landApi";
+import { fetchLandFaas, editLandFaas, createLandFaas } from "../api/landApi";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useLandFaasQuery = () => {
@@ -14,6 +14,17 @@ export const useCreateLandFaas = () => {
 
     return useMutation({
         mutationFn: createLandFaas,
+        onSuccess: () => {
+            queryClient.invalidateQueries(["landFaasRecords"]);
+        },
+    });
+};
+
+export const useEditLandFaas = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: editLandFaas,
         onSuccess: () => {
             queryClient.invalidateQueries(["landFaasRecords"]);
         },
