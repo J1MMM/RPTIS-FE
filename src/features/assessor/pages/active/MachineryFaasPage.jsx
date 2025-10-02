@@ -68,7 +68,7 @@ function MachineryFaasPage() {
   };
 
   const handleFaasForm = () => {
-  setPrintFaasModalActive(true);
+    setPrintFaasModalActive(true);
   };
   const handleClosePrintModal = () => {
     setPrintFaasModalActive(false);
@@ -143,24 +143,20 @@ function MachineryFaasPage() {
           handleSubmit={() => confirm({
             title: "Add Machinery FAAS Confirmation",
             message: "Are you sure you want to add this machinery FAAS data? It will be saved once confirmed.",
-
             onConfirm: handleSubmit(onSubmit)
-          }))}
+          })}
           handleForm={handleClick}
         />
 
-        <PrintableMachineryFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal}/>
-        <PrintableMachineryTaxdecFormModal open={printTaxdecModalActive} onClose={handleClosePrintModal}/>
+        <PrintableMachineryFaasFormModal open={printFaasModalActive} onClose={handleClosePrintModal} />
+        <PrintableMachineryTaxdecFormModal open={printTaxdecModalActive} onClose={handleClosePrintModal} />
         <PrintablesMenu
           open={open}
           handleClose={handleClose}
           anchorEl={anchorEl}
           handleFaas={handleFaasForm}
           handleTaxdec={handleTaxdecForm}
-
-            onConfirm: () => handleSubmit(onSubmit)()
-          })}
-
+          onConfirm={() => handleSubmit(onSubmit)()}
         />
       </FormProvider>
     </>
