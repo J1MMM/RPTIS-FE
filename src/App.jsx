@@ -13,19 +13,20 @@ import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.js
 import PendingFaasPage from "./features/assessor/pages/pending/PendingFaasPage.jsx";
 import "./styles/global.scss";
 import LoginPage from "./features/auth/pages/LoginPage.jsx";
+import LandingPage from "./features/clients/pages/LandingPage.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <CssBaseline />
       <Routes>
+        <Route path="/" element={<LandingPage />} />
+
         <Route element={<PersistLogin />}>
           <Route path="/login" element={<LoginPage />} />
-
           <Route element={<RequireAuth />}>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Dashboard />} />
-
+            <Route element={<Layout />}>
+              <Route path="dashboard" element={<Dashboard />} />
               {/* <Route path="/" element={<Navigate to="/assessor" />} /> */}
               <Route path="assessor" element={<AssessorPageLayout />}>
                 <Route index element={<Navigate to="active" replace />} />

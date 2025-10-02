@@ -67,7 +67,9 @@ function AdditionalItemsFields({ readOnly }) {
 
   const onEditSubmit = (data) => {
     try {
-      update(editingId, { ...data, id: fields[editingId].id });
+      const selectedItem = getBldgValue(FIELDS.ADDITIONAL_ITEMS) || []
+
+      update(editingId, { ...data, id: selectedItem[editingId].id });
       setModalActive(false);
       setEditingId(null);
       reset(ADDITIONAL_ITEMS_DEFAULT);

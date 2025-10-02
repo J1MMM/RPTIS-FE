@@ -54,7 +54,8 @@ function MachineBrandCapacity({ readOnly }) {
 
   const onEditSubmit = (data) => {
     try {
-      update(editingId, { ...data, id: fields[editingId].id });
+      const selectedItem = getValues(FIELDS.M_BRAND_CAPACITY) || []
+      update(editingId, { ...data, id: selectedItem[editingId].id });
       setModalActive(false);
       setEditingId(null);
       resetForm(FORM_DEFAULT);

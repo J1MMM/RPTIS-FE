@@ -6,7 +6,7 @@ import { DATA_GRID_INITIAL_STATE, DATA_GRID_STYLE, PAGE_SIZE_OPTION } from "@con
 import { TableToolbar } from '../../../../../../components/shared';
 
 
-function LandFaasTable({ rows, toolbarButtons, handleShowDetails }) {
+function LandFaasTable({ rows, toolbarButtons, handleShowDetails, loading }) {
     const columns = useMemo(() => [
         ...LAND_TABLE_COLUMN,
         {
@@ -35,6 +35,7 @@ function LandFaasTable({ rows, toolbarButtons, handleShowDetails }) {
             // checkboxSelection
             rows={rows}
             columns={columns}
+            loading={loading}
             initialState={DATA_GRID_INITIAL_STATE}
             pageSizeOptions={PAGE_SIZE_OPTION}
             disableRowSelectionOnClick

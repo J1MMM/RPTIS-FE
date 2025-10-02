@@ -1,49 +1,44 @@
 import { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import useFaasData from "../../hooks/useFaasData";
 import { toast, } from "react-toastify";
-import { toastConfig } from "../../../../constants/toastConfig";
 import { PlusCircle, ShuffleIcon } from "lucide-react";
-import { v4 } from "uuid";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm, } from "react-hook-form";
 import useConfirm from "../../../../hooks/useConfirm";
 import MachineryFaasTable from "../../components/tables/machinery/MachineryFaasTable";
 import MachineyFaasModal from "../../components/forms/machinery/modals/MachineyFaasModal";
 import { MACHINERY_FORM_DEFAULTS } from "../../constants/machinery/default";
-import axios from "../../../../api/axios";
+import { useCreateMachineFaas, useMachineFaasQuery } from "../../hooks/useMachineryQuery";
+import { capitalizeFirstLetter } from "../../../../utils/formatters";
 import { machineryReqFormatter } from "../../utils/machineryReqFormatter";
 import PrintablesMenu from "../../components/forms/PrintablesMenu";
 import { PrintableMachineryFaasFormModal } from "../../components/forms/machinery/modals/printableModal/PrintableMachineryFaasFormModal";
 import PrintableMachineryTaxdecFormModal from "../../components/forms/machinery/modals/printableModal/PrintableMachineryTaxdecFormModal";
 
 function MachineryFaasPage() {
-  const methods = useForm({ defaultValues: MACHINERY_FORM_DEFAULTS, mode: "onSubmit" });
-  const { handleSubmit, formState: { isSubmitting, isDirty, dirtyFields }, reset, setValue, getValues, watch } = methods;
-  const { machineFaasRecords, setMachineFaasRecords } = useFaasData();
   const confirm = useConfirm()
+  const methods = useForm({ defaultValues: MACHINERY_FORM_DEFAULTS, mode: "onSubmit" });
+  const { handleSubmit, formState: { isDirty }, reset } = methods;
+  const { data: machineFaasRecords, isLoading } = useMachineFaasQuery();
+  const createMachineFaas = useCreateMachineFaas()
 
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [addModalActive, setAddModalActive] = useState(false);
   const [printFaasModalActive, setPrintFaasModalActive] = useState(false)
   const [printTaxdecModalActive, setPrintTaxdecModalActive] = useState(false)
   const [formMode, setFormMode] = useState("add");
 
   const onSubmit = async (data) => {
-    if (isSubmitting) return;
     try {
       const formattedData = machineryReqFormatter(data)
-      const response = await axios.post('/machine/create', formattedData)
-      setMachineFaasRecords(prev => [...prev, { ...data, id: v4() }])
-      toast.success("Form submitted successfully!");
+      await createMachineFaas.mutateAsync(formattedData);
+      toast.success("Machine FAAS added successfully!");
       setAddModalActive(false);
+      reset(MACHINERY_FORM_DEFAULTS);
     } catch (error) {
       console.error("Error submitting form:", error);
-
-      toast.error(error.response.data?.message);
-    } finally {
-      setShowConfirmation(false);
+      toast.error(`${capitalizeFirstLetter(error.response?.data?.message)}`);
     }
   };
+
   const handleAddBtnClick = () => {
     setFormMode("add");
     setAddModalActive(true);
@@ -118,6 +113,7 @@ function MachineryFaasPage() {
         <MachineryFaasTable
           handleShowDetails={handleShowDetails}
           rows={machineFaasRecords}
+          loading={isLoading}
           toolbarButtons={(<>
             <Button
               // disabled={Boolean(selectedArpNos.length < 2)}
@@ -141,12 +137,13 @@ function MachineryFaasPage() {
         <MachineyFaasModal
           formMode={formMode}
           setFormMode={setFormMode}
-          disabled={isSubmitting}
+          disabled={createMachineFaas.isLoading}
           open={addModalActive}
           onClose={handleCloseModal}
-          handleSubmit={handleSubmit(() => confirm({
+          handleSubmit={() => confirm({
             title: "Add Machinery FAAS Confirmation",
             message: "Are you sure you want to add this machinery FAAS data? It will be saved once confirmed.",
+
             onConfirm: handleSubmit(onSubmit)
           }))}
           handleForm={handleClick}
@@ -160,6 +157,10 @@ function MachineryFaasPage() {
           anchorEl={anchorEl}
           handleFaas={handleFaasForm}
           handleTaxdec={handleTaxdecForm}
+
+            onConfirm: () => handleSubmit(onSubmit)()
+          })}
+
         />
       </FormProvider>
     </>

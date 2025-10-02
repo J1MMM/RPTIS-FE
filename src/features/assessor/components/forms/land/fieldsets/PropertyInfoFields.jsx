@@ -39,6 +39,7 @@ function PropertyInfoFields({ control, readOnly }) {
         />
 
         <TextInput
+          required={false}
           control={control}
           label="City"
           name={FIELDS.CITY}
@@ -46,6 +47,7 @@ function PropertyInfoFields({ control, readOnly }) {
           value="SAN PABLO CITY"
         />
         <TextInput
+          required={false}
           control={control}
           label="Province"
           name={FIELDS.PROVINCE}

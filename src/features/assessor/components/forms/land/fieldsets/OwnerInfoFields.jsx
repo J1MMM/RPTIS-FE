@@ -14,7 +14,7 @@ function OwnerInfoFields({ readOnly, ownerFieldName }) {
   const [activeModal, setActiveModal] = useState(false)
   const [formMode, setFormMode] = useState("add")
   const [editingId, setEditingId] = useState(null)
-  const { control: bldgControl } = useFormContext()
+  const { control: bldgControl, getValues } = useFormContext()
   const { control: ownerFieldControl, handleSubmit, setValue, reset } = useForm({ defaultValues: DEFAULT_OWNER_FORM })
   const ownersForm = useWatch({ control: ownerFieldControl })
   const { fields, append, remove, update } = useFieldArray({ control: bldgControl, name: ownerFieldName });
@@ -68,8 +68,11 @@ function OwnerInfoFields({ readOnly, ownerFieldName }) {
     e.stopPropagation()
 
     handleSubmit((data) => {
+
       try {
-        update(editingId, { ...data, id: fields[editingId].id })
+        const selectedItem = getValues(ownerFieldName) || []
+
+        update(editingId, { ...data, id: selectedItem[editingId].id })
         setActiveModal(false);
         setEditingId(null);
         reset(DEFAULT_OWNER_FORM);
