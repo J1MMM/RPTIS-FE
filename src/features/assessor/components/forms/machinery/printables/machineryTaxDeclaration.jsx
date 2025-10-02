@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import "./style.scss";
+// import "./style.scss";
 import logo1 from "../../../../../../assets/images/seal.png";
 import logo2 from "../../../../../../assets/images/trylogo.png";
 import {
@@ -101,12 +101,12 @@ function numberToWords(num) {
   return words.trim();
 }
 
-export const BuildingTaxDeclaration = forwardRef((props, ref) => {
+export const MachineryTaxDeclaration = forwardRef((props, ref) => {
     const {control} = useFormContext()
     const selectedRow = useWatch({control})
     //role call
-    const owner = selectedRow.bldg_ownership.find(entry => entry.role?.toLowerCase() === "owner");
-    const admin = selectedRow.bldg_ownership.find(entry => entry.role?.toLowerCase() === "administrator");
+    const owner = selectedRow.machine_ownership.find(entry => entry.role?.toLowerCase() === "owner");
+    const admin = selectedRow.machine_ownership.find(entry => entry.role?.toLowerCase() === "administrator");
 
   return (
     <Paper 
@@ -138,11 +138,11 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
       <Stack direction={'row'} gap={1} sx={{width: '100%', pb: 1}}>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">T.D. No. :</Typography>
-          <input type="text" disabled value={selectedRow.arp_no || ''} style={inputValStyle}/>
+          <input type="text" disabled value={selectedRow?.arp_no || ""} style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">Property Identification No. :</Typography>
-          <input type="text" disabled value={selectedRow.pin_no || ''} style={inputValStyle}/>
+          <input type="text" disabled value={selectedRow?.pin_no || ""} style={inputValStyle}/>
         </Stack>
       </Stack>
 
@@ -152,13 +152,13 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
           <input 
             type="text" 
             disabled 
-            value={`${owner?.firstname || ""} ${owner?.middlename || ""} ${owner?.lastname || ""}`}
+            value={`${owner?.firstname || ""} ${owner?.middlename || ""} ${owner?.lastname || ""} ${owner?.name || ""}`}
             style={inputValStyle}
           />
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">TIN No. :</Typography>
-          <input type="text" disabled value={owner?.tin} style={inputValStyle}/>
+          <input type="text" disabled value={owner?.tin || ""} style={inputValStyle}/>
         </Stack>
       </Stack>
       <Stack direction={'row'} gap={1} sx={{width: '100%', pb: 1}}>
@@ -167,7 +167,7 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
           <input 
            type="text"
            disabled 
-           value={`${owner.brgy || ""}, ${owner.city || ""}, ${owner.province || ""}, ${owner.regions || ""}`}
+           value={`${owner?.brgy || ""} ${owner?.city || ""}, ${owner?.province || ""}`}
            style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
@@ -182,13 +182,13 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
           <input 
             type="text" 
             disabled 
-            value={`${admin?.firstname || ""} ${admin?.middlename || ""} ${admin?.lastname || ""}`} 
+            value={`${admin?.firstname || ""} ${admin?.middlename || ""} ${admin?.lastname || ""} ${admin?.name || ""}`} 
             style={inputValStyle}
           />
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">TIN No. :</Typography>
-          <input type="text" disabled value={admin?.tin_no || ""} style={inputValStyle}/>
+          <input type="text" disabled value={admin?.tin || ""} style={inputValStyle}/>
         </Stack>
       </Stack>
       
@@ -196,7 +196,7 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
         <Stack direction={'row'} gap={1} sx={{flex: 1.5}}>
           <Typography variant="caption">Address:</Typography>
           <input type="text" disabled 
-          value={admin?.address || ""} 
+          value={`${admin?.brgy || ""} ${admin?.city || ""}, ${admin?.province || ""}`} 
           style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
@@ -214,9 +214,9 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
         }}
       >
         <Typography variant="caption">Location of Property:</Typography>
-          <input type="text" disabled value={selectedRow?.land_reference.street || ""} style={inputValStyle}/>
-          <input type="text" disabled value={selectedRow?.land_reference.brgy || ""} style={inputValStyle}/>
-          <input type="text" disabled value={`${selectedRow?.land_reference.city || ""}, ${selectedRow?.land_reference.province || ""}`} style={inputValStyle}/>
+          <input type="text" disabled value={selectedRow?.street || ""} style={inputValStyle}/>
+          <input type="text" disabled value={selectedRow?.brgy || ""} style={inputValStyle}/>
+          <input type="text" disabled value={`${selectedRow?.city || ""}, ${selectedRow?.province || ""}`} style={inputValStyle}/>
         <Box/>
         <Typography variant="caption" sx={{textAlign: 'center'}}>Number and Street</Typography>
         <Typography variant="caption" sx={{textAlign: 'center'}}>Barangay/District</Typography>
@@ -226,31 +226,31 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
       <Stack direction={'row'} gap={1} sx={{width: '100%'}}>
         <Stack direction={'row'} gap={1} sx={{flex: 1.5}}>
           <Typography variant="caption">OCT/TCT/CLOA No. :</Typography>
-          <input type="text" disabled value={selectedRow?.land_reference.oct_tct_cloa_no || ""} style={inputValStyle}/>
+          <input type="text" disabled value={''} style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">Survey No. :</Typography>
-          <input type="text" disabled value={selectedRow?.land_reference.survey_no || ""} style={inputValStyle}/>
+          <input type="text" disabled value={''} style={inputValStyle}/>
         </Stack>
       </Stack>
       <Stack direction={'row'} gap={1} sx={{width: '100%'}}>
         <Stack direction={'row'} gap={1} sx={{flex: 1.5}}>
           <Typography variant="caption">CCT:</Typography>
-          <input type="text" disabled value={selectedRow?.cct || ""} style={inputValStyle}/>
+          <input type="text" disabled value={''} style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">Lot No.:</Typography>
-          <input type="text" disabled value={selectedRow?.land_reference.lot_no || ""} style={inputValStyle}/>
+          <input type="text" disabled value={''} style={inputValStyle}/>
         </Stack>
       </Stack>
       <Stack direction={'row'} gap={1} sx={{width: '100%', pb: 1}}>
         <Stack direction={'row'} gap={1} sx={{flex: 1.5}}>
           <Typography variant="caption">Date:</Typography>
-          <input type="text" disabled value={"sample Value"} style={inputValStyle}/>
+          <input type="text" disabled value={""} style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{flex: 1}}>
           <Typography variant="caption">Block No.:</Typography>
-          <input type="text" disabled value={selectedRow?.land_reference.blk_no || ""} style={inputValStyle}/>
+          <input type="text" disabled value={""} style={inputValStyle}/>
         </Stack>
       </Stack>
 
@@ -283,7 +283,7 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
           <Typography variant="caption" fontWeight={'bold'}>LAND</Typography>
         </Stack>
         <Stack direction={'row'} gap={2}>
-          <input readOnly disabled type="checkbox"/>
+          <input readOnly checked type="checkbox"/>
           <Typography variant="caption" fontWeight={'bold'}>MACHINERY</Typography>
         </Stack>
       </Stack>
@@ -298,7 +298,7 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
 
       <Stack direction={'row'} sx={{display: 'grid', gridTemplateColumns: '1fr 1fr', width: '100%'}}>
         <Stack direction={'row'} gap={2}>
-          <input readOnly checked type="checkbox"/>
+          <input readOnly disabled type="checkbox"/>
           <Typography variant="caption" fontWeight={'bold'}>BUILDING</Typography>
         </Stack>
         <Stack direction={'row'} gap={2}>
@@ -310,7 +310,7 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
       <Stack direction={'row'} sx={{display: 'grid', gridTemplateColumns: '1fr 1fr', width: '100%'}}>
         <Stack direction={'row'} gap={2} sx={{pl: 5}}>
           <Typography variant="caption">No. of Storeys:</Typography>
-          <input type="text" disabled value={selectedRow?.noOfStorey || ""} style={inputValStyle}/>
+          <input type="text" disabled value={''} style={inputValStyle}/>
         </Stack>
         <Stack direction={'row'} gap={2} sx={{pl: 5}}>
           <Typography variant="caption">Specify:</Typography>
@@ -331,12 +331,12 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
         TableBody={
             <>
             <TableRow>
-              <TableCell align="center" sx={cellStyles}>{selectedRow.propertyAssessments.classification || ''}</TableCell>
-              <TableCell align="center" sx={cellStyles}>{selectedRow.propertyAssessments.area || ''} </TableCell>
-              <TableCell align="center" sx={cellStyles}>₱ {selectedRow.propertyAssessments.marketValue || ''}</TableCell>
-              <TableCell align="center" sx={cellStyles}>{selectedRow.propertyAssessments.actualUse || ''}</TableCell>
-              <TableCell align="center" sx={cellStyles}>{selectedRow.propertyAssessments.assessmentLevel || ''} %</TableCell>
-              <TableCell align="center" sx={cellStyles}>₱ {selectedRow.propertyAssessments.assessedValue || ''}</TableCell>
+              <TableCell align="center" sx={cellStyles}>{selectedRow?.property_assessment_machine.kind || ""}</TableCell>
+              <TableCell align="center" sx={cellStyles}>{selectedRow?.property_assessment_machine.area || ""}</TableCell>
+              <TableCell align="center" sx={cellStyles}>₱ {selectedRow?.property_assessment_machine.market_value || ""}</TableCell>
+              <TableCell align="center" sx={cellStyles}>{selectedRow?.property_assessment_machine.actual_use || ""}</TableCell>
+              <TableCell align="center" sx={cellStyles}>{selectedRow?.property_assessment_machine.assessment_level || ""} %</TableCell>
+              <TableCell align="center" sx={cellStyles}>₱ {selectedRow?.property_assessment_machine.assessed_value || ""}</TableCell>
             </TableRow>
             </>
         }
@@ -345,10 +345,10 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
             <TableRow>
               <TableCell align="center" sx={{...cellStyles, border: 0}}>Total</TableCell>
               <TableCell align="center" sx={cellStyles}></TableCell>
+              <TableCell align="center" sx={cellStyles}>₱ {selectedRow?.property_assessment_machine.market_value || ""}</TableCell>
               <TableCell align="center" sx={cellStyles}></TableCell>
               <TableCell align="center" sx={cellStyles}></TableCell>
-              <TableCell align="center" sx={cellStyles}></TableCell>
-              <TableCell align="center" sx={cellStyles}>₱ {selectedRow.propertyAssessments.assessedValue || ''}</TableCell>
+              <TableCell align="center" sx={cellStyles}>₱ {selectedRow?.property_assessment_machine.assessed_value || ""}</TableCell>
             </TableRow>
             </>
           }
@@ -362,10 +362,10 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
         <Typography variant="caption">Total Assessed Value:</Typography>
         <input 
           type="text" 
-          disabled  
+          disabled 
           value={
-            selectedRow?.propertyAssessments?.assessedValue
-            ? `${numberToWords(Number(selectedRow.propertyAssessments.assessedValue)) } PESOS ONLY`
+            selectedRow?.property_assessment_machine?.assessed_value 
+            ? `${numberToWords(Number(selectedRow.property_assessment_machine.assessed_value)) } only`
             : ""
           } 
           style={inputValStyle}
@@ -428,19 +428,19 @@ export const BuildingTaxDeclaration = forwardRef((props, ref) => {
       }}>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">This declaration cancels T.D. No:</Typography>
-          <input type="text" disabled value={selectedRow?.previousRecords.arp_no || ""} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_data.prevTD || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Owner:</Typography>
-          <input type="text" disabled value={selectedRow?.previousRecords.owner_name || ""} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_data.owner || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Previous A.V. Php:</Typography>
-          <input type="text" disabled value={selectedRow?.previousRecords.total_assessed_value || ""} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_data.value || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Property Index Number:</Typography>
-          <input type="text" disabled value={selectedRow?.previousRecords.pin_no || ""} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_data.prevPin || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Box/>
         <Box/>

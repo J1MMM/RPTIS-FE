@@ -25,42 +25,42 @@ import dayjs from "dayjs";
 function numberToWords(num) {
   const a = [
     "",
-    "one",
-    "two",
-    "three",
-    "four",
-    "five",
-    "six",
-    "seven",
-    "eight",
-    "nine",
-    "ten",
-    "eleven",
-    "twelve",
-    "thirteen",
-    "fourteen",
-    "fifteen",
-    "sixteen",
-    "seventeen",
-    "eighteen",
-    "nineteen",
+    "ONE",
+    "TWO",
+    "THREE",
+    "FOUR",
+    "FIVE",
+    "SIX",
+    "SEVEN",
+    "EIGHT",
+    "NINE",
+    "TEM",
+    "ELEVEN",
+    "TWELVE",
+    "THIRTEEN",
+    "FOURTEEN",
+    "FIFTEEN",
+    "SIXTEEN",
+    "SEVENTEEN",
+    "EIGHTEEN",
+    "NINETEEN",
   ];
   const b = [
     "",
     "",
-    "twenty",
-    "thirty",
-    "forty",
-    "fifty",
-    "sixty",
-    "seventy",
-    "eighty",
-    "ninety",
+    "TWENTY",
+    "THIRTY",
+    "FORTY",
+    "FIFTY",
+    "SIXTY",
+    "SEVENTY",
+    "EIGHTY",
+    "NINETY",
   ];
-  const g = ["", "thousand", "million", "billion", "trillion"];
+  const g = ["", "THOUSAND", "MILLION", "BILLION", "TRILLION"];
 
   if (typeof num !== "number" || isNaN(num)) return "Not a number";
-  if (num === 0) return "zero";
+  if (num === 0) return "ZERO";
 
   const [integerPart, decimalPart] = num.toString().split(".");
 
@@ -73,7 +73,7 @@ function numberToWords(num) {
       if (chunk) {
         let chunkInWords = "";
         if (chunk > 99) {
-          chunkInWords += a[Math.floor(chunk / 100)] + " hundred ";
+          chunkInWords += a[Math.floor(chunk / 100)] + " HUNDRED ";
           chunk %= 100;
         }
         if (chunk > 19) {
@@ -108,6 +108,9 @@ export const TaxDeclaration = forwardRef((props, ref) => {
     //role call
     const owner = selectedRow.land_ownership.find(entry => entry.role?.toLowerCase() === "owner");
     const admin = selectedRow.land_ownership.find(entry => entry.role?.toLowerCase() === "administrator");
+    
+    const totalAssessedValue = selectedRow?.propertyAssessments
+      ?.reduce((total, item) => total + Number(item.assessed_value || 0), 0) || 0;
 
   return (
     <Paper 
@@ -217,7 +220,7 @@ export const TaxDeclaration = forwardRef((props, ref) => {
         <Typography variant="caption">Location of Property:</Typography>
           <input type="text" disabled value={selectedRow.street  || ''} style={inputValStyle}/>
           <input type="text" disabled value={selectedRow.brgy  || ''} style={inputValStyle}/>
-          <input type="text" disabled value={selectedRow.city  || ''} style={inputValStyle}/>
+          <input type="text" disabled value={`${selectedRow.city  || ''} ${selectedRow.province  || ''}`} style={inputValStyle}/>
         <Box/>
         <Typography variant="caption" sx={{textAlign: 'center'}}>Number and Street</Typography>
         <Typography variant="caption" sx={{textAlign: 'center'}}>Barangay/District</Typography>
@@ -331,16 +334,26 @@ export const TaxDeclaration = forwardRef((props, ref) => {
         TableHead={<PropertyAssessmentTaxdecTableHead />}
         TableBody={
             <>
-            {selectedRow.propertyAssessments.map((obj) => (
-            <TableRow>
-              <TableCell align="center" sx={cellStyles}>Classification ?</TableCell>
-              <TableCell align="center" sx={cellStyles}>Area ? m²</TableCell>
-              <TableCell align="center" sx={cellStyles}>₱ {obj.market_value}</TableCell>
-              <TableCell align="center" sx={cellStyles}>{obj.actual_use}</TableCell>
-              <TableCell align="center" sx={cellStyles}>{obj.assessment_level} %</TableCell>
-              <TableCell align="center" sx={cellStyles}>₱ {obj.assessed_value}</TableCell>
-            </TableRow>
-            ))}
+              {selectedRow?.propertyAssessments.map((obj) => {
+                const matchingAppraisal = selectedRow.landappraisals.find(
+                  (appraisal) => appraisal.id === obj.land_appraisal_id
+                );
+
+                return (
+                  <TableRow key={obj.id}>
+                    <TableCell align="center" sx={cellStyles}>
+                      {matchingAppraisal?.classification || "N/A"}
+                    </TableCell>
+                    <TableCell align="center" sx={cellStyles}>
+                      {matchingAppraisal?.area || "N/A"} m²
+                    </TableCell>
+                    <TableCell align="center" sx={cellStyles}>₱ {obj.market_value}</TableCell>
+                    <TableCell align="center" sx={cellStyles}>{obj.actual_use}</TableCell>
+                    <TableCell align="center" sx={cellStyles}>{obj.assessment_level} %</TableCell>
+                    <TableCell align="center" sx={cellStyles}>₱ {obj.assessed_value}</TableCell>
+                  </TableRow>
+                );
+              })}
             </>
         }
         TableFooter={
@@ -351,7 +364,7 @@ export const TaxDeclaration = forwardRef((props, ref) => {
               <TableCell align="center" sx={cellStyles}></TableCell>
               <TableCell align="center" sx={cellStyles}></TableCell>
               <TableCell align="center" sx={cellStyles}></TableCell>
-              <TableCell align="center" sx={cellStyles}></TableCell>
+              <TableCell align="center" sx={cellStyles}>₱ {totalAssessedValue.toLocaleString()}</TableCell>
             </TableRow>
             </>
           }
@@ -363,7 +376,16 @@ export const TaxDeclaration = forwardRef((props, ref) => {
         py: 1
       }}>
         <Typography variant="caption">Total Assessed Value:</Typography>
-        <input type="text" disabled value={'THREE THOUSAND SIX HUNDRED SEVENTY PESOS ONLY'} style={inputValStyle}/>
+        <input 
+         type="text" 
+         disabled
+         value={
+          totalAssessedValue
+          ? `${numberToWords(totalAssessedValue)} PESOS ONLY`
+          : ""
+         } 
+         style={inputValStyle}
+        />
         <Box/>
         <Typography variant="caption" sx={{textAlign: 'center'}}>(Amount in Words)</Typography>
       </Box>
@@ -406,7 +428,7 @@ export const TaxDeclaration = forwardRef((props, ref) => {
         </Stack>
         <Stack direction={'column'}>
         <Typography variant="caption" fontWeight={'bold'} sx={{textAlign: 'center'}}>BLESILDA B. ALINEA</Typography>
-        <Typography variant="caption" sx={{textAlign: 'center'}}>City Assessor</Typography>
+        <Typography variant="caption" sx={{textAlign: 'center'}}>Tax Mapper IV</Typography>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
         <Typography variant="caption">Date:</Typography>
@@ -422,19 +444,19 @@ export const TaxDeclaration = forwardRef((props, ref) => {
       }}>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">This declaration cancels T.D. No:</Typography>
-          <input type="text" disabled value={'prevRec ?'} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_records.arp_no || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Owner:</Typography>
-          <input type="text" disabled value={'prevRec ?'} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_records.owner_name || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Previous A.V. Php:</Typography>
-          <input type="text" disabled value={'prevRec ?'} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_records.total_assessed_value || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Stack direction={'row'} gap={1} sx={{display: 'flex', alignItems: 'center'}}>
           <Typography variant="caption">Property Index Number:</Typography>
-          <input type="text" disabled value={'prevRec ?'} style={{...inputValStyle, width: 10}}/>
+          <input type="text" disabled value={selectedRow?.previous_records.pin_no || ""} style={{...inputValStyle, width: 10}}/>
         </Stack>
         <Box/>
         <Box/>
@@ -450,7 +472,7 @@ export const TaxDeclaration = forwardRef((props, ref) => {
           <textarea
             disabled
             value={
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est earum enim obcaecati iusto doloremque consectetur voluptates tempora omnis, facilis amet. Enim, alias ex doloremque sit ratione consectetur placeat provident laborum.'
+              selectedRow?.memoranda || ""
             }
             style={inputMemoStyle}
             rows={4} // or auto-calculate rows dynamically

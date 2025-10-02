@@ -7,6 +7,12 @@ const LandFaasRearPage = forwardRef((props, ref) => {
   const {control} = useFormContext()
   const selectedRow = useWatch({control})
 
+  const totalMarketValue = selectedRow?.landappraisals
+  ?.reduce((total, item) => total + Number(item.market_value || 0), 0) || 0;
+
+  const totalPropertyAssessment = selectedRow?.propertyAssessments
+  ?.reduce((total, item) => total + Number(item.assessed_value || 0), 0) || 0;
+
   return (
     <Paper ref={ref} 
         sx={{
@@ -48,7 +54,7 @@ const LandFaasRearPage = forwardRef((props, ref) => {
                       <TableCell align="center" sx={cellStyles}>Total</TableCell>
                       <TableCell align="center" sx={cellStyles}></TableCell>
                       <TableCell align="center" sx={cellStyles}>₱</TableCell>
-                      <TableCell align="center" sx={cellStyles}>₱</TableCell>
+                      <TableCell align="center" sx={cellStyles}>₱{totalMarketValue}</TableCell>
                     </TableRow>
                     </>
                 }
@@ -62,10 +68,10 @@ const LandFaasRearPage = forwardRef((props, ref) => {
                   <>
                   {selectedRow.propertyAssessments.map((obj) => (
                   <TableRow>
-                    <TableCell align="center" sx={cellStyles}>{obj.actual_use}</TableCell>
-                    <TableCell align="center" sx={cellStyles}>₱ {obj.market_value}</TableCell>
-                    <TableCell align="center" sx={cellStyles}>{obj.assessment_level} %</TableCell>
-                    <TableCell align="center" sx={cellStyles}>₱ {obj.assessed_value}</TableCell>
+                    <TableCell align="center" sx={cellStyles}>{obj.actual_use  || ""}</TableCell>
+                    <TableCell align="center" sx={cellStyles}>₱ {obj.market_value  || ""}</TableCell>
+                    <TableCell align="center" sx={cellStyles}>{obj.assessment_level  || ""} %</TableCell>
+                    <TableCell align="center" sx={cellStyles}>₱ {obj.assessed_value  || ""}</TableCell>
                   </TableRow>
                   ))}
                   </>
@@ -76,7 +82,7 @@ const LandFaasRearPage = forwardRef((props, ref) => {
                     <TableCell align="center" sx={cellStyles}></TableCell>
                     <TableCell align="center" sx={cellStyles}></TableCell>
                     <TableCell align="center" sx={cellStyles}>Total</TableCell>
-                    <TableCell align="center" sx={cellStyles}>₱</TableCell>
+                    <TableCell align="center" sx={cellStyles}>₱ {totalPropertyAssessment || ""}</TableCell>
                   </TableRow>
                   </>
                 }
@@ -218,12 +224,17 @@ const LandFaasRearPage = forwardRef((props, ref) => {
             MEMORANDA:
         </Typography>
         <Box sx={{
-          display: 'flex', 
-          flex: 1,
-          height: '10vh',
-          border: '1px solid black'
+            display: 'flex',
+            pl: 5,
+            flex: 1,
+            border: 0,
         }}>
-
+          <textarea
+            disabled
+            value={selectedRow?.memoranda || ""}
+            style={inputMemoStyle}
+            rows={4} // or auto-calculate rows dynamically
+          />
         </Box>
         <Stack direction='row' sx={{flex: 1}}>
           <Typography variant='caption'>Date of Entry in the Record of Assessment</Typography>
@@ -237,31 +248,31 @@ const LandFaasRearPage = forwardRef((props, ref) => {
         <Stack direction='column' sx={{flex: 1, border: '1px solid black'}}>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>PIN:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" value={selectedRow?.previous_records.pin_no || ""} disabled style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>ARP NO.</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.arp_no || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>Total Assessed Value:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.total_assessed_value || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>Previous Owner:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.owner_name || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>Effectivity of Assessment:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.effectivity_assessment || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>AR Page No.:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.ar_page_no || ""} style={inputValStyle}/>
             </Stack>
             <Stack direction='row' gap={2} sx={{px: 1, border: '1px solid black'}}>
               <Typography variant='caption'>Recording Personnel:</Typography>
-              <input type="text" disabled style={inputValStyle}/>
+              <input type="text" disabled value={selectedRow?.previous_records.recording_person || ""} style={inputValStyle}/>
             </Stack>
         </Stack>
         <br />
@@ -289,6 +300,22 @@ const cellStyles = {
   fontSize: 12,
   padding: 0,
   border: '1px solid black',
+};
+
+const inputMemoStyle = {
+  width: '100%',
+  border: 'none',
+  backgroundColor: 'white',
+  textDecoration: 'underline',
+  fontFamily: 'inherit',
+  fontSize: '12', // caption size
+  lineHeight: 1.3,
+  color: 'inherit',
+  padding: 0,
+  resize: 'none',
+  overflow: 'hidden', // hides scrollbar for printing
+  whiteSpace: 'pre-wrap',
+  pointerEvents: 'none' // keeps it read-only visually
 };
 
 export function MarketValueFaasTableHead() {

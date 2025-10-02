@@ -6,8 +6,7 @@ import MachineryFaasFrontPage from "../../printables/machineryFaasFrontPage";
 import MachineryFaasRearPage from "../../printables/machineryFaasRearPage";
 
 
-export const ViewMachineryAppraisalModal = ({ open, onClose, control, watch, setValue, disabled }) => {
-  const [openView, setOpenView] = useState(true);
+export const PrintableMachineryFaasFormModal = ({ open, onClose, control, watch, setValue, disabled }) => {
   const contentRef = useRef(null);
   const handlePrint = useReactToPrint({contentRef});
 
@@ -15,8 +14,8 @@ export const ViewMachineryAppraisalModal = ({ open, onClose, control, watch, set
     <ContainerModal
       disabled={disabled}
       maxWidth="md"
-      title="View Land Faas"
-      open={openView}
+      title="FIELD APPRAISAL & ASSESSMENT SHEET FORM"
+      open={open}
       onClose={onClose}
       actionButton={
         <>
@@ -34,8 +33,15 @@ export const ViewMachineryAppraisalModal = ({ open, onClose, control, watch, set
         </>
       }
     >
-        <MachineryFaasFrontPage  ref={contentRef}/>
-        <MachineryFaasRearPage/>
+        <div ref={contentRef}>
+          <div>
+            <MachineryFaasFrontPage/>
+          </div>
+          <br />
+          <div style={{ pageBreakBefore: 'always' }}>
+            <MachineryFaasRearPage/>
+          </div>
+        </div>
 
     </ContainerModal>
   );

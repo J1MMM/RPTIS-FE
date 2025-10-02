@@ -1,8 +1,13 @@
 import {forwardRef} from 'react'
 import { Box, Paper, Stack, Typography } from "@mui/material";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { useFormContext, useWatch } from 'react-hook-form';
+import dayjs from 'dayjs';
 
 const MachineryFaasRearPage = forwardRef((props, ref) => {
+    const {control} = useFormContext()
+    const selectedRow = useWatch({control})
+    const rowSpanCount = selectedRow?.reference_posting_summary.length || 0;
   return (
     <Paper elevation={10} ref={ref} sx={{px: 2, py: 10}}>
         <Box sx={{
@@ -23,7 +28,19 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
             <Box sx={{
                 gridColumn: 'span 2'
             }}>
-                <PropertyAssessmentTable/>
+                <PropertyAssessmentTable
+                    tableRow={
+                        <>
+                            <TableRow>
+                                <TableCell align="center" sx={[cellStyles, py]}>{selectedRow?.property_assessment_machine.kind}</TableCell>
+                                <TableCell align="center" sx={[cellStyles, py]}>{selectedRow?.property_assessment_machine.actual_use}</TableCell>
+                                <TableCell align="center" sx={[cellStyles, py]}>{selectedRow?.property_assessment_machine.market_value}</TableCell>
+                                <TableCell align="center" sx={[cellStyles, py]}>{selectedRow?.property_assessment_machine.assessment_level}</TableCell>
+                                <TableCell align="center" sx={[cellStyles, py]}>{selectedRow?.property_assessment_machine.assessed_value}</TableCell>
+                            </TableRow>
+                        </>
+                    }
+                />
             </Box>
             <Box sx={{
                 display: 'grid',
@@ -32,9 +49,9 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                 gridColumn: 'span 2'
             }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>PREVIOUS OWNER</Typography>
-                    <input type="text" disabled style={{flex: 1, border: 0, backgroundColor: 'White', gridColumn: 'span 2'}}/>
+                    <input type="text" disabled value={selectedRow?.previous_data.owner} style={{...inputValStyle, gridColumn: 'span 2'}}/>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>TAXABILITY</Typography>
-                    <input type="text" disabled style={{flex: 1, border: 0, backgroundColor: 'White'}}/>
+                    <input type="text" disabled value={selectedRow?.taxable ? 'TAXABLE' : 'EXEMPTED'} style={inputValStyle}/>
             </Box>
             <Box sx={{
                 display: 'grid',
@@ -43,9 +60,18 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                 gridColumn: 'span 2'
             }}>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>PREVIOUS VALUE</Typography>
-                    <input type="text" disabled style={{flex: 1, border: 0, backgroundColor: 'White', gridColumn: 'span 2'}}/>
+                    <input type="text" disabled value={selectedRow?.previous_data.value} style={{...inputValStyle, gridColumn: 'span 2'}}/>
                     <Typography variant="caption" sx={{display: 'grid', placeItems: 'center'}}>EFFECTIVITY</Typography>
-                    <input type="text" disabled style={{flex: 1, border: 0, backgroundColor: 'White'}}/>
+                    <input 
+                        type="text"
+                        disabled 
+                        value={
+                            dayjs(selectedRow?.effectivity_year).isValid()
+                            ?dayjs(selectedRow?.effectivity_year).format("MM/DD/YYYY")
+                            : ""
+                        } 
+                        style={inputValStyle}
+                    />
             </Box>
         </Box>
         <br />
@@ -63,7 +89,7 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input type="text" disabled value={selectedRow?.appraised_by.name || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                     <Typography variant='caption'>Name</Typography>
                     </Stack>
                     <Stack
@@ -73,13 +99,22 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input 
+                        type="text" 
+                        disabled 
+                        value={
+                            dayjs(selectedRow?.appraised_by?.date).isValid()
+                            ? dayjs(selectedRow.appraised_by.date).format("MM/DD/YYYY")
+                            : ""
+                        }
+                        style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}
+                    />
                     <Typography variant='caption'>Date</Typography>
                     </Stack>
                 </Stack>
             </Stack>
             <Stack direction={'column'} gap={1}>
-                <Typography variant='caption'>APPRAISED BY:</Typography>
+                <Typography variant='caption'>ASSESSED BY:</Typography>
                 <Stack direction={'row'}>
                     <Stack
                     sx={{
@@ -88,7 +123,7 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input type="text" disabled value={selectedRow?.assessed_by.name || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                     <Typography variant='caption'>Name</Typography>
                     </Stack>
                     <Stack
@@ -98,7 +133,16 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input 
+                        type="text" 
+                        disabled 
+                        value={
+                            dayjs(selectedRow?.assessed_by?.date).isValid()
+                            ? dayjs(selectedRow.assessed_by.date).format("MM/DD/YYYY")
+                            : ""
+                        }
+                        style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}
+                    />
                     <Typography variant='caption'>Date</Typography>
                     </Stack>
                 </Stack>
@@ -119,7 +163,7 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input type="text" disabled value={selectedRow?.recommending_approval.municipality || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                     <Typography variant='caption'>MUNICIPALITY</Typography>
                     </Stack>
                     <Stack
@@ -129,7 +173,16 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input 
+                        type="text" 
+                        disabled 
+                        value={
+                            dayjs(selectedRow?.approval?.date).isValid()
+                            ? dayjs(selectedRow.approval.date).format("YYYY")
+                            : ""
+                        }
+                        style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}
+                    />
                     <Typography variant='caption'>Date</Typography>
                     </Stack>
                 </Stack>
@@ -144,7 +197,7 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input type="text" disabled value={selectedRow?.approval.name || ""} style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                     <Typography variant='caption'>EVA F. PUNTO - City Assessor</Typography>
                     </Stack>
                     <Stack
@@ -154,7 +207,15 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                    <input type="text" disabled style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black'}}/>
+                    <input 
+                    type="text" 
+                    disabled 
+                    value={
+                        dayjs(selectedRow?.approval?.date).isValid()
+                        ? dayjs(selectedRow.approval.date).format("MM/DD/YYYY")
+                        : ""
+                    }
+                    style={{width: '90%', placeItems: 'center', border: 0, borderBottom: '1px solid black', backgroundColor: 'white'}}/>
                     <Typography variant='caption'>Date</Typography>
                     </Stack>
                 </Stack>
@@ -165,14 +226,18 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
             MEMORANDA:
         </Typography>
         <Box sx={{
-            display: 'flex', 
+            display: 'flex',
+            pl: 5,
             flex: 1,
-            height: '10vh',
-            border: '1px solid black'
+            border: 0,
         }}>
-
+          <textarea
+            disabled
+            value={selectedRow?.memoranda || ""}
+            style={inputMemoStyle}
+            rows={4} // or auto-calculate rows dynamically
+          />
         </Box>
-        <br />
         <Box sx={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
@@ -191,7 +256,29 @@ const MachineryFaasRearPage = forwardRef((props, ref) => {
             <Box sx={{
                 gridColumn: 'span 2'
             }}>
-                <RefPostSummaryTable/>
+                <RefPostSummaryTable
+                 tableRow={
+                    <>
+                    {selectedRow?.reference_posting_summary.map((obj) => (
+                        <TableRow>
+                            <TableCell align="center" rowSpan={rowSpanCount} sx={{ ...cellStyles, py: 1, width: '10%' }}>
+                                Pin PRE/ARP No.
+                            </TableCell>
+                            <TableCell align="center" sx={{...cellStyles, py, width: '20%'}}>{obj.pin || ""}</TableCell>
+                            {/* <TableCell align="center" sx={[cellStyles, py]}>{obj.pin || ""}</TableCell> */}
+                            <TableCell align="center" sx={[cellStyles, py]}>{obj.present_posting || ""}</TableCell>
+                            <TableCell align="center" sx={[cellStyles, py]}>{obj.previous_posting || ""}</TableCell>
+                            <TableCell align="center" sx={[cellStyles, py]}>{obj.posting.initial || ""}</TableCell>
+                            <TableCell align="center" sx={[cellStyles, py]}>{
+                            dayjs(obj.posting.date).isValid()
+                            ?dayjs(obj.posting.date).format("MM/DD/YYYY")
+                            : ""
+                            }</TableCell>
+                        </TableRow>
+                    ))}
+                    </>
+                 }
+                />
             </Box>
         </Box>
     </Paper>
@@ -208,7 +295,7 @@ const py = {
     py: .5
 };
 
-function PropertyAssessmentTable() {
+function PropertyAssessmentTable({tableRow}) {
   return (
     <TableContainer>
       <Table>
@@ -232,41 +319,14 @@ function PropertyAssessmentTable() {
             </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}>John</TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}>John</TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}>John</TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}>John</TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
+            {tableRow}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
 
-function RefPostSummaryTable() {
+function RefPostSummaryTable({tableRow}) {
   return (
     <TableContainer>
       <Table>
@@ -295,34 +355,33 @@ function RefPostSummaryTable() {
             </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell align="center" rowSpan={3} sx={{ ...cellStyles, py: 1, width: '10%' }}>
-                Pin PRE/ARP No.
-            </TableCell>
-            <TableCell align="center" sx={{...cellStyles, py, width: '20%'}}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-            <TableCell align="center" sx={[cellStyles, py]}></TableCell>
-          </TableRow>
+            {tableRow}
         </TableBody>
       </Table>
     </TableContainer>
   );
 }
+
+const inputValStyle = {
+    flex: 1, 
+    border: 0, 
+    backgroundColor: 'white'
+}
+
+const inputMemoStyle = {
+  width: '100%',
+  border: 'none',
+  backgroundColor: 'white',
+  textDecoration: 'underline',
+  fontFamily: 'inherit',
+  fontSize: '12', // caption size
+  lineHeight: 1.3,
+  color: 'inherit',
+  padding: 0,
+  resize: 'none',
+  overflow: 'hidden', // hides scrollbar for printing
+  whiteSpace: 'pre-wrap',
+  pointerEvents: 'none' // keeps it read-only visually
+};
 
 export default MachineryFaasRearPage

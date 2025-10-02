@@ -289,12 +289,17 @@ const BuildingFaasRearPage = forwardRef((props, ref) => {
             MEMORANDA:
         </Typography>
         <Box sx={{
-            display: 'flex', 
+            display: 'flex',
+            pl: 5,
             flex: 1,
-            height: '10vh',
-            border: '1px solid black'
+            border: 0,
         }}>
-
+          <textarea
+            disabled
+            value={selectedRow?.memoranda || ""}
+            style={inputMemoStyle}
+            rows={4} // or auto-calculate rows dynamically
+          />
         </Box>
         <Stack direction='row' sx={{flex: 1}}>
             <Typography variant='caption'>Date of Entry in the Record of Assessment</Typography>
@@ -343,6 +348,22 @@ const cellStyles = {
   fontSize: 12,
   padding: 0,
   border: '1px solid black',
+};
+
+const inputMemoStyle = {
+  width: '100%',
+  border: 'none',
+  backgroundColor: 'white',
+  textDecoration: 'underline',
+  fontFamily: 'inherit',
+  fontSize: '12', // caption size
+  lineHeight: 1.3,
+  color: 'inherit',
+  padding: 0,
+  resize: 'none',
+  overflow: 'hidden', // hides scrollbar for printing
+  whiteSpace: 'pre-wrap',
+  pointerEvents: 'none' // keeps it read-only visually
 };
 
 export function BuildingPropertyAssessmentFaasTableHead() {
