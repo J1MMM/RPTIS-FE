@@ -1,18 +1,6 @@
 import { Box, Typography, Stack, Card, CardContent } from '@mui/material';
 import { Calculator, FileCheck, CreditCard, Bell, Download, FileText, Building2, Clock } from 'lucide-react';
-import { keyframes } from '@mui/system';
-
-// Animation
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import { motion } from 'framer-motion';
 
 function Services() {
     const services = [
@@ -58,6 +46,12 @@ function Services() {
         }
     ];
 
+    // Animation variants for consistency
+    const fadeInUp = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0 }
+    };
+
     return (
         <Box
             id="services"
@@ -77,32 +71,46 @@ function Services() {
             >
                 {/* Header */}
                 <Stack spacing={2} alignItems="center" textAlign="center">
-                    <Typography
-                        variant="h3"
-                        fontWeight="800"
-                        sx={{
-                            fontSize: { xs: "2rem", md: "2.5rem" },
-                            color: "#1e293b",
-                            letterSpacing: "-0.02em",
-                            animation: `${fadeInUp} 0.8s ease-out`
-                        }}
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        variants={fadeInUp}
                     >
-                        Services that grow with your needs
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            fontSize: { xs: "1rem", md: "1.125rem" },
-                            color: "#64748b",
-                            maxWidth: 700,
-                            lineHeight: 1.7,
-                            animation: `${fadeInUp} 0.8s ease-out`,
-                            animationDelay: '0.1s',
-                            animationFillMode: 'backwards'
-                        }}
+                        <Typography
+                            variant="h3"
+                            fontWeight="800"
+
+                            sx={{
+                                fontSize: { xs: "2rem", md: "2.5rem" },
+                                color: "#1e293b",
+                                letterSpacing: "-0.02em"
+                            }}
+                        >
+                            Services that grow with your needs
+                        </Typography>
+                    </motion.div>
+
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        variants={fadeInUp}
                     >
-                        Comprehensive property tax management tools designed to save you time, money, and stress throughout the year.
-                    </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                fontSize: { xs: "1rem", md: "1.125rem" },
+                                color: "#64748b",
+                                maxWidth: 700,
+                                lineHeight: 1.7
+                            }}
+                        >
+                            Comprehensive property tax management tools designed to save you time, money, and stress throughout the year.
+                        </Typography>
+                    </motion.div>
                 </Stack>
 
                 {/* Service Cards Grid */}
@@ -115,79 +123,85 @@ function Services() {
                             md: 'repeat(3, 1fr)',
                             lg: 'repeat(4, 1fr)'
                         },
-                        gap: 3,
-                        animation: `${fadeInUp} 0.8s ease-out`,
-                        animationDelay: '0.2s',
-                        animationFillMode: 'backwards'
+                        gap: 3
                     }}
                 >
                     {services.map((service, index) => (
-                        <Card
+                        <motion.div
                             key={index}
-                            sx={{
-                                bgcolor: 'white',
-                                borderRadius: 4,
-                                border: '1px solid #e5e7eb',
-                                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
-                                transition: 'all 0.3s ease',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                    transform: 'translateY(-8px)',
-                                    boxShadow: '0 20px 40px rgba(40, 127, 113, 0.15)',
-                                    borderColor: '#287F71',
-                                    '& .service-icon': {
-                                        bgcolor: '#287F71',
-                                        color: 'white',
-                                        transform: 'scale(1.1)'
-                                    }
-                                }
-                            }}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            variants={fadeInUp}
                         >
-                            <CardContent sx={{ p: 3 }}>
-                                <Stack spacing={2}>
-                                    {/* Icon */}
-                                    <Box
-                                        className="service-icon"
-                                        sx={{
-                                            width: 64,
-                                            height: 64,
-                                            borderRadius: 3,
-                                            bgcolor: 'rgba(40, 127, 113, 0.1)',
-                                            color: '#287F71',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            transition: 'all 0.3s ease'
-                                        }}
-                                    >
-                                        {service.icon}
-                                    </Box>
+                            <Card
+                                sx={{
+                                    height: "100%",
+                                    bgcolor: 'white',
+                                    borderRadius: 4,
+                                    border: '1px solid #e5e7eb',
+                                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+                                    transition: 'all 0.3s ease',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        transform: 'translateY(-8px)',
+                                        boxShadow: '0 20px 40px rgba(40, 127, 113, 0.15)',
+                                        borderColor: '#287F71',
+                                        '& .service-icon': {
+                                            bgcolor: '#287F71',
+                                            color: 'white',
+                                            transform: 'scale(1.1)'
+                                        }
+                                    }
+                                }}
+                            >
+                                <CardContent sx={{ p: 3 }}>
+                                    <Stack spacing={2}>
+                                        {/* Icon */}
+                                        <Box
+                                            className="service-icon"
+                                            sx={{
+                                                width: 64,
+                                                height: 64,
+                                                borderRadius: 3,
+                                                bgcolor: 'rgba(40, 127, 113, 0.1)',
+                                                color: '#287F71',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                transition: 'all 0.3s ease'
+                                            }}
+                                        >
+                                            {service.icon}
+                                        </Box>
 
-                                    {/* Title */}
-                                    <Typography
-                                        variant="h6"
-                                        fontWeight="700"
-                                        sx={{
-                                            color: '#1e293b',
-                                            fontSize: '1.125rem'
-                                        }}
-                                    >
-                                        {service.title}
-                                    </Typography>
+                                        {/* Title */}
+                                        <Typography
+                                            variant="h6"
+                                            fontWeight="700"
+                                            sx={{
+                                                color: '#1e293b',
+                                                fontSize: '1.125rem'
+                                            }}
+                                        >
+                                            {service.title}
+                                        </Typography>
 
-                                    {/* Description */}
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            color: '#64748b',
-                                            lineHeight: 1.6
-                                        }}
-                                    >
-                                        {service.description}
-                                    </Typography>
-                                </Stack>
-                            </CardContent>
-                        </Card>
+                                        {/* Description */}
+                                        <Typography
+                                            variant="body2"
+                                            sx={{
+                                                color: '#64748b',
+                                                lineHeight: 1.6
+                                            }}
+                                        >
+                                            {service.description}
+                                        </Typography>
+                                    </Stack>
+                                </CardContent>
+                            </Card>
+                        </motion.div>
                     ))}
                 </Box>
             </Stack>
