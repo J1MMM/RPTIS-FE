@@ -44,7 +44,7 @@ const LoginForm = () => {
             const token = "secret_token";
             Cookies.set("token", token);
             setAuth({ accessToken: token });
-            navigate("/", { replace: true });
+            navigate("/dashboard", { replace: true });
             // const response = await axios.post(
             //     "/api/user/login",
             //     JSON.stringify(data),
@@ -270,7 +270,7 @@ const LoginForm = () => {
                         color="text.secondary"
                         sx={{ fontSize: "0.85rem" }}
                     >
-                        Real Property Tax Information System
+                        Real Property Tax Management System
                     </Typography>
                 </Box>
             </Stack>

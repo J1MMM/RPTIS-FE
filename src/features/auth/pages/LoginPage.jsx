@@ -1,9 +1,7 @@
-import React from "react";
-import { Box, Typography, useTheme, useMediaQuery, Paper } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { Navigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import LoginForm from "../components/LoginForm";
-import logo from "../../../assets/images/favicon.svg";
 
 const LoginPage = () => {
     const { auth } = useAuth();
@@ -11,7 +9,7 @@ const LoginPage = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     if (auth?.accessToken) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/dashboard" replace />;
     }
 
     return (

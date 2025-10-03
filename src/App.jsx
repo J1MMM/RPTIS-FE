@@ -11,10 +11,10 @@ import Dashboard from "./features/dashboard/pages/Dashboard.jsx";
 import LandTaxPage from "./features/landtax/pages/LandTaxPage.jsx";
 import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.jsx";
 import PendingFaasPage from "./features/assessor/pages/pending/PendingFaasPage.jsx";
-import "./styles/global.scss";
 import LoginPage from "./features/auth/pages/LoginPage.jsx";
-import LandingPage from "./features/clients/pages/LandingPage.jsx";
 import Computations from "./features/landtax/pages/Computations.jsx";
+import "./styles/global.scss";
+
 
 function App() {
   return (
