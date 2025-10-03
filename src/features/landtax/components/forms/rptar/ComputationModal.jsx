@@ -8,24 +8,23 @@ import {
   Typography,
   MenuItem,
   Select,
-  InputLabel,
   FormControl,
   Chip,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
 import StyledFieldset from "../../../../../components/ui/StyledFieldset";
 import { computeTotal } from "../../../utils/computation.utils";
 
 const allowedQuarters = ["first", "second", "third", "fourth"];
 
-export default function OrdersForm({ row }) {
+export default function OrdersForm({ row, onSuccess }) {
   const currentTaxYear = new Date().getFullYear();
 
   const [orders, setOrders] = useState([]);
-
   const [form, setForm] = useState({
     td_no: row?.td_no,
-    tax_year: "2024",
+    tax_year: currentTaxYear,
     tax_due: "",
     basic_tax: "",
     discount: "",
@@ -41,6 +40,7 @@ export default function OrdersForm({ row }) {
   });
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (field, value) => {
     setForm({ ...form, [field]: value });
@@ -48,17 +48,12 @@ export default function OrdersForm({ row }) {
 
   const handleQuarterChange = (event) => {
     const value = event.target.value;
-    // Ensure unique values (no duplicates)
-    const unique = [...new Set(value)];
-    setForm({ ...form, quarter: unique });
+    setForm({ ...form, quarter: [...new Set(value)] });
   };
 
   const handleAddOrder = () => {
-    const { basicTax, penalty, discount, total, percentage,percentagePenalty } = computeTotal(
-      form.total_assessed_value,
-      form.tax_due,
-      form.quarter
-    );
+    const { basicTax, penalty, discount, total, percentage, percentagePenalty } =
+      computeTotal(form.total_assessed_value, form.tax_due, form.quarter);
 
     const newOrder = {
       id: orders.length + 1,
@@ -68,24 +63,54 @@ export default function OrdersForm({ row }) {
       discount,
       total,
       quarterPercentage: percentage,
-      percentagePenalty
+      percentagePenalty,
     };
 
     setOrders([...orders, newOrder]);
 
     setForm({
-      ...form,
+      td_no: row?.td_no,
+      tax_year: currentTaxYear, // reset to current year
+      tax_due: "",
       basic_tax: "",
       discount: "",
       penalty: "",
       total: "",
-      tax_due: "",
-      clerk: "",
+      total_assessed_value: row?.total_assessed_value,
       quarter: [],
       quarterPercentage: "",
+      current_owner: row?.name,
+      payor: "",
+      clerk: "",
+      kind: row?.kind,
     });
 
     setOpen(false);
+  };
+
+  const handleSubmitOrders = async () => {
+    try {
+      setLoading(true);
+
+      const payload = {
+        td_no: row?.td_no,
+        orders: orders,
+      };
+
+      const res = await axios.post(
+        "http://localhost:3000/api/landtax/computations",
+        payload
+      );
+
+      alert("Orders submitted successfully!");
+      setOrders([]);
+      onSuccess?.(); // refresh parent data if needed
+    } catch (err) {
+      console.error("Submit failed:", err);
+      alert(err.response?.data?.message || "Error submitting orders");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const columns = [
@@ -98,21 +123,8 @@ export default function OrdersForm({ row }) {
     { field: "penalty", headerName: "Penalty", flex: 1 },
     { field: "discount", headerName: "Discount", flex: 1 },
     { field: "total", headerName: "Total", flex: 1 },
-    // {
-    //   field: "quarter",
-    //   headerName: "Quarter",
-    //   flex: 1,
-    //   renderCell: (params) => params.value?.join(", "),
-    // },
-    {
-      field: "quarterPercentage",
-      headerName: "Quarter %",
-      flex: 1,
-    },{
-      field: "percentagePenalty",
-      headerName: "Penalty %",
-      flex: 1,
-    },
+    { field: "quarterPercentage", headerName: "Quarter %", flex: 1 },
+    { field: "percentagePenalty", headerName: "Penalty %", flex: 1 },
     { field: "payor", headerName: "Payor", flex: 1 },
     { field: "clerk", headerName: "Clerk", flex: 1 },
   ];
@@ -127,6 +139,7 @@ export default function OrdersForm({ row }) {
         <DataGrid
           rows={orders}
           columns={columns}
+          getRowId={(row) => row.id}
           slots={{
             footer: () => (
               <Box
@@ -150,18 +163,18 @@ export default function OrdersForm({ row }) {
         />
       </Box>
 
-
       <Box mt={2}>
         <Button
           variant="contained"
           sx={{ backgroundColor: "#287F71", color: "white" }}
-          onClick={() => console.log(orders)}
-          disabled={orders.length === 0}
+          onClick={handleSubmitOrders}
+          disabled={orders.length === 0 || loading}
         >
-          Submit Orders
+          {loading ? "Submitting..." : "Submit Orders"}
         </Button>
       </Box>
 
+      {/* Order Modal */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
@@ -179,16 +192,8 @@ export default function OrdersForm({ row }) {
             <Stack spacing={2}>
               <StyledFieldset title={"Property Assessment"}>
                 <Stack direction="row" gap={1}>
-                  <TextField
-                    sx={{ flex: 1 }}
-                    label="ARP No"
-                    value={form.td_no}
-                  />
-                  <TextField
-                    sx={{ flex: 1 }}
-                    label="Owner"
-                    value={form.current_owner}
-                  />
+                  <TextField sx={{ flex: 1 }} label="ARP No" value={form.td_no} />
+                  <TextField sx={{ flex: 1 }} label="Owner" value={form.current_owner} />
                 </Stack>
               </StyledFieldset>
 
@@ -198,6 +203,7 @@ export default function OrdersForm({ row }) {
                     sx={{ flex: 1 }}
                     label="Tax Year"
                     value={form.tax_year}
+                    onChange={(e) => handleChange("tax_year", e.target.value)}
                   />
                   <TextField
                     sx={{ flex: 1 }}
@@ -211,7 +217,6 @@ export default function OrdersForm({ row }) {
               <StyledFieldset title={"Quarter"}>
                 <FormControl fullWidth>
                   <Select
-                    labelId="quarter-label"
                     multiple
                     value={form.quarter}
                     onChange={handleQuarterChange}
