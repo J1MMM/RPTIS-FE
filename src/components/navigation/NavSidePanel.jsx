@@ -88,7 +88,7 @@ export default function NavSidePanel({ open, setOpen }) {
                 },
               }}
             >
-              RPTIS
+              RPTMS
             </Typography>
           </Stack>
         </Stack>
