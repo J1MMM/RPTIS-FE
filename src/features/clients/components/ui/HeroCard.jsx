@@ -63,7 +63,7 @@ function HeroCard() {
                                         Estimated Annual Tax
                                     </Typography>
                                     <Typography sx={{ fontSize: '1.875rem', fontWeight: 'bold' }}>
-                                        $8,470.00
+                                        ₱8,470.00
                                     </Typography>
                                 </Box>
 
@@ -82,7 +82,7 @@ function HeroCard() {
                                             Property Value
                                         </Typography>
                                         <Typography sx={{ color: 'white' }}>
-                                            $450,000
+                                            ₱450,000
                                         </Typography>
                                     </Box>
 
@@ -100,7 +100,7 @@ function HeroCard() {
                                             Exemptions
                                         </Typography>
                                         <Typography sx={{ color: 'white' }}>
-                                            -$2,000
+                                            -₱2,000
                                         </Typography>
                                     </Box>
                                 </Box>
@@ -181,7 +181,7 @@ function HeroCard() {
                         Savings Goal
                     </Typography>
                     <Typography sx={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#287F71' }}>
-                        $705/mo
+                        ₱705/mo
                     </Typography>
                     <Typography sx={{ fontSize: '0.75rem', color: 'grey.500' }}>
                         Auto-save enabled
