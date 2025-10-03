@@ -1,9 +1,35 @@
 import { CardContent, Button, Box, Typography, Card } from '@mui/material';
+import { keyframes } from '@mui/system';
+
+// Define the floating animation
+const float = keyframes`
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+`;
+
+const floatSlow = keyframes`
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
 
 function HeroCard() {
     return (
         <Box sx={{ position: 'relative', width: "100%" }}>
-            <Box sx={{ position: 'relative', zIndex: 10 }}>
+            <Box
+                sx={{
+                    position: 'relative',
+                    zIndex: 10,
+                    // animation: `${float} 4s ease-in-out infinite`
+                }}
+            >
                 {/* Main Card */}
                 <Card
                     sx={{
@@ -11,7 +37,8 @@ function HeroCard() {
                         color: 'white',
                         p: 3,
                         borderRadius: 6,
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        transition: 'box-shadow 0.3s ease'
                     }}
                 >
                     <CardContent sx={{ p: 0 }}>
@@ -112,7 +139,9 @@ function HeroCard() {
                         boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                         p: 2,
                         border: '1px solid',
-                        borderColor: 'grey.100'
+                        borderColor: 'grey.100',
+                        animation: `${floatSlow} 3s ease-in-out infinite`,
+                        animationDelay: '0.5s'
                     }}
                 >
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -143,7 +172,9 @@ function HeroCard() {
                         boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                         p: 2,
                         border: '1px solid',
-                        borderColor: 'grey.100'
+                        borderColor: 'grey.100',
+                        animation: `${floatSlow} 3.5s ease-in-out infinite`,
+                        animationDelay: '1s'
                     }}
                 >
                     <Typography sx={{ fontSize: '0.875rem', fontWeight: 500, color: 'grey.700' }}>

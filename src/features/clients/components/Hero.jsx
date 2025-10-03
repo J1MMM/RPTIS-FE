@@ -1,10 +1,57 @@
 import { Box, Stack, Typography, Button, Chip } from "@mui/material";
 import { Calculator, Building2, CheckCircle, ArrowRight, Users, Shield, Landmark } from "lucide-react";
 import HeroCard from "./ui/HeroCard";
+import { keyframes } from '@mui/system';
+
+// Define animations
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const fadeInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const fadeInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const scaleIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 function Hero() {
     return (
         <Box
+            id="home"
             sx={{
                 minHeight: "100vh",
                 display: "flex",
@@ -13,8 +60,6 @@ function Hero() {
                 overflow: "hidden",
                 py: { xs: 6, md: 8 },
                 px: { xs: 3, md: 6, lg: 8 },
-                // border: "1px solid red",
-
             }}
         >
             {/* Background decorative elements */}
@@ -29,8 +74,6 @@ function Hero() {
                     borderRadius: "50%",
                     filter: "blur(60px)",
                     zIndex: 0,
-                    // bgcolor: 'red'
-
                 }}
             />
             <Box
@@ -44,7 +87,6 @@ function Hero() {
                     borderRadius: "50%",
                     filter: "blur(60px)",
                     zIndex: 0,
-
                 }}
             />
 
@@ -58,18 +100,26 @@ function Hero() {
                     width: "100%",
                     position: "relative",
                     zIndex: 1,
-                    // border: "1px solid blue",
                     mt: -10
                 }}
             >
                 {/* Left Content */}
-                <Box sx={{
-                    flex: 1, maxWidth: { md: "50%" },
-                    // border: "1px solid red",
-                }}>
+                <Box
+                    sx={{
+                        flex: 1,
+                        maxWidth: { md: "50%" },
+                        animation: `${fadeInRight} 0.8s ease-out`,
+                    }}
+                >
                     <Stack spacing={3}>
                         {/* Badge */}
-                        <Box>
+                        <Box
+                            sx={{
+                                animation: `${fadeInUp} 0.6s ease-out`,
+                                animationDelay: '0.1s',
+                                animationFillMode: 'backwards'
+                            }}
+                        >
                             <Chip
                                 icon={<Landmark size={16} />}
                                 label="City of San Pablo - Official Service"
@@ -95,7 +145,10 @@ function Hero() {
                                 fontSize: { xs: "2.5rem", md: "3.5rem" },
                                 lineHeight: 1.1,
                                 color: "#1e293b",
-                                letterSpacing: "-0.02em"
+                                letterSpacing: "-0.02em",
+                                animation: `${fadeInUp} 0.8s ease-out`,
+                                animationDelay: '0.2s',
+                                animationFillMode: 'backwards'
                             }}
                         >
                             Simplify the Way You{" "}
@@ -120,14 +173,27 @@ function Hero() {
                                 fontSize: { xs: "1.125rem", md: "1.25rem" },
                                 color: "#64748b",
                                 lineHeight: 1.7,
-                                maxWidth: 600
+                                maxWidth: 600,
+                                animation: `${fadeInUp} 0.8s ease-out`,
+                                animationDelay: '0.3s',
+                                animationFillMode: 'backwards'
                             }}
                         >
                             San Pablo City's official Real Property Tax Management System. Calculate your taxes and view your property information - no account required.
                         </Typography>
 
                         {/* Feature Pills */}
-                        <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap>
+                        <Stack
+                            direction="row"
+                            spacing={2}
+                            flexWrap="wrap"
+                            useFlexGap
+                            sx={{
+                                animation: `${fadeInUp} 0.8s ease-out`,
+                                animationDelay: '0.4s',
+                                animationFillMode: 'backwards'
+                            }}
+                        >
                             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                                 <CheckCircle size={20} color="#10b981" />
                                 <Typography sx={{ color: "#475569", fontWeight: 500 }}>
@@ -149,7 +215,16 @@ function Hero() {
                         </Stack>
 
                         {/* CTA Buttons */}
-                        <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ pt: 2 }}>
+                        <Stack
+                            direction={{ xs: "column", sm: "row" }}
+                            spacing={2}
+                            sx={{
+                                pt: 2,
+                                animation: `${fadeInUp} 0.8s ease-out`,
+                                animationDelay: '0.5s',
+                                animationFillMode: 'backwards'
+                            }}
+                        >
                             <Button
                                 variant="contained"
                                 size="large"
@@ -206,7 +281,10 @@ function Hero() {
                             sx={{
                                 pt: 3,
                                 borderTop: "1px solid #e2e8f0",
-                                mt: 2
+                                mt: 2,
+                                animation: `${fadeInUp} 0.8s ease-out`,
+                                animationDelay: '0.6s',
+                                animationFillMode: 'backwards'
                             }}
                         >
                             <Box>
@@ -244,7 +322,9 @@ function Hero() {
                         justifyContent: "center",
                         alignItems: "center",
                         padding: 10,
-                        // border: "1px solid red",
+                        animation: `${fadeInLeft} 1s ease-out`,
+                        animationDelay: '0.3s',
+                        animationFillMode: 'backwards'
                     }}
                 >
                     <HeroCard />

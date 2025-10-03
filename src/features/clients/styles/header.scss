@@ -1,9 +1,39 @@
 .nav-links {
-  text-decoration: none;
   color: #475569;
+  text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
+  transition: all 0.2s ease;
+  position: relative;
+
   &:hover {
     color: #287f71;
+  }
+
+  &.active {
+    color: #287f71;
+    font-weight: 600;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: #287f71;
+      border-radius: 2px;
+    }
+  }
+}
+
+.nav-links-mobile {
+  &:hover {
+    color: #287f71 !important;
+  }
+
+  &.active {
+    color: #287f71 !important;
+    font-weight: 600 !important;
   }
 }
