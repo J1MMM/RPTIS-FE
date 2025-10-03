@@ -17,7 +17,7 @@ import {
 } from "../../constants/layout";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import CustomNavLink from "./CustomNavLink";
-import logoImg from "../../assets/images/seal.png";
+import logoImg from "../../assets/images/spclogo.png";
 import {
   FOOTER_LINKS,
   MAIN_LINKS,

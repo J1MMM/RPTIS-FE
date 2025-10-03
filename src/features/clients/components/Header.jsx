@@ -1,6 +1,6 @@
 import { Box, Button, Stack, Typography, IconButton, Drawer } from "@mui/material";
 import { useState } from "react";
-import logo from '../../../assets/images/seal.png'
+import logo from '../../../assets/images/spclogo.png'
 import { NavLink } from "react-router-dom";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { keyframes } from '@mui/system';
