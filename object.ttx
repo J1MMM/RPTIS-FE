@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "td_no": "06-0077-0001",
+        "tax_year": "2024",
+        "tax_due": "2024",
+        "basic_tax": 154.41,
+        "discount": 0,
+        "penalty": 67.94,
+        "total": 222.35,
+        "total_assessed_value": "30882.00",
+        "quarter": [
+            "second"
+        ],
+        "quarterPercentage": "25%",
+        "current_owner": "McDo",
+        "payor": "",
+        "clerk": "",
+        "kind": "land",
+        "percentagePenalty": 44
+    }
+]

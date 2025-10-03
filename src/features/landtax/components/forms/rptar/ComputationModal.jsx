@@ -24,7 +24,7 @@ export default function OrdersForm({ row }) {
   const [orders, setOrders] = useState([]);
 
   const [form, setForm] = useState({
-    tax_dec: row?.tax_dec,
+    td_no: row?.td_no,
     tax_year: "2024",
     tax_due: "",
     basic_tax: "",
@@ -54,7 +54,7 @@ export default function OrdersForm({ row }) {
   };
 
   const handleAddOrder = () => {
-    const { basicTax, penalty, discount, total, percentage } = computeTotal(
+    const { basicTax, penalty, discount, total, percentage,percentagePenalty } = computeTotal(
       form.total_assessed_value,
       form.tax_due,
       form.quarter
@@ -67,7 +67,8 @@ export default function OrdersForm({ row }) {
       penalty,
       discount,
       total,
-      quarterPercentage: percentage
+      quarterPercentage: percentage,
+      percentagePenalty
     };
 
     setOrders([...orders, newOrder]);
@@ -88,7 +89,7 @@ export default function OrdersForm({ row }) {
   };
 
   const columns = [
-    { field: "tax_dec", headerName: "ARP No", flex: 1 },
+    { field: "td_no", headerName: "ARP No", flex: 1 },
     { field: "tax_year", headerName: "Tax Year", flex: 1 },
     { field: "tax_due", headerName: "Tax Due", flex: 1 },
     { field: "current_owner", headerName: "Owner", flex: 1 },
@@ -106,6 +107,10 @@ export default function OrdersForm({ row }) {
     {
       field: "quarterPercentage",
       headerName: "Quarter %",
+      flex: 1,
+    },{
+      field: "percentagePenalty",
+      headerName: "Penalty %",
       flex: 1,
     },
     { field: "payor", headerName: "Payor", flex: 1 },
@@ -177,7 +182,7 @@ export default function OrdersForm({ row }) {
                   <TextField
                     sx={{ flex: 1 }}
                     label="ARP No"
-                    value={form.tax_dec}
+                    value={form.td_no}
                   />
                   <TextField
                     sx={{ flex: 1 }}

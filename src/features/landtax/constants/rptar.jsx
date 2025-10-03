@@ -35,9 +35,9 @@ function ActionCell({ params }) {
   );
 }
 
-export const tax_dec_columns = [
+export const td_no_columns = [
   {
-    field: "tax_dec",
+    field: "td_no",
     headerName: "TAX DEC.",
     flex: 1,
     headerAlign: "center",
@@ -89,7 +89,7 @@ export const tax_dec_columns = [
 
 export const columns = [
   {
-    field: "tax_dec",
+    field: "td_no",
     headerName: "TAX DEC.",
     flex: 1,
     headerAlign: "center",
