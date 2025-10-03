@@ -12,8 +12,9 @@ import LandTaxPage from "./features/landtax/pages/LandTaxPage.jsx";
 import LandTaxLayout from "./features/landtax/components/layout/LandTaxLayout.jsx";
 import PendingFaasPage from "./features/assessor/pages/pending/PendingFaasPage.jsx";
 import LoginPage from "./features/auth/pages/LoginPage.jsx";
-import LandingPage from "./features/clients/pages/LandingPage.jsx";
+import Computations from "./features/landtax/pages/Computations.jsx";
 import "./styles/global.scss";
+
 
 function App() {
   return (
@@ -54,7 +55,8 @@ function App() {
 
               <Route path="landtax" element={<LandTaxLayout />}>
                 <Route index element={<LandTaxPage />} />
-                <Route path="tax-assessment" element={<LandTaxPage />} />
+                
+                <Route path="tax-assessment" element={<Computations />} />
                 <Route path="payment-records" element={<LandTaxPage />} />
               </Route>
 

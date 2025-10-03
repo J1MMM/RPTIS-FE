@@ -1,7 +1,7 @@
 import { Box, Stack } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { tax_dec_columns } from '../constants/rptar';
+import { td_no_columns } from '../constants/rptar';
 import axios from 'axios';
 
 function LandTaxPage() {
@@ -15,7 +15,7 @@ function LandTaxPage() {
           // Map backend response into DataGrid format
           const formatted = res.data.data.map((item) => ({
             id: item.id,
-            tax_dec: item.td_no,
+            td_no: item.td_no,
             pin_no: item.pin_no,
             name: item.individuals && item.individuals.length > 0 
               ? item.individuals.map(i => i.name || `${i.firstname ?? ""} ${i.lastname ?? ""}`).join(", ")
@@ -48,7 +48,7 @@ function LandTaxPage() {
 
       <DataGrid 
         textAlign={"center"} 
-        columns={tax_dec_columns} 
+        columns={td_no_columns} 
         rows={rows} 
         getRowId={(row) => row.id} // make sure DataGrid uses correct key
       />

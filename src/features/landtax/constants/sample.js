@@ -1,7 +1,7 @@
 export const rows = [
     {
         id: 1,
-        tax_dec: "ARP-001",
+        td_no: "ARP-001",
         pin_no: "PIN-123456",
         name: "Juan Dela Cruz",
         year: 2024,
@@ -16,7 +16,7 @@ export const rows = [
     },
     {
         id: 2,
-        tax_dec: "ARP-002",
+        td_no: "ARP-002",
         pin_no: "PIN-654321",
         name: "Ana Reyes",
         year: 2023,
@@ -31,7 +31,7 @@ export const rows = [
     },
     {
         id: 3,
-        tax_dec: "ARP-003",
+        td_no: "ARP-003",
         pin_no: "PIN-987654",
         name: "Roberto Cruz",
         year: 2022,
@@ -46,10 +46,10 @@ export const rows = [
     },
 ];
 
-export const tax_dec_rows = [
+export const td_no_rows = [
     {
         id: 1,
-        tax_dec: "td-1",
+        td_no: "td-1",
         name: "juan",
         total_area: 200,
         total_assessed_value:30000,
@@ -58,7 +58,7 @@ export const tax_dec_rows = [
         effecitivity_of_quarter: "1st"
     }, {
         id: "2",
-        tax_dec: "td-2",
+        td_no: "td-2",
         name: "jusdua",
         total_area: 1000,
         total_assessed_value: 500000,
@@ -67,7 +67,7 @@ export const tax_dec_rows = [
         effecitivity_of_quarter: "2nd"
     }, {
         id: 3,
-        tax_dec: "td-3",
+        td_no: "td-3",
         name: "jsad",
         total_area: 1120,
         total_assessed_value: 50211,

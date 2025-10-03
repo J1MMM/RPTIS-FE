@@ -87,6 +87,9 @@ export const computeTotal = (assessed_value, tax_due, quarter) => {
   }
 
   totalPenalty = basicTax * penalty;
+  let percentagePenalty = penalty * 100
+  let formatpercentagePenalty = (percentagePenalty.toString()+"%")
+  percentagePenalty = formatpercentagePenalty
   penalty = parseFloat(totalPenalty.toFixed(2));
   total = basicTax + totalPenalty;
 
@@ -100,6 +103,7 @@ export const computeTotal = (assessed_value, tax_due, quarter) => {
     total,
     penalty,
     basicTax,
-    percentage
+    percentage,
+    percentagePenalty
   };
 };

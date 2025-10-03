@@ -4,15 +4,15 @@ import NavigationTabs from "../../../../components/navigation/NavigationTabs";
 
 export const LANDTAX_TAB_LINKS = [
     {
-        to: "",
+        to: "/landtax/",
         label: "RPTAR",
     },
     {
-        to: "tax-assessment",
+        to: "/landtax/tax-assessment",
         label: "COMPUTATION",
     },
     {
-        to: "payment-records",
+        to: "/landtax/payment-records",
         label: "Payment Records",
     },
 ];

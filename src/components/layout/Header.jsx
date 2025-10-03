@@ -20,7 +20,7 @@ export const Header = ({ onMenuClick }) => {
       mobile: "ASSESSOR"
     },
     landtax: {
-      full: "OFFICE OF THE REVENUE COMMISSIONER",
+      full: "LANDTAX OFFICE",
       short: "REVENUE COMMISSIONER",
       mobile: "REVENUE"
     },
